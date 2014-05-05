@@ -1,0 +1,2182 @@
+\documentclass[english, 11pt]{article}
+\usepackage{notes}
+%\renewcommand{\sfdefault}{cmss}
+%\renewcommand{\familydefault}{\sfdefault}
+
+\newcommand{\thiscoursecode}{STAT 230}
+\newcommand{\thiscoursename}{Probability}
+\newcommand{\thisprof}{Dr. Jiwei Zhao}
+\newcommand{\me}{Liam Horne}
+\newcommand{\thisterm}{Fall 2013}
+\newcommand{\website}{LIHORNE.COM}
+
+% Headers
+\chead{\thiscoursename}
+\lhead{\thisterm}
+
+
+%%%%% TITLE %%%%%
+\newcommand{\notefront} {
+\pagenumbering{roman}
+\begin{center}
+
+{\ttfamily \url{\website}} {\small}
+
+\textbf{\Huge{\noun{\thiscoursecode}}}{\Huge \par}
+
+{\Large{\noun{\thiscoursename}}}\\ \vspace{0.1in}
+
+\vspace{0in}\includegraphics[scale=0.5]{logo.png}
+
+  %\includegraphics[scale=0.1]{shield.png} \\
+  {\noun \thisprof} \ $\bullet$ \ {\noun \thisterm} \ $\bullet$ \ {\noun {University of Waterloo}} \\
+
+  \end{center}
+  }
+
+%   ooooo      ooo   .oooooo.   ooooooooooooo oooooooooooo  .oooooo..o
+%   `888b.     `8'  d8P'  `Y8b  8'   888   `8 `888'     `8 d8P'    `Y8
+%    8 `88b.    8  888      888      888       888         Y88bo.
+%    8   `88b.  8  888      888      888       888oooo8     `"Y8888o.
+%    8     `88b.8  888      888      888       888    "         `"Y88b
+%    8       `888  `88b    d88'      888       888       o oo     .d8P
+%   o8o        `8   `Y8bood8P'      o888o     o888ooooood8 8""88888P'
+
+
+
+\begin{document}
+
+  % Notes front
+  \notefront
+  % Table of Contents and List of Figures
+  \tocandfigures
+  % Abstract
+  \doabstract{These notes are intended as a resource for myself; past, present, or future students of this course, and anyone interested in the material. The goal is to provide an end-to-end resource that covers all material discussed in the course displayed in an organized manner. If you spot any errors or would like to contribute, please contact me directly.}
+
+
+  \section{Introduction to Probability}
+
+  Why is it important to learn about Probability and Statistics? There are many mistakes made currently in the industry, for example, watch the Ted Talk on "How juries are fooled by statistics.". For example, consider the case of Sally Clark. For Wednesday, understand what a sample space is, an event is, and a probability distribution is.
+
+  \subsection {Definitions of Probability}
+
+  \begin{defn}[Randomness]
+    Uncertainty or \textbf{randomness} (i.e. variability of results) is usually due to some mixture of at least two factors including:
+    \begin{itemize}
+      \item[1.] Variability in populations consisting of animate or inanimate objects (e.g., people vary in size, weight, blood type etc.)
+      \item[2.] Variability in processes or phenomena (e.g., the random selection of 6 numbers from 49 in a lottery draw can lead to a very large number of different outcomes)
+    \end{itemize}
+  \end{defn}
+
+  \begin{defn}[sample space]
+    We refer to the set of all possible distinct outcomes to a random experiment as the sample space (usually denoted by $S$). Groups or sets of outcomes of possible interest, subsets of the sample space, we will call events.
+  \end{defn}
+
+  Then we might define probability in three different ways:
+
+  \begin{defn}[Probability (Classic), Relative Frequency, Subjective Probability]
+    The classical definition: The \textbf{probability} of some event is
+    \[ \frac{ \mbox { number of ways the event can occur } }{ \mbox {number of outcomes in } S } \]
+    provided all points in the sample space $S$ are equally likely. For example, when a die is rolled the probability of getting a 2 is $\frac{1}{6}$ because one of the six faces is a 2. \\
+
+    The \textbf{relative frequency} definition: The probability of an event is the (limiting) proportion (or fraction) of times the event occurs in a very long series of repetitions of an experiment or process. For example, this definition could be used to argue that the probability of getting a 2 from a rolled die is $\frac{1}{6}$. \\
+
+    The \textbf{subjective probability} definition: The probability of an event is a measure of how sure the person making the statement is that the event will happen. For example, after considering all available data, a weather forecaster might say that the probability of rain today is 30\% or 0.3.
+  \end{defn}
+
+  There are problems with all three of these definitions. The first being that "equally likely" is not defined, the second being unfeasible, and third being hard to agree on. Thus we create a mathematical model with a set of axioms to better understand probability. \newpage
+
+  \begin{defn}[probability model]\label{probability model}
+  \
+     \begin{itemize}
+       \item a sample space of all possible outcomes of a random experiment is defined.
+       \item a set of events, subsets of the sample space to which we can assign probabilities, is defined.
+       \item a mechanism for assigning probabilities (numbers between 0 and 1) to events is specified.
+     \end{itemize}
+  \end{defn}
+
+
+  \subsection{Solutions to Problems on Chapter 1}
+
+  \begin{itemize}
+    \item[1.1] The chance of head or tails; repetetive dice throwing in grade six; stock forecasts.
+    \item[1.2] Claim on car insurance would be subjective based on someone's basic opinion, or relative considering how often other people have claims. A meltdown at nucelear power plant would be subjective since it doesn't happen often, isn't one of a set of probabilities, and is based on opinion or skepticism. A person's birthday is classical since there are 12 possibilities and April is 1 of 12.
+    \item[1.3] Lottery draws are classical in that a ticket is one of several million, thus there is a value for $P(x)$ calculated using the formula above. Small businesses may use probability, or decision, trees to save money and time when deciding upon which areas of their company require an extensive review due to fraud or human error. There is subjective probability in understanding disease transmission, as well relative frequency since lots of data and samples can be taken. Public opinion polls can be subjectively evaluated, for example a presedential election (a type of publiv opinion poll) typically has forecasts by experts in politics and media.
+    \item[1.4] Positions of small particles in space involve quantum physics, for example a particle must follow Heisenberg's Uncertainty Principle. The velocity of an object dropped from the leaning tower of Pisa does not depend on anything (if not acted on by another force). Values of stocks are not deterministic at all (though people try to think of them as such). Currency changes value steadily but it is not deterministic.
+  \end{itemize}
+
+  \section{Mathematical Probability Models}
+
+  \subsection{Sample Spaces and Probability}
+
+  Consider some repeatable phenomenon with certain events or outcomes labelled $A_1, A_2, \cdots, A_n$ are needed. We call this phenomenon an \textbf{experiment} and repetitions of it as a \textbf{trial}. The probability of an event if $A$ is $0 \leq P(A) \leq 1$.
+
+  \begin{defn}[Sample Space]\label{sample space}
+    A \textbf{sample space} $S$ is a set of distinct outcomes for an experiment or process, with the property that in a single trial, one and only one of these outcomes occurs.
+  \end{defn}
+
+  The outcomes that make up the sample space may sometimes be called \textbf{sample points} or just points on occasion.
+
+  \begin{exmp}
+    Roll a 6-sided die, and define the events $a_i = $ top face is $i$, for $i = 1,2,3,4,5,6$. Then we can take a sample space as $S = \{ a_1, a_2, a_3, a_4, a_5, a_6\}$. Rather than defining this sample space we could have also defined $S = \{ E, O \}$ where $E$ is the event that an even number comes up, and $O$ the event that an off number turns up. Both sample spaces satisfy the definition.
+  \end{exmp}
+
+  However, we try to choose sample spaces that are indivisible, so the first is preferred.
+
+  \begin{defn}
+    A \textbf{discrete} sample space is one that consists of a finite or countably infinite set of simple events. Recall that a countably infinite sequence is one that can be put in one-one correspondance with positive integers.
+  \end{defn}
+
+  \begin{defn}
+    A non-discrete sample space is one that is not discrete.
+  \end{defn}
+
+  \begin{exmp}
+    The sample space $S = \Z$ is discrete, $S = \R$ is not, but $S = \{ 1, 2, 3 \}$ is.
+  \end{exmp}
+
+  \begin{defn}
+    An event in a discrete sample space is a subset $A \subset S$. If the event is indivisible so it contains only one point, e.g. $A_1 = \{a_1\}$ we call it a \textbf{simple event}. An event $A$ made up of two or more simple events such as $A = \{a_1, a_2 \}$ is called a compound event.
+  \end{defn}
+
+  We will simplify $P(\{a_1\})$ to mean $P(a_1)$.
+
+  \begin{defn}
+    Let $S = \{a_1, a_2, a_3, \cdots\}$ be a discrete sample space. Then \textbf{probabilities} $P(a_i)$ are numbers attached to the $a_i's (i = 1,2,3,\cdots)$ such that the following two conditions hold:
+    \begin{itemize}
+      \item[(1)] $0 \leq P(a_i) \leq 1$
+      \item[(2)] $\sum_i P(a_i) = 1$
+    \end{itemize}
+  \end{defn}
+
+  The above function $P(a_i)$ is called a \textbf{probability distribution on} $S$.
+
+  \begin{defn}
+    The probability $P(A)$ of an event $A$ is the sum of the probabilities for all the simple events that make up $A$ or $P(A) = \sum_{a \in A} P(a)$.
+  \end{defn}
+
+  Probability theory does not choose values for $a_i$ but rather defines probability to be restricted to the above two mathematical rules. All else is experiment to mimic the real world values.
+
+  \begin{exmp}
+    For a dice we would assign $P(a_i)$ equal to $\frac{1}{6}$ for $S = \{a_1, a_2, a_3, a_4, a_5, a_6\}$. So, $P(E) = P(a_2, a_4, a_6) = 3\times\frac{1}{6} = \frac{1}{2}$.
+  \end{exmp}
+
+  The typical approach to a given problem of these types is the following:
+  \begin{itemize}
+    \item[(1)] Specify a sample space $S$.
+    \item[(2)] Assign numerical probabilities to the simple events in $S$.
+    \item[(3)] For any compound event $A$, find $P(A)$ by adding the probabilities of all the simple events that make up $A$.
+  \end{itemize}
+
+  \begin{exmp}
+    Draw 1 card from a standard well-shuffled deck. Find the probability of finding a club.
+  \end{exmp}
+  \textbf{Solution} Let $S = \{$ spade, heart, diamond, club $\}$. $S$ then has four sample points and one of them is club, so $P(\mbox{club}) = \frac{1}{4}$.
+  We could also have defined $S = \{$ all cards $\}$ where a club event is $A = \{$ all clubs $\}$ and $P(A) = \sum P($one club$) = \frac{1}{52} + \cdots + \frac{1}{52} = \frac{13}{52} = \frac{1}{4}$.
+
+  \begin{defn}
+    The \textbf{odds} in favour of an event $A$ is the probability the event occurs divided by the probability it does not occur or $\frac{P(A)}{1-P(A)}$. The odds against the event is the reciprocal.
+  \end{defn}
+
+  When treating objects in an experiment as distinguishable leads to a different answer from treating them as identical, the points in the sample space for identical objects are usually not "equally likely" in terms of their long run relative frequencies. It is generally safer to pretend objects can be distinguished even when they can't be, in order to get equally likely sample points.
+
+  \subsection{Solutions to Problems on Chapter 2}
+
+  \begin{itemize}
+    \item[2.1]
+    \begin{itemize}
+      \item[a)] $S = \{ a_1b_1, a_1b_2, a_1b_3, a_1b_4, a_2b_1, a_2b_2, a_2b_3, a_2b_4, a_3b_1,a_3b_2,a_3b_3,a_3b_4,a_4b_1,a_4b_2,a_4b_3,a_4b_4 \}$
+      \item[b)] The probability that both students ask the same prof is $P(A)$ where $A = \bigcup_{i=1}^4 a_ib_i$. $P(A) = \frac{1}{16} + \frac{1}{16} + \frac{1}{16} + \frac{1}{16} = \frac{1}{4}$.
+    \end{itemize}
+    \item[2.2]
+    \begin{itemize}
+      \item[a)] $S = \{ HHH, HHT, HTH, THH, HTT, TTH, THT, TTT \}$
+      \item[b)] $P(TT) = P(\{HTT, TTH\}) = \frac{1}{8} + \frac{1}{8} = \frac{1}{4}$
+    \end{itemize}
+    \item[2.3] $S = \{ (1,2), (1,3), (1,4), (1,5), (2,1), (2,3), (2,4), (2,5), (3,1), (3,2), (3,4), (3,5), (4,1), (4,2), (4,3), (4,5), (5,1), (5,2), \\ (5,3), (5,4) \}$ then the probability of of finding numbers that differ by 1 is $P(\{ (1,2), (2,1), (2,3), (3,2), (3,4), (4,3), (4,5), \\ (5,4) \}) = \frac{4}{10}$.
+    \item[2.4]
+    \begin{itemize}
+      \item[a)] AB is for A's letter in B's envelope. \\ $S = \{ \\ (WW, XX, YY, ZZ), (WW, XX, YZ, ZY), (WW, XZ, YY, ZX), (WZ, XX, YY, ZW), \\ (WW, XY, YX, ZZ), (WY, XX, YW, ZZ), (WX, XW, YY, ZZ), (WW, XY, YZ, ZX), \\ (WW, XZ, YX, ZY), (WY, XX, YZ, ZW), (WZ, XX, YW, ZY), (WX, XY, YY, ZZ), \\ (WY, XZ, YY, ZW), (WX, XY, YW, ZZ), (WY, XW, YX, ZZ), (WY, XZ, YW, ZX), \\ (WY, XW, YZ, ZX), (WY, XZ, YX, ZW), (WX, XY, YZ, ZW), (WX, XZ, YW, ZY), \\ (WX, XW, YZ, ZY), (WZ, XW, YX, ZY), (WZ, XY, YW, ZX), (WZ, XY, YX, ZW)\}$
+      \item[c)] $\frac{1}{4}, \frac{3}{8}, \frac{1}{4}, 0$
+    \end{itemize}
+    \item[2.5]
+     \begin{itemize}
+      \item[a)]
+      \item[c)]
+    \end{itemize}
+    \item[2.6] $P($test positive has disease$) = \frac{18}{1000}$, $P($has the disease$) = \frac{2}{100}$
+  \end{itemize}
+
+  TODO : Finish these problems
+
+  \section{Probability - Counting Techniques}
+
+  \begin{defn}
+    A \textbf{uniform distribution} over the set $\{ a_1, \cdots, a_n \}$ is when the probability of each event is $\f{1}{n}$. That is, each event has equal probability. If a compound event $A$ contains $r$ points, then $P(A) = \f{r}{n}$.
+  \end{defn}
+
+  \subsection{Counting Arguments}
+
+  There are two useful rules for counting.
+
+  \begin{itemize}
+    \item[1.] The \textbf{Addition Rule}: Suppose we can do job 1 in $p$ ways and job 2 in $q$ ways. Then we can do either job 1 \textbf{OR} job 2, but not both, in $p + q$ ways.
+    \item[2.] The \textbf{Multiplication Rule}: Suppose we can d job 1 in $p$ ways and, for each of these ways, we can do job 2 in $q$ ways. Then we can do both job 1 \textbf{AND} job 2 in $p \times q$ ways.
+  \end{itemize}
+
+  This interpretation using AND and OR occur throughout probability. For example, if we are picking two numbers from $\{ 1,2,3,4,5 \}$ with uniform distribution. Then the probability of having at least one even can be found like so: we need the first to be even AND the second odd OR the first odd AND the second even. Then,
+  \[ P(\mbox{one number is even}) = \f{2\times3+3\times2}{5\times5} = \f{12}{25} \]
+
+  Note that the phrases \textbf{at random} and \textbf{uniformly} are often used to mean that all of the points in a sample space are equally likely.
+
+  \begin{exmp}
+    Suppose a course has 4 sections with no limit on how many can enrol in each section. Three students each pick a section at random. The probability that they are all in the same section is $\left(\f{1}{4}\right)\left(\f{1}{4}\right)\left(\f{1}{4}\right) \times 4 = \f{1}{16}$. The probablity that they all end up in different sections is $\left(\f{1}{4}\right)\left(\f{1}{4}\right)\left(\f{1}{4}\right)\times 12 = \f{3}{16}$. The probability that nobody selects section 1 is $\left(\f{3}{4}\right)\left(\f{3}{4}\right)\left(\f{3}{4}\right)\times = \f{27}{64}$ \\
+  \end{exmp}
+
+  \begin{rem}
+    In many problems the sample space is a set of arrangements or sequences. These are called \textbf{permutations}. A key step in the argument is to be sure to undrstand what it is that you are counting. It is helpful to invent a notation for the outcomes in the sample space and the events of interest.
+  \end{rem}
+  \begin{exmp}
+    Suppose the first six letters are arranged at random to form a six-letter word (an arrangement) - we must use each letter once only. The sample space
+    \[ S = \{ abcdef, abcdfe, \cdots, fedcba\} \]
+    has a large number of outcomes and, because we formed the word "at random", we assign the same probablity to each. To count the number of words in $S$, count the number of ways that we can construct such a word, each way corresponds to a unique word. For each word we follow a pattern of having six choices, then five, and so until until we're left with one. Thus there are $6\times5\times4\times3\times2\times1$ ways of constructing words; 720 ways. \\
+    Now consider events such as $A$; the second letter is $e$ or $f$. So there are now $5\times2\times4\times3\times2\times1 = 240$ ways. So,
+    \[ P(A) = \f{\mbox{number of outcomes in $A$}}{\mbox{number of outcomes in $S$}} = \f{240}{720} = \f{1}{3} \]
+    Generally, there are $n!$ arrangements of length $n$ using each symbol once and only once, and $(n-r+1)!$ arrangements of length $r$ using each symbol at most once. This product is denoted $n^{(r)}$ ("$n$ to $r$ factors").
+  \end{exmp}
+  There is an approximation to $n!$ called Stirling's formula whcih states
+  \[ n! \rightarrow n^ne^{-n}\sqrt{2\pi n} \mbox{ as } n \rightarrow \infty \]
+
+  \begin{exmp}
+    A pin number of length 4 is formed by randomly selecting with replacement 4 digits from the set $\{0,1,2,\cdots,9]\}$.
+    \begin{itemize}
+      \item[A:] The probability that the pin number is even is the probability that the last digit is even.
+      \[ P(A) = \f{5\times10^3}{10^4} = \f{1}{2} \]
+      \item[B:] The probability that the pin only has even digits is
+      \[ P(B) = \f{5^4}{10^4} \]
+      \item[C:] That all digits are unique is
+      \[ P(C) = \f{10^{(4)}}{10^4} = \f{10\times9\times8\times7}{10^4} = \f{63}{125} \]
+      \item[D:] That the pin number contains at least one 1 is
+      \[ P(D) = 1- \f{9^4}{10^4} = \f{3439}{10000} \]
+    \end{itemize}
+  \end{exmp}
+
+  \begin{defn}[complement]\label{complement}
+    For some general event $A$, the \textbf{complement} of $A$ denoted by $\bar{A}$ is the set of all outcomes in $S$ which are not in $A$. It is often easier toc ount outcomes in the complement rather than in the event itself.
+  \end{defn}
+
+  \begin{exmp}
+    Suppose now that we're selecting pins again, but this time without replacement.
+    \begin{itemize}
+      \item[A:] The probability that the pin number is even is the probability that the last digit is even.
+      \[ P(A) = \f{5 \times 9 \times 8 \times 7}{10^{(4)}} = \f{1}{2} \]
+      \item[B:] The probability that the pin only has even digits is
+      \[ P(B) = \f{5\times4\times3\times2}{10^{(4)}} = \f{1}{42} \]
+      \item[C:] That the pin number contains 1 is
+      \[ P(D) = 1 - \f{9^{(4)}}{10^{(4)}} = \f{2}{5} \]
+    \end{itemize}
+  \end{exmp}
+
+  In some problems, the outcomes in the sample space are subsets of a fixed sized. Here we look at counting such subsets. Suppose we want to randomly select a subset of 3 digits from the set of digits 0 - 9. Let us now however consider order to be irrelevant, and numbers cannot be picked twice. Then we end up with
+  \[ m = \f{10^{(3)}}{3!} = 120 \]
+  arrangements of digits.
+
+  \begin{defn}
+    We use the combinatorial symbol $\comb{n}{r}$ to denote the number of subsets of size $r$ that can be selected from a set of $n$ objects. If we denote $m$ to be the number of subsets of size $r$ that can be selected from $n$ things, then $m \times r! = n^{(r)}$ and so
+    \[ \comb{n}{r} = \f{n^{(r)}}{r!} \]
+  \end{defn}
+
+  \begin{exmp}
+  Suppose a box contains 10 balls of which 3 are red, 4 are white and 3 are green. A sample of 4 balls is selected at random without replacement. Find the probablity of the events
+  \begin{itemize}
+    \item[E:] the sample contains 2 red balls
+    \item[F:] the sample contains 2 red, 1 white, and 1 green ball
+    \item[G:] the sample contains 2 or more red balls
+  \end{itemize}
+  For simplicity, define 0,1,2 being red, 3,4,5,6 being white, and 7,8,9 being green. Then we construct a uniform probability model
+  \[ S = \{ \{0,1,2,3\}, \ldots, \{ 6,7,8,9 \} \} \]
+  Now for $E$, we take the number of ways we can take 2 red balls of the three AND take 2 other-coloured balls from the other seven
+  \[ P(E) = \f{\comb{3}{2}\comb{7}{2}}{\comb{10}{4}} = \f{3}{10} \]
+  For $F$ it is the same idea, we multiply the number of ways of finding each ball. For $G$ we take the sum of the ways of finding 2 red balls and 3 red balls.
+  \[ P(G) = \f{\comb{3}{2}\comb{7}{2}}{\comb{10}{4}} + \f{\comb{3}{3}\comb{7}{1}}{\comb{10}{4}} \]
+  \end{exmp}
+
+  Here are some important properties of the combinatorial function $n$ choose $r$:
+  \begin{itemize}
+    \item[1.] $n^{(r)} = \f{n!}{(n-r)!} = n(n-1)^{(r-1)} \mbox{ \ for $r \geq 1$ }$
+    \item[2.] $\comb{n}{r} = \f{n!}{r!(n-r)!} = \f{n^{(r)}}{r!}$
+    \item[3.] $\comb{n}{r} = \comb{n}{n-r}$ \mbox{ \ for all $r = 0,1,\ldots,n$}.
+    \item[4.] If we define $0! = 1$, then the formulas above make sense for $\comb{n}{0} = \comb{n}{n} = 1$
+    \item[5.] $(1+x)^n = \comb{n}{0} + \comb{n}{1}x + \comb{n}{2}x^2 + \cdots + \comb{n}{r}x^n$ (binomial theorem)
+  \end{itemize}
+
+  \begin{exmp}
+    Suppose the letters of the word STATISTICS are arranged at random. Find the probablity of the event $G$ that the arrangement begins with and ends with $S$. The sample space is $S = \{ SSSTTTIIAC, SSSTTTIICA, \ldots \}$. First consider the length of this set (the number of ways of spelling STATISTICS)
+    \[ \comb{10}{3}\comb{7}{3}\comb{4}{2}\comb{2}{1}\comb{1}{1} = n \]
+    Now the number of ways of spelling it with two S's fixed at either end
+    \[ \f{\comb{8}{3}\comb{5}{2}\comb{3}{1}\comb{2}{1}\comb{1}{1}}{\comb{10}{3}} = k\]
+    The quotient $\f{k}{n} = \f{1}{15}$ is our answer to the probability that the words start and end with S.
+  \end{exmp}
+
+    \begin{rem}
+      \textbf{The number of arrangements when some symbols are alike} generaly, for $n$ symbols of type $i \in \{1,\ldots,k\}$ with $\sum_{i=1}^k n_i = n$, then the number of arrangements using all of the symbols is
+    \[ \comb{n}{n_1}\times\comb{n-n_1}{n_2} \times \comb{n-n_1-n_2}{n_3}\times\cdots\times\comb{n_k}{n_k} = \f{n!}{n_1!n_2!\cdots n_n!} \]
+    \end{rem}
+
+  \begin{exmp}
+    Suppose we make a random arrangement of length 3 using letters from the set $\{ 1,b,c,d,e,f,g,h,i,j \}$, then what is the probability of the event $B$ that the letters are in alphabetic order if (a) the letters are selected without replacement, and (b) if the letters are selected with replacement. \\
+    There are $10^{(3)}$ ways of picking 3 letter words from this set, and $\comb{10}{3}$ ways of picking them in alphabetical order, thus for part (a) we simply take the quotient of the two.
+    \[ P(B) = \f{\comb{10}{3}}{10^{(3)}} \]
+    With replacement implies three cases, one for each number of identical letters in a sequence of 3 letters. In case 1, there are 3 identical letters and there are obviously only 10 ways of achieving this, for case 2 thee are 2 identical letters and so there are 6 possibilites of arrangements, but only two are identical, so we multiply the choices of two letters by two. The third case is the same as part (a). Thus
+    \[ P(B) = \f{10+\comb{10}{2}\time2 + \comb{10}{3}}{10^3} = \f{11}{50} \]
+  \end{exmp}
+
+  \begin{note}
+    While $n^{(r)}$ only has a physical interpretation when $n$ and $r$ are positive integers with $n \geq r$, it still has meaning when $n$ is not a positive integer, as long as $r$ is a non-negative integer. In general, we can define $n^{(r)} = n(n-1)\cdots(n-r+1).$ For example:
+    \[ (-2)^{(3)} = (-2)(-2 -1)(-2 -2) = -24 \]
+    \[ 1.3^{(2)} = (1.3)(1.3 - 1) = 0.39 \]
+    Note that in order for $\comb{n}{0} = \comb{n}{n} =1$ we must define
+    \[ n^{(0)} = \f{n!}{(n-0)!} = 1 \mbox{ \ and \ } 0! = 1. \]
+    Also $\comb{n}{r}$ loses its physical meaning when $n$ is not a non-negative $\geq r$ but we can use
+    \[ \comb{n}{r} = \f{n^{(r)}}{r!} \]
+    to define it when $n$ is not a positive integer but $r$ is. For example,
+    \[ \comb{\f{1}{2}}{3} = \f{\left(\f{1}{2}\right)^{(3)}}{3!} = \f{1}{16} \]
+    Also, when $n$ and $r$ are non-negative integers and $r > n$ notice that $\comb{n}{r} = \f{n^{(r)}}{r!} = \f{n(n-1)\cdots(0)\cdots}{r!} = 0$
+  \end{note}
+
+  \subsection[Review]{Review of Useful Series and Sums}
+
+  Recall the following series and sums.
+
+  \begin{itemize}
+    \item[1.] Geometric Series
+    \[ a + ar + ar^2 + \cdots + ar^{n-1} = \f{a(1-r^n)}{1-r} \mbox {\ for $r \not = 1$} \]
+    If $|r| < 1$, then
+    \[ a+ar + ar^2 + \cdots + ar^{n-1} = \f{a}{1-r} \]
+    \item[2.] Binomial Theorem
+    \[ (1+a)^n = 1 + \comb{n}{1}a + \comb{n}{2}a^2 + \cdots + \comb{n}{n}a^n = \sum_{x=0}^n \comb{n}{x}a^x \]
+    \item[3.] Binomial Theorem (general)
+    \[ (1+a)^n = \sum_{x=0}^{\infty} \comb{n}{x} a^x \mbox{ \ if $|a| < 1$} \]
+    \begin{proof}
+      Recall from Calculus the Maclaurin's series which says that a sufficiently smooth function $f(x)$ can be written as an infinite series using an expansion around $x = 0$,
+      \[ f(x) = f(0) + \f{f'(0)}{1}x + \f{f''(0)}{2!}x^2 + \cdots \]
+      provided that this series is convergent. In this case, with $f(a) = (1+a)^n$, $f'(0) = n, f''(0) = n(n-1)$ and $f^{(r)}(0) = n^{(r)}$. Substituting,
+      \[ f(a) = 1 + \f{n}{1}a + \f{n(n-1)}{2!}a^2 + \cdots + \f{n^{(r)}}{r!} a^r + \cdots = \sum_{x=0}^{\infty} \comb{n}{x} a^x \]
+      It is not hard to show that this converges whenever $|a| < 1$.
+    \end{proof}
+    \item[4.] Multinomial Theorem, a generalization of the binomial theorem is
+    \[ (a_1 + a_2 + \cdots + a_k)^n = \sum \f{n!}{x_1!x_2!\cdots x_k!} a_1^{x_1} a_2^{x_2} \cdots a_k^{x_k}.\]
+    with the summation over all $x_1,x_2,\ldots,x_k$ with $\sum x_i = n$.
+    \item[5.] Hypergeometric Identity
+    \[ \sum_{x=0}^{\infty} \comb{a}{x}\comb{b}{n-x} = \comb{a+b}{n}. \]
+    There will not be an infinite number of terms if $a$ and $b$ are positive integers since the terms become 0 eventually. For example
+    \[ \comb{4}{5} = \f{4^{(5)}}{5!} = 0 \]
+    \item[6.] Exponential Series
+    \[ e^x = \f{x^0}{0!} + \f{x^1}{1!} + \f{x^2}{2!} + \f{x^3}{3!} + \cdots = \sum_{n=0}^{\infty} \f{x^n}{n!} \]
+    \item[7.] Special series involving integers:
+    \[ \sum_{x = 0}^{n} x = \f{n(n+1)}{2} \]
+    \[ \sum_{x=0}^n x^2 = \f{n(n+1)(2n+1)}{6}\]
+    \[ \sum_{x=0}^n x^3 = \left[ \f{n(n+1)}{2} \right]^2 \]
+  \end{itemize}
+
+   \subsection{Tutorial 1}
+
+  \begin{exmp}
+    Suppose one's birthday is equally likely to be in one of the 12 months. For a group of 10 students, find the probability that
+    \begin{itemize}
+      \item[A] $=$ "None of them has a birthday in January or December"
+      \item[B] $=$ "All of them have birthdays in different months"
+      \item[C] $=$ "All birthdays in the same month"
+      \item[D] $=$ "2 of them in one month, 3 in another, and the remaining 5 in different months"
+    \end{itemize}
+    Consider a box model where we have 12 slots and 10 objects to fill the the slots with. So,
+    \[ P(A) = \f{10^{10}}{12^{10}} \]
+    \[ P(B) = \f{12^{(10)}}{12^{10}} \]
+    \[ P(C) = \f{12}{12^{10}} \]
+    \[ P(D) = \f{\comb{12}{1} \comb{10}{2} \comb{11}{1} \comb{8}{3} 10^{(5)}}{12^{10}} \]
+    Consider now a new case $E =$ "5 in one month and remaining 5 in another month."
+    \[ P(E) = \f{\comb{12}{1} \comb{10}{5} \comb{11}{1} \comb{5}{5} }{12^{10}} \mbox { \ not correct, we need to divide by 2} \]
+    We take a different approach, reserving two months to begin with, so
+    \[ P(E) = \f{\comb{12}{2} \comb{10}{5} \comb{5}{5}}{12^{10}} \]
+  \end{exmp}
+
+  \begin{exmp}
+    Four numbers are randomly selected from $\{ 0,1,2,3,4,5,6,7,8,9 \}$ without replacement and form a sequence.
+    \begin{itemize}
+      \item[A] $=$ "The sequence is a 4-digit number"
+      \item[B] $=$ "It is a 4-digit even number"
+      \item[C] $=$ "It is a 4-digit even number bigger than 4000"
+    \end{itemize}
+    Our solution,
+    \[ P(A) = \f{\comb{9}{1}9^{(3)}}{10^{(4)}} = \f{9}{10} \]
+    \[ P(B) = \f{\comb{5}{1}\comb{5}{1}8^{(2)} + \comb{4}{1}\comb{4}{1}8^{(2)}}{10^{(4)}} \]
+    \[ P(C) = \f{\comb{3}{1}\comb{5}{1}8^{(2)} + \comb{3}{1}\comb{4}{1}8^{(2)}}{10^{(4)}} \]
+  \end{exmp}
+
+  \begin{exmp}
+    Roll a regular die 4 times. $A = $ "The sum of the 4 numbers appeared is 10"
+    \[S= \{ (1,1,1,1),(1,1,1,2),\ldots,(6,6,6,6)\} \]
+    and $n = 6^4$. So,
+    \[ A = \{ (2,3,3,2), (1,4,1,4), \ldots \} \]
+    The number of ways to have 4 numbers add up to 10, each number is from $\{ 1,2,3,4,5,6 \}$ is the same as the number of ways to put 10 identical balls into 4 boxes, and each box has at least one ball, at most 6 balls.
+    \[ P(A) = \f{\comb{9}{3}-4}{6^4} \]
+    Another way to solve this problem is to consider $(x+x^2+x^3+x^4+x^5+x^6)^4$, we need the coefficient in front of $x^10$ in the expansion. We can find this using binomial theorem and it describes the same thing. So,
+    \begin{align*}
+      x^4(1+x+x^2+x^3+x^4+x^5)^4 & = x^4\left(\f{1-x^6}{1-x}\right)^4 = x^4(1-x^6)^4(1-x)^{-4}
+    \end{align*}
+  \end{exmp}
+
+  \subsection{Solutions to Problems on Chapter 3}
+
+  \begin{itemize}
+    \item[3.1]
+    \begin{itemize}
+      \item[(a)] $P(a) = \f{\comb{4}{1}6^{(5)}}{7^{(4)}} = \f{4}{7}$
+      \item[(b)] $P(b) = \f{5\times5^{(5)}}{7^{(6)}}$
+      \item[(c)] $P(c) = \f{(4+3+2+1)5^{(4)}}{7^{(6)}}$
+    \end{itemize}
+    \item[3.2]
+    \begin{itemize}
+      \item[(a) i.] $P = \f{(n-1)^{r}}{n^{r}}$
+      \item[(a) ii.] $P = \f{n^{(r)}}{n^{r}}$
+    \end{itemize}
+    \item[3.3]
+    \begin{itemize}
+      \item[(a)] $P(a) = \f{6^{(4)}}{6^4} = \f{5}{18}$
+      \item[(b)] $P(b) = \f{6\times\comb{6}{2}}{6^4} = \f{5}{72}$ (6 destinations for 6 spots split among groups of 2)
+    \end{itemize}
+    \item[3.4] $P(H) = \f{\comb{4}{2}\comb{12}{4}\comb{36}{7}}{\comb{52}{13}}$ (36 since 16 cards not applicable as "others")
+    \item[3.5]
+    \begin{itemize}
+      \item[(a)] $P(STATISTICS) = \f{1}{\f{10!}{3!3!2!1!1!1!}} = \f{1}{50400}$
+      \item[(b)] $P($"same letter at each end"$) = \f{8\comb{7}{3}\comb{4}{2}\comb{2}{1} + 8\comb{7}{3}\comb{4}{2}\comb{2}{1} + \comb{8}{3}\comb{5}{3}\comb{2}{1}\comb{1}{}}{50400} = \f{7}{45}$
+    \end{itemize}
+    \item[3.6]
+    \begin{itemize}
+      \item[(a)] $P(a) = \f{1}{6}$ (take any 3 digits, the probability there are $3^{(3)}$ arrangements, and only one is strictly increasing)
+      \item[(b)] $P(b) = P(a) \times \f{10^{(3)}}{10^3}$
+    \end{itemize}
+    \item[3.7]$P(A) = \f{365^{(r)}}{365^{r}} $
+    \item[3.8]
+    \begin{itemize}
+      \item[(a)] $P(a) = \f{1}{n}$ (not in order, just pick a single key out of $n$)
+      \item[(b)] $P(b) = \f{2}{n}$
+    \end{itemize}
+    \item[3.9]
+    $P(A) = \f{1 + 3 + 5 + \cdots +  (2n-1)}{\comb{2n+1}{3}}$
+    \item[3.10]
+    \begin{itemize}
+      \item[(a)]
+      \begin{itemize}
+        \item[i.] $\f{6}{10000}$ (6 ways to arrange this group, refer to Remark 3.2)
+        \item[ii.] $\f{4^{(4)}}{10000} = \f{24}{10000}$, better odds to pick four non-repeating digits
+      \end{itemize}
+      \item[(b)] The operator loses money if the prize money exceeds $\$ 1 \times 10000$, that is, if there are more than $20$ prize winners. We need the probability that four digits are picked with no repeating digits. $P(b) = \f{10^{(4)}}{10000}$. \\
+      The amount of money the operator gives out is $\$500 \times |S|$ where $S$ is the set of all possible rearrangements of the four digits drawn.
+    \end{itemize}
+    \item[3.11]
+    \begin{itemize}
+      \item[(a)] $P(a) = \f{\comb{6}{2}\comb{19}{4}}{25}$ (note to self: remember you have 19 left after taking 6 away, not 23 kiddo)
+      \item[(b)] We could estimate there were 15 deer (extrapolate experiment three times to meet 6 tagged deer)
+    \end{itemize}
+    \item[3.12]
+    \begin{itemize}
+      \item[(a)] $P(a) = \f{1}{\comb{49}{6}}$
+      \item[(b)] $P(b) = \f{\comb{6}{5}\comb{43}{1}}{\comb{49}{6}}$
+      \item[(c)] $P(c) = \f{\comb{6}{4}\comb{43}{2}}{\comb{49}{6}}$
+      \item[(d)] $P(d) = \f{\comb{6}{3}\comb{43}{3}}{\comb{49}{6}}$
+    \end{itemize}
+    \item[3.13]
+    \begin{itemize}
+      \item[(a)] There are 2 Jacks, left, so $P(a) = 1 - \f{\times\comb{48}{3}}{\comb{50}{3}}$
+      \item[(b)] $1-\f{\comb{45}{2}}{\comb{47}{2}}$
+      \item[(c)] $\f{\comb{2}{2}\comb{48}{3}}{\comb{50}{5}} = \f{\comb{48}{3}}{\comb{50}{5}}$
+    \end{itemize}
+    \item[$\pi$] The binomial theorem states that
+    \[ (1+a)^n = \sum_{x=0}^n\comb{n}{x}a^x \]
+    So,
+    \begin{align*}
+     n(1+a)^{n-1} & = \sum_{x=0}^{n} x \comb{n}{x}a^{x-1} & \mbox{(Differentiate)}\\
+     na(1+a)^{n-1} & =  \sum_{x=0}^{n} x \comb{n}{x}a^{x} \\
+     n\left(\f{p}{1-p}\right)\left(1+\left(\f{p}{1-p}\right)\right)^{n-1} & =  \sum_{x=0}^{n} x \comb{n}{x}\left(\f{p}{1-p}\right)^{x} & \mbox{$\left(  a = \left(\f{p}{1-p}\right) \right)$ }\\
+     np & = \sum_{x=0}x\comb{n}{x}p^xp^{n-x}
+     \end{align*}
+  \end{itemize}
+
+  \section[Conditional]{Probability Rules and Conditional Probability}
+
+  \subsection{General Methods}
+
+  Recall that a \nameref{probability model} consists of a \nameref{sample space} $S$, a set of events or subsets of the sample space to which we can assign probabilities and a mechanism for assigning these probabilities. So the probability for some event $A$ is the sum of the probabilities of simple events in $A$. Thus we have these rules:
+
+  \begin{itemize}
+    \item \textbf{Rule 1} $P(S) = 1$
+    \item \textbf{Rule 2} For any event $A, 0 \leq P(A) \leq 1$.
+    \item \textbf{Rule 3} If $A$ and $B$ are two events with $A \subseteq B$, $P(A) \leq P(B)$.
+  \end{itemize}
+
+  Now consider since I am not going to make venn diagrams right now a venn diagram with two circles $A$ and $B$ inside a rectangle $S$. Then, $S$ is the sample space and $A$ and $B$ are events. $A \cup B$ is everything in either circle, $A \cap B$ is the intersection of both circles. As well, $\overline{A}$ is everything outside of $A$ and is defined as the \nameref{complement}. \\
+\newcommand{\ov}[1]{\overline{#1}}
+  \begin{thrm}[De Morgan's Laws]\label{demorgan}
+  \
+    \begin{itemize}
+      \item $\overline{A \cup B} = \overline{A} \cap \overline{B}$
+      \item $\ov{A \cap B} = \ov{A} \cup \ov{B}$
+    \end{itemize}
+  \end{thrm}
+
+  % \textbf{Problems.}
+
+  % \begin{itemize}
+  %   \item[4.1.1] In a typical year, 20\% of the days have a high temperature $> 22^{\circ}$. On $40\%$ of these days there is no rain. In the rest of the year, when the high temperature $\leq 22^{\circ}$, $70 \%$ of the days have no rain. What percent of days in the year have rain and a high temperature $\leq 22^{\circ}$? \\
+
+  %   So, we have $A = $"temperature is higher than $22^{\circ}$", and $B = $"there is no rain". Then we have $P(A) = 0.2$, $P(BA) = 0.4$, $P(\ov{A}B) = 0.7$, we need $P(\ov{B}\cdot \ov{A})$. Then we know
+  %   \begin{align*}
+  %     (1) P(A) = 0.2 \\
+  %     (2) P(AB) = 0.4 \\
+  %     (3) P(\ov{A}B) = 0.7 \\
+  %     (4) P()
+  %   \end{align*}
+  % \end{itemize}
+
+  \subsection{Rules for Unions of Events}
+
+  In addition to the last two rules, we have the following
+
+  \begin{itemize}
+    \item \textbf{Rule 4a} (probability of unions) $P(A \cup B) = P(A) + P(B) - P(AB)$
+    \item \textbf{Rule 4b} (probability of union of three events)
+    \[P(A \cup B \cup C) = P(A) + P(B) + P(C) - P(AB) - P(AC) - P(BC) + P(ABC)\]
+    \item \textbf{Rule 4c} (inclusion-exclusion principle)
+    \[ P(A_1 \cup \cdots \cup A_n) = \sum_i P(A_i) - \sum_{i < j} P(A_iA_j) + \sum_{i<j<k}(A_iA_jA_k) -\sum_{i < j < k < l}P(A_iA_jA_kA_l) + \cdots \]
+  \end{itemize}
+
+  \begin{defn}[mutually exclusive]\label{mutually exclusive}
+    Events $A$ and $B$ are \textbf{mutually exclusive} if $AB = \varphi$ (the empty set).
+  \end{defn}
+
+  Since \nameref{mutually exclusive} events $A$ and $B$ have no common points, $P(AB) = P(\varphi) = 0$.
+
+  \begin{itemize}
+    \item {\bf Rule 5a} (unions of mutually exclusive events) Let $A$ and $B$ be \nameref{mutually exclusive} events. Then $P(A \cup B) = P(A) + P(B)$.
+    \item {\bf Rule 5b} (generalized 5a) If $A_1, \ldots, A_n$ are \nameref{mutually exclusive} events, then $P(A_1\cup\cdots\cup A_n) = \sum_{i = 1}^n P(A_i)$.
+    \item {\bf Rule 6} (probability of complements) $P(A) = 1- P(\ov{A})$.
+  \end{itemize}
+
+  \subsection{Intersections of Events and Independence}
+
+  \begin{defn}[independent]\label{independent}
+    Events $A_1, A_2, \ldots, A_n$ are {\bf independent} if and only if $P(A_{i_1}, A_{i_2}, \ldots, A_{i_k})  = P(A_{i_1})P(A_{i_2})\cdots P(A_{i_k})$ for all sets $(i_1, i_2, \ldots, i_k)$ of distinct subscripts chosen from $(1,2,\ldots,n)$. If they are not independent, we call the events {\bf dependent}.
+  \end{defn}
+
+  \begin{exmp}
+    Suppose you're tossing a dice, are the events that your first toss is a 3 and the sum of two tosses is 7 \nameref{independent}? $P(A) = 1/6$, $P(B) = 1/6$, and $P(AB) = 1/36$, so yes.
+  \end{exmp}
+
+  \begin{thrm}
+    If $A$ and $B$ are independent events, then so too are $\ov{A}$ and $\ov{B}$.
+  \end{thrm}
+
+  \subsection{Conditional Probability}
+
+  In some situations we'll want to know what the probability of $A$ is while knowing that $B$ has already occured. We let the symbol $P(A|B)$ represent this probability.
+
+  \begin{defn}[conditional probability]\label{conditional probability}
+    \[ P(A|B) = \f{P(AB)}{P(B)} \]
+    if $P(B) \not = 0$.
+  \end{defn}
+
+  \begin{exmp}
+  If a fair coin is tossed 3 times, find the probablity that if at least 1 head occurs, then exactly 1 head occurs.\\
+
+  Let $A$ be the event that we obtain 1 head, and $B$ be the event that at least one head occurs. We want $P(A|B)$. So
+  \begin{align*}
+    P(A|B) & = \f{P(AB)}{P(B)} \\
+    & = \f{\f{3}{8}}{\f{7}{8}} \\
+    & = \f{3}{7}
+  \end{align*}
+  \end{exmp}
+
+  \subsection{Multiplication and Partition Rules}
+
+  \begin{itemize}
+    \item \textbf{Product Rule} Let $A$, $B$, $C$, $D, \ldots$ be arbitary events in a sample space. Assume that $P(A) > 0, P(AB)>0$, and $P(ABC) > 0$. Then
+    \begin{align*}
+      P(AB) & = P(A)P(B|A) \\
+      P(ABC) & = P(A)P(B|A)P(C|AB) \\
+      P(ABCD) & = P(A)P(B|A)P(C|AB)P(D|ABC)
+    \end{align*}
+    and so on.
+    \item \textbf{Partition Rule} Let $A_1,\ldots, A_k$ be a partition of the sample space $S$ into disjoint (mutually exclusive) events, that is
+    \[ A_1 \cup A_2 \cup \cdots \cup A_k = S. \mbox{ \ and \ } A_i \cap A_j = \varphi \mbox{\ if $i \not = j$} \]
+    Let $B$ be an arbitary event in $S$. Then
+    \begin{align*}
+      P(B) & = P(BA_1) + P(BA_2) + \cdots + P(BA_k) \\
+      & = \sum_{i = 1}^k P(B|A_i)P(A_i)
+    \end{align*}
+  \end{itemize}
+
+  \begin{exmp}
+     In an insurance portfolio 10\% of the policy holders are in Class $A_1$ (high risk), 40\% are in Class $A_2$ (medium risk), and 50\% are in Class $A_3$ (low risk). The probability there is a claim on a Class $A_1$ policy in a given year is .10; similar probabilities for Classes $A_2$ and $A_3$ are .05 and .02. Find the probability that if a claim is made, it is made on a Class $A_1$ policy. \\
+
+     \textbf{Solution.}
+
+     For a randomly selected policy, let $B$ be the event that a policy has a claim, and $A_i$ be the event that the policy is of class $i$ for $i = 1,2,3$. We are asked to find $P(A_1|B)$. Note that,
+     \[ P(A_1 | B) = \f{P(A_1B)}{P(B)} \]
+     and that
+     \[ P(B) = P(A_1B) + P(A_2B) + P(A_3B). \]
+     We are told that
+     \[ P(A_1) = 0.10, P(A_2) = 0.40, P(A_3) = 0.50 \]
+     and that
+     \[ P(B|A_1) = 0.10, P(B|A_2) = 0.05, P(B|A_3) = 0.02. \]
+     Thus,
+     \begin{align*}
+       P(A_1B) = P(A_1)P(B|A_1) & = 0.01 \\
+       P(A_2B) = P(A_2)P(B|A_2) & = 0.02 \\
+       P(A_3B) = P(A_3)P(B|A_3) & = 0.01
+     \end{align*}
+     Therefore $P(B) = 0.04$ and $P(A_1|B) = 0.01/0.04 = 0.25$.
+  \end{exmp}
+
+  \begin{thrm}[Bayes Theorem]\label{Baye's theorem}
+    \[ P(A|B) = \f{P(B|A)P(A)}{P(B|\ov{A})P(\ov{A})+P(B|A)P(A)} \]
+  \end{thrm}
+
+  \subsection{Tutorial 2}
+
+  \begin{exmp}
+    Independent games are to be played between teams $X$ and $Y$, with team $X$ having probability 0.6 to win each game.
+    \begin{itemize}
+      \item[(i)] $A = $ "Team $X$ wins a best-of-seven series with a sweep" (4:0)
+      \item[(ii)] $B = $ "Team $X$ wins a best of seven series."
+    \end{itemize}
+
+   \textbf{Solution.} Let $B_i$ = "Team $X$ wins game $i$" ($1 \leq i \leq 7$). For any game $P(B_i) = 0.6$. Note that $B_1, B_2, \ldots, B_7$ are independent.
+   \begin{itemize}
+     \item[(i)] $P(B_1B_2B_3B_4) = P(B_1)P(B_2)P(B_3)P(B_4) = 0.6^4$
+     \item[(ii)] $D_i = $ "Team $X$ wins the series in $i$ games" for $i = 4,5,6,7$. \\ $P(B) = P(D_4\cup D_5 \cup D_6 \cup D_7) = P(D_4) + P(D_5) + P(D_6) + P(D_7)$. Now,
+     \begin{itemize}
+       \item[$\bullet$] $P(D_4) = 0.6^4$
+       \item[$\bullet$] \begin{align*}
+         P(D_5) & = P(B_1B_2B_3\ov{B_4}B_5 \cup B_1B_2\ov{B_3}B_4B_5 \cup B_1\ov{B_2}B_3B_4B_5 \cup \ov{B_1}B_2B_3B_4B_5) \\
+         & = P(B_1B_2B_3\ov{B_4}B_5) + \cdots + P(\ov{B_1}B_2B_3B_4B_5) \\
+         & = 4 \times 0.4 \times 0.6^4
+       \end{align*}
+       Then $P(B) = 0.6^4 + \comb{4}{1}0.4\times 0.6^4 + \comb{5}{2} 0.4^2 \times 0.6^4 + \comb{6}{3} 0.4^3 \times 0.6^4$
+     \end{itemize}
+   \end{itemize}
+  \end{exmp}
+
+  \begin{exmp}
+    There are $n$ letters $L_1, \ldots, L_n$ and $n$ envelopes $E_1, \ldots, E_n$ and $L_i$ and $E_i$ are intended to be matched randomly, put letters into evenlopes, one letter per envelope. Find the probability that
+    \begin{itemize}
+      \item $A = $ "At least one match"
+      \item $B = $ "No matches"
+      \item $C = $ "The 1st $r$ letters and the $r$ envelopes matche dbut none of the others match"
+      \item $D = $ "Exactly $r$ matches"
+    \end{itemize}
+
+    \textbf{Solution.} $A_i = $ "$L_i$ matches $E_i$" for $i = 1,2,\ldots, n$. Are $A_1, \ldots, A_n$ independent? No. Are $A_i$ and $A_j$ disjoint? No.
+    \begin{align*}
+      P(A) & = P(A_1 \cup A_2 \cup \cdots \cup A_n) \\
+      & = \sum_{i = 1}^n P(A_i) - \sum_{i < j} P(A_iA_j) + \sum_{i < j < k} P(A_iA_jA_k) + \cdots + (-1)^{n-1} P(A_1A_2\cdots A_n) \\
+      & = nP(A_1) - \comb{n}{2}P(A_1A_2) + \comb{n}{3}P(A_1A_2A_3) + \cdots + (-1)^{n-1}P(A_1\cdots A_n) \\
+      & = n\f{1}{n} - \comb{n}{2}\f{1}{n(n-1)} + \comb{n}{3}\f{1}{n(n-1)(n-2)} + \cdots + (-1)^{n-1}\f{1}{n!} \\
+      & = 1 - \f{1}{2!} + \f{1}{3!} - \f{1}{4!} + \cdots + (-1)^{n-1}\f{1}{n!} \\
+      & = \sum_{k=1}^n (-1)^{k-1} \f{1}{k!}
+    \end{align*}
+  \end{exmp}
+
+
+  End of Chapter 4:
+
+  \begin{itemize}
+    \item[4.12] An experiment has three possible outcomes $A$, $B$, $C$ with respective probabilities $p$, $q$, $r$, where $p + q + r = 1$. The experiement is repeated until either outcome $A$ or outcome $B$ occurs. Show that $A$ occurs before $B$ with probablity $\f{p}{p+q}$. \\
+
+    \textbf{Solution.} On a single trial: $A, B, C$. $P(A) = p$, $P(B) = q$, $P(c) = r$, and $p + q + r = 1$. Under repeated trials, $A_i = $ "The $i$-th trial has result $A$", similarly for $B_i$ and $C_i$. Note that $P(A_i) = p$ still, and similarly for the other two since these are repeated trials. Note that the results from different trials are independent of each other. For example, $A_1$ and $B_2$ are independent, so is $C_1$ and $A_3$. \\
+
+    Now, the probability that $A$ occurs before $B$ includes trials $A_1 \cup C_1A_2 \cup C_1C_2A_3 \cup \cdots$,
+    \begin{align*}
+      P(\mbox{$A$ occurs before $B$}) & = P(A_1 \cup C_1A_2 \cup C_1C_2A_3 \cup \cdots) \\
+                                      & = P(A_1) + P(C_1A_2) + P(C_1C_2A_3) + \cdots \\
+                                      & = p + rp + r^2p + \cdots \\
+                                      & = p(1 + r + r^2 + r^3 + \cdots) \\
+                                      & = \f{p}{1-r} \\
+                                      & = \f{p}{p+q}
+    \end{align*}
+    $k$ possible outcomes: $D_1, D_2, \ldots, D_k$. Find $p_i = P(D_i)$ for $i = 1,2,\ldots, k$ and $\sum_{i=1}^k p_i = 1$. Find $P(D_1$ occurs before $D_2$) $= \f{p_1}{p_1+p_2}$
+    \item[4.13] $A = $ "you win the game", and $B_i = $ "the sum of the two numbers from rolling two dice" $i = 2,3,4,\ldots,11,12$. We want $P(A) = \sum_{i=2}^{12} P(B_i)P(A|B_i)$. How do we find $B_i$? Well consider $P(B_2) = \f{1}{36}$, $P(B_3) = \f{2}{36}$. Now the tricky part is the conditional probability. For example, $P(A|B_7) = 1$. $P(A | B_2) = 0$, and $P(A|B_5) = \f{P(B_5)}{P(B_5) + P(B_7)}$
+  \end{itemize}
+
+  \subsection{Problems on Chapter 4}
+
+  \begin{itemize}
+    \item[4.1] Use \nameref{demorgan} for the second last one.
+    \item[4.2] $P(A) = \f{10}{10^3}, P(B) = \f{10^{(3)}}{10^3}, P(C) = \f{9^3}{10^3}, P(D) = \f{5^3}{10^3}, P(E) = \f{2\times5^3}{10^3}$.
+    \item[4.3] We want $P(A|\ov{B})$ which is $\f{P(A\ov{B})}{P(\ov{B})} = \f{P(A) - P(AB)}{1 - P(B)} = \f{P(A) - P(B)(A|B)}{1-P(B)}$
+    \item[4.4]
+    \begin{itemize}
+      \item[(a)] It's the probablity of not getting a 1 to the 8th power. $(1-P(1))^8$
+      \item[(b)] It's the probablity of not getting a 2 to the 8th power. $(1 - P(2))^8$
+      \item[(c)] Same idea, but for both. $(1 - P(1) - P(2))^8$
+      \item[(d)] $1 - P((a)) - P((b)) + P((c))$
+    \end{itemize}
+    \item[4.5] $P(A \cup B) = P(A) + P(B) - P(AB) = P(A) + P(B) - P(A)P(B)$ (independent)
+    \item[4.6] Let $A$,$B$,$C$ be the events that $A, B, C$ get the right answer. Then we want to find $P(\ov{C}|X)$ where $X$ is the event that two people get the right answer. The probability that two people get the right answer is $P(\ov{C}|X) = \f{P(\ov{C}X)}{P(X)} = \f{P(AB\ov{C})}{P(X)} = \f{P(A)P(B)P(\ov{C})}{P(A)P(B)P(\ov{C}) + P(\ov{A})P(B)P(C) + P(A)P(\ov{B})P(C)}$
+    \item[4.7] Let $X$ be the event that a customer pays with credit card then
+    \begin{itemize}
+      \item[(a)] $\comb{5}{3} 0.7^3 0.3^2$
+      \item[(b)] $\comb{4}{2} 0.7^3 0.3^2$
+    \end{itemize}
+    \item[4.9] Let $D$ be the probability that one randomly selected person out of this population is diseased. Then $P(D)$ is the union of the probbilities at given $A$, $A$ is diseased, and given $B$, $B$ is diseased, and given $C$, $C$ is diseased which is 0.041. Then the probability that at least one of ten are diseased is one minus the probability ten people selected have no disease. Thus $P($"at least one diseased of 10"$) = 1-(1-0.041)^{10}$.
+    \item[4.10] The probability that $A$ sweeps is $P(A_HA_HA_AA_A) = 0.7^20.5^2$, and in five is $P(B_AA_HA_AA_AA_A \cup A_HB_AA_AA_AA_A \cup A_HA_HB_HA_AA_A \cup A_HA_HA_AB_HA_A) = 0.175$, probability it doesn't go to six games is the sum of these two plus the same idea for $B$ winning in four or five.
+    \item[4.12] look up
+    \item[4.13] $A = $ "you win the game", and $B_i = $ "the sum of the two numbers from rolling two dice" $i = 2,3,4,\ldots,11,12$. We want $P(A) = \sum_{i=2}^{12} P(B_i)P(A|B_i)$. How do we find $B_i$? Well consider $P(B_2) = \f{1}{36}$, $P(B_3) = \f{2}{36}$. Now the tricky part is the conditional probability. For example, $P(A|B_7) = 1$. $P(A | B_2) = 0$, and $P(A|B_5) = \f{P(B_5)}{P(B_5) + P(B_7)}$. So,
+    \begin{align*}
+      P(A) = 0 + 0 + \f{P(B_4)^2}{P(B_4) + P(B_7)} + \f{P(B_5)^2}{P(B_5) + P(B_7)} + \f{P(B_6)^2}{P(B_6) + P(B_7)} + P(B_7) + \f{P(B_8)^2}{P(B_8) + P(B_7)} + \\ +  \f{P(B_9)^2}{P(B_9) + P(B_7)} + \f{P(B_{10})^2}{P(B_{10}) + P(B_7)} + P(B_{11}) + 0 = 0.492929292
+    \end{align*}
+
+    \item[4.14]
+    \begin{itemize}
+      \item [(a)] The probability that a student says yes is the 0.2 times the chance that he or she was born in one of the two months added to 0.8 times the chance they have ever cheated on an exam $p$. Thus
+      \[ P((a)) = \f{1}{30} + \f{4p}{5} \]
+      \item[(b)] Suppose $x$ of $n$ students answer yes, then set $P((a)) = \f{x}{n}$. So,
+      \[ p = \f{5x-\f{1}{6}n}{4n} \]
+      \item[(c)] The proportion of students that answer yes responding to question B is \[ \f{\f{4p}{5}}{P((a))} = \f{4p}{\f{1}{6} + 4p} == \f{24p}{1+24p}\]
+    \end{itemize}
+
+    \item[4.16]
+    \begin{itemize}
+      \item[(a)] $\f{1}{5}\f{3}{5}\f{1}{5} = \f{3}{125}$
+      \item[(b)] $\f{1}{10}\f{1}{10}\f{8}{10}$ is the minimum.
+    \end{itemize}
+
+    \item[4.17]
+    \begin{itemize}
+      \item[(a)] $P(A|Spam) = \f{P(Spam)P(A|Spam)}{P(A)} = \f{0.5*0.2}{0.5(0.2 + 0.001)}$
+      \item[(b)] $P(A|NotSpam)$
+    \end{itemize}
+
+    \item[4.18]
+    \begin{itemize}
+      \item[(a)] $1 - \f{P(A_1|NotSpam)\cdots(PA_n|NotSpam)}{P(A_1|Spam)\cdots P(A_n|Spam))}$
+      \item[(b)] Same as above, use $1 - P(A_3)$.
+      \item[(c)]
+    \end{itemize}
+
+  \end{itemize}
+
+  \begin{note}
+    Sorry to anyone using these notes that I haven't created a better summary of 4 or anything for 5, I'll try to get back on track after the midterm.
+  \end{note}
+
+  \begin{note}
+    Good questions to ask:
+    \begin{itemize}
+      \item Can I use the negation? \nameref{demorgan}, remember to take 1 - "neg".
+      \item Is there a product I don't know? Use product rule. ($P(AB) = P(A)(P(B|A)$)
+      \item Probabiliy of a union? Take sum of parts, less their various intersections.
+      \item Mutually exclusive? Intersection is 0.
+      \item Independent? Probability of product is product of probabilities of individual parts of initial product
+      \item Conditional probaility? Turn into fraction of product over probability of given part.
+      \item Do I know probabilities of various condition parts but not main part? Paritition rule; $P(B) = P(B|A_1) + \cdots + P(B|A_n)$
+    \end{itemize}
+  \end{note}
+
+  \section{Probability Distributions}
+  \subsection{Solutions to Problems on Chapter 5}
+
+  Quick tip, when the feature of independence is mentioned in the question, we're probably talking about either Bernoulli trials (Binomial, Negative Binomial), or Poisson process. Hypergeometric is NOT independent.
+
+  \begin{itemize}
+    \item[5.1]
+    \item[5.2]
+    \item[5.3]
+    \item[5.4] Let $P(X = x) = p(1-p)^x$, then the probability function on $R$ is a function on $\f{X}{4}$,
+    \begin{align*}
+      P(R = r) & = P(X = r) + P(X = (r + 4)) + P(X = (r + 8)) + \cdots \\
+               & = p(1-p)^r + p(1-p)^{r + 4} + p(1-p)^{r+8} + \cdots \\
+               & = p(1-p)^r ( 1 + p(1-p)^4 + p(1-p)^8 + \cdots)
+    \end{align*}
+    The sum inside the brackets is a geometric series similar to
+    \[ z + z^4 + z^8 + \cdots = \f{z}{1-z^4} \]
+    So,
+    \[  P(R = r) = \f{p(1-p)^r}{1 - p(1-p)^4} \]
+
+
+    \item[5.5]
+    \begin{itemize}
+      \item[(a)] Event $X$ that our friend takes 10 tickets to have 4 winners with probability of each trial is 0.3 has a negative binomial distribution. We want 6 failures before 4th success.
+    \[ f(x) = \comb{x + 4 - 1}{x}(0.3)^4(0.7)^{x} \]
+    then ($x = 6$ failures)
+    \[ P(X = 6) = 0.0800483796 \]
+
+    \item[(b)] We have a binomial distribution, we want $x = 0$. 15 events, probability of success trial is $1/9$.
+    \[ f(x) = \comb{15}{x} \f{1}{9^x} \left( \f{8}{9} \right)^{15-x} \implies P(X = 0) = 0.170888 \]
+
+    \item[(c)] Same idea, 60 cups not 15, 1 or 0 not just 0.
+    \[ P(X \leq 1) = \comb{60}{1} \f{1}{9} \left( \f{8}{9} \right)^{59} + \comb{60}{0}  \left( \f{8}{9} \right)^{60}  = 7.2488\times 10^{-3} \]
+
+    \end{itemize}
+
+    \item[5.6]
+    \begin{itemize}
+      \item[(a)] One minus probability this guy wins no prizes. Probability of a win is $\f{500}{500000} = 0.001$. Binomial distribution, ten trials, 0 successes.
+      \[ P(x \geq 1) = 1 - P(X = 0) = 1 - \comb{10}{0}(0.001)^0(1-0.001)^{10} = 9.955\times 10^{-3} \approx 0.010 \]
+
+      \item[(b)] Same thing, 2000 tickets.
+      \[ P(X \geq 1) = 1 - P(X = 0) = 1 - (1-0.001)^{2000} = 0.8648 \]
+    \end{itemize}
+
+    \item[5.7]
+    \begin{itemize}
+      \item[(a)]
+      Straightforward. $\f{40}{150} = \f{4}{15}$
+      \item[(b)] Hypergeometric distribution, men are successes, women are failures. 150 people, 74 men, 76 women, 12 people being picked.
+      \[ P(Y = y) = \f{\comb{74}{y}\comb{150 - 74}{12 - y}}{\comb{150}{12}} \]
+
+      \item[(c)] Plug in numbers.
+      \[ P(Y \leq 2) = P(Y = 0) + P(Y = 1) + P(Y = 2) = 0.176\]
+    \end{itemize}
+
+    \item[5.8] This is classic Poisson Distribution from Poisson Process. We have a rate, a timeline, a period and some number of events in that period. Both units in months so we're good.
+    \[ P(X \geq 4) = 1 -  \sum_{k=0}^{3} P(X = k) = 1 - e^{-\lambda t}\left( \sum_{k=0}^{3} \f{(\lambda t)^k}{k!} \right) = 0.9989497\]
+
+    \item[5.9] Fish are more interesting than bacteria, so we use Possion (translate: fish) process. We have a rate $\f{1}{20}$
+    \begin{itemize}
+      \item[(a)] Classic. $V$ is volume of sample.
+      \[ P(X = x) = \f{(\lambda V)^2e^{-\lambda V}}{x!} \implies P(X = 2) = \f{\left( \f{1}{20} \cdot 10 \right)^2e^{-\left( \f{1}{20} \cdot 10 \right)}}{2!} = 0.7581633 \]
+
+      \item[(b)]
+      Exactly the same procedure, use 1 - probability of finding none, and 1 instead of 10.
+      \[ P(X \geq 1) = 0.488 \]
+      \item[(c)] We use binomial distribution on poisson distribution. $p$ is probability of no fish present in sample.
+      \[ p = \f{(10\lambda)^0 e^{-10\lambda}}{0!} = e^{-10\lambda} \]
+      \[ P(Y = y) = \comb{10}{y} p^y(1-p)^{10-y} = \comb{10}{y} (e^{-10\lambda})^y(1-e^{-10\lambda})^{10-y} \]
+      \item[(d)]
+      \[ p = \f{3}{10} \implies \lambda = 0.12 \]
+    \end{itemize}
+
+    \item[5.10]
+    \begin{itemize}
+      \item[(a)] One minus probability of no claims,
+      \[ P(X \geq 1) = 1- P(X = 0) =  1 - \f{\left( \f{8}{100} \cdot 1 \right)^0e^{-\left( \f{8}{100} \cdot 1 \right)}}{0!} = 0.07688365 \]
+
+      \item[(b)] Probability of no claims for 20 is binomial ontop of above,
+      \[ P(X = x) = \comb{20}{x} (0.07688365)^x (1-0.07688365)^{20-x} \]
+      Set $x = 0$ for first part of this question. For second part, calculate $P(X \geq 2)$.
+    \end{itemize}
+
+    \item[5.11] 80\% of months have no failures.
+    \begin{itemize}
+      \item[(a)] Straightforward.
+      \[ P(X = 5) = \comb{7}{5} 0.8^5 0.2^2 = 0.2753 \]
+      \item[(b)] Negative binomial.
+      \[ P(X = 7) = \comb{2 + 5 - 1}{2}0.2^20.8^5= 0.1966 \]
+      \item[(c)] So for this part we think about it in terms of Poisson Distribution. So $P(X = x)$ is the probability that a month has $x$ power failures,
+      \[ P(X = 0) = 0.8 \]
+      from the question, and $t = 1$ for one month, so
+      \[ 0.8 = \f{(\lambda t)^0 e^{-\lambda t}}{0!} = e^{-\lambda t} = e^{-\lambda(1)} \implies \lambda = 0.223 \]
+      Then,
+      \[ P(X > 1) = 1 - (P(X = 0) + P(X = 1)) = 1 - (e^{-0.223} + (0.223)e^{-0.223}) = 0.0215 \]
+    \end{itemize}
+
+    \item{5.12}
+    \begin{itemize}
+      \item[(a)] First note that $ \lim_{N \ar \infty} \f{r}{N} = \f{r}{N}$
+      \begin{align*}
+        \lim_{N \ar \infty} f(x) & =  \lim_{N \ar \infty} \f{\comb{r}{x}\comb{N-r}{n-x}}{\comb{N}{n}}\\
+        & =  \comb{n}{x} \lim_{N \ar \infty} \f{r!(N-r)!n!}{(r-x)!(N - r - n + x)!N!} \\
+        & =  \comb{n}{x} \lim_{N \ar \infty} \f{[r(r-1)\cdots(r-x+1)][(N - r)(N - r - 1)\cdots(N - r - n + x + a)]}{N(N-1)\cdots(N-n +1)}
+      \end{align*}
+      For $x = 0,1,2,\ldots,n$. It must be th ecase that $r \ar \infty$ since $p = \f{r}{N}$ is fixed. We expect that $N - r \leq N - n$ and $n$ could be ignored as $r, N$ go to infinity. Let $q = \f{1}{p} = \f{N}{r}$. Then,
+      \begin{align*}
+        f(x) & = \comb{n}{x} \f{[r(r-1)\cdots(r-x+a)][(q-1)r((q-1)r-1)\cdots((q-1)r-n+x+1)]}{qr(qr-1)\cdots(qr-n+1)} \\
+        & = \comb{n}{x}\left( \f{1}{q} \right)^x \left( \f{q-1}{q} \right)^{n-x} \\
+        & = \comb{n}{x} p^x (1-p)^{n-x}
+      \end{align*}
+    \end{itemize}
+
+    \item[5.13]
+    \begin{itemize}
+      \item[(a)] Call this event $X$. We have a rate $\lambda$ per hectare and measure which is $n$ hectare plots, and we're looking for at least $k$ of some item. So it's Poisson process. We are looking for one minus the probability that all of the hectare plots have less than $k$ spruce budworms. That probability is the $n$-th power of the probablility that a single hectare plot has less than $k$ spruce budworms, which is the sum from $i = 0$ to $i = k - 1$ of the poisson distribution over one hectare (so $\mu = 1 \cdot \lambda$) for $i$. Therefore we conclude,
+      \[P(X) =  1 - \left( \sum_{i = 0}^{k-1} \f{(\lambda \cdot 1)^ie^{-\lambda \cdot 1}}{i!} \right)^n \]
+    \end{itemize}
+
+    \item[5.14] So we're essentially told at tht beginning here that $\lambda = 20$, and $p = 0.2$.
+    \begin{itemize}
+      \item[(a)] Probability of two sales in 5 calls is straightforward Binomial Distribution,
+      \[ \comb{5}{2}0.2^2\cdot0.8^3 = 0.2048 \]
+      \item[(b)] This is negative binomial distribution, 8 fails up to reach 2 successes.
+      \[ \comb{2 + 6 - 1}{1} 0.2^2\cdot 0.8^6 = 0.0734\]
+      \item[(c)] This situation occurs only if calls 4,5,6,7 are failures. Thus our probability is ($*$) the ways that the first three can yield one success, then ($**$) four failures, then ($***$) one success, over all possibilities where it takes 8 trials for 2 successes (which we found in part b).
+      \[ \f{\ub{\comb{3}{1}\times 0.2 \times 0.8^2}_{(*)} \times \ub{0.8^4}_{(**)} \times \ub{0.2}_{(***)}}{P((b))} = \f{0.03145728}{0.0734} = 0.428 \]
+
+      \item[(d)] This is Poisson, we have to convert minutes to hours, $\lambda$ is per hour, so just use $\f{1}{4}$ for 15 minutes.
+      \[ \f{(\f{1}{4}\times\lambda)^3e^{-\f{\lambda}{4}}}{3!} = \f{(\f{1}{4}\times20)^3e^{-\f{20}{4}}}{3!} = 0.14037 \]
+    \end{itemize}
+
+    \item[5.15] Collection of $N = 105$ objects, $n = 35$ of type $A$ and $r = 70$ of type $B$. We choose objects without replacement until 8 of type $B$ have been selected. Let $X$ be the number of type $A$ withdrawn. This is Hypergeometric distribution. Think about it this way: how many ways can you choose $x$ objects of type $A$, and also 7 objects of type $B$? (7 here since the last one is always of type $B$ to get our 8th success) Well, $\comb{35}{x}\times\comb{70}{7}$. All possibilities are $\comb{105}{7 + x}$ because you're taking 7 of type $B$ for sure, and then $x$ of type $A$. Now finally all we need is the probability that the last one is an 8. Well, that's simply the number of objects of type $B$ left after our first 7 are taken, 63, over the total number less the $x$ and 7 we already took.
+    \[ f(x) = P(X = x) = \f{\comb{35}{x}\comb{70}{7}}{\comb{105}{7+x}} \left( \f{70 - 7}{105 - 7 - x} \right)\]
+
+    \item[5.16]
+    \begin{itemize}
+      \item[(a)] Basic Poisson questions, just convert seconds to hours.
+      \[ \f{\left(540\cdot \f{1}{120}\right)^{11}e^{-\left(540\cdot \f{1}{120}\right)}}{11!} = 4.26438\times10^{-3} \]
+      and
+      \[ 1 - \left( \sum_{k=0}^{10} \f{\left(540\cdot \f{1}{120}\right)^{k}e^{-\left(540\cdot \f{1}{120}\right)}}{k!}\right) = 6.668672\times 10^{-3}\]
+      \item[(b)] This is binomial on the first part of part (a)
+      \[ \comb{20}{2} (0.004264)^2(1-0.004264)^{18} = 3.19877 \times 10^{-3} \]
+      \item[(c)]
+      \begin{itemize}
+        \item[(i)]It's not quite the same as part (b), this time we're using negative binomial distribution to find the probablity of only 11 successes in 1399 trials, then the 1400th being golden.
+      \[ \comb{1399}{11}  (0.004264)^{11}(1-0.004264)^{1388}\cdot 0.004264\]
+        \item[(ii)] Check page 90 of textbook for "use the Poisson distribution with $\mu = np$ as a close approximation to the binomial distribution $Bi(n,p)$ in processes for which $n$ is large and $p$ is small."
+        \[ \f{\left( 0.004264 \times 1399 \right)^{11}e^{-\left(0.004264 \times 1399  \right)}}{11!} \times 0.004264 = 9.331\times10^{-5}\]
+      \end{itemize}
+    \end{itemize}
+
+    \item[5.17]
+    \begin{itemize}
+      \item[(a)] The probability of a single sheet of glass with no bubbles is
+      \[\f{(1.2\times 0.8)^0e^{-(1.2\times0.8)}}{0!} \]
+      Therefore,
+      \[ f(x) = P(X = x) = \comb{n}{x}(e^{-0.96})^x(1-e^{-0.96})^{n-x} \]
+      \item[(b)]
+      \begin{align*}
+        \f{1}{2} & \leq e^{-\lambda \times 0.8} \\
+        \f{\ln(2)}{0.8} & \geq \lambda \\
+        \lambda & \leq 0.866
+      \end{align*}
+    \end{itemize}
+
+    \item[5.18]$ 4k^2 = 1 \implies k = 0.5$, then just draw the same little table for $f(x)$, and add up $f(3)$ and $f(4)$.
+
+    \item[5.19]
+    \begin{itemize}
+      \item[(a)] \begin{align*}
+        P(Y \geq y) & = P(Y = y) + P(Y = y + 1) + \cdots \\
+        & = p(1-p)^y + p(1-p)^{y+1} + \cdots \\
+        & = p(1-p)^{y}(1 + (1-p) + (1-p)^2 + \cdots) \\
+        & = \f{p(1-p)^y}{1 - (1-p)} \\
+        & = \f{p(1-p)^y}{p} \\
+        & = (1-p)^y
+      \end{align*}
+      Then,
+      \begin{align*}
+        P(Y \geq s + t | Y \geq s) & = \f{P(Y \geq s + t)}{P(Y \geq s)} \\
+        & = \f{(1-p)^{s+t}}{(1-p)^{s}} \\
+        & = (1-p)^t \\
+        & = P(Y \geq t)
+      \end{align*}
+      \item[(b)] Since $p \leq 1$, and $(1-p)$ is therefore less than one, the probablity function is decreasing. The most probable value of $Y$ is 0. $P(Y = 0) = p$.
+      \item[(c)] Call this event $X$,
+      \begin{align*}
+        P(X) & = P(Y = 0) + P(Y = 3) + P(Y = 6) + \cdots \\
+        & = p(1-p)^0 + p(1-p)^3 + p(1-p)^6 + \cdots \\
+        & = p( 1 + (1-p)^3 + (1-p)^6 + \cdots)\\
+        & = \f{p}{1 - (1-p)^3}
+      \end{align*}
+      \item[(d)]
+      \begin{align*}
+        P(R = r) & = p(1-p)^r + p(1-p)^{r + 3} + p(1-p)^{r+6} + \cdots \\
+        & = p(1-p)^r(1 + (1-p)^3 + (1-p)^6 + \cdots) \\
+        & = \f{p(1-p)^r}{1 - (1-p)^3}
+      \end{align*}
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Tutorial 3}
+
+  Recall the Poisson approximation to Binomial, for $n$ large and $p$ small, $\mu = np$ (so $p = \f{\mu}{n}$). Then
+  \[ \comb{n}{x} p^x(1-p)^{n-x} \approx  \f{\mu^x e^{-\mu}}{x!}\]
+  \begin{exmp}
+    For example, consider $X \sim Bi(100,0.02)$
+    \begin{itemize}
+      \item[i.] Find the probablity of $P(X = 0)$, $P(X=1)$, and $P(X=2)$ \\
+      \begin{align*}
+        P(X = 0) & = \comb{100}{0}(0.02)^0(0.98)^{100} = 0.1326 \\
+        P(X = 1) & = \comb{100}{1}(0.02)^1(0.98)^{99} = 0.2707 \\
+        P(X = 2) & = \comb{100}{2}(0.02)^2(0.98)^{98} = 0.2734
+      \end{align*}
+      \item[ii.] Use Posson approximation to fnd probabilities in i. ($\mu = 100 \cdot 0.02 = 2$)
+      \begin{align*}
+        P(X = 0) & = \f{\mu^0e^{-\mu}}{0!} = 0.135 \\
+        P(X = 1) & = \f{\mu^1e^{-\mu}}{1!} = 0.2707 \\
+        P(X = 2) & = \f{\mu^2e^{-\mu}}{2!} = 0.2707
+      \end{align*}
+    \end{itemize}
+  \end{exmp}
+
+  \begin{exmp}
+    Say $X \sim NB(2,0.02)$.
+    \begin{itemize}
+      \item Find probability $P(X = 99)$ \\
+      \item Use Poisson approx to find $P(X = 99)$
+      Let
+      \[ f(x) = P(X = x) = \comb{x+k-1}{x} p^k (1-p)^x\]
+      Then
+      \begin{align*}
+        P(X = 99) & = \comb{99 + 2 - 1}{99} 0.02^2 \cdot 0.98^{99} \\
+        & = \comb{100}{99}(0.02)^2 (0.98)^{99} \\
+        & = \comb{100}{1} (0.02)(0.98)^{99} \cdot 0.02 \\
+        & = \f{\mu^1}{1!}e^{-\mu} \cdot 0.02
+      \end{align*}
+    \end{itemize}
+  \end{exmp}
+
+  \begin{exmp}
+    Traffic accident occurs following a poisson process. It is known that 10\% of days have no accidents.
+    \begin{itemize}
+      \item Let $x$ be the number of accidents in a day. Find distribution of $X$.
+      \item Find the probability that there are two accidents in a day.
+      \item Find the probablity that there are four accidents in two days.
+      \item Find the probablity that there are at least 2 accidents in a day.
+      \item Find the probablity that, among a week of 7 days, there are exactly 3 days which have at least 2 accidents per day.
+    \end{itemize}
+    Then for i., $X \sim Poi(\mu)$, and $\mu = \lambda t$ not available. However, we know that $x = 0$ means no accidents, and then
+    \begin{align*}
+      P(X = 0) = e^{-\mu} = 0.1 \implies \mu = 2.3
+    \end{align*}
+    So, $X \sim Poi(2.3)$. \\
+
+    For ii., $P(X = 2) = \f{\mu^2}{2!}e^{-\mu}$. \\
+
+    For iii., let $y$ be the number of accidents in 2 days. Then $y \sim Poi(2.3 \times 2) = Poi(4.6)$. So,
+    \[ P(y = 4) = \f{4.6^4}{4!}e^{-4.6} \] \\
+
+    For iv., Let $x$ be the number of accidents in a day, $X \sim Poi(2.3)$. Then
+    \begin{align*}
+      p = P(X \geq 2) \\
+      & = 1 - [f(0) + f(1)] \\
+      & = 1 - [e^{-\mu} + \mu e^{-\mu}] \\
+      & = 0.67
+    \end{align*}
+
+    For v., let $y$ be the number of days among a week of seven days that have at least 2 accidents. Then $y \sim Bi(7,0.67)$. $P(Y = 3) = \comb{7}{3}0.67^3 0.33^4$. \\
+
+    For vi. Find the probability that we have to observe a total of 10 days to see the third day with greater than or equal to 2 accidents in the day. Let $y$ be the days required to see 3rd day with $\geq 2$ accidents.
+    \[ P(y = 10) = \comb{9}{2} (0.67)^3 (0.33)^7 \]
+    (could also use $y$ the number of failures before 3rd success, and then $y \sim NB(3,0.67)$) \\
+
+    Now vii, if there are a total of 13 accidents in a week of 7 days, what's the probablity that there are 6 accidents in the first 3 days of the week? \\
+
+    Let $y$ be the number of accidents in 7 days. Let $x_1$ be the number of accidents in the first 3 days. Let $x_2$ be the number of accidents in the last 4 days. Then, \begin{itemize}
+      \item $y \sim Poi(\mu)$ for $\mu = 2.3 \times 7$.
+      \item $x_1 \sim Poi(\mu_1)$ for $\mu_1 = 2.3 \times 3$.
+      \item $x_2 \sim Poi(\mu_2)$ for $\mu_2 = 2.3 \times 4$.
+    \end{itemize}
+    Then
+    \begin{align*}
+      P(x = 6 | y = 13) & = \f{P(x_1 = 6 \cap y =  13)}{P(y = 13)} \\
+      & = \f{P(x_1 = 6 \cap x_2 = 7)}{P(y = 13)} \\
+      & = \f{P(x_1 = 6)P(x_2 = 7)}{P(y = 13)} \\
+      & = \f{\f{\mu_1^6e^{-\mu_1}}{6!}\cdot \f{\mu_2^7e^{-\mu_2}}{7!}}{\f{\mu^{13}e^{-\mu}}{13!}} \\
+      & = \comb{13}{6}\left( \f{3}{7} \right)^6 \left( \f{4}{7} \right)^7
+    \end{align*}
+  \end{exmp}
+  \newpage
+  \section{Chapter 7}
+
+  \subsection{Tutorial 4}
+
+  \begin{itemize}
+    \item[(1)] Moment generating function:
+    \[ M(t) = E(e^{tx}), \ \ \ \ t \in (-h,h), h > 0 \]
+    If $X$ is discrete with probability function $f(x)$,
+    \[ M(t) = \sum_x e^{tx}f(x) \]
+    Then,
+    \begin{itemize}
+      \item $X \sim Bi(n,p)$, $M(t) = (pe^t + q)^n$, any $t$
+      \item $X \sim Geo(p)$, $M(t) = \f{p}{1-qe^t}$, $t < -\ln(q)$
+      \item $X \sim Poi(\mu)$, $M(t) = e^{\mu(e^t - 1)}$, any $t$
+    \end{itemize}
+
+    \item[(2)] $X$ and $Y$ are two discrete random variables with probability functions $f_x(x)$ and $f_y(y)$, $MGFs$ that are $M_x(t)$ and $M_y(t)$, $t \in (-h,h)$, $h>0$. Then,
+    \[ f_x(x) = f_y(x) \mbox{ \ \ for all $x$} \]
+    if and only if
+    \[ M_x(t) = M_y(t) \mbox{ \ \ for $t \in (-h,h)$} \]
+    Two random variables have the same distribution if and only if they have the same moment generating function.
+
+    \begin{exmp}
+      If $X$ has Moment Generating Function,
+      \[ M(t) = 0.5e^t + 0.2e^{3t} + 0.3e^{5t} \]
+      find the probability function of $X$ \\
+
+      $X \sim f(x):$
+      \begin{tabular}{c | c c c}
+        $x$ & 1 & 3 & 5 \\
+        \hline
+        $f(x)$ & 0.5 & 0.2 & 0.3
+      \end{tabular}
+
+    \end{exmp}
+
+    \item[(3)] $X_n$ has probablity fnction $f_n(x)$, moment generating function $M_n(x)$; \\
+    $X$ has probablity function $f(x)$, moment generating function $M(t)$ \\
+
+    If $M_n(t) \lar M(t)$, $t \in (-h,h)$ as $n \ar \infty$. Then,
+    \[ f_n(x) \ar f(x) \mbox{\ for all $x$, as $n \ar \infty$} \]
+
+    \begin{exmp}
+      Let $p = \f{\mu}{n}$. Use the MGF technique to show that
+      \[ \comb{n}{x}p^x(1-p)^{n-x} \lar \f{\mu^x}{x!}e^{-\mu} \]
+      when $n \ar \infty$. \\
+
+      $X_n \sim Bi(n,p):$ $M_n(t) = (pe^t + q)^n$ \\
+      $X \sim Poi(\mu):$ $M(t) = e^{\mu(e^t - 1)}$ \\
+      Then
+      \begin{align*}
+        (pe^t + q)^n & = (pe^t + 1 - p)^n \\
+        & = \left(1 + \f{\mu}{n}\left( e^t - 1 \right)\right)^n \\
+        & = \left( 1 + \f{c}{n} \right)^n & x = \mu(e^t -1)
+      \end{align*}
+      And $(n \ar \infty) \lar e^c = e^{\mu(e^t -1)}$
+          \end{exmp}
+
+          \item[(4)]
+
+     If $y = aX + b$ for some constants $a$ and $b$, then
+     \[ M_y(t) = e^{bt}M_x(at) \]
+     special case: \\
+     If $y = X + b$, then $M_y(y) = e^{bt}M_x(t)$. Since by defintiion,
+     \[ M_x(t) = E(e^{tx}) \]
+     \begin{align*}
+       M_y(t) & = E(e^{ty}) \\
+              & = E(e^{t(aX + b)}) \\
+              & = E(e^{bt}e^{atX}) \\
+              & = e^{bt}E(e^{atX}) \\
+              & = e^{bt}M_x(at)
+     \end{align*}
+
+  \end{itemize}
+
+  Question 7.7 from the book: Suppose that $n$ people take a blood test for a disease,w here each person has probability $p$ of having the disease, independent of the other person. TO save time and money, blood samples from $k$ people are pooled and analyzed together. If none of the $k$ persons has te disease then the test will be negative, but otherwise it will be positive. If the pooled test if positive then each of the $k$ persons is tested seperately (so $k+1$ tests are done in that case).
+  \begin{itemize}
+    \item[(a)] Let $X$ be the number of tests required for a group of $k$ people, show that
+    \[ E(X) = k+1 - k(1-p)^k \]
+    Let $X$ be the number of tests required for a group of $k$ persons, then
+    \begin{tabular}{c | c c}
+        $x$ & 1 & k+1 \\
+        \hline
+        $f(x)$ & $(1-p)^k$ & $1-(1-p)^k$
+      \end{tabular}
+    Then
+    \begin{align*}
+      E(x) & = 1 \times (1-p)^k + (k+1)\times(1- (1-p)^k) \\
+          & = k+1 - k(1-p)^k
+    \end{align*}
+
+    \item[(b)] What is the expected number of tests required for $n/k$ groups of $k$ people each? If $p = 0.01$, evaluate this for caes $k = 1,5,10$. \\
+
+    We have that
+    \begin{align*}
+      \f{n}{k} \cdot E(x) & = \f{n}{k} \left( k+1 - k(1-p)^k \right) \\
+        & = n + \f{n}{k} - n(1-p)^k \ \ \ \ \ \ (*)
+    \end{align*}
+Question 1: Show that $(*) \approx n \left( kp + \f{1}{k} \right)$ \\
+    Question 2: $(*)$ is minimized at $k = p^{-1/2}$
+    \item[(c)] Show that if $p$ is small, the expected number of tests in part (b) is approximately $n(kp + k^{-1})$, and is minimized for $k \approx p^{-1/2}$. \\
+
+    Since $p$ is small,
+    \begin{align*}
+      (1-p)^k & = 1 - kp + \f{k(k-1)}{2!}p^2 + \cdots \\
+      & \approx 1 - kp
+    \end{align*}
+    Then,
+    \begin{align*}
+      n + \f{n}{k} - n(1-p)^k  & \approx n + \f{n}{k} - n(1-kp) \\
+      & = n \left( \f{1}{k} + kp \right) \\
+      & = n \left( \left( \f{1}{\sqrt{k}} - \sqrt{k}\sqrt{p} \right)^2 + 2\sqrt{p} \right)
+    \end{align*}
+    This is minimized when the squared term is 0, so
+    \begin{align*}
+      \f{1}{\sqrt{k}} & = \sqrt{k}\sqrt{p} \\
+      k & = p^{-1/2}
+    \end{align*}
+  \end{itemize}
+
+  Question 7.11 from the book: Find the distributions that correspnd to the following moment-generating functions:
+  \begin{itemize}
+    \item[(a)] $M(t) = \f{1}{3e^{-t} -2}$ for $t < \ln(3/2)$ \\
+
+    Then,
+    \begin{align*}
+      M(t) & = \f{e^t}{3-2e^t} \\
+      & = \f{e^t}{3} \ub{\left( \f{1}{1 - \f{2}{3}e^t} \right)}_{M_x(t)}
+    \end{align*}
+    then $M_x(t): X \sim Geo \left( \f{1}{3} \right)$. Then,
+    \begin{align*}
+      M_y(t) & = e^tM_x(t)
+    \end{align*}
+    Then $y = x +1:$ The total number of trials to the get the first success.
+    \[ f(y) = P(Y = y) = q^{y-1}p, \ \ y = 1,2 \]
+
+    \item[(b)] $M(t) = e^{2(e^t -1)}$ for $t < \infty$
+  \end{itemize}
+
+  Question 7.13 from the book: Let $X$ be a random variable in the set $\{0,1,2\}$ with moments $E(X) = 1$ and $E(X^2) = \f{3}{2}$. \\
+
+  \begin{note}
+    When you have a random variable $X \sim f(x)$ we notice
+    \begin{tabular}{c | c c c}
+        $x$ & 0 & 1 & 2 \\
+        \hline
+        $f(x)$ & $p_0$ & $p_1$ & $p_2$
+      \end{tabular} \\
+    then
+    \[ E(X) = 1: 0\times p_0 + 1\times p_1 + 2 \times p_2 = 1 \] and
+    \[ E(X^2) = \f{3}{2}: 0^2\times p_0 + 1^2 \times p_1 + 2^2 \times p_2 = \f{3}{2}\] and
+    \[ p_0 + p_1 + p_2 = 1 \]
+
+  \end{note}
+
+
+  \subsection{Solutions to Problems on Chapter 7}
+
+  \begin{itemize}
+    \item[7.1] The mean multiplies each $x$ by its $f(x)$, so
+  \[ \f{11}{40}\times 1 + \sum_{x=2}^6\f{x}{2x} = \f{11}{40} + \f{5}{2} = 2.775 \]
+  The variance is then $E((X-2.775)^2)$ which is
+  \[ Var(X) = (1 - 2.775)^2 \f{11}{40} + \sum_{x=2}^6 \f{(x-2.775)^2}{2x} = 2.574375 \]
+
+  \item[7.2] $E(X)$ is the expected winnings based on the expected number of tosses, $g(X)$.
+  \[ E(g(X)) = 0.5^12^1 + 0.5^22^2 + 0.5^32^3 + 0.5^42^4 + 0.5^52^5 + \sum_{x > 5}0.5^x(-256) = 5 + \f{-256 \left( \f{1}{2} \right)^6}{1 - \f{1}{2}} = -3\]
+
+
+  \item[7.3] Expected cost per person if a population is tested for the disease using the inexpensive test followed, if necessary, by the expensive test. First let $X = 1$ if the initial test is negative, $X = 2$ if the inital test is positive. Let $g(x)$ be the total cost of testing the person, then
+  \[ E(g(X)) = g(1)f(1) + g(2)f(2) \]
+  Then
+  \begin{align*}
+    P(X = 2) & = P(D) + P(R|\bar{D})P(\bar{D}) = 0.02 + 0.05\times(1-0.02) = 0.069
+  \end{align*}
+  Then
+  \[ E(g(X)) = 110 \times 0.069 + 10 \times(1-0.069) = \$16.90 \]
+
+  \item[7.4] $P($condition$) = P(C) = 0.02$. $P(A|C) = 0.8$ and $P(A|\bar{C}) = 0.05$. Also, $P(B|C) = 1$ and $P(B|\bar{C}) = 1$. Then,
+  \begin{itemize}
+    \item[(a)] We want
+    \begin{align*}
+      \sum_{i = 1}^{150} P(C) = 3
+    \end{align*}
+    \item[(b)] Let $g(X)$ be the expected total cost for the same $X$ as last time, then
+    \begin{align*}
+      P(X = 1) & = P(A|C)P(C) + P(A|\hat{C})P(\hat{C}) = 0.065
+    \end{align*}
+    Thus,
+    \[ E(g(X)) = 101\times0.065 + 1\times(1-0.065) =7.5 \]
+    So for 2000 people, that's $7.5\times2000 = \$15000$. Then the expected number of detected cases are the ones where someone has the condition, and is verified by $A$, because if they are verified by $A$ and don't have it, obviously the second test $B$ will confirm they are alright.
+    \[ 2000\times 0.08\times0.02 = 32 \]
+  \end{itemize}
+
+  \item[7.5]
+  \begin{itemize}
+    \item[(a)] Expected "winnings" if you bet a dollar is
+    \[ E(X) = \left( \f{18}{37} \right)\times 1 - \left( \f{19}{37} \right)\times 1 \]
+    multiply by ten for ten plays and we get $-\$\f{10}{37}$. \\
+    If you spend 10 on a single play, your expected winnings are
+    \[ E(X) = \f{18}{37}\times10 - \f{19}{37}\times(10)\]
+    reduce by the 10 you put in again and find it's the same number from part (a).
+    \item[(b)] The probability that your winnings are positive if you bet one dollar ten times is the probability that you win at least 6, 7, 8, 9, or 10 games
+    \[ \sum_{x = 6}^{10} \comb{10}{x} \left( \f{18}{37} \right)^x \left( \f{19}{37} \right)^{10 -x} \]
+    the other result is straightforward, the probability you win one game.
+  \end{itemize}
+
+  \item[7.6] The probability of each can be calculated by multiplying the probability of getting it on a single wheel for all three wheels, thus
+  \[ E(g(X)) = 20\times \left( \f{2}{10} \right)\left( \f{6}{10} \right)\left( \f{2}{10} \right)
+               + 10\times \left( \f{4}{10} \right)\left( \f{3}{10} \right)\left( \f{3}{10} \right)
+               + 5\times \left( \f{4}{10} \right)\left( \f{1}{10} \right)\left( \f{5}{10} \right)\]
+               which is \$0.94.
+
+  \item[7.7]
+  \begin{itemize}
+    \item[(a)] There are two cases, either no one has it or at least one person has it. Probability of no one having it is $(1-p)^k$, in which case 1 test is done. The probability of at least one person having it is $1 - (1-p)^k$ in which case $k + 1$ tests are done.
+    \begin{align*}
+      E(X) & = (1-p)^k + (1-(1-p)^k)(k+1) \\
+           & = (1-p)^k + k + 1 - (1-p)^k(k+1) \\
+           & = k + 1 - k(1-p)^k
+    \end{align*}
+    \item[(b)] Just multiply by the number of groups from part(a). $n + \f{n}{k} + n(1-p)^k$.
+    \item[(c)]
+    Since $p$ is small,
+    \begin{align*}
+      (1-p)^k & = 1 - kp + \f{k(k-1)}{2!}p^2 + \cdots \\
+      & \approx 1 - kp
+    \end{align*}
+    Then,
+    \begin{align*}
+      n + \f{n}{k} - n(1-p)^k  & \approx n + \f{n}{k} - n(1-kp) \\
+      & = n \left( \f{1}{k} + kp \right) \\
+      & = n \left( \left( \f{1}{\sqrt{k}} - \sqrt{k}\sqrt{p} \right)^2 + 2\sqrt{p} \right)
+    \end{align*}
+    This is minimized when the squared term is 0, so
+    \begin{align*}
+      \f{1}{\sqrt{k}} & = \sqrt{k}\sqrt{p} \\
+      k & = p^{-1/2}
+    \end{align*}
+  \end{itemize}
+
+  \item[7.8] The probability a radio is defective is $0.05$. In a single carton of $n$ radios, we can find the expected value for the amount that the manufacturer will pay to the reailer, it is
+  \begin{align*}
+    E(g(x)) & = 59.50n - 25 - 200\cdot E(X^2)
+  \end{align*}
+  Find $E(X^2)$ using the fact that $Var(X) = E(X^2) + E(X)^2$, and that for a binomial distribution $Var(X) = np(1-p)$ and $E(X) = np$. Plug in to the above equation and find max using methods from Calculus.
+
+  \item[7.9]
+  \begin{itemize}
+    \item[(a)] By definition,
+    \begin{align*}
+      M(t) & = E(e^{tX}) \\
+           & = \sum_{x\geq 0} e^{tx}f(x) \\
+           & = \sum_{x \geq 0} e^{tx}p(1-p)^x \\
+           & = p \sum_{x \geq 0} (e^t(1-p))^x \\
+           & = \f{p}{1 - e^t(1-p)}
+    \end{align*}
+    with the contraint that $e^t(1-p) < 1$.
+    \item[(b)]
+    \begin{align*}
+      E(X) & = M'(0) \\
+           & = \f{-p}{(1-(1-p))^2}(-1)(1-p) \\
+           & = \f{1-p}{p}
+    \end{align*}
+    \begin{align*}
+      E(X^2) & = M''(0) \\
+      & = \f{(1-p)^2 + p(1-p)}{p^2}
+    \end{align*}
+    \begin{align*}
+      Var(X) & = E(X^2) - E(X)^2 \\
+      & = \f{(1-p)^2 + p(1-p)}{p^2} - \f{(1-p)p}{p^2} \\
+      & = \left( \f{1-p}{p} \right)^2
+    \end{align*}
+    \item[(c)]
+  \end{itemize}
+
+  \item[7.10]
+  \begin{itemize}
+    \item[(a)] If $X$ is the number of comparisons needed, then since in general $E(X) = \sum_{i = 1}^n E(X|A_i)P(A_i)$, it's clear that
+    \begin{align*}
+      C_n & = \sum_{i = 1}^n E(X|\mbox{initial pivot if the $i$th smallest number})\left( \f{1}{n} \right)
+    \end{align*}
+    \item[(b)] Once we have a pivot, we need to split the remaining $n-1$ numbers into 2 groups (one comparison each), and then solve the two sub-problems; one of size $i-1$ and one of size $n-i$, respectively. So,
+    \begin{align*}
+        E(X|\mbox{initial pivot if the $i$th smallest number}) & = n - 1 + C_{i-1} + C_{n-1}
+    \end{align*}
+    The recursion comes from plugging in this result to the formula from part a.
+    \[ C_n  = n - 1 + \f{2}{n} \sum_{k = 1}^{n-1} C_k, \ \ \ \ \  n = 2, 3, \ldots \]
+    \item[(c)] So,
+    \begin{align*}
+      C_{n+1} & = n + \f{2}{n+1}\sum_{k=1}^n C_k & n = 2, 3, \ldots\\
+      (n+1)C_{n+1} & = (n+1)n + 2\sum_{k=1}^n C_k \\
+      & = (n+1)n + 2C_n + 2\sum_{k = 1}^{n-1}C_k \\
+      & = (n+1)n + 2C_n + n(C_n - n + 1) \\
+      & = 2n + (n+2)C_n & n = 1, 2, \ldots
+    \end{align*}
+    \item[(d)] From part c,
+    \begin{align*}
+      \lim_{n \ar \infty} \f{C_{n+1}}{n+1} & = \lim_{n \ar \infty} \f{2n + (n+2)C_n}{(n+1)^2} \\
+      & = \lim_{n \ar \infty} \f{2n + nC_n + 2C_n}{n^2 + 2n + 1} \\
+      & = \lim_{n \ar \infty} \f{2n + n \left( n - 1 + \f{2}{n} \sum_{k = 1}^{n-1} C_k \right) + 2 \left( n - 1 + \f{2}{n} \sum_{k = 1}^{n-1} C_k \right)}{n^2 + 2n + 1} \\
+      & = \lim_{n \ar \infty} \f{2n + \left( n^2 - n + 2 \sum_{k = 1}^{n-1} C_k \right) + \left( 2n - 2 + \f{4}{n} \sum_{k = 1}^{n-1} C_k \right)}{n^2 + 2n + 1} \\
+      & = \lim_{n \ar \infty} \f{3n + n^2 + \left( 1 + \f{4}{n} \right)\sum_{k = 1}^{n-1} C_k}{n^2 + 2n + 1} \\
+    \end{align*}
+  \end{itemize}
+
+  \item[7.11] Look above
+
+  \item[7.12]
+  \begin{align*}
+    M(t) & = E(e^{tx}) \\
+      & = \sum_{x = a}^b e^{tx} \f{1}{b-a+1} \\
+      & = \f{1}{b-a+1} \sum_{x=a}^b e^{tx} \\
+      & = \f{1}{b-a+1} (e^{at} + e^{(a+1)t} + \cdots + e^{bt})) \\
+      & = \f{1}{b-a+1} \left( \f{e^{(b+1)t} - e^{at}}{e^t - 1} \right)
+  \end{align*}
+  If $a = b$ then
+  \[ M(t) = e^{at} \]
+  If $b = a + 1$ then
+  \[ M(t) = \f{1}{2}e^{at}(1 + e^t) \]
+
+\newcommand{\mtx}[1]{\left( \begin{matrix}
+  #1
+\end{matrix} \right)}
+
+  \item[7.13] First,
+  \begin{tabular}{c | c c c}
+  $x$ & 0 & 1 & 2 \\
+  \hline
+  $f(x)$ & $p_0$ & $p_1$ & $p_2$
+  \end{tabular}
+  Then we know that
+    \[ E(X) = 1: 0\times p_0 + 1\times p_1 + 2 \times p_2 = 1 \] and
+    \[ E(X^2) = \f{3}{2}: 0^2\times p_0 + 1^2 \times p_1 + 2^2 \times p_2 = \f{3}{2}\] and
+    \[ p_0 + p_1 + p_2 = 1 \]
+    Solving this system of equations gets us $p_0 = \f{1}{4}$, $p_1 = \f{1}{2}$ and $p_2 = \f{1}{4}$. Then,
+    \begin{itemize}
+      \item[(a)] $M(t) = 0.25 + 0.5e^t + 0.25e^{2t}$
+      \item[(b)] $M^{(k)}(0)$ for $k = 1,2,3,4,5,6$,
+      \[ M'(0) = 1, M''(0) = \f{3}{2}, M^{(3)}(0) = \f{5}{2}, M^{(4)}(0) = \f{9}{2}, M^{(5)}(0) = \f{17}{2}, M^{(6)}(0) = \f{33}{2} \]
+      \item[(c)] See above
+      \item[(d)] For given values of $E(X) = \mu_1$, $E(X^2) = \mu_2$, there is a unique solution to $p_0 + p_1 + p_2 = 1$, $p_1 + 2p_2 = \mu_1$, and $p_1 + 4p_2 = \mu_2$. Then,
+      \begin{align*}
+        \mtx{1 & 1 & 1 & 1 \\ 0 & 1 & 2 & \mu_1 \\ 0 & 1 & 4 & \mu_2} \equiv \mtx{1 & 0 & 0 & 1 + \f{\mu_2}{2} - \f{3\mu_1}{2} \\ 0 & 1 & 0 & 2\mu_2 - \mu_1 \\ 0 & 0 & 1 & \f{1}{2}\mu_2 -\mu_1}
+      \end{align*}
+    \end{itemize}
+
+
+  \end{itemize}
+
+  \section{Chapter 8}
+
+  \subsection{Solutions to Problems on Chapter 8}
+
+  \begin{itemize}
+    \item[8.1]
+    \begin{itemize}
+      \item[(a)] We check if $f(x,y) = f_1(x)f_2(y)$ for all $(x,y)$. Consider $(0,0)$. Then $f(0,0) = .15 \not = f_1(0)f_2(0) = (0.15 + 0.35)(0.15 + 0.1 + 0.5)$.
+      \item[(b)] $P(X > Y) = f(1, 0) + f(2, 0) + f(2,1) = 0.3$ and $P(X = 1 | Y = 0) = \f{f(1,0)}{f_2(0)} = \f{1}{3}$.
+    \end{itemize}
+
+    \item[8.2]
+    \begin{itemize}
+      \item[(a)] Since $X \sim Poisson(\mu_1 = 0.10)$ and $Y \sim Poisson (\mu_2 =0.5)$ we have
+      \[ P(X = x) = \f{\mu_1^xe^{-\mu_1}}{x!} \ \ \ \ \ \ \ \ P(Y = y) = \f{\mu_2^ye^{-\mu_2}}{y!} \]
+      If $X$ and $Y$ are independent, then
+      \[ P(X = x, Y = y) =  \f{\mu_1^xe^{-\mu_1}}{x!}\f{\mu_2^ye^{-\mu_2}}{y!}\]
+      parameterizing for $P(T = t) = P(X + Y = t) = \sum_xP(X = x, Y = t - x)$ then we have
+      \begin{align*}
+        P(T = t) & = \sum_x\f{\mu_1^xe^{-\mu_1}}{x!}\f{\mu_2^{t-x}e^{-\mu_2}}{(t-x)!} \\
+        & = 0.05^te^{-0.15} \sum_x \f{1}{x!(t-x)!}\left( \f{0.01}{0.005} \right)^x \\
+        & = 0.05^te^{-0.15} \f{1}{t!} \sum_x \f{t!}{x!(t-x)!}\left( \f{0.01}{0.005} \right)^x \\
+        & = 0.05^te^{-0.15} \f{1}{t!} \sum_x \comb{t}{x} \left( \f{0.01}{0.005} \right)^x \\
+        & = \f{0.05^te^{-0.15}}{t!} \left( 1 + \f{0.1}{0.05}^t \right) \\
+        & = \f{e^{-0.15}0.15^t}{t!}
+      \end{align*}
+      Then we want $P(t > 1)$, it's just
+      \[ 1 - (P(T = 1) + P(T = 0)) \approx 0.0102 \]
+
+      \item[(b)] The mean and variance of a poisson distribution are both $\mu$, so we get 0.15 for both.
+    \end{itemize}
+
+    \item[8.4] Let's say the events are $A, O,$ and $T$, and $P(A)= p, P(O) = q, P(T) = 1 - p -q$.
+    \begin{itemize}
+      \item[(a)] We want $P(X = x, Y = y)$. This is a case of negative binomial distribution, the first combinatorial term is just the number of ways that we can arrange the $x$ of type $A$, $y$ of type $O$, and 9 of type $T$ before the tenth $T$.
+      \begin{align*}
+        f(x,y) & = \f{(x+y+9)!}{x!y!9!}p^xq^y(1-p-q)^{10}
+      \end{align*}
+      \item[(b)] The conditional probability function:
+      \begin{align*}
+        f(y|x) & = \f{f(x,y)}{f_1(x)} \\
+               & = \f{\f{(x+y+9)!}{x!y!9!}p^xq^y(1-p-q)^{10}}{f_1(x)}
+      \end{align*}
+      Now,
+      \begin{align*}
+        f_1(x) & = \sum_{y \geq 0}\f{(x+y+9)!}{x!y!9!}p^xq^y(1-p-q)^{10} \\
+               & = \sum_{y \geq 0} \f{(x+y+9)!}{x!y!9!}p^xq^y(1-p-q)^{10} \\
+               & = \f{p^x(1-p-q)^{10}}{x!9!} \sum_{y \geq 0} \f{(x+y+9)!}{y!}q^y \\
+               & = \f{p^x(1-p-q)^{10}}{x!9!} (x+9)! \sum_{y \geq 0} \comb{x+y+9}{y} q^y \\
+               & = \f{p^x(1-p-q)^{10}\comb{x+9}{x}}{(1-q)^{x+10}} \sum_{y \geq 0} \comb{x+y+10 -1}{y} q^y(1-q)^{x + 10} \\
+               & = \comb{x+9}{x} \left( \f{p}{1-q} \right)^x \left( \f{1-p-q}{1-q} \right)^{10}
+      \end{align*}
+      Then
+      \begin{align*}
+        f(y|x) & = \f{f(x,y)}{f_1(x)} \\
+               & = \f{\f{(x+y+9)!}{x!y!9!}p^xq^y(1-p-q)^{10}}{\comb{x+9}{x} \left( \f{p}{1-q} \right)^x \left( \f{1-p-q}{1-q} \right)^{10}} \\
+               & = \comb{x+y+9}{y}q^y(1-q)^{x+10}
+      \end{align*}
+    \end{itemize}
+
+    \item[8.7] On any draw, of the 5 yellow balls you choose $x$, and of the 3 remaining you choose 2 - $x$. Then, of the remaining yellow balls you choose $y-x$ and then $2 + x - y$ of the remaining.
+    \[ f(x,y) = \f{\comb{5}{x}\comb{3}{2-x}\comb{5-x}{y-x}\comb{1+x}{2+x-y}}{\comb{8}{2}\comb{6}{2}} \]
+    for part (b), to determine if they are not independent we need to find a case where $f(x,y) \not = f_1(x)f_2(y)$. Note $f_1(0) \not = 0$, $f_2(3) \not = 0$ but $f(0,3) = 0$.
+
+    \item[8.8] Hypergeometric,
+    \begin{itemize}
+      \item[(a)] \begin{align*}
+      f(x,y) & = \f{\comb{2}{x}\comb{1}{y}\comb{7}{3-x-y}}{\comb{10}{3}}
+    \end{align*}
+    \item[(b)] Marginal probability functions are $f_1(x)$, $f_2(y)$, note that since
+    \[ \comb{n}{k} = \comb{n-1}{k-1} + \comb{n-1}{k} \]
+    \begin{align*}
+      f_1(x) & = \f{\comb{2}{x}\comb{8}{3-x}}{\comb{10}{3}} \\
+      f_2(x) & = \f{\comb{1}{y} \comb{9}{3-y}}{\comb{10}{3}}
+    \end{align*}
+
+    \item[(c)] Then $P(X = Y)$ is $f(x,x)$
+    \begin{align*}
+      f(x,x) & = f(0,0) + f(1,1) = \f{49}{120}
+    \end{align*}
+    and $P(X = 1 | Y = 0)$ is $f(1|0) = \f{f(1,0)}{f_2(0)} = \f{1}{2}$
+    \end{itemize}
+
+
+    \item[8.9]
+    \begin{itemize}
+      \item[(a)] The marginal probability function of $X$ is
+      \begin{align*}
+        f_1(x) & = \sum_{y \geq 0} k \f{2^{x+y}}{x!y!} \\
+               & = \f{2^xk}{x!} \sum_y \f{2^y}{y!} \\
+               & = \f{2^xk}{x!} \left( 1 + \f{2}{1!} + \f{2^2}{2!}  \right) \\
+               & = \f{2^xk}{x!} e^2
+      \end{align*}
+      \item[(b)] Evaluating $k$ ...
+      \begin{align*}
+        \sum_x f_1(x) & = 1 \\
+        \sum_x \f{k2^x}{x!} e^2 & = 1 \\
+        k & = \f{1}{e^2\sum_x \f{2^x}{x!}} \\
+        k & = e^{-4}
+      \end{align*}
+      \item[(c)] Might as well check, note
+      \begin{align*}
+        f_2(y) & = \f{k2^y}{y!}e^2
+      \end{align*}
+      by symmetry, then
+      \begin{align*}
+        f(x,y) & = f_1(x)f_2(y) \\
+               & = \f{2^x}{x!e^2}\f{2^y}{y!e^2} \\
+               & = \f{2^{x+y}}{x!y!e^4} \\
+               & = k\f{2^{x+y}}{x!y!} \\
+               & = f(x,y)
+      \end{align*}
+      so yeah, independent
+      \item[(d)] $P(T = X + Y) = f(t)$ is
+      \begin{align*}
+        \sum_x f(x, t-x) & = \sum_x \f{2^{x + t - x}}{x!(t-x)!e^4} \\
+        & = \f{2^t}{e^4} \f{1}{t!} \sum_x \comb{t}{x} \\
+        & = \f{2^t}{t!e^4} (1 + 1)^t \\
+        & = \f{2^{2t}}{t!e^4}
+      \end{align*}
+    \end{itemize}
+
+  \item[8.10]
+  \begin{itemize}
+    \item[(a)] Let $Y$ represent number of Type A eveners that occur in a 1-min period. Let $X$ be the total number of events in a 1 minute period. Then, $P(X = \mbox{type $A$}) = p$ and $X \sim Poisson(\mu)$.
+    \begin{align*}
+      P(Y = y) & = \sum_{x} P(Y = y|X=x)P(X=x) \\
+               & = \sum_x f(y|x)f_1(x) \\
+               & = \sum_x \comb{x}{y}p^y(1-p)^{x-y} \f{e^{-\lambda}\lambda^x}{x!} \\
+               & = e^{-\lambda}p^y \lambda^y \sum_x \comb{x}{y}\f{(\lambda(1-p))^{x-y}}{x!} \\
+               & = \f{e^{-\lambda}}{y!}p^y \lambda^y \sum_x \f{(\lambda(1-p))^{x-y}}{(x-y)!} \\
+               & = \f{e^{-\lambda}(p\lambda)^y}{y!}e^{\lambda(1-p)} \\
+               & = \f{(p\lambda)^ye^{-\lambda p}}{y!}
+    \end{align*}
+    \item[(b)] $P(Y = y) = \f{e^{-0.05\times3\times30}(0.05\times3\times30)^y}{y!}$
+    \[ 1 - \sum_{y = 0}^4 P(Y = y) \]
+
+  \end{itemize}
+  \item[8.11]
+  \begin{itemize}
+    \item[(a)] Multinomial distribution...
+    \[ P(\mbox{10 of each type}) = \f{40!}{10!10!10!10!} \left( \f{3}{16} \right)^{10}\left( \f{5}{16} \right)^{10}\left( \f{5}{16} \right)^{10}\left( \f{3}{16} \right)^{10} \]
+    \item[(b)]
+    \[ \f{40!}{16!24!}\left( \f{8}{16} \right)^{40} =  \comb{40}{16} \left( \f{3 + 5}{16} \right)^{16} \left( \f{5 + 3}{16} \right)^{24} \]
+    \item[(c)]
+    \begin{align*}
+      P(\mbox{10 of 1 | 16 of 1 and 2}) & = \f{\f{40!}{10!6!24!} \left( \f{3}{16} \right)^{10} \left( \f{5}{16} \right)^6 \left( \f{8}{16} \right)^{24}}{\f{40!}{24!16!} \left( \f{8}{16} \right)^{16} \left( \f{8}{16} \right)^{24} } \\
+      & = \comb{16}{10} \left( \f{3}{8} \right)^{10} \left( \f{5}{8} \right)^{6}
+    \end{align*}
+  \end{itemize}
+
+  \item[8.12]
+  \begin{itemize}
+    \item[(a)]
+    \begin{align*}
+      E(X) & = \sum_x xf(x) \\
+           & = 0\times.20 + \cdots + 8\times.01 \\
+           & = \f{44}{25}
+    \end{align*}
+    \item[(b)] First,
+    \begin{align*}
+      f(y|x) & = \comb{x}{y} 0.5^{y}0.5^{x-y}
+    \end{align*}
+    So,
+    \begin{align*}
+      f(x,y) & = f(x)f(y|x) \\
+             & = f(x)\comb{x}{y} 0.5^{y}0.5^{x-y} \\
+             & = f(x)\comb{x}{y} 0.5^{x}
+    \end{align*}
+    Then,
+    \[ f_Y(y)  = \sum_{x=y}^8 f(x,y) \]
+    So finally,
+    \[ E(y) = \sum_y yf_Y(y)= \f{1}{2} E(x) = 0.88  \]
+  \end{itemize}
+
+  \item[8.13]
+  \begin{itemize}
+    \item[(a)] This is multinomial distribution,
+    \[ f(x_1,x_2,x_3,x_4,x_5,x_6) = \f{10!}{x_1!x_2!x_3!x_4!x_5!x_6!}p_1^{x_1}p_2^{x_2} p_3^{x_3}p_4^{x_4}p_5^{x_5}p_6^{x_6}\]
+    \item[(b)]
+    \begin{align*}
+      P(X_3 \geq 1|x_1 + x_2 + x_3 + x_4 = 4) & = 1 \\
+      & = 1 - P(X_3 = 0|1|x_1 + x_2 + x_3 + x_4 = 4) \\
+      & = 1 - \f{P(X_3 = 0, x_1 + x_2 + x_3 + x_4 = 4, x_5 + x_6 = 6)}{P(x_1 + x_2 + x_3 + x_4 = 4)} \\
+      & = 1 - \f{\f{10!}{4!6!}p_3^0(p_1 + p_2 + p_4)^4(p_5 +p_6)^6}{\f{10!}{4!6!}(p_1 + p_2 + p_3 + p_4)^4(p_5+p_6)^6} \\
+      & = 0.4602
+    \end{align*}
+    \item[(c)]
+    \[ 10 \times (0.1(500) + 0.05(500) + 0.05(700) + 0.15(2000) + 0.15(400) + 0.5(200)) = 5700 \]
+  \end{itemize}
+
+  \item[8.14]
+  \begin{proof}
+    \begin{align*}
+      E[g(X_1,\ldots,X_n)] & = \sum_{x_1,\ldots,x_n}g(x_1,\ldots,x_n)f(x_1,\ldots,x_n)
+    \end{align*}
+    then
+    \begin{align*}
+       \sum_{x_1,\ldots,x_n}af(x_1,\ldots,x_n) \leq \sum_{x_1,\ldots,x_n}g(x_1,\ldots,x_n)f(x_1,\ldots,x_n) \leq \sum_{x_1,\ldots,x_n}bf(x_1,\ldots,x_n) \\
+        a\sum_{x_1,\ldots,x_n}f(x_1,\ldots,x_n) \leq \sum_{x_1,\ldots,x_n}g(x_1,\ldots,x_n)f(x_1,\ldots,x_n) \leq b\sum_{x_1,\ldots,x_n}f(x_1,\ldots,x_n) \\
+        a \leq \sum_{x_1,\ldots,x_n}g(x_1,\ldots,x_n)f(x_1,\ldots,x_n) \leq b \\
+        a \leq  E[g(X_1,\ldots,X_n)]  \leq b
+    \end{align*}
+  \end{proof}
+
+  \item[8.15]
+  \begin{align*}
+    Var(X - 2Y) & = (1)Var(X) - (-2)^2Var(Y) + 2(1)(-2)Cov(X,Y) \\
+                & = 13 + 4(34) - 4(0.7)\sqrt{13}\sqrt{34} \\
+                & = 207.86666666666666666666
+  \end{align*}
+
+  \item[8.16]
+  \begin{itemize}
+    \item[(a)] $T \sim Bin(n, p + q)$
+    \item[(b)] $E(T) = n(p+q)$ because it's binomially distributed, so also $Var(T) = n(p+q)(1-p-q)$
+    \item[(c)]
+    \begin{align*}
+      Cov(X,Y) & = E(XY) - E(X)E(Y)
+    \end{align*}
+    not helpful. Try again:
+    \begin{align*}
+      Var(T) & = Var(X + Y) \\
+             & = Var(X) + Var(Y) + 2Cov(X,Y) \\
+      n(p+q)(1-p-q) & = np(1-p) + nq(1-q) + 2Cov(X,Y) \\
+            Cov(X,Y) & = -npq
+    \end{align*}
+    It should be negative since as one goes up, the other goes down.
+  \end{itemize}
+
+  \item[8.17]
+  \begin{itemize}
+    \item[(a)] First find them for $X$ and $Y$.
+    \[ E(X) = \f{1}{2}(2) = 1,  E(Y) = \f{1}{2}(2) = 1\]
+    \[ Var(X) = E(X)\f{1}{2} = \f{1}{2}, Var(Y) = \f{1}{2} \]
+    Then,
+    \[ E(U) = E(X) + E(Y) = 2, E(V) = 0 \]
+    \[ V(U) = V(X) + V(Y) = 1, V(V) = 1 \]
+    \item[(b)]
+    \begin{align*}
+      Cov(U,V) & = Cov(X+Y, X-Y) \\
+               & = Cov(X,X) + (-1)Cov(X, Y) + Cov(Y,X) + (-1)Cov(Y,Y) \\
+               & = Var(X) - Var(Y) \\
+               & = 0
+    \end{align*}
+    \item[(c)]
+    Nah, $U = 0$ and $V = 1$ is a counterexample.
+  \end{itemize}
+
+  \item[8.18]
+  \begin{itemize}
+    \item[(a)] Let $X_i$ be whether or not question $i$ was answered right (1 for yes 0 for no). Then,
+    \begin{itemize}
+      \item[(i)]
+       \begin{align*}
+        Y & = \sum_{i = 1}^{100} X_i - \f{1}{4}\left(100 - \sum_{i = 1}^{100} X_i\right)
+       \end{align*}
+      \item[(ii)]
+      $E(X_i)$; $V(X_i)$. Let $A_i$ = "know answer to question $Q_i$"
+     \begin{align*}
+       P(X_i = 1) & = P(A_i)P(X_i = 1|A_i) + P(\bar{A_i})P(X_i = 1|\bar{A_i}) \\
+       & = p_i \times 1 + (1-p_i) \times \f{1}{5} \\
+       & = \f{4}{5}p_i + \f{1}{5}
+     \end{align*}
+    \end{itemize}
+    Then since $X = 0$ or 1,
+    \[ E(X^2) = E(X) = 0\times f(0) + 1\times f(1) = \f{4}{5}p_i + \f{1}{5} \]
+    and then
+    \begin{align*}
+      Var(X) & = E(X^2) - E(X)^2 \\
+             & = \left( \f{4}{5}p_i + \f{1}{5} \right) - \left( \f{4}{5}p_i + \f{1}{5} \right)^2 \\
+             & = \f{12}{25}p_i - \f{16}{25}p_i^2 + \f{4}{25}
+    \end{align*}
+    So we're set to find $E(Y)$ and $Var(Y)$
+    \begin{align*}
+      E(Y) & = E \left( \sum_{i = 1}^{100} X_i - \f{1}{4}\left(100 - \sum_{i = 1}^{100} X_i\right) \right) \\
+           & = \sum_{i = 1}^{100} \left( \f{5}{4} E(X_i) \right) - 25 \\
+           & = \f{5}{4} \left(\sum_{i=1}^{100} \f{4}{5}p_i + \f{1}{5}\right) - 25 \\
+           & = \sum_{i =1}^{100}p_i
+    \end{align*}
+    as required. Next,
+    \begin{align*}
+      Var(Y) & = Var\left( \sum_{i = 1}^{100} X_i - \f{1}{4}\left(100 - \sum_{i = 1}^{100} X_i\right) \right) \\
+      & = Var \left( \sum_{i=1}^{100} \f{5}{4} X_i \right) \\
+      & = \f{25}{16} \sum  Var(X_i) \\
+      & = \sum \f{3}{4} p_i - p_i^2 + \f{1}{4} \\
+      & = \sum p_i(1-p_i) + \f{100-\sum p_i}{4}
+    \end{align*}
+    as required.
+
+    \item[(b)]
+    \[ Y = \sum X_i \]
+    \[  P(X_i = 1) = P(A_i)P(X_i = 1|A_i) = p_i \]
+    then
+    \begin{align*}
+      E(X_i) & = p_i \\
+      Var(X_i) & = E(X_i^2) - E(X_i)^2 \\
+      & = p_i - p_i^2 \\
+      & = p_i(1-p_i)
+    \end{align*}
+    so we have
+    \begin{align*}
+      E(Y) & = E \left( \sum X_i \right) \\
+           & = \sum p_i
+    \end{align*}
+    and
+    \begin{align*}
+      Var(Y) & = Var \left( \sum X_i \right) \\
+             & = \sum Var(X_i) \\
+             & = \sum p_i(1-p_i)
+    \end{align*}
+  \end{itemize}
+
+  \item[8.19]
+  \begin{align*}
+    Cov(X+Y, X - Y) & = Cov(X, X) - Cov(Y,Y) \\
+                    & = Var(X) - Var(Y) \\
+                    & = 1 - 2 \\
+                    & = -1
+  \end{align*}
+
+  \item[8.20]
+  \begin{itemize}
+    \item[(a)]
+    We know that $L = A + B + C$. So,
+    \begin{align*}
+      Var(L) = Var(A) + Var(B) + Var(C) =  0.6^2 + 0.8^2 + 0.7^2
+    \end{align*}
+    so $\sigma = \sqrt{\sigma^2} = 1.22$.
+    \item[(b)]
+    Do the same thing as before with the new standard deviation of $B$, and take the quotient of the it with answer from part (a).
+  \end{itemize}
+
+  \item[8.21]
+  $X = $ total number of islands being cut off. Let
+    \[ X_i = \piecewise{1}{island $i$ being cut off}{0}{otherwise}, \ \ \ \ i = 1,2,3,4,5 \]
+    \begin{itemize}
+      \item[(i)] $X = X_1 + X_2 + X_3 + X_4 + X_5$. Now we want to find the expected value of $X_i$, the variance, and the probability that $X_i = 1$. So,
+      \begin{align*}
+        E(X_i) & = p_i \\
+        Var(X_i) & = p_i(1-p_i) \\
+        p_i & = P(X_i = 1)
+      \end{align*}
+      however $p_i$ varies for $i = 5$.
+      \begin{align*}
+        P(X_1 = 1) & = p^3 \\
+        P(X_5 = 1) & = p^4 \\
+      \end{align*}
+      now, it also varies if you cut off two bridges at a time (since some bridges are shared)
+      \begin{align*}
+        Cov(X_i, X_j) & = E(X_iX_j) - E(X_i)E(X_j) \\
+        E(X_1X_2) & = P(X_1 = 1, X_2 = 1) = p^5 \\
+        E(X_1X_5) & = P(X_1 = 1, X_5 = 1) = p^6
+      \end{align*}
+      So first off,
+      \[ E(X) = E(X_1 + X_2 + X_3 + X_4 + X_5) = 4p^3 + p^4 \]
+      so then
+      \begin{align*}
+        Var(X) & = Var(X_1 + X_2 + X_3 + X_4 + X_5) \\
+               & = Var(X_1) + \cdots + Var(X_5) + 2\sum_{i < j}Cov(X_i, X_j) \\
+               & = 4p^3(1-p^3) + p^4(1-p^4) + 2\sum_{i < j}Cov(X_i, X_j)
+      \end{align*}
+      Now,
+      \begin{align*}
+        Cov(X_i, X_j) & = E(X_iX_j) - E(X_i)E(X_j)
+      \end{align*}
+
+      I forgot to finish this solution but the rest is pretty straightforward, I'll do it tomorrow morning, just find all the possible covariances and use that Var formula above
+    \end{itemize}
+
+
+  \end{itemize}
+
+  \subsection{Tutorial 5}
+
+  \begin{exmp}
+    Suppose $X \sim Geo(p)$ and $Y \sim Geo(p)$, $X$ and $Y$ are independent.
+    \begin{itemize}
+      \item[(a)] Find the distribution of $T = X + Y$.
+      \item[(b)] Find the conditional distribution of $X$ given $T = t$.
+    \end{itemize}
+
+    \begin{itemize}
+      \item[(a)] $f_T(t) = P(T = t) = \comb{t+2-1}{t}p^2q^t$. This is intuitive because geometric is the number of failures before a success, and adding two of them should be the number of failures before the second success.
+      \item[(b)] $P(X=x|T=t) = \f{1}{t+1}$, $x = 0,1,\ldots,t$
+    \end{itemize}
+  \end{exmp}
+
+  \begin{exmp}
+    $X \sim Poi(\mu)$, $Y \sim Bi(n,p)$, $X$ and $Y$ are independent.
+    \begin{itemize}
+      \item[(a)] Find $Var(2X - Y + 1)$
+      \item[(b)] Find $Cov(X + Y, X - Y)$
+    \end{itemize}
+
+    \begin{itemize}
+      \item[(a)] $Var(2X-Y+1) = 4Var(X) + (-1)^2 Var(Y)$
+      \item[(b)] $Cov(X + Y, X-Y) = Cov(X,X) - Cov(X,Y) + Cov(Y,X) - Cov(Y,Y)$
+    \end{itemize}
+  \end{exmp}
+
+  \begin{exmp}
+    $(X_1, X_2, \ldots, X_k) \sim$ multinomial$(n; p_1, p_2, \ldots, p_k)$
+    \begin{itemize}
+      \item[(a)] Find $Cov(x_i, x_j)$ where $(i \not = j)$.
+      \item[(b)] Find the correlation coefficient $\rho$ between $x_i$ and $x_j$.
+    \end{itemize}
+
+    Note that $X_i \sim Bi(n, p_i)$. Similarly, $X_j \sim Bi(n, p_j)$. Also, $X_i + X_j \sim Bi(n, p_i +p_j)$. What about $X_i | X_k = t$? $X_i | X_k = t \sim Bi\left(n-t, \f{p_i}{1-p_k} \right)$. So,
+
+
+    \begin{itemize}
+      \item[(a)] $Cov(X_i, X_j) = E(X_iX_j) - E(X_i)E(X_j)$. But what is $E(X_iX_j)$? Let's approach it differently, \\
+
+      $Var(X_i + X_j) = Var(X_i) + Var(X_j) + 2Cov(X_i, X_j)$. From this equation we know all three $Var$ terms since they are all binomially distributed. So,
+      \begin{align*}
+        Var(X_i + X_j) & = Var(X_i) + Var(X_j) + 2Cov(X_i, X_j) \\
+        n(p_i + p_j)(1-p_i-p_j) & = np_i(1-p_i) + np_j(1-p_j) + 2Cov(X_i, X_j) \\
+        Cov(X_i, X_j) & = -np_ip_j
+      \end{align*}
+    \end{itemize}
+  \end{exmp}
+
+  \begin{exmp}
+    Randomly put $n$ letters $L_1, L_2, \ldots, L_n$ into $n$ envelopes $E_1, E_2, \ldots, E_n$, one letter per envelope. If letter $L_i$ is in envelope $E_i$, it's called a match. Let $X$ be the total number of matches. Find $E(X)$ and $Var(X)$. \\
+
+    \textbf{Method 1.} Use $f(x)$. Then,
+    \[ E(X) = \sum_x xf(x) \]
+    This is hopelessly complicated.
+    \textbf{Method 2.} Use indicator variables. Let
+    \[ X_i = \piecewise{1}{letter $L_i$ matches $E_i$}{0}{otherwise} , \ \ \ \ \ i = 1,2,\ldots,n\]
+    \begin{itemize}
+      \item[i.]  $X = X_1 + X_2 + \cdots + X_n$
+      \item[ii.] $X_1, \ldots, X_n$ are not independent
+      \item[iii.] $X_i \sim$ Bernoulli $(p_i)$, so $f(0) = 1-p_i$ and $f(1) = p_i$.
+      \[ E(X_i) = p_i \]
+      \[ Var(X_i) = p_i(1-p_i) \]
+      \begin{align*}
+        p_i & = P(X_i = 1) \\
+            & = \f{1}{n}
+      \end{align*}
+      Note that
+      \[ E(X) = E \left( \sum_{i = 1}^n X_i \right) = \sum_{i = 1}^nE(X_i) = n \times \f{1}{n} = 1\]
+      Now,
+      \begin{align*}
+        V(X) & = V \left( \sum_{i = 1}^n X_i \right) \\
+             & = \sum_{i = 1}^n V(X_i) + 2\sum_{i < j} Cov(X_i, X_j)
+      \end{align*}
+      now before we continue, note that:
+      \begin{align*}
+        Cov(X_i, X_j) & = E(X_iX_j) - E(X_i)E(X_j)
+      \end{align*}
+      \begin{align*}
+        E(X_iX_j) & = \sum_x \sum_y xyf(x,y) \\
+        &  = f(1,1) \\
+        & = P(X_i = 1, X_j = 1) \\
+        & = \f{1}{n(n-1)}
+      \end{align*}
+      So,
+          \begin{align*}
+        V(X) & = V \left( \sum_{i = 1}^n X_i \right) \\
+             & = \sum_{i = 1}^n V(X_i) + 2\sum_{i < j} Cov(X_i, X_j) \\
+             & = \ub{\sum_{i = 1}^n \f{1}{n} \left( 1 - \f{1}{n} \right)}_{1 - \f{1}{n}} + 2\comb{n}{2} \left[ \f{1}{n(n-1)} - \f{1}{n^2} \right] \\
+             & = 1
+      \end{align*}
+    \end{itemize}
+  \end{exmp}
+
+  \begin{exmp}
+    Question 8.21 from the book. The inhabitants of the beautiful and ancient city of Pentapolis live on 5 islands seperated from each other by water.  Bridges cross from one island to another as shown. On any day, a bridge can be closed, with probability $p$, for restoration work. Assuming that the 8 bridges are closed independently, find the mean and variance of the number of islands which are completely cut off because of restoration work. \\
+
+    $X = $ total number of islands being cut off. Let
+    \[ X_i = \piecewise{1}{island $i$ being cut off}{0}{otherwise}, \ \ \ \ i = 1,2,3,4,5 \]
+    \begin{itemize}
+      \item[(i)] $X = X_1 + X_2 + X_3 + X_4 + X_5$. Now we want to find the expected value of $X_i$, the variance, and the probability that $X_i = 1$. So,
+      \begin{align*}
+        E(X_i) & = p_i \\
+        Var(X_i) & = p_i(1-p_i) \\
+        p_i & = P(X_i = 1)
+      \end{align*}
+      however $p_i$ varies for $i = 5$.
+      \begin{align*}
+        P(X_1 = 1) & = p^3 \\
+        P(X_5 = 1) & = p^4 \\
+      \end{align*}
+      now, it also varies if you cut off two bridges at a time (since some bridges are shared)
+      \begin{align*}
+        Cov(X_i, X_j) & = E(X_iX_j) - E(X_i)E(X_j) \\
+        E(X_1X_2) & = P(X_1 = 1, X_2 = 2) = p^5 \\
+        E(X_1X_5) & = P(X_1 = 1, X_5 = 1) = p^6
+      \end{align*}
+    \end{itemize}
+  \end{exmp}
+
+  \begin{exmp}
+    Question 8.18 from the book. A multiple choice exam has 100 questions, each with 5 possible answers. One mark is awarded for a correct answer and 1/4 mark is deducted for an incorrect answe. A particular student has probability $p_i$ of knowing the correct answer to the $i$th question, independent of other questions.
+    \begin{itemize}
+      \item[(a)] Suppose that on a question where the student does not know the answer, he or she guesses randomly. Show that his or her total mark has mean $\sum p_i$ and variance $\sum p_i(1-p_i) + \f{(100 - \sum p_i)}{4}$.
+      \item[(b)] Show that the total mark for a student who refrains from guessing also has mean $\sum p_i$, but with variance $\sum p_i(1-p_i)$. Compare the variances when all $p_i$'s equal (i) .9, (ii) .5.
+    \end{itemize}
+
+    Let $Y = $ total mark and let
+   \[ X_i = \piecewise{1}{$Q_i$ answered correctly}{0}{otherwise}, \ \ \ \ i = 1,2,\ldots, 100 \]
+   \begin{itemize}
+     \item[(i)] $y = 1\times \sum_{i =1}^{100} X_i - \f{1}{4} \left( 100 - \sum_{i =1}^{100} \right)$
+     \item[(ii)] $E(X_i)$; $V(X_i)$
+     \begin{align*}
+       P(X_i = 1) & = P(A_i)P(X_i = 1|A_i) + P(\bar{A_i})P(X_i = 1|\bar{A_i}) \\
+       & = p_1 \times 1 + (1-p_i) \times \f{1}{5}
+     \end{align*}
+     Let $A_i$ = "know answer to question $Q_i$"
+   \end{itemize}
+  \end{exmp}
+
+
+  \section{Continuous Probability Distributions}
+
+  \subsection{Solutions to Problems on Chapter 9}
+
+  \begin{itemize}
+    \item[9.1]
+    $Y = \f{4}{3} \pi \left( \f{X}{2} \right)^3$. Plug in $X =0.6$ and $X = 1.0$ to get the bounds $0.036\pi\leq y \leq \f{\pi}{6}$. Next,
+    \begin{align*}
+      F(x) & = \f{x - 0.6}{0.4}
+    \end{align*}
+    so then
+    \begin{align*}
+      F(y) & = P(Y \leq y) \\
+           & = P \left( \f{4}{3} \pi \left( \f{X}{2} \right)^3 \leq y \right) \\
+           & = P\left(X \leq \sqrt[3]{\f{6y}{\pi}} \right) \\
+           & = \f{\sqrt[3]{\f{6y}{\pi}}  - 0.6}{0.4} \\
+           & = \sqrt[3]{\f{750y}{8\pi}} - \f{3}{2}
+    \end{align*}
+    which implies
+    \begin{align*}
+      f(y) & = \f{d}{dy} F(y) \\
+           & = \f{d}{dy} \sqrt[3]{\f{750y}{8\pi}} - \f{3}{2} \\
+           & = \f{5}{6} \left( \f{6}{\pi} \right)^{\f{1}{3}} y^{\f{-2}{3}}
+    \end{align*}
+
+    \item[9.2]
+    \begin{itemize}
+      \item[(a)]
+      \begin{align*}
+        \int_{-1}^1 f(x) & = 1 \\
+        \int_{-1}^1 k(1-x^2) dx & = 1 \\
+        kx - \f{k}{3}x^3 \Big|_{-1}^1 & = 1 \\
+        k & = \f{3}{4}
+      \end{align*}
+      Then,
+      \begin{align*}
+        P(X \leq x) & = \int_{-1}^x \f{3}{4}(1-x^2) dx \\
+        & = \f{3}{4}x - \f{1}{4}x^3 \Big|_{-1}^x \\
+        & = \f{3}{4} \left( \f{2}{3} + x - \f{x^3}{3} \right)
+      \end{align*}
+      \item[(b)]
+      \begin{align*}
+        F(c) - F(-c) & = 0.95 \\
+        \f{3}{4} \left( \f{2}{3} + c - \f{x^3}{3} \right) - \f{3}{4} \left( \f{2}{3} - c - \f{x^3}{3} \right) & = 0.95 \\
+        c & = 0.811
+      \end{align*}
+    \end{itemize}
+
+    \item[9.3]
+    \begin{itemize}
+      \item[(a)]
+      \begin{align*}
+        E(X) & = \int_x xf(x) \\
+        & = \int_0^{\f{1}{2}} 4x dx + \int_{\f{1}{2}}^1 4(1-x) dx \\
+        & = \f{1}{2}
+      \end{align*}
+      \begin{align*}
+        \sigma^2 & = E(X^2) - E(X)^2 \\
+          & = \int_x x^2f(x) - \f{1}{4} \\
+          & = \f{1}{24}
+      \end{align*}
+    \end{itemize}
+
+    \item[9.4]
+    \begin{align*}
+      F(x) & = \f{x}{20}
+    \end{align*}
+    then since $X = 20Y - 10$,
+    \begin{align*}
+      F(y) & = \f{20y - 10}{20}
+    \end{align*}
+    so
+    \begin{align*}
+      f(y) & = 1
+    \end{align*}
+
+    \item[9.5]
+    \begin{itemize}
+      \item[(a)]
+      we just need $\alpha + 1 > 0$. $\alpha > -1$.
+      \item[(b)]
+      \begin{align*}
+        P \left( X \leq \f{1}{2} \right) & = \int_0^{\f{1}{2}} (\alpha + 1)x^{\alpha} \\
+        & = \left( \f{1}{2} \right)^{\alpha + 1}
+      \end{align*}
+      \begin{align*}
+        E(X) & = \int_0^1 xf(x) \\
+             & = \f{\alpha +1}{\alpha + 2}
+      \end{align*}
+      \item[(c)]
+      \begin{align*}
+        F(x) & = x^{\alpha + 1} \\
+        F_T(t) & = P \left( \f{1}{X} \leq t \right) \\
+        & = 1 - P \left( \f{1}{t} > X \right) \\
+        & = 1 - \left( \f{1}{t} \right)^{\alpha + 1}
+              \end{align*}
+              so
+              \begin{align*}
+                f(t) & = (\alpha + 1) t^{-(\alpha + 2)} \\
+                & = \f{\alpha + 1}{t^{\alpha + 2}}
+              \end{align*}
+    \end{itemize}
+
+
+
+\item[9.6]
+\begin{itemize}
+  \item[(a)] In this case $\lambda = \f{2}{5}$.
+  \begin{align*}
+    (1 - e^{-\lambda(5)})^3 & = (1 - e^{2})^3
+  \end{align*}
+  \item[(b)]
+  \begin{align*}
+    P(\mbox{exceeds 4} | \mbox{exceeds 4}) & = \f{(1-(1 - e^{-\lambda(5)})}{(1-(1 - e^{-\lambda(4)}))} = e^{-\f{2}{5}}
+  \end{align*}
+\end{itemize}
+
+\item[9.7]
+We know that $E(X) = 1000$, therefore $1000 = \f{1}{\lambda} \implies \lambda = \f{1}{1000}$. So, the median lifetime $x$ implies
+\begin{align*}
+  F(x) & = 0.5
+\end{align*}
+So,
+\begin{align*}
+  0.5 & = 1 - e^{-\lambda x} \\
+  x & = - \f{1}{\lambda} \ln \left( \f{1}{2} \right) \\
+  & = 693.1472
+\end{align*}
+
+\item[9.8] $X \sim N(0.65, 0.01)$. Thus, $E(X) = 0.65$ and $Var(X) = 0.01$.
+\begin{itemize}
+  \item[(a)] For each one just calculate the $z$-score, for example
+  \[ P(X \geq 80\%) = 1 - P(X < 80\%) = 1 - F_X(0.8) = 1 - F_Z(1.5) = 1 - 0.93319 = 0.6681 \]
+  where $F_X(x) = F_Z \left( \f{x - \mu}{\lambda} \right)$
+  \item[(b)] $\bar{X}$ is the average score in a group of 25 students. So $\bar{X} \sim N(\mu, \sigma^2/25)$
+  \begin{align*}
+    P(\bar{X} > 70\%) & = 1 - P(\bar{X} < 70\%) \\
+                  & = 1 - P \left( \f{0.7 - 0.65}{\sqrt{\f{\sigma^2}{25}}} \right) \\
+                  & = 1 - F_Z(2.5) \\
+                  & = 1 - 0.99379 \\
+                  & = 0.00621
+  \end{align*}
+  \item[(c)]
+  Introduce the random variable $\bar{Y} = $ average score in another group of 25 students, $\bar{Y} \sim N(0.65, \sigma^2/25)$. So, $\bar{X} - \bar{Y} \sim N(0.65 - 0.65, \sigma^2/25 + \sigma^2/25)$. Then,
+  \begin{align*}
+    P(|\bar{X} - \bar{Y}| \geq 0.05) & = 1 - P(|\bar{X} - \bar{Y}| < 0.05) \\
+    & = 1 - P(|\bar{X} - \bar{Y}| < 0.05) \\
+    & = 1 - P \left(|Z| < \f{0.05 - 0}{\sqrt{2\sigma^2/25)}} \right) \\
+    & = 1 - (P(Z < 1.77) - P(Z < -1.77)) \\
+    & = 1 - (0.96164 - (1 - 0.96164)) \\
+    & = 0.0762 \mbox{ \ \ \ close enough?}
+  \end{align*}
+\end{itemize}
+
+\item[9.9] Let $X$ be the amount of water in a bottle in litres.
+\begin{itemize}
+  \item[(a)] $P(\mbox{less than 2 litres})$
+  \begin{align*}
+    P(X < 2) & = P \left( Z < \f{2 - 2}{0.01} \right) \\
+             & = P(Z < 0) \\
+             & = 0.5
+  \end{align*}
+  \item[(b)]
+  \begin{align*}
+    P(Z \leq d) & = P(Z \geq |d|) \\
+    & = 1 - P(Z \leq |d|) = 0.01 \\
+    \implies P(Z \leq |d|) & = 0.99 \\
+    |d| & = 2.3263 \\
+    d & = -2.3263
+  \end{align*}
+  So,
+  \[ \f{2-\mu}{0.01} = -2.326 \implies \mu = 2.023 \]
+\end{itemize}
+
+\item[9.10]
+Let $X$ be the r.v. defined by length of the turbine shaft, and $A_i$ the respective parts. So,
+\[ X = A_1 + A_2 + A_3 + A_4 \sim N(8.10 + 7.25 + 9.75 + 3.10, .22^2 + .20^2 + .24^2 + .20^2) = N(28.2, 0.186)  \]
+We need
+\begin{align*}
+  P(|X - 28| < .26) & = P(27.74 < X < 28.26) \\
+                    & = P \left( \f{27.74 - 28.2}{\sqrt{0.186}} < Z < \f{28.26 - 28.2}{\sqrt{0.186}} \right) \\
+                    & = P(-1.07 < Z < 0.14) \\
+                    & = 0.55567 - (1- 0.85769) \\
+                    & = 0.4134
+\end{align*}
+
+
+\item[9.11]
+\begin{itemize}
+  \item[(a)]
+  \begin{align*}
+    P(9.0 < X < 11.1) & = F_X(11.1) - F_X(9) \\
+    & = F_Z \left( \f{11.1 - 9.5}{2} \right) - F_Z \left( \f{9 - 9.5}{2} \right) \\
+    & = F_Z(0.8) - F_Z(-0.25) \\
+    & = 0.78814 - (1- 0.59871) \\
+    & = 0.3868
+  \end{align*}
+  \item[(b)] $X + 4Y \sim N(9.5 + 4(-2.1), 2^2 + 4^2(0.75))$.
+  \begin{align*}
+    P(X + 4Y > 0) & = P \left( Z > \f{0 - 1.1}{4} \right) \\
+    & = P(Z < 0.275) \\
+    & = 0.6083
+  \end{align*}
+  \item[(c)]
+  \begin{align*}
+    P(X > b) & = 0.9 \implies P \left( Z > \f{b - 9.5}{2} \right) = 0.9 \implies b = 6.94
+  \end{align*}
+\end{itemize}
+
+\item[9.12]
+\begin{itemize}
+  \item[(a)]
+  \begin{align*}
+    P(A < l) & = P \left( Z < \f{l - 1.05l}{\sqrt{0.0004}l} \right) \\
+             & = P \left( Z < \f{1 - 1.05}{\sqrt{0.0004}} \right) \\
+             & = 0.062
+  \end{align*}
+  \item[(b)]
+  Define $B = A_1 + A_2 + A_3 + \cdots + A_{20} = $ volume of 20 randomly chosen bottles where $B \sim N(20(1.05), 20(0.0004))$, $B \sim N(21,0.008)$. Then $B - V \sim N(-1, 0.168)$ so we obtain
+  \begin{align*}
+    P(B \leq V) & = P(B - V \leq 0) \\
+    & = P \left(  Z \leq \f{0 - (-1)}{\sqrt{0.168}} \right) \\
+    & = P(Z \leq 2.44) \\
+    & = 0.9927
+  \end{align*}
+\end{itemize}
+
+\item[9.14]
+Let $Y$ be the diameter of the eggs. $X_i$ the wholesale of the $i$-th randomly selected egg, and $\bar{X}$ the average wholesale selling preice, $\bar{X} = \f{\sum_{i=1}^n X_i}{n}$. We know that $\bar{X} = \mu = E(X_i)$ for large $n$.
+\begin{align*}
+  E(X_i) & = \sum_{x_i = 5}^7 x_if(x_i) \\
+  & = 5 P(Y < 37) + 6P(37 \leq Y \leq 42) + 7P(Y > 42) \\
+  & = 6.0292
+\end{align*}
+
+\end{itemize}
+
+Good luck on finals everyone. :)0
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \end{document}

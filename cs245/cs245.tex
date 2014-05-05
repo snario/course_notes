@@ -1,0 +1,1909 @@
+\documentclass[english, 11pt]{article}
+\usepackage{notes}
+\usepackage{turnstile}
+\usepackage{qtree}
+\usepackage{flagderiv}
+\usepackage{pdfpages}
+%\renewcommand{\sfdefault}{cmss}
+%\renewcommand{\familydefault}{\sfdefault}
+
+\newcommand{\thiscoursecode}{CS 245}
+\newcommand{\thiscoursename}{Logic \& Computation}
+\newcommand{\thisprof}{Dr. Borzoo Bonakdarpour}
+\newcommand{\me}{Liam Horne}
+\newcommand{\thisterm}{Fall 2013}
+\newcommand{\website}{LIHORNE.COM}
+\newcommand{\feq}{\sdststile{}{}}
+% Headers
+\chead{\thiscoursename}
+\lhead{\thisterm}
+
+
+%%%%% TITLE %%%%%
+\newcommand{\notefront} {
+\pagenumbering{roman}
+\begin{center}
+
+{\ttfamily \url{\website}} {\small}
+
+\textbf{\Huge{\noun{\thiscoursecode}}}{\Huge \par}
+
+{\Large{\noun{\thiscoursename}}}\\ \vspace{0.1in}
+
+\vspace{0in}\includegraphics[scale=0.5]{logo.png}
+
+  %\includegraphics[scale=0.1]{shield.png} \\
+  {\noun \thisprof} \ $\bullet$ \ {\noun \thisterm} \ $\bullet$ \ {\noun {University of Waterloo}} \\
+
+  \end{center}
+  }
+
+
+%   ooooo      ooo   .oooooo.   ooooooooooooo oooooooooooo  .oooooo..o
+%   `888b.     `8'  d8P'  `Y8b  8'   888   `8 `888'     `8 d8P'    `Y8
+%    8 `88b.    8  888      888      888       888         Y88bo.
+%    8   `88b.  8  888      888      888       888oooo8     `"Y8888o.
+%    8     `88b.8  888      888      888       888    "         `"Y88b
+%    8       `888  `88b    d88'      888       888       o oo     .d8P
+%   o8o        `8   `Y8bood8P'      o888o     o888ooooood8 8""88888P'
+
+
+
+\begin{document}
+
+  % Notes front
+  \notefront
+  % Table of Contents and List of Figures
+  \tocandfigures
+  % Abstract
+  \doabstract{These notes are intended as a resource for myself; past, present, or future students of this course, and anyone interested in the material. The goal is to provide an end-to-end resource that covers all material discussed in the course displayed in an organized manner. If you spot any errors or would like to contribute, please contact me directly.}
+\hypersetup{linkcolor=blue}
+
+  \section{Introduction}
+
+  The Neehdham-Shroeder Authentication Protocol is a security protocol that works like this. Suppose there are two people, Alice and Bob. Alice intends to send a message to Bob, and this message can be represented by $\{A, N_a\}_{PK_B}$. Alice wants to establish secure communication with Bob. The idea is that a message can be encrypted by a public key (e.g., $PK_B$ (public key of Bob)) that only Bob can decrypt using his private key. The returned message is now $\{N_a, N_b\}_{PK_A}$. Alice authenticates Bob. Bob then authenticates Alice,  returning $\{N_b\}_{PK_B}$. \\
+
+  The problem with this was discovered in 1997, using program verification. Suppose there is an intruder in the middle, and he convinces Alice to send her message encrypted using the Intruder's public key. Then, the intruder sends the message encrypted with Bob's public key back to Bob, and Bob responds with Alice's message encrypted with her public key. He then sends it back to Alice, then she replied with the Intruder's public key and again he can decrypt it and send it back to Bob. Through these means, the intruder successfully impersonates Alice.
+
+  \subsection{Background}
+
+  \begin{defn}[set]
+    \label{set}
+    A \textbf{set} is a collection of objects called \textbf{members} or \textbf{elements}. We write
+    \[ \alpha \in S \]
+    to mean that $\alpha$ is a member of $S$ ($\alpha \not \in S$ is the opposite). We write
+    \[ \alpha_1, \cdots, \alpha_n \in S \]
+    to mean that $\alpha_1 \in S, \cdots,$ and $\alpha_n \in S$.
+  \end{defn}
+
+  Two sets are \textbf{equal} if and only iff they have the same members. That is,
+  \[ \mbox{for every } x , x \in S \iff x \in T \]
+  $S$ is said to be a \textbf{subset} of $T$, written as
+  \[ S \subseteq T \]
+  iff for every $x, x \in S$ implies $x \in T$. Every set is a subset of itself. $S = T$ iff $S \subseteq T$ and $T \subseteq S$.
+
+  $S$ is a \textbf{proper subset} of $T$ ($S \subset T$) if and only if $S \subseteq T$ and $S \not = T$. Sets are not ordered (for example, $\{\alpha, \beta\} = \{\beta, \alpha\}$). Additionally, the empty set is denoted $\emptyset$ and is a set which has no members at all.
+
+  \begin{defn}[complement, union, intersection, difference]
+    $\overline{S} = \{ x \vert x \not \in S \}$ is the complement. \\
+    $S \cup T = {x | x \in S \mbox{ or } x  \in T}$ is the union. \\
+    $S \cap T = {x | x \in S \mbox{ and } x  \in T}$ is the intersection. \\
+    $S - T = {x | x \in S \mbox{ and } x  \not \in T}$ is the difference. \\
+  \end{defn}
+
+  $S$ and $T$ are said to be \textbf{disjoint} iff $S \cap T = \emptyset$.
+
+  \begin{defn}[union]
+  \label{union}
+    The \textbf{union} of $\{S_i | i \in I\}$ is defined by
+    \[ \bigcup_{ i \in I} S_i = \{ x | x \in S_i \mbox { for some } i \in I \} \]
+  \end{defn}
+  \begin{defn}[intersection]
+    \label{intersection}
+    The \textbf{intersection} of $\{S_i | i \in I\}$  is defined by
+    \[ \bigcap_{ i \in I} S_i = \{ x | x \in S_i \mbox { for each } i \in I \} \]
+  \end{defn}
+
+  \begin{defn}(natural numbers)
+  \label{natural}
+    \begin{itemize}
+      \item[1.] $0 \in \N$
+      \item[2.] For any $n$, if $n \in \N$, then $n' \in \N$, where $n'$ is the successor of $n$.
+      \item[3.] $n \in \N$ only if $n$ has been generated by [1] and [2].
+    \end{itemize}
+  \end{defn}
+
+  \begin{exmp}
+    Show that
+    \[ 1 + 2 + \cdots + n = \frac{n(n+1)}{2} \]
+  \end{exmp}
+ \begin{proof}
+   Base case: $n = 2$. \\
+   Inductive step: We assume that
+   \[ 1 + 2 + \cdots + k = \frac{k(k+1)}{2} \]
+   We now show that
+   \[ 1 + 2 + \cdots + k + 1 = \frac{(k+1)(k+2)}{2} \]
+ \end{proof}
+
+ \section{Propositional Logic}
+
+ \begin{defn}[logic]
+   \label{logic}
+   \textbf{Logic} is the science of principles of valid reasoning and inference. The aim of logic in computer science is to develop languages to model the situations we encounter, so that we can \textbf{reason} about them formally. \textbf{Reasoning} about situations means constructing arguments about them. We want these arguments to be formal, can be defended rigorously, or executed on a machine.
+
+   In propositional logic, \textbf{simple(atomic)} propositions are the basic building blocks used to create \textbf{compound} propositions using connectives.
+ \end{defn}
+
+ We will construct a \textbf{propositional language} $\mathcal{L}^p$ and it is the formal language for propositional logic. A formal language is a collection of symbols, distinguished from symbols of the metalanguage used in studying them.
+
+ $\Lp$ consists of three classes of symbols
+ \begin{itemize}
+   \item[1.] propositional symbols we use roman-type small Latin letters (e.g., p q r). The set of propositional symbols is denoted by $Atom(\Lp)$.
+   \item[2.] Five connective symbols/connectives (negation, conjunction, disjuction, implication, equivalence)
+   \[ \neg, \land, \lor, \rightarrow, \leftrightarrow \]
+   \item[3.] Punctuation; we use ( and )
+ \end{itemize}
+
+ \begin{defn}[expression]
+   \label{expression}
+   \textbf{Expressions} are finite strings of symbols. The \nameref{expression} of length 0 is called the empty \nameref{expression} which cannot be written. We use the notation $\emptyset$ to denote the empty \nameref{expression}. The \textbf{length} of an \nameref{expression} is the number of occurences in it. Two \nameref{expression}s are equal if they have the same length and have the same symbols in order.
+ \end{defn}
+
+  \begin{defn}[segment]
+    \label{segment}
+  \end{defn}Consider two \nameref{expression}s $U$ and $V$ in this order, then their concatenation is $UV$. If some \nameref{expression} $U = W_1VW_2$ then $V$ is a segment of $U$; if $U \not = V$, then $V$ is a proper \nameref{segment} of $U$. If $U = VW$, then $V$ is an \textbf{initial} \nameref{segment} of $U$ and $W$ is a \textbf{terminal} \nameref{segment} of $U$. If $W$ is non-empty, then $V$ is a \textbf{proper initial \nameref{segment}} and if $V$ is non-empty then $W$ is a proper terminal \nameref{segment}.
+
+  \begin{defn}[formula]
+  \label{formula}
+    \nameref{formula}s are defined from \nameref{expression}s. The set of \textbf{formulas} of $\Lp$ (denoted $Form(\Lp)$) is inductively defined as follows:
+    \begin{enumerate}
+      \item $Atom(\Lp) \subseteq Form(\Lp)$
+      \item If $A \in Form(\Lp)$, then $(\neg A) \in Form(\Lp)$
+      \item If $A, B, \in Form(\Lp)$, then $(A * B) \in Form(\Lp)$, where $*$ is a binary connective.
+    \end{enumerate}
+  \end{defn}
+
+  We indicate roman capital letters to indicate \nameref{formula}s, such as $A, B, C, U, V, etc$. Note also that $Form(\Lp)$ is the smllest class of \nameref{expression} of $\Lp$ \textbf{closed} under the formation rules of $\Lp$.
+
+  There are certain \nameref{formula} types:
+  \begin{itemize}
+    \item $(\neg A)$ is called a negation
+    \item $(A \land B)$ is called a conjunction
+    \item $(A \lor B)$ is called a disjunction
+    \item $(A \rightarrow B)$ is called an implication
+    \item $(A \leftrightarrow B)$ is called an equivalence
+  \end{itemize}
+
+  We can build \textbf{parse trees}. For example the \nameref{expression} $(A \rightarrow B)$ has the parse tree
+
+\ptree{
+  \pnode{\ar}
+    \pchild{A}
+    child{node[circle,draw]{$B$}};
+    }
+
+  Another method is through the use of a recursive algorithm like this.
+
+  \begin{itemize}
+    \item \textbf{Input:} $U$ is an \nameref{expression} of $\Lp$
+    \item \textbf{Output: true} if $U$ is in $Form(\Lp)$; \textbf{false} otherwise
+    \item \textbf{Steps:}
+    \begin{enumerate}
+      \item Return \textbf{false} if the \nameref{formula} is empty.
+      \item If $U \in Atom(\Lp)$, then return \textbf{true}; otherwise if $U$ is any other single symbol, return \textbf{false}
+      \item If $U$ contains more than one symbol and it does not start with '(', then return \textbf{false}
+      \item If the second symbol is $\neg$, $U$ must be $(\neg V)$ where $V$ is an \nameref{expression}; otherwise return \textbf{false}. Now, recursively apply the same algorithm to $V$, which is of smaller size.
+      \item If $U$ begins with '(' but the second symbol is not $\neg$, scan from left to right until($V$ \nameref{segment} is found where $V$ is a proper \nameref{expression}; if no such $V$ is found, return \textbf{false}. $U$ must be $(V*W)$ where $W$is also an \nameref{expression}; otherwise return \textbf{false}.
+      \item Now apply the same algorithm recursively to $V$ and $W$.
+    \end{enumerate}
+  \end{itemize}
+
+  Since every \nameref{expression} is finite in length by definition, and since in each iteration the analyzed \nameref{expression}s are getting smaller, the algorithm terminates in a finite number of steps.
+
+  \textbf{Question.} How should we prove that every \nameref{formula} has the equal number of left and right parentheses?
+
+  \begin{rem}
+    In \textbf{course-of-values induction} the induction hypothesis for proving $M(n+1)$ is not just $M(n)$, but the conjunction
+    \[ M(1) \land M(2) \land \cdots \land M(n) \]
+    Thus, there does not have to be an explicit induction base case.
+  \end{rem}
+
+  In order to prove properties of propositional \nameref{formula}s, we apply induction on the height of the parse tree. This proof is called structural induction.
+
+  \begin{lem}
+    Every \nameref{formula} $\Lp$ has the same number of left and right parentheses.
+  \end{lem}
+
+  \begin{proof}
+    Let $M(n)$ mean 'All \nameref{formula}s $A$ of height $n$ that have the same number of left and right brackets'. We assume $M(k)$ for each $k<n$ and try to prove $M(n)$. The base case is that $n = 1$. This implies that $A \in Atom(\Lp)$ and hence has 0 parentheses. Next, our inductive step for $n > 1$. The root of the parse tree $\varphi$ must be in the connectives. Without loss of generality we can assume that it is $\rightarrow$ and $\varphi = (\varphi_1 \rightarrow \varphi_2)$. The heights of $\varphi_1$ and $\varphi_2$ have to be strictly less than $n$. Using the inductive hypothesis, the nmber of left and right parentheses in $\varphi$ should also be equal because we simply added 2 more parentheses.
+  \end{proof}
+
+  \begin{lem}
+    Any non-empty proper initial \nameref{segment}of a \nameref{formula} of $\Lp$ has more left than right parentheses, and any non-empty proper terminal \nameref{segment} of a \nameref{formula} of $\Lp$ has less left than right parentheses.
+  \end{lem}
+
+  \begin{thrm}[\nameref{formula}s uniqueness]
+    Every \nameref{formula} of $\Lp$ is of exactly one of six forms: an atom, $(\neg A), (A\land B), (A \lor B), (A \rightarrow B),$ and $(A \leftrightarrow B)$; and in each case it is of that form in exactly one way.
+  \end{thrm}
+
+  We now begin to examine the scope of a \nameref{formula}. We begin with a definition for scope.
+
+  \begin{defn}[scope]
+  \label{scope}
+    If $(\neg A)$ is a \nameref{segment} of $C$, then $A$ is called the \textbf{scope} in $C$ of the $\neg$ on the left of $A$. If $(A * B)$ is a \nameref{segment} of $C$, then $A$ and $B$ are called the left and right \textbf{scopes} in $C$ of the $*$ between $A$ and $B$.
+  \end{defn}
+
+  \begin{thrm}[unique scope]
+    \label{uniquescope}
+    Any $\neg$ in any $A$ has a unique \nameref{scope}, and any $*$ in any $A$ has unique left and right \nameref{scope}.
+  \end{thrm}
+
+  \begin{thrm}
+    If $A$ is a \nameref{segment} of $(\neg B)$ then $A$ is a \nameref{segment} of $B$ or $A = (\neg B)$. If $A$ is a \nameref{segment} of $(B * C)$ then $A$ is a segment of $B$, or $A$ is a segment of $C$, or $A = (B*C)$.
+  \end{thrm}
+
+  \subsection[Semantics]{Semantics of Propositional Logic}
+
+  \begin{defn}[semantics]\label{semantics}
+    Informally, \textbf{semantics} of a logic describe how to interpret \nameref{formula}s. For example, the interpretation of \nameref{formula} $p \land q$ depends on three things: the interpretation of $p$, the interpretation of $q$, and the interpretation of $\land$. In propositional logic, we need to give \textbf{meaning} to atoms, connectives, and \nameref{formula}.
+  \end{defn}
+
+  Let $A$ and $B$ be two \nameref{formula}s that express propositions $\mathcal{A}$ and $\mathcal{B}$. Intuitively we give the following meanings:
+  \begin{center}
+    \begin{tabular}{l l}
+      $\neg A$ & Not $\mathcal{A}$ \\
+      $A \land B$ & $\mathcal{A}$ and $\mathcal{B}$ \\
+      $A \lor B$ &  $\mathcal{A}$ or $\mathcal{B}$ \\
+      $A \rightarrow B$ &  If $\mathcal{A}$ then $\mathcal{B}$  \\
+      $A \leftrightarrow B$ &  $\mathcal{A}$ iff $\mathcal{B}$  \\
+    \end{tabular}
+  \end{center}
+
+  \begin{defn}[semantics]
+    \label{semantics}
+    Formally, semantics is a function that maps a \nameref{formula} to a value in $\{ 0,1\}$ (also known as a \textbf{truth table})
+  \end{defn}
+
+  \begin{center}
+    \begin{tabular}{c | c}
+      A & $\neg$ A \\
+      \hline
+      1 & 0 \\
+      0 & 1 \\
+    \end{tabular}
+  \end{center}
+
+  A \textbf{truth valuation} is a function with the set of all proposition symbols as domain and $\{0,1\}$ as range. Note that $1 \rightarrow 1$ is 1 because truth is preserved, $1 \rightarrow 0$ is 0 because truth is not preserved, and $0 \rightarrow 0$ is 1 because there is no truth to be preserved.
+
+  \begin{defn}[value]\label{value}
+    The \textbf{value} assigned to \nameref{formula}s by a truth valuation $t$ is defined by recursion:
+    \begin{itemize}
+      \item[[1]] $p^t \in \{0,1\}$
+      \item[[2]] $(\neg A)^t = \piecewise{1}{if $A^t = 0$}{0}{if $A^t = 1$}$
+      \item[[3]]  $(A \land B)^t = \piecewise{1}{if $A^t = B^t = 1$}{0}{otherwise}$
+      \item[[4]]  $(A \lor B)^t = \piecewise{1}{if $A^t = 1$ or $B^t = 1$}{0}{otherwise}$
+      \item[[5]]  $(A \rightarrow B)^t = \piecewise{1}{if $A^t = 0$ or $B^t = 1$}{0}{otherwise}$
+      \item[[6]]  $(A \leftrightarrow B)^t = \piecewise{1}{if $A^t = B^t$}{0}{otherwise}$
+    \end{itemize}
+  \end{defn}
+
+  \begin{defn}[compositional]
+  \label{compositional}
+    Notice that \nameref{semantics} of propositional logic is \textbf{compositional}; i.e., if we know the valuation of two subformulas, then we know the valution of their composition using a propositional connective.
+  \end{defn}
+
+  An easy approach for evaluating propositional \nameref{formula}s is by building truth tables by considering all combinations. In general, for $n$ propositional variables, there exist $2^n$ values. \\
+
+  Suppose $A = p \lor q \rightarrow q \land r$. If $p^t = q^t = r^t = 1$, then $A^t = 1$ Also, if $p^{t_1} = q^{t_1} = r^{t_1} = 0$, then $A^{t_1} = 1$.
+
+  \begin{thrm}\label{formdomain}
+    For any $A \in Form(\Lp)$ and any truth valuation $t, A^t \in \{ 0, 1 \}.$
+  \end{thrm}
+
+  \begin{defn}[satisfiable]\label{satisfiable}
+    Let $\Sigma$ denote a set of \nameref{formula}s and
+    \[ \Sigma^t = \piecewise{1}{if for each $B \in \Sigma, B^t = 1$}{0}{otherwise} \]
+    We say that $\Sigma$ is \textbf{satisfiable} iff there is some truth valuation $t$ such that $\Sigma^t = 1$. When $\Sigma^t = 1$, $t$ is said to \textbf{satisfy} $\Sigma$.
+  \end{defn}
+
+  For example, the set $\{(p \rightarrow q) \lor r, (p \lor q \lor s ) \}$ is satisfiable.
+
+  \begin{defn}[tautology]\label{tautology}
+    A \nameref{formula} $A$ is a \textbf{tautology} iff for any truth valuation $t$, $A^t = 1$.
+  \end{defn}
+
+  \begin{defn}[contradiction]\label{contradiction}
+    A \nameref{formula} $A$ is a \textbf{contradiction} iff for any truth valuation $t$, $A^t = 0$.
+  \end{defn}
+
+  A faster way to evaluate a propositional \nameref{formula} is by using valuation trees and "expressions".
+
+  \begin{exmp}
+    Show that $A = ((((p\land q) \rightarrow r)\land (p \rightarrow q))\rightarrow (p \rightarrow r))$ is a \nameref{tautology}.
+  \end{exmp}
+
+  \begin{defn}[deducible]\label{deducible}
+    Suppose $\mathcal{A}_1, \cdots, \mathcal{A}_n$, and $\mathcal{A}$ are propositions. Deductive logic studies whether $\mathcal{A}$ is \textbf{deducible} from $\mathcal{A}_1,\cdots,\mathcal{A}_n$.
+  \end{defn}
+
+  \begin{defn}[tautological consequence]\label{tautologicalconsequence}
+    Suppose $\Sigma \subseteq Form(\Lp)$ and $A \in Form (\Lp)$. We say that $A$ is a \textbf{tautological consequence} of $\Sigma$ (that is, of the \nameref{formula}s in $\Sigma$), written as $\Sigma \models A$, iff for any truth valuation $t$, $\Sigma^t = 1$ implies $A^t = 1$. Note that $\Sigma \models A$ is not a \nameref{formula}.
+  \end{defn}
+
+  We write $\Sigma \not \models A$ for "not $\Sigma \models A$". That is, there exists some truth valuation $t$ such that $\Sigma^t = 1$ and $A^t = 0$. Also, $\emptyset \models A$ means that $A$ is a \nameref{tautology}.
+
+  \begin{exmp}
+    $\{(A \rightarrow B), (B \rightarrow C)\} \models A \rightarrow C$
+  \end{exmp}
+
+  \begin{exmp}
+    \[ \{((A \rightarrow \neg B ) \lor C), (B \land (\neg C)),(A\leftrightarrow C)\} \not \models (A \land (B \rightarrow C)). \]
+  \end{exmp}
+
+  \begin{defn}[associativity of commutativity]\label{assoccommut} \
+    \begin{center}
+      $(A \land B) \equiv (B \land A)$ \\
+      $((A \land B) \land C) \equiv (A \land (B \land C))$ \\
+      $(A \lor B) \equiv (B \lor A)$ \\
+      $((A \lor B) \lor C) \equiv (A \lor (B \lor C))$
+    \end{center}
+  \end{defn}
+
+  \begin{thrm} \
+    \begin{itemize}
+      \item[[1]] $\{A_1,\ldots,A_n\} \models A \iff \emptyset \models A_1 \land \cdots \land A_n \rightarrow A$
+      \item[[2]] $\{A_1,\ldots,A_n\} \models A \iff \emptyset \models A_1 \rightarrow (\cdots (A_n \rightarrow A) \cdots)$
+    \end{itemize}
+  \end{thrm}
+
+  \begin{lem}
+    If $A \equiv A'$ and $B \equiv B'$ then,
+    \begin{itemize}
+      \item[1.] $\neg A \equiv \neg A'$
+      \item[2.] $A \land B \equiv A' \land B'$
+      \item[3.] $A \lor B \equiv A' \lor B'$
+      \item[4.] $A \rightarrow B \equiv A' \rightarrow A' \rightarrow B'$
+      \item[5.] $A \leftrightarrow B \equiv A' \equiv B'$
+    \end{itemize}
+  \end{lem}
+
+  \begin{thrm}[replaceability]
+    If $B \equiv C$ and $A'$ results from $A$ by replacing some (not necessarily all) occurrences of $B$ in $A$ by $C$, then $A \equiv A'$.
+  \end{thrm}
+
+  \begin{proof}
+    By induction on the structure of $A$.
+If $B = A$, then $C = A'$. This theorem thus holds.
+Basis. $A$ is an atom. Then $B = A$; the theorem holds.
+Induction step. $A$ is one of the five forms: $\neg A_1$, $A_1 \land A_2$, $A_1 \lor A_2$, $A \rightarrow A_2$, $A_1 \leftrightarrow A_2$. \\
+Suppose $A = \neg A_1$. If $B = A$, the theorem holds as stated above. If $B \not A$, then $B$ is a segment of $A_1$. Let $A_1'$ results from $A_1$ by the replacement stated in the theorem, then $A' = \neg A_1'$. We have
+\[ A_1 \equiv A_1' \ \ \ \mbox{(by inductive hypothesis)}, \]
+\[ \neg A_1 \equiv \neg A_1' \]
+That is, $A \equiv A'$.
+Suppose $A = A_1 * A_2$. ($*$ denotes any one of $\land, \lor, \rightarrow, \leftrightarrow$.) If $B = A$, the theorem holds as in the above case. If $B \not = A$, then $B$ is a segment of $A_1$ or $A_2$ (by Theorem 2.3.7). Let $A_1'$ and $A_2'$ result respectively from $A_1$ and $A_2$ by the replacement stated in the theorem, then $A' = A_1' * A_2'$. We have
+\[ A_1 \equiv A_1', A_2 \equiv A_2' \ \ \ \mbox{(by inductive hypothesis)} \]
+\[ A_1 * A_2 \equiv A_1' * A_2' \]
+That is, $A \equiv A'$. By the basis and induction step, the theorem is proved.
+  \end{proof}
+
+  \begin{thrm}[duality]
+    Suppose $A$ is a formula composed of atoms and the connectives $\neg$, $\land$, and $\lor$ by the formation rules concerned, and $A'$ results by exchanging in $A$, $\land$ for $\lor$ and each atom for its negation. Then $A' \equiv \neg A$. ($A'$ is the \textbf{dual} of $A$)
+  \end{thrm}
+
+  Formulas $A \rightarrow B$ and $\neg A \lor B$ are tautologically equivalent. Then $\rightarrow$ is said to be \textbf{definable} in terms of (or \textbf{reducible}) $\neg$ and $\lor$. \\
+
+  Let $f$ and $g$ be two $n$-ary connectives. We shall write $fA_1, \ldots, A_n$ for the formula formed by an $n$-ary connective $f$ connectiving formulas $A_1, \ldots, A_n$.
+
+  \textbf{Question.} Given $n \geq 1$, how many $n$-ary connectives exist?
+
+  \begin{exmp} Suppose $f_1, f_2,$ and $f_3$ are distinct unary connectives. They have the following truth tables:
+  \begin{center}
+  \begin{tabular}{c | c c c c}
+    $A$ & $f_1A$ & $f_2A$ & $f_3A$ & $f_4A$ \\
+    \hline
+    1 & 1 & 1 & 0 & 0 \\
+    0 & 1 & 0 & 1 & 0
+  \end{tabular}
+  \end{center}
+
+  \begin{defn}[adequate]\label{adequate}
+    A set of connectives is said to be \textbf{adequate} iff any $n$-ary ($n \geq 1$) connective can be defined in terms of them.
+  \end{defn}
+
+  \begin{thrm}
+    $\{\land, \lor, \neg \}$ is an adequate set of connectives.
+  \end{thrm}
+
+  \begin{cor}
+    $\{ \land, \neg \}, \{\lor, \neg\}, \{ \rightarrow, \neg \}$ are adequate.
+  \end{cor}
+
+  \end{exmp}
+
+  \subsection[Proof Systems]{Proof Systems in Propositional Logic}
+
+  We would like to construct a \textbf{calculus} for reasing about propositional logic. The application of such a calculus is to mechanize proofs of validity. To mechanically develop proofs, we need \textbf{proof rules}. Using a proof rule, one can \textbf{infer} a formula from another.
+
+  \begin{defn}[Hilbert System]\label{hilbert}
+    The \textbf{Hilbert System} (H) is an example of a deduction system for the set of propositional logic formulas. A well-formed formula $A$ is formally \textbf{provable} by Hilbert System axioms $H$ if and only if
+    \[ \Gamma \vdash_H A \]
+    holds, where $\Gamma$ is a set of formulas, called \textbf{assumptions}.
+  \end{defn}
+
+  The Hilbert System Axions:
+
+  \[ Ax_1 : (\varphi \rightarrow (\psi \rightarrow \varphi)) \]
+  \[ Ax_2 : (\varphi \rightarrow (\psi \ar \gamma)) \rightarrow ((\varphi \rightarrow \psi) \rightarrow (\varphi \rightarrow \gamma)) \]
+  \[ Ax_3 : (\neg \varphi \rightarrow \neg \psi) \rightarrow (\psi \rightarrow \varphi) \]
+  \[ MP : \f{ \varphi \ \ \varphi \rightarrow \psi}{\psi} \]
+
+  \begin{note}
+
+  \end{note}
+
+  \begin{exmp}
+    Prove that $\vdash_H (A \rightarrow A)$ holds. Note that these steps are not necessarily ordered. In fact, we should not call them steps. \\
+
+    \begin{itemize}
+      \item[1.] $(A \ar ((A \ar A) \ar A))$ \hfill (by $Ax_1$) \\
+      (In axiom 1, replace $\psi$ with $(A \ar A))$, replace $\varphi$ with $A$)
+      \item[2.] $(A \ar (( A \ar A) \ar A)) \ar (A \ar (A \ar A )) \ar (A \ar A))$ \hfill (by $Ax_2$) \\
+      (In axiom 2, replace both $\varphi$ by $A$ and $\gamma$ with $A$, $\psi$ by $A \ar A$)
+      \item[3.] $(A \ar (A \ar A)) \ar (A \ar A))$ \hfill (by $MP, 1, 2$)
+      \item[4.] $( A \ar (A \ar A))$ \hfill (by $Ax_1$) \\
+      (In axiom 1, replace $\psi$ with $A$)
+      \item[5.] $(A \ar A)$ \hfill (by $MP,3,4$)
+    \end{itemize}
+    Notice that we proved $(A \ar A)$ with an empty set of assumptions. This means $(A \ar A)$ is a tautology.
+  \end{exmp}
+
+  \begin{exmp}
+    Show that $\{A \ar B, B \ar C\} \vdash_H (A \ar C)$ holds.
+    \begin{itemize}
+      \item[1.] $(B \ar C)$ \hfill (by Assumption)
+      \item[2.] $((B \ar C) \ar (A \ar (B \ar C)))$ \hfill (by $Ax_1$)
+      \item[3.] $(A \ar (B \ar C))$ \hfill (by $MP,1,2$)
+      \item[4.] $(A \ar (B \ar C)) \ar ((A \ar B) \ar (A \ar C))$ \hfill (by $Ax_2$)
+      \item[5.] $((A \ar B) \ar (A \ar C))$ \hfill (by $MP,3,4$)
+      \item[6.] $(A \ar B)$ \hfill (by Assumption)
+      \item[7.] $(A \ar C)$ \hfill (by $MP,5,6$)
+    \end{itemize}
+  \end{exmp}
+
+  \begin{defn}[Deduction Theorem]\label{Deduction Theorem}
+  \[ \Gamma \vdash A \ar B \iff \Gamma \cup \{ A \} \vdash B \]
+  \end{defn}
+
+  \begin{exmp}
+    Prove that $\vdash_H ( \neg A \ar ( A \ar B))$ holds. You may use the result from Example 2.
+    \begin{itemize}
+      \item[1.] $(\neg A \ar ( \neg B \ar \neg A))$ \hfill (by $Ax_1$)
+      \item[2.] $(\neg B \ar \neg A) \ar (A \ar B)$ \hfill (by $Ax_3$)
+      \item[3.] $(\neg A \ar (A \ar B))$ \hfill (by $Ex.2,1,2$)
+    \end{itemize}
+  \end{exmp}
+
+  \begin{exmp}
+    Prove that if $\Sigma \vdash_H A$ and $\Sigma \vdash_H ( \neg A)$, then $\Sigma \vdash_H B$ for any $B$.
+    \begin{itemize}
+      \item[1.] $(\neg A)$ \hfill (by Assumption)
+      \item[2.] $((\neg A) \ar ((\neg B) \ar (\neg A)))$ \hfill (by $Ax_1$)
+      \item[3.] $((\neg B) \ar (\neg A))$ \hfill ($MP,1,2$)
+      \item[4.] $(((\neg B) \ar (\neg A)) \ar (A \ar B))$ \hfill (by $Ax_3$)
+      \item[5.] $(A \ar B)$ \hfill (by $MP,3,4$)
+      \item[6.] $A$ \hfill (by Assumption)
+      \item[7.] $B$ \hfill (by $MP,5,6$)
+    \end{itemize}
+  \end{exmp}
+
+  \begin{exmp}
+    Prove that $\vdash_H(\neg \neg A \ar A)$ by applying the \nameref{Deduction Theorem}, we show that $\{(\neg \neg A) \} \vdash_H (A))$
+    \begin{itemize}
+      \item[1.] $(\neg \neg A)$ \hfill (by Assumption)
+      \item[2.] $(\neg \neg A) \ar ((\neg \neg \neg \neg A) \ar (\neg \neg A))$ \hfill (by $Ax_1$)
+      \item[3.] $((\neg \neg \neg \neg A) \ar (\neg \neg A)$ \hfill ($MP,1,2$)
+      \item[4.] $((\neg \neg \neg \neg A) \ar (\neg \neg A)) \ar (( \neg A) \ar (\neg \neg \neg A))$ \hfill (by $Ax_3$)
+      \item[5.] $(\neg A) \ar (\neg \neg \neg A)$ \hfill (by $MP,3,4$)
+      \item[6.] $((\neg A) \ar (\neg \neg \neg A)) \ar (( \neg \neg A) \ar A)$ \hfill (by $Ax_3$)
+      \item[7.] $(\neg \neg A) \ar A$ \hfill (by $MP,5,6$)
+      \item[8.] $A$ \hfill (by $MP,7,1$)
+    \end{itemize}
+  \end{exmp}
+
+  \begin{exmp}
+    Prove that $\vdash_H (A \ar B) \ar (\neg B \ar \neg A)$ by applying the \nameref{Deduction Theorem}, we show that $\{(A \ar B) \} \vdash_H (\neg B \ar \neg A))$
+    \begin{itemize}
+      \item[1.] $(A \ar B)$ \hfill (by Assumption)
+      \item[2.] $(\neg \neg A) \ar A$ \hfill (by Ex. 6)
+      \item[3.] $(\neg \neg A) \ar B$ \hfill (by Ex.2, 1, 2)
+      \item[4.] $B \ar (\neg \neg B)$ \hfill (proof?)
+      \item[5.] $(\neg \neg A) \ar (\neg \neg B)$ \hfill (by Ex.2, 3, 4)
+      \item[6.] $((\neg \neg A) \ar (\neg \neg B)) \ar ((\neg B) \ar (\neg A))$ \hfill ($Ax_3$)
+      \item[7.] $((\neg B) \ar (\neg A))$ \hfill (by $MP,5,6$)
+    \end{itemize}
+  \end{exmp}
+
+  \textbf{Natural Deduction} \\
+
+  In general, using proof rules, one can infer a \textbf{conclusion} from a set of \textbf{premises}. \\
+
+  Let $\Sigma = \{ \varphi_1, \varphi_2, \ldots \}$ (for convenience, writen as a sequence $\varphi_1, \varphi_2, \ldots$). Accordingly, the sets $\Sigma \cup \{ \varphi \}$ and $\Sigma \cup \Sigma'$ may be written as $\Sigma, \varphi$ and $\Sigma, \Sigma'$, respectively. \\
+
+  \begin{notation}
+    We use the symbol $\vdash$ to denote \textbf{deducibility} and write
+  \[ \Sigma \vdash \varphi \]
+  to mean that $\varphi$ is \textbf{deducible} (or \textbf{provable}) from $\Sigma$. \\
+  \end{notation}
+
+  Natural deduction will be defined by a set of proof \textbf{rules}, where \textbf{conclusion} $\varphi$ is derived from a set of \textbf{premises} $\Sigma$. \\
+
+  Note that $\Sigma \vdash \varphi$ is not a formula (but it can be viewed as a proposition).
+
+  \begin{exmp}
+    If the train arrives late and there are no taxis at the station, then John is late for his meeting. John is not late for his meeting. The train did arrive late. \textbf{Therefore}, there were taxis in the station. \\
+
+    This conclusion can be written as follows:
+
+    \[ (p \land \neg q) \rightarrow r, \neg r , p \vdash q \]
+  \end{exmp}
+
+    Constructing such a proof is a creative exercise, a bit like programming. \\
+
+    Roughly speaking, proof rules should have two features:
+
+    \begin{itemize}
+      \item One cannot prove invalid patterns of argumentation (called \textbf{soundness})
+      \item Valid arguments can be proved (Called \textbf{completeness})
+    \end{itemize}
+
+    \begin{exmp}
+      We should not be able to show $p, q \vdash p \land \neg q$.
+    \end{exmp}
+
+    The basic rules of natural / formal deduction are shown in the following tables and examples:
+
+  \begin{defn}[natural deduction]\label{natural} \
+
+    \begin{center}\textbf{Basic Rules}\end{center}
+
+    \begin{center}
+    \begin{tabular}{c | c | c }
+      Name & $\vdash$ Notation & Inference Notation \\
+      \hline
+      \hline
+      \ &&\\
+      Reflexivity (Ref) & $\varphi \vdash \varphi$ & $\displaystyle\f{\varphi}{\varphi}$ \\[3ex]
+      \hline
+      \hline
+      \ &&\\
+      Addition of Premises ($+$) & If $\Sigma \vdash \varphi$ then $\Sigma \cup \Sigma' \vdash \varphi$ & $\displaystyle\f{\f{\psi}{\varphi}}{\f{\psi \ \psi'}{\varphi}}$ \\[3ex]
+      \hline
+      \hline
+    \end{tabular}
+    \end{center}
+
+    \begin{exmp}
+      Show that if $\varphi \in \Sigma$, then $\Sigma \vdash \varphi$. \\
+
+      Let $\Sigma' = \Sigma - \{ \varphi \}$.
+      \begin{itemize}
+        \item[(1)] $\varphi \vdash \varphi$ (Ref)
+        \item[(2)] $\varphi, \Sigma' \vdash \varphi$ ((+), (1))
+        \item[(3)] $\Sigma \vdash \varphi$
+      \end{itemize}
+
+      We will call this rule $(\epsilon)$.
+    \end{exmp}
+
+    \begin{center}\textbf{Rule of Negation}\end{center}
+
+    \begin{center}
+    \begin{tabular}{c | c | c }
+      Name & $\vdash$ Notation & Inference Notation \\
+      \hline
+      \hline
+      \ &&\\
+      $\neg$-elimination ($\neg -$) & If $\Sigma, \neg \varphi \vdash \psi, \Sigma, \neg \varphi \vdash \neg \psi$ then $\Sigma \vdash \varphi$ & $\displaystyle\f{\f{\neg\varphi}{\psi} \ \f{\neg \varphi}{\neg \psi}}{\varphi}$ \\[3ex]
+      \hline
+      \hline
+    \end{tabular}
+    \end{center}
+
+    $\neg -$ means, if we have a contradiction that follows from certain premises (denoted by $\Sigma$) with an additional supposition that a certain proposition does not hold (denoted by $\neg \phi$), then this proposition is deducible from the premises (denoted by $\Sigma \vdash \varphi$).
+
+    \begin{exmp}
+      Show that $\neg \neg \varphi \vdash \varphi$.
+      \[ \f{\f{\neg\neg\varphi \ \neg\varphi}{\neg\varphi}(\epsilon) \ \f{\neg\neg\varphi \ \neg \varphi}{\neg\neg\varphi}(\epsilon)}{\varphi}(\neg -) \]
+      Another way:
+      \begin{itemize}
+        \item[(1)] $\neg \neg \varphi, \neg \varphi \vdash \neg \varphi$ \ \ \ $(\epsilon)$
+        \item[(2)] $\neg \neg \varphi, \neg \varphi \vdash \neg \neg \varphi$ \ $(\epsilon)$
+        \item[(3)] $\neg \neg \varphi \vdash \varphi$ \ \ \ \ \ \ \ \ \ \ \  $(\neg -), \ (1), \ (2)$
+      \end{itemize}
+    \end{exmp}
+
+    \begin{center}\textbf{Rule of Conjunction}\end{center}
+
+    \begin{center}
+    \begin{tabular}{c | c | c }
+      Name & $\vdash$ Notation & Inference Notation \\
+      \hline
+      \hline
+      \ &&\\
+      $\land$-introduction ($\land+$) & If $\Sigma \vdash \varphi, \Sigma \vdash \psi$, then $\Sigma \vdash \varphi \land \psi$ & $\displaystyle\f{\varphi \ \psi}{\varphi \land \psi}$ \\[3ex]
+      \hline
+      \hline
+      \ &&\\
+      $\land$-elimination ($\land-$) & If $\Sigma \vdash \varphi \land \psi$, then $\Sigma \vdash \varphi, \Sigma \vdash \psi$ & $\displaystyle\begin{array}{c}\f{\varphi \land \psi}{\varphi} \\ \f{\varphi \land \psi}{\psi}\end{array}$ \\[3ex]
+      \hline
+      \hline
+    \end{tabular}
+    \end{center}
+    $\land+$ means, if we have a proof for $\varphi$ and a proof for $\psi$, then we have a proof for $\varphi \land \psi$. $\land -$ says, if we have a proof for $\varphi \land \psi$, then we have a proof for $\varphi$ and a proof for $\psi$.
+
+    \begin{exmp} Show that $p \land q \vdash q \land p$.
+      \[ \f{\f{p \land q}{q} (\land -) \ \f{p \land q}{p} (\land -)}{q \land p}(\land +) \]
+      Another way:
+      \begin{itemize}
+        \item[(1)] $p \land q \vdash q$ \ \ \ \ \ $(\land -)$
+        \item[(2)] $p \land q \vdash p$ \ \ \ \ \ $(\land -)$
+        \item[(3)] $p \land q \vdash q \land p$  \ \ $(\land +), \ (1), \ (2)$
+      \end{itemize}
+    \end{exmp}
+
+    \begin{exmp}
+      Show that $p \land q, r \vdash q \land r$.
+      \[ \f{\f{p \land q}{q} (\land-) \ r}{q \land r}(\land+) \]
+      More specifically:
+      \begin{itemize}
+        \item[1.] We derive $q$ from $q \land r$ by $\land$-elimination.
+        \item[2.] Then, we get $q \land r$ by $\land$-introduction.
+      \end{itemize}
+    \end{exmp}
+
+    \begin{center}\textbf{Rules of Implication}\end{center}
+    \begin{center}
+    \begin{tabular}{c | c | c }
+      Name & $\vdash$ Notation & Inference Notation \\
+      \hline
+      \hline
+      \ &&\\
+      $\ar$-elimination ($\ar-$) & If $\Sigma \vdash \varphi \ar \psi, \Sigma \vdash \varphi$, then $\Sigma \vdash \psi $ & $\displaystyle \f{\varphi \ar \psi \ \ \ \varphi}{\psi}$ \\[3ex]
+      \hline
+      \hline
+      \ &&\\
+      $\ar$-introduction ($\ar+$) & If $\Sigma, \varphi \vdash \psi,$ then $\Sigma \vdash \varphi \ar \psi$ & $\displaystyle \f{\f{\varphi}{\psi}}{\varphi \ar \psi}$ \\[3ex]
+      \hline
+      \hline
+    \end{tabular}
+    \end{center}
+
+    \begin{exmp}
+      Show that $p, p \ar q, p \ar (q \ar r) \vdash r$.
+      \[ \f{\f{p \ar (q \ar r) \ \ p}{q \ar r} (\ar -) \ \ \f{p \ar q \ \ p}{q} (\ar -)}{r} (\ar -) \]
+      \begin{itemize}
+        \item[1.] $p \ar (q \ar r)$ \ \ (premise)
+        \item[2.] $p \ar q$ \ \ (premise)
+        \item[3.] $p$ \ \ (premise)
+        \item[4.] $q \ar r$ \ \ $(\ar -), (1), (3)$
+        \item[5.] $q$ \ \ $(\ar -),(2),(3)$
+        \item[6.] $r$ \ \ $(\ar -),(4),(5)$
+      \end{itemize}
+    \end{exmp}
+
+    \begin{exmp}
+      Show that $\varphi \ar \psi, \psi \ar \xi \vdash \varphi \ar \xi$.
+      \begin{itemize}
+        \item[1.] $\varphi \ar \psi, \psi \ar \xi, \varphi \vdash \varphi \ar \psi$ \ \ ($\epsilon$)
+        \item[2.] $\varphi \ar \psi, \psi \ar \xi, \varphi \vdash \varphi$ \ \ $(\epsilon)$
+        \item[3.] $\varphi \ar \psi, \psi \ar \xi, \varphi \vdash \psi$ \ \ ($\ar -$), (1),(2)
+        \item[4.] $\varphi \ar \psi, \psi \ar \xi, \varphi \vdash \psi \ar \xi \ \ (\epsilon)$
+        \item[5.] $\varphi \ar \psi, \psi \ar \xi, \varphi \vdash \xi \ \ (\ar -), (3), (4)$
+        \item[6.] $\varphi \ar \psi, \psi \ar \xi \vdash \varphi \ar \xi \ \ (\ar +), (5)$
+      \end{itemize}
+    \end{exmp}
+
+    \begin{center}\textbf{Rules of Disjunction}\end{center}
+    \begin{center}
+    \begin{tabular}{c | c | c }
+      Name & $\vdash$ Notation & Inference Notation \\
+      \hline
+      \hline
+      \ &&\\
+      $\lor$-elimination ($\lor-$) & If $\Sigma, \varphi_1 \vdash \psi, \Sigma, \varphi_2 \vdash \psi,$, then $\Sigma, \varphi_1 \lor \varphi_2 \vdash \psi$ & $\displaystyle \f{\f{\varphi_1}{\psi} \ \ \f{\varphi_2}{\psi}}{\f{\varphi_1 \lor \varphi_2}{\psi}}$ \\[3ex]
+      \hline
+      \hline
+      \ &&\\
+      $\lor$-introduction ($\lor+$) & If $\Sigma \vdash \varphi$, then $\Sigma \vdash \varphi \lor \psi, \Sigma \vdash \psi \lor \varphi$ & $\displaystyle \begin{array}{c}\f{\varphi}{\varphi\lor \psi} \\ \f{\varphi}{\psi \lor \varphi}\end{array}$ \\[3ex]
+      \hline
+      \hline
+    \end{tabular}
+    \end{center}
+
+    Check the slides for some examples.
+
+    \begin{center}\textbf{D-Implication}\end{center}
+    \begin{center}
+    \begin{tabular}{c | c | c }
+      Name & $\vdash$ Notation & Inference Notation \\
+      \hline
+      \hline
+      \ &&\\
+      $\leftrightarrow$-elimination ($\leftrightarrow-$) & If $\Sigma \vdash \varphi \leftrightarrow \psi, \Sigma \vdash \varphi$, then $\Sigma \vdash \psi$ & $\displaystyle \f{\varphi \leftrightarrow \psi \ \ \varphi}{\psi}$ \\[3ex]
+      \hline
+      \hline
+      \ &&\\
+      $\leftrightarrow$-introduction ($\leftrightarrow+$) & If $\Sigma, \varphi \vdash \psi, \Sigma, \psi \vdash \varphi$, then $\Sigma \vdash \varphi \leftrightarrow \psi$ & $\displaystyle \f{\f{\varphi}{\psi} \ \ \f{\psi}{\varphi}}{\varphi \leftrightarrow \psi}$ \\[3ex]
+      \hline
+      \hline
+    \end{tabular}
+    \end{center}
+
+  \end{defn}
+
+
+    \begin{defn}[formal proof]\label{formal proof}
+      Let $\Sigma_1 \vdash \varphi_1, \ldots, \Sigma_n \vdash \varphi_n$ be a sequence, where each $\Sigma_k \vdash \varphi_k$ (for all $1 \leq k \leq n$) is a rule of \nameref{natural}. We say that this sequence is a \textbf{formal proof} for $\Sigma_n \vdash \varphi_n$ and $\varphi_n$ is \textbf{formally deducible} from $\Sigma_n$. \\
+
+      Note that $\Sigma \models \varphi$ (\nameref{tautologicalconsequence}) and $\Sigma \vdash \varphi$ (\nameref{deducible}) are different matters. The former belongs to semantics while the latter belongs to syntax.
+    \end{defn}
+
+    \begin{thrm}
+      If $\Sigma \vdash \varphi$, then there is some finite $\Sigma^0 \subseteq \Sigma$, such that $\Sigma^0 \vdash \varphi$.
+    \end{thrm}
+
+    \begin{proof} By structural induction.
+
+    \end{proof}
+
+    \begin{thrm}[transitivity of deducibility]\label{transitivity of deducibility}
+      If $\Sigma \vdash \Sigma'$ and $\Sigma' \vdash \varphi$, then $\Sigma \vdash \varphi$. (\textbf{transitivity of deducibility}).
+    \end{thrm}
+
+    \begin{thrm}
+      \begin{itemize}
+        \item[1.] $\varphi \ar \psi, \varphi \vdash \psi$
+        \item[2.] $\psi \vdash \psi \ar \varphi$
+        \item[3.] $\varphi \ar \psi, \psi \ar \xi \vdash \varphi \ar \xi$
+        \item[4.] $\varphi \ar (\psi \ar \xi), \varphi \ar \psi \vdash \varphi \ar \xi$
+      \end{itemize}
+      (See Theorems. 2.6.5-2.6.12 in the text book)
+    \end{thrm}
+
+    \subsection[Soundness and Completeness]{Soundness and Completeness of Natural Deduction}
+
+    Recall that proof rules of \nameref{natural} are syntactical (i.e., the rules do not know anything about the \nameref{semantics} of \nameref{formula}). We now want to make a connection between proof rules of \nameref{natural} and \nameref{semantics} of propositional logic.
+
+  \begin{defn}[soundness]\label{soundness}
+        Soundness of \nameref{natural} means that what we prove using proof rules of \nameref{natural}, is indeed provable. Let $\Sigma$ be a set of \nameref{formula} and $\varphi$ be a \nameref{formula}. It means the following:
+        \[ \mbox{If } \Sigma \vdash \varphi, \mbox{ \ then \ } \Sigma \models \varphi \]
+        This means that \nameref{natural} proof rules, preserve the \nameref{value} of \nameref{formula}s (as the term soundness suggests).
+  \end{defn}
+
+
+  We know that $p \land q \models p$, because the valuation that makes $p \land q$ true (that ism $p^t = q^t = 1$) also makes $p$ (the right hand side) true. In \nameref{natural}, the $\land -$ rule stipulates the same thing: $p \land q \vdash p$. \\
+
+  \textbf{Question.} What about $p \lor q \not \models p$? \\
+
+  We now present a proof of \nameref{soundness}.
+
+  \begin{proof}
+    By structural induction on the \textbf{length of the proof}: 'For all deductions $\Sigma \vdash \psi$ which have a proof of length $k$, it is the case that $\Sigma \models \psi$' by course-of-values induction on the natural number $k$. \\
+    \textbf{Base case.} The base case of the induction given by the smallest proofs (length 1); they are of the form
+    \[ \Sigma, \varphi \vdash \varphi \]
+    We need to show that:
+    \[ \Sigma, \varphi \models \varphi \]
+    This is trivial: recall that any \nameref{formula} (and in particular, $\varphi$) is a \nameref{tautologicalconsequence} of a set of \nameref{formula} that includes it (in particular, $\Sigma \cup \{ \varphi\})$. \\
+    \textbf{Inductive step.} Let us assume that the proof of $\Sigma \vdash \psi$ has $k$ steps and what we want to prove is true for all numbers less than $k$. Our proof should have the following structure
+    \begin{align*}
+      1 \ \ & \varphi_1 \ \ \mbox{(premise)} \\
+      2 \ \ & \varphi_2 \ \ \mbox{(premise)} \\
+      & \vdots \\
+      n \ \ & \varphi_n \ \ \mbox{(premise)} \\
+      & \vdots \\
+      k \ \ & \psi \ \ \mbox{(justification)}
+    \end{align*}
+    There are two things we don't know: (1) what's happening between those dots, and (2) what is the last rule applied. The first is of no concern due to the power of mathematical induction. For the second, we have to consider all rules. Let
+    $\Sigma = \{ \varphi_1, \varphi_2, \ldots, \varphi_n \}$: \\
+
+    Let us assume that the last rule is $\land+$. Thus, the last step is of the form $\Sigma \vdash \psi_1 \land \psi_2$, where $\psi_1$ and $\psi_2$ are obtaiend in steps $k_1$ and $k_2$, where $k_1, k_2 < k$. Thus, there exists sound proofs for them. That is, $\Sigma \vdash \psi_1$ and $\Sigma \vdash \psi_2$. By the induction hypothesis, we have $\Sigma \models \psi_1$ and $\Sigma \models \psi_2$. This implies $\Sigma \models \psi_1 \land \psi_2$. \\
+
+    Let us assume that the last rule is $\ar +$. Thus, the last step is of the form $\Sigma \vdash \psi_1 \ar \psi_2$. Hence, in some step $k' < k$, we must have had $\Sigma, \psi_1 \vdash \psi_2$, for which there exists a proof. By the induction hypothesis, we have
+$\Sigma, \psi_1 \models \psi_2$. This implies $\Sigma \models \psi_1 \ar \psi_2$.
+The soundness of the rest of \nameref{natural} rules can be proved in a similar way.
+  \end{proof}
+
+
+  \begin{defn}[completeness]\label{completeness}
+  Completeness of ND means that if something is provable, then we can prove it using proof rules of \nameref{natural}. Let $\Sigma$ be a set of formulas and $\varphi$ be a formula. Formally, \textbf{completeness} means the following:
+  \[ \mbox{ If \ } \Sigma \models \varphi, \mbox{ \ then \ } \Sigma \vdash \varphi \]
+  This means that \nameref{natural} proof rules can prove anything provable by truth tables.
+  \end{defn}
+
+  \begin{proof}
+    We prove completeness by showing the contrapositive:
+    \[ \mbox{ If \ } \Sigma \not \vdash \varphi, \mbox{ \ then \ } \Sigma \not \models \varphi  \]
+    \begin{itemize}
+      \item[1.] $\Sigma \not \vdash \varphi$ implies $\Sigma \cup \{ \neg \varphi \}$ is \textbf{consistent}
+      \item[2.] implies $\Sigma \cup \{ \neg \varphi \}$ has a \textbf{model}
+      \item[3.] implies $\Sigma \models \varphi$.
+    \end{itemize}
+    $\Sigma \subseteq (\Lp)$ is \textbf{consistent} if and only if there is no $\varphi \in ( \Lp )$ such that $\Sigma \vdash \varphi$ and $\Sigma \vdash \neg \varphi$. Consistency is a syntactical notion. As well, $\Sigma \subseteq Form(\Lp)$ is \textbf{maximal consistent} if and only if
+    \begin{itemize}
+      \item[1.] $\Sigma$ is consistent
+      \item[2.] for any $\varphi \in (\Lp)$ such that $\varphi \not \in \Sigma, \Sigma \cup \{ \varphi \}$ is inconsistent.
+    \end{itemize}
+
+    \begin{lem}
+      Suppose $\Sigma$ is a maximal consistent. Then $\varphi \in \Sigma$ if and only if $\Sigma \vdash \varphi$.
+    \end{lem}
+
+    \begin{lem}
+    If $\Sigma$ is maximal consistent, then
+      \begin{itemize}
+        \item[1.] $\neg \varphi \in \Sigma \iff \varphi \not \in \Sigma$
+        \item[2.] $\varphi \land \psi \in \Sigma \iff \varphi \in \Sigma \mbox{ \ and \ } \psi \in \Sigma$
+        \item[3.] $\varphi \lor \psi \in \Sigma \iff \varphi \in \Sigma \mbox{ \ or \ } \psi \in \Sigma$
+        \item[4.] $\varphi \ar \psi \in \Sigma \iff \varphi \in \Sigma$ implies $\psi \in \Sigma$
+        \item[5.] $\varphi \leftrightarrow \psi \in \Sigma \iff \varphi \in \Sigma \iff \psi \in \Sigma$
+      \end{itemize}
+    \end{lem}
+
+    \begin{lem}
+      Suppose $\Sigma$ is maximal consistent. Then, $\Sigma \vdash \neg \varphi \iff \Sigma \not \vdash \varphi$.
+    \end{lem}
+
+    \begin{lem}[Lindenbaum Lemma]\label{Lindenbaum Lemma}
+      Any consistent set of formulas can be extended to some maximal consistent set.
+    \end{lem}
+
+    \begin{thrm}
+      Suppose $\Sigma \subseteq (\Lp)$. If $\Sigma$ is consistent, then $\Sigma$ is \nameref{satisfiable}.
+    \end{thrm}
+
+    \begin{thrm}[completeness]\label{completeness theorem}
+      Suppose $\Sigma \subseteq (\Lp)$ and $\varphi \in \Lp$. Then
+      \begin{itemize}
+        \item[1.] If $\Sigma \models \varphi$, then $\Sigma \vdash \varphi$.
+        \item[2.] If $\models \varphi$, then $\vdash \varphi$.
+      \end{itemize}
+    \end{thrm}
+
+    \begin{thrm}
+      $\Sigma \subseteq (\Lp)$ is \nameref{satisfiable} if and only if each finite subset of $\Sigma$ is \nameref{satisfiable}.
+    \end{thrm}
+
+  \end{proof}
+
+  \section{Predicate Logic}
+
+  \begin{defn}[ordered pair]\label{ordered pair}
+  The \textbf{ordered pair} of objects $\alpha$ and $\beta$ is written as $\langle \alpha, \beta \rangle = \langle \alpha_1, \beta_1 \rangle$ if and only if $\alpha = \alpha_1$ and $\beta = \beta_1$. Similarly, one can define an ordered $n$-tuple $\langle \alpha_1, \ldots, \alpha_n \rangle$. One can also define a set of ordered pairs (for example $\{\langle m ,n \rangle \ | \ m,n$ are natural numbers and $m < N \}$).
+  \end{defn}
+
+  \begin{defn}[cartesian product]\label{cartesian product}
+  The \textbf{cartesian product} of sets $S_1,\ldots,S_n$ is defined by
+  \[ S_1 \times \cdots \times S_n = \{ \langle x_1, \ldots, x_n \rangle \ | \ x_1 \in S_1, \ldots, x_n \in S_n \} \]
+  Let $S^n = \ub{S \times \cdots \times S}_n$, an $n$-ary \textbf{relation} $R$ on set $S$ is a subset of $S^n$.
+  \end{defn}
+
+  \begin{exmp}
+    A special binary relation is the equality relation:
+    \[ \{\langle x , y \rangle \ | \ x,y \in S \mbox{ \ and \ } x= y \} \equiv \{ \langle x , x \rangle \ | \ x \in S \} \]
+    For a binary relation $R$, we often write $xRy$ to denote $\langle x,y \rangle \in R$.
+  \end{exmp}
+
+  \begin{defn}[reflexive]\label{reflexive}
+  $R$ is \textbf{reflexive} on $S$ if and only if for any $x \in S, xRx$.
+  \end{defn}
+  \begin{defn}[symmetric]\label{symmetric}
+  $R$ is \textbf{symmetric} on $S$ if and only if for any $x,y \in S$, whenever $xRy$, then $yRx$.
+  \end{defn}
+  \begin{defn}[transitive]\label{transitive}
+  $R$ is \textbf{transitive} on $S$ if and only if for any $x, y \in S$, whenever $xRy$ and $yRz$, then $xRz$.
+  \end{defn}
+  \begin{defn}[equivalence relation]\label{equivalence relation}
+  $R$ is an \textbf{equivalence relation} if and only if $R$ is \nameref{reflexive}, \nameref{symmetric}, and \nameref{transitive}.
+  \end{defn}
+  \begin{defn}[$R$-equivalence]\label{R-equivalence}
+  Suppose that $R$ is an equivalence relation on $S$. For any $x \in S$, the set
+  \[ \bar{x} = \{ y \in S \ | \ xRy\} \]
+  is called the \textbf{$R$-equivalence class of $x$}. $R$-equivalence classes make a \textbf{partition} of $S$.
+  \end{defn}
+  \begin{defn}[function]\label{function}
+  A \textbf{function (mapping)} $f$ is a set of ordered pairs such that if $\langle x , y \rangle \in f$ and $\langle x , z \rangle \in f$, then $y = z$.
+  \end{defn}
+  \begin{defn}[domain]\label{domain}
+  $dom(f)$ of $f$ is the set $\{x \ | \ \langle x,y\rangle \in f$ for some $y \}$
+  \end{defn}
+  \begin{defn}[range]\label{range}
+  The \textbf{range} $ran(f)$ of $f$ is the set $\{ y \ | \ \langle x, y \rangle \in f$ for some $x \}$
+  \end{defn}
+  $f(x)$ denotes the unique element in $y \in ran(f)$, where $x \in dom(f)$ and $\langle x , y \rangle \in f$. If $f$ is a function with $dom(f) = S$ and $ran(f) \subseteq T$, we say that $f$ is a function from $S$ to $T$ and denote it by
+  \[ f: S \lar T \]
+  Similarly, one can define $n$-ary functions.
+  \begin{defn}[restriction]\label{restriction}
+  The \textbf{restriction} of $R$ to $S_1$ is the $n$-ary relation $R \cap S_1^n$. Suppose $f : S \lar T$ is a function and $S_1 \subseteq S$. The \textbf{restriction} of $f$ to $S_1$ is the function
+  \[ f \ | \ S_1 : S_1 \lar T \]
+  \end{defn}
+  \begin{defn}[onto]\label{onto}
+  A function $f : S \lar T$ is \textbf{onto} if $ran(f) = T$.
+  \end{defn}
+  \begin{defn}[one-to-one]\label{one-to-one}
+  A function is \textbf{one-to-one} if $f(x) = f(y)$ implies $x = y$.
+  \end{defn}
+  \begin{defn}[equipotent]\label{equipotent}
+  Two sets $S$ and $T$ are \textbf{equipotent} (that is, $S \sim T$) iff there is a \nameref{one-to-one} mapping from $S$ \nameref{onto} $T$.
+  \end{defn}
+  $\sim$ is an equivalence relation.
+  \begin{defn}[cardinal]\label{cardinal}
+  A \textbf{cardinal} of a set $S$ is dentoed by $|S|$ where:
+  \[ |S| = |T| \iff S \sim T. \]
+  \end{defn}
+  \begin{defn}[countably infinite]\label{countablyinfinite}
+  A set $S$ is to be \textbf{countably infinite}, if and only if $|S| = |\N|$.
+  \end{defn}
+  \begin{defn}[countable]\label{countable}
+  A set $S$ is said to be \textbf{countable} if and only if $|S| \leq |\N|$ (that is, $S$ is finite or \nameref{countablyinfinite}).
+  \end{defn}
+  \begin{thrm}\label{subsetcountablecountable}
+  A subset of a \nameref{countable} set is \nameref{countable}.
+  \end{thrm}
+  \begin{thrm}\label{unionfinitecountable}
+    The \nameref{union} of any finite number of \nameref{countable} sets if \nameref{countable}.
+  \end{thrm}
+  \begin{thrm}\label{unioncountablecountable}
+    The union of any countably many \nameref{countable} sets is \nameref{countable}.
+  \end{thrm}
+  \begin{thrm}\label{cartesianfinitecountable}
+    The \nameref{cartesian product} of any finite number of \nameref{countable} sets is \nameref{countable}.
+  \end{thrm}
+  \begin{thrm}\label{allfinitemembercountable}
+   The set of all finite sequences with the members of a \nameref{countable} set as components is \nameref{countable}.
+  \end{thrm}
+  \subsection{First-Order Predicate Logic}
+
+  In propositional logic, only the logical forms of compound propositions are analyzed. Propositional logic worked well with statements like not, and, or, if ... then. We need some way to talk about \textbf{individuals} (also called \textbf{objects}) and refer to some, all, among, and only objects. Propositional logic fails to express such statements. Consider this statement:
+  \begin{center}
+    Every student is younger than some instructor.
+  \end{center}
+  This statement is about being a student, being an instructor, and being younger. These are all properties of some sort that we would like to be able to express along with logical connectives and dependencies. Some more examples:
+  \begin{itemize}
+    \item For any natural number $n$, there is a prime number greater than $n$.
+    \item $2^{100}$ is a natural number.
+    \item There is a prime number greater than $2^{100}$.
+  \end{itemize}
+  \begin{defn}[first-order logic]\label{first-order-logic}
+  \textbf{First-order logic} (also called \textbf{predicate logic} gives us means to express and reason about objects. It is a scientific theory with these ingredients:
+  \begin{itemize}
+    \item Domain of objects (individuals) (e.g., the set of natural numbers)
+    \item Variables
+    \item Designated individuals (e.g., '0')
+    \item Functions (e.g., '+' and '.')
+    \item Relations (e.g., '=')
+    \item Quantifiers and Propositionsl connectives
+  \end{itemize}
+  Now, let's explore the meaning of each of these. \\
+  We use \textbf{predicates} (that is, relations) to express statements such as 'being a student'. For example, we could write $S(liam)$ to denote that Liam is a student and $I(borzoo)$ to denote that Borzoo is an instructor. Likewise, $Y(liam,borzoo)$ could mean that Liam is younger than Borzoo. In order to make predicates more expressive, we use \textbf{variables}. Think of variables as \textbf{place holders} that can be replaced by concrete objects. \\
+  For example:
+  \begin{itemize}
+    \item $S(x):$ $x$ is a student
+    \item $I(x):$ $x$ is an instructor
+    \item $Y(x,y):$ $x$ is younger than $y$
+  \end{itemize}
+  Notice that we cab write the meaning of $I$ or $S$ by using any variable instead of $x$, such as $y$ or $z$. In general, we use variables that range over a \textbf{domain of objecs} to make general statements
+  \[ x^2 \geq 0 \]
+  and in expressing conditions which individuals may or may not satisfy:
+  \[ x + x = x\cdot x \]
+  This condition is satified by only 0 and 2. \\
+  We need to convey the meaning of '\textbf{Every} student $x$ is younger than \textbf{some} professor $y$'. This is where we use the terms \textbf{for all} and \textbf{there exists} frequently (called \textbf{quantifiers}). For example:
+  \begin{itemize}
+    \item For all $\epsilon > 0$, there exists some $\delta > 0$ such that if $|x-a| < \delta$, then $|f(x) - b| < \epsilon$.
+      \end{itemize}
+    \begin{itemize}
+      \item "For all" is called the \textbf{universal quanitifer} $\forall$, and
+      \item "There exists" is the \textbf{existential quantifer} $\exists$.
+    \end{itemize}
+    A quantiier is always attached to variables as in $\forall x$ (for all $x$) and $\exists x$ (there exists $z$). We can now write our examples entirely symbolically (although paraphrased!):
+    \[ \forall x.(S(x) \ar (\exists y.(I(y) \land Y(x,y)))) \]
+    Or, the statement 'Not all birds can fly' can be written as:
+    \[ \neg(\forall x (B(x) \ar F(x))) \]
+    In addition to predicates and quantifiers, \nameref{first-order-logic} extends propositional logic by using \textbf{functions} as well. Consider the following statement:
+    \begin{center}
+      Every child if younger than its mother.
+    \end{center}
+    One way to express this statement in \nameref{first-order-logic} is the following:
+    \[ \forall x . \forall y (C(x) \land M(y,x) \ar Y(x,y)) \]
+    But this means $x$ can have multiple mothers! \\
+    \textbf{Functions} in \nameref{first-order-logic} gives us way to express statements more concisely. The previous example can be expressed as follows:
+    \[ \forall x (C(x) \ar Y(x,m(x))) \]
+    where $m$ is a function: it takes one argument and returns the mother of that argument.
+  \end{defn}
+  More examples:
+  \begin{itemize}
+    \item Andy and Paul have the same maternal grandmother
+    \[ m(m(a)) = m(m(p))\]
+    \item Ann likes Mary's brother:
+    \[ \exists x (B(x,m) \land L(a,x)) \]
+  \end{itemize}
+  Consider:
+  \begin{center}
+    For all $x$, $x$ is even. \\ There exists $x$ such that $x$ is even.
+  \end{center}
+  Since $x$ ranges over $\N$, they mean:
+  \begin{center}
+    For all natural numbers $x$, $x$ is even. \\ There exists a natural number $x$ such that $x$ is even.
+  \end{center}
+  These have truth values! Also,
+  \begin{center}
+    '4 is even'
+  \end{center}
+  is a proposition since 4 is an individual in $\N$. If we replace 4 by a variable $x$ ranging over $\N$, then
+  \begin{center}
+    '$x$ is even'
+  \end{center}
+  is not a proposition and has no truth value. It is a proposition function.
+  \begin{defn}[proposition function]\label{proposition function}
+  A \textbf{proposition function} on a domain $D$ is an $n$-ary function mapping $D^n$ into $\{0,1\}$.
+  \end{defn}
+  \subsection{Syntax of Predicate Logic}
+  \begin{itemize}
+    \item Constant (individual) symbols ($CS$): $c, d,c_1,c_2,\ldots,d_1,d_2,\ldots$
+    \item Function Symbols $(FS)$: $f,g,h,f_1,f_2,\ldots,g_1,g_2$
+    \item Variables $(VS)$: $x,y,z,x_1,x_2,\ldots,y_1,y_2,\ldots$
+    \item Predicate (Relational) Symbols ($PS$): $P,Q,P_1,P_2,\ldots,Q_1,Q_2,\ldots$
+    \item Logical Connectives $\neg, \land, \lor, \implies$
+    \item Quantifiers $\forall$ (for all) and $\exists$ (there exists)
+    \item Punctuation: '(',')', '.', and ','.
+  \end{itemize}
+  \begin{exmp}
+    \item 0: constant '0'
+    \item $S$: function (successor) $S(x)$ stands for '$x + 1$'
+    \item Eq: relation (equality) $Eq(x,y)$ stands for: '$x = y$'
+    \item plus: function (addition) $plus(x,y)$ stands for: '$x+y$'
+    \[ \forall x.Eq(plus(x,S(S(0))), S(S(x))) \]
+  \end{exmp}
+  means "Adding two to a number results in the second successor of that number"
+  \begin{exmp}
+    \[ \forall x. \forall y. Eq(plus (x,y), plus(y,x)) \]
+    means "Addition is commutative".
+    \[ \neg \exists x. Eq(0,S(x)) \]
+    means "0 is not the successor of any number."
+  \end{exmp}
+  \begin{defn}[term]\label{terms}
+  The set $Terms(\mathcal{L})$ of \textbf{terms} of $\mathcal{L}$ is defined using the following rules:
+  \begin{itemize}
+    \item All constants in $CS$ are terms
+    \item All variables in $VS$ are terms
+    \item If $t_1,\ldots,t_n \in Term(\mathcal{L})$ and $f$ is an $n$-ary function, then $f(t_1,\ldots,t_n) \in Term(\mathcal{L})$.
+  \end{itemize}
+  \end{defn}
+  \begin{defn}[atom]\label{atom}
+  Let $P$ be a predicate (that is, an $n$-ary relation). An expression of $\mathcal{L}$ is an \textbf{atom} in $Atoms(\mathcal{L})$ if and only if it is of one of the forms $P(t_1,\ldots,t_n)$ where $t_1,\ldots,t_n$ are terms in $Term(\mathcal{L})$.
+  \end{defn}
+  \begin{defn}[formula]\label{formulasFOL}
+  We define the set $Form(\mathcal{L})$ of \nameref{first-order-logic} formulas inductively as follows:
+  \begin{enumerate}
+    \item $Atom(\mathcal{L}) \subseteq Form(\mathcal{L})$
+    \item If $\varphi \in Form(\mathcal{L})$, then $(\neg \varphi ) \in Form(\mathcal{L})$
+    \item If $\varphi, \psi \in Form(\mathcal{L})$, then $(\varphi * \psi) \in Form(\mathcal{L})$, where $* \in \{\land, \lor, \implies\}$
+    \item If $\varphi \in Form(\mathcal{L})$ and $x \in VS$, then $\forall x.\varphi \in Form(\mathcal{L})$ and $(\exists x. \varphi) \in Form(\mathcal{L})$
+  \end{enumerate}
+    \end{defn}
+  Parse trees are similar to propositional \nameref{formulasFOL}:
+  \begin{itemize}
+    \item Quantifiers $\forall x$ and $\exists y$ form nodes like negation (i.e., only one sub-tree)
+    \item Predicates $P(t_1,t_2,\ldots,t_n)$ has $P$ as a node and \nameref{terms}s $t_1,t_2,\ldots,t_n$ as children nodes.
+  \end{itemize}
+  \def\cir#1{\tikz\node[draw,shape=circle]{#1};}
+  \Tree [ .\cir{$\forall x$} [.\cir{$\land$} [.\cir{$\ar$} [.\cir{$P$} \cir{$x$} ] [.\cir{$Q$} \cir{$x$} ] ] [.\cir{$S$}  \cir{$x$} \cir{$y$} ] ] ]
+  \[ \forall x.((P(x) \ar Q(x)) \land S(x,y)) \]
+  How is the following formula generated?
+  \[ \forall x.(F(b) \implies \exists y.(\forall z.G(y,z) \lor H(u,x,y))) \]
+
+  To evaluate first-order \nameref{formulasFOL}s, we need to understand the nature of occurrence of variables. For example, in this above parse tree,
+  \begin{itemize}
+    \item three leaves labeled by $x$: if we walk up from these nodes, we reach a node labeled by $\forall x$
+    \item one leaf labeled by $y$: if we walk up from this node, we will reach no quantifiers for $y$
+  \end{itemize}
+  \begin{defn}[free]\label{free}
+  We say that an occurrence of $x$ is \textbf{free} in first-order \nameref{formulasFOL} $\varphi$, if in the parse tree of $\varphi$, there is no upwards path from $x$ to a node labeled by $\forall x$ or $\exists x$.
+  \end{defn}
+  \begin{defn}[quantified]\label{quantified}
+  An occurrence of $x$ that is not free is called \textbf{bound} or \textbf{quantified}.
+  \end{defn}
+  \begin{defn}[free variable]\label{free variable}
+  Let $\varphi \in Form(\mathcal{L})$. We define the set $FV(A)$ of \textbf{free variables} of $A$ as follows:
+  \begin{enumerate}
+    \item $\{x \ | \ x$ appears in $t_i$ for some $0 < i \leq ar(P)\}$, for $\varphi = P(t_1,\ldots,t_{ar(P)})$
+    \item $FV(\varphi)$ for $\psi = (\neg \varphi)$
+    \item $FV(\varphi) \cup FV(\psi)$ for $\gamma = (\varphi * \psi)$, where $* \in \{ \land, \lor \implies \}$
+    \item $FV(\varphi) - \{x\}$ for $\psi = (\forall x. \varphi)$ or $\psi = (\exists x. \varphi)$
+  \end{enumerate}
+  Variables not in $FV(\varphi)$ are \textbf{bound variables}\label{bound variable}.
+  \end{defn}
+  \begin{defn}[scope]\label{folscope}
+  If $\forall x. A(x)$ or $\exists x. A(x)$ is a \nameref{segment} of $B$, $A(x)$ is called the \textbf{scope} in $B$ of the $\forall x$ or $\exists x$ on the left of $A(x)$.
+  \end{defn}
+  In the following formula:
+  \[ \exists x. \forall y. \exists z. F(x,y,z) \]
+  what is the scope of $\forall y$? \\
+  \begin{center}
+    \Tree [.\cir{$\land$}
+          [ .\cir{$\forall x$}
+            [.\cir{$\land$}
+              [.\cir{$\ar$}
+                [.\cir{$P$} \cir{$x$} ]
+                [.\cir{$Q$} \cir{$x$} ]
+              ]
+              [.\cir{$S$} \cir{$x$} \cir{$y$} ]
+            ]
+          ]
+          [.\cir{$\lor$}
+            [.\cir{$\neg$}
+              [.\cir{$P$} \cir{$x$} ]
+            ]
+            [.\cir{$Q$} \cir{$y$} ]
+          ]
+        ]
+  \end{center}
+
+  \[ (\forall x.((P(x) \land Q(x))) \ar (\neg P(x) \lor Q(y)) \]
+  Is $x$ \nameref{free} or \nameref{quantified}? \\
+  \begin{defn}[closed]\label{closed}
+  A \nameref{formulasFOL} $A \in Form(\mathcal{L})$ is \textbf{closed} (also called a \textbf{sentence}) if $FV(A) = \{\}$.
+  \end{defn}
+  \begin{defn}[substitution]\label{substitution}
+  Given a variable $x$, a \nameref{terms} $t$, and a \nameref{formulasFOL} $\varphi$, we define $\varphi[t/x]$ to be the \nameref{formulasFOL} obtained by replacing each free occurrence of variable $x$ in $\varphi$ with $t$.
+  \begin{exmp}Consider formula
+  \[ \varphi = \forall x.((P(x) \ar Q(x)) \land S(x,y)) \]
+    We have
+    \[ \varphi[f(x,y)/x] = \varphi \]
+    because there is no free occurrence of $x$.
+  \end{exmp}
+  \end{defn}
+  \begin{exmp}
+    Consider formula
+    \[ \varphi = (\forall x.((P(x) \land Q(x)))) \ar (\neg P(x) \lor Q(y)) \]
+    We have
+    \[ \varphi[f(x,y)/x] = (\forall x.((P(x) \land Q(x)))) \ar (\neg P(f(x,y)) \lor Q(y)) \]
+    We say that the term $t$ is \textbf{free for} variable $x$ in formula $\varphi$ is in the scope of $\forall y$ or $\exists y$ for any variable $y$ occurring in $t$.
+  \end{exmp}
+  \begin{exmp}
+    Consider \nameref{terms} $t = f(y,y)$ and \nameref{formulasFOL}
+    \[ \varphi = S(x) \land (\forall y.(P(x) \ar Q(y))) \]
+    The leftmost $x$ can be substituted by $t$ since it is not in the \nameref{scope} of any quantifier, but substituting the rightmost $x$ introduces a new variable $y$ in $t$, which becomes bound by $\forall y$. Hence, $f(y,y)$ is not \nameref{free} for $x$ in $\varphi$. Such cases can be resolved by variable renaming, for example $t = f(z,z)$.
+  \end{exmp}
+  \begin{enumerate}
+    \item For a term $t_1, (t_1)[t/x]$ is $t_1$ with each occurrence of the variable $x$ replaced by the term $t$.
+    \item For $\varphi = P(t_1, \ldots, t_{ar(P)})$, $(\varphi)[t/x] = P((t_1)[t/x],\ldots,(t_{ar(P)})[t/x]).$
+    \item For $\varphi = (\neg \psi), (\varphi)[t/x] = (\neg (\psi)[t/x]);$
+    \item For $\varphi = (\psi \ar \eta), (\varphi)[t/x] = ((\psi)[t/x] \ar (\eta)[t/x])$, and
+    \item For $\varphi = (\forall y.\psi)$, there are two cases
+    \begin{itemize}
+      \item if $x$ is $y$, then $(\varphi)[t/x] = \varphi = (\forall y.\psi)$ and
+      \item otherwise, then $(\varphi)[t/x] = (\forall z. (\psi [z/y])(t/x)$, where $z$ is any variable that is not \nameref{free} in $t$ or in $\varphi$.
+    \end{itemize}
+  \end{enumerate}
+  In the last case above, the additional substitution $(.)[z/y]$ (that is, renaming the variable $y$ to $z$ in $\psi$) is needed in order to avoid an accidental \textbf{capture a variable} by the quantifier (that is, captrue of any $y$ that is possibly free in $t$).
+  \subsection{Semantics of Predicate Logic}
+  In propositional logic, semantics was described in terms of valuation of (the only ingredients) propositional variables. The first-order language includes more ingrediants (i.e., predicates and \nameref{function}s) and, hence, the interpretations for it are more complicated. First-order \nameref{formulasFOL} are intended to express propositions (i.e, true/false valuation). This is accomplished by \textbf{interpretations} (also called \textbf{models}). \\
+
+  \begin{defn}[interpretation]\label{interpretation}
+  A first order \textbf{interpretation} $I$ is a tuple $(D,(.)^I)$:
+  \begin{itemize}
+    \item $D$ is a non-empty set called the \textbf{domain} (or \textbf{universe}); and
+    \item $(.)^I$ is an \textbf{interpretation function} that maps
+    \begin{itemize}
+      \item constant symbols $c \in CS$ to individuals $c^I \in D$
+      \item function symbols $f \in FS$ to functions $f^I:D^{ar(f)} \ar D$; and
+      \item predicate symbols $P \in PS$ to relations $P^I \subseteq D^{ar(P)}$.
+    \end{itemize}
+  \end{itemize}
+  \end{defn}
+  \begin{exmp}
+    Let \nameref{function}s $f$ and $g$ be respectively addition and squaring functions and $P$ be the equality relation. Let $P(f(g(a),g(b)),g(c))$ be a \nameref{closed} \nameref{formula}, where individuals $a$,$b$, and $c$ be interpreted as 4, 5, and 6 in $\N$.Then, the above predicate is interpreted as the false proposition.
+  \end{exmp}
+  \begin{exmp}
+    Let $f(g(a),f(b,c))$ be a \nameref{terms}. Let individuals $a$, $b$, and $c$ be interpreted as 4, 5, and 6 in $\N$ and \nameref{function}s $f$ and $g$ are respectively as addition and squaring. Then, the above term is interpreted as $4^2$ + (5 + 6) which is the individual 27 in $\N$.
+  \end{exmp}
+  \begin{exmp}
+    \nameref{interpretation} is extremely liberal and openended. For example, consider the non-\nameref{closed} \nameref{formula}:
+    \[ P(f(g(u),g(b)),g(w)) \]
+    where only $b$ is interpreted as 5. One can interpret this formula by:
+    \[ x^2+ 5^2=y^2 \]
+    where $x$ and $y$ are \nameref{free} variables. This is not a proposition, but a binary proposition \nameref{function} in $\N$.
+  \end{exmp}
+  Given an \nameref{interpretation}, in order to evaluate the truthfulness of a formula $\forall x. \varphi$ or $\exists x . \varphi$, we should check whether $\varphi$ holds for all or some value $a$ in the interpretation. The mechanism to check this is by using \nameref{substitution} $\varphi[a/x]$ for values $a$ in an \nameref{interpretation}. This is called a \textbf{valuation}. For example, in the previous example, one can obtain a truth value by assigning individuals in $\N$ to $x$ and $y$.
+  \begin{defn}[valuation]\label{valuationfol}
+  A \textbf{valuation} $\theta$ (also called an \textbf{assignment}) is a mapping from $VS$, the set of variables, to domain $D$. For example, the non-closed formula
+  \[ x^2 + 4^2 = y^2 \]
+  $\theta(x) = 3$ and $\theta(y) = 5$ evaluated the formula to the true proposition.
+  \end{defn}
+  Let $I$ be a first order \nameref{interpretation} and $\theta$ a \nameref{valuationfol}. For a term $t$ in $Term(\mathcal{L})$, we define \nameref{interpretation} and \nameref{valuationfol} of $t$, $t^{I,\theta}$, as follows:
+  \begin{itemize}
+    \item[1.] $c^{I,\theta} = c^I$ for $t \in CS$ (i.e., $t$ is a constant);
+    \item[2.] $x^{I,\theta} = \theta(x)$ for $t \in VS$ (i.e., $t$ is a variable); and
+    \item[3.] $f(t_1,\ldots,t_{ar(f)})^{I,\theta} = f^I((t_1)^{I,\theta},\ldots,t_{ar(f)}^{I,\theta})$, otherwise (i.e., for $t$ a functional term).
+  \end{itemize}
+  \begin{exmp}
+    Suppose a language has a constant symbol 0, a unary function $s$, and a binary function $+$. Let us write $+$ in infix position (i.e., $x + y$ instead of $+(x,y)$). Notice that $s(s(0) + s(x))$ and $s(x,s(x+s(0)))$ are two \nameref{terms}s. The following are examples of \nameref{interpretation}s and \nameref{valuationfol}s:
+    \begin{itemize}
+      \item $D = \{0,1,2,\ldots\}, 0^I = 0, s^I$ is the successor function and $+^I$ is the addition operation. Then if $\theta(x) = 3$, $s(s(0) + s(x)) = 6$ and $s(x,s(x+s(0))) = 9$.
+      \item $D$ is the collection of all words over the alphabet $\{a,b\}, 0^I = a, s^I$ is the operation that appends $a$ to the end of the word, and $+^I$ is the concatenation. Then if $\theta(x) = aba$, $s(s(0) + s(x)) = aaabaaa$ and $s(x,s(x+s(0))) = abaabaaaaa$.
+      \item $D = \{\ldots, -2,-1,0,1,2,\ldots\}, 0^I = 1, s^I$ is the predecessor function and $+^I$ is the subtraction operation. Then, in general, $s(s(0) + s(x)) = -\theta(x)$ and $s(x+s(x+s(0))) = 0$, given any \nameref{valuationfol} $\theta$.
+    \end{itemize}
+  \end{exmp}
+
+  \begin{defn}[satisfaction relation]\label{satisfaction relation}
+  The \textbf{satisfaction relation} $\models$ between an \nameref{interpretation} $I$, a \nameref{valuationfol} $\theta$, and a first-order \nameref{formulasFOL} $\varphi$ is defined as:
+  \begin{itemize}
+    \item $I,\theta \models P(t_1,\ldots,t_{ar(P)})$ iff $\langle (t_1)^{I,\theta},\ldots,(t_{ar(P)})^{I,\theta}\rangle \in P^I$ for $P \in PS$
+    \item $I, \theta \models \neg \varphi$ if and only if $I, \theta \models \varphi$ is not true
+    \item $I, \theta \models \varphi \land \psi$ if and only if $I, \theta \models \varphi$ and $I, \theta \models \psi$
+    \item $I, \theta \models \varphi \lor \psi$ if and only if $I, \theta \models \varphi$ or $I, \theta \models \psi$
+  \end{itemize}
+  \end{defn}
+  \begin{rem}
+    \begin{itemize} \
+      \item[1.] $\langle (t_1)^{I,\theta},\ldots,(t_{ar(P)})^{I,\theta}\rangle \in P^I$ means that $ (t_1)^{I,\theta},\ldots,(t_{ar(P)})^{I,\theta}$ is in the relation $P^I$
+      \item[2.] If $A(x)$ is a variable with no \nameref{free} occurrence of $u$ and $A(u)$ is a \nameref{formulasFOL} with no \nameref{free} occurrence of $x$, then $A(x)$ and $A(u)$ have the same intuitive meaning.
+      \item[3.] For the same reason, $\forall x. A(x)$ and $\forall u. A(u)$ have the same meaning.
+    \end{itemize}
+  \end{rem}
+  One can trivially define the following:
+  \begin{itemize}
+    \item $I,\theta \models (\forall x . \varphi)$ if and only if $I,\theta ([x=v]) \models \varphi$ for all $v \in D$
+    \item $I, \theta \models (\exists x . \varphi)$ if and only if $I , \theta ([x = v]) \models \varphi$ for some $v \in D$
+  \end{itemize}
+  where the \nameref{valuationfol} $[x=v](y)$ is defined to be $v$ when $x = y$ and $\theta$ otherwise.
+  \begin{exmp}
+    Let $loves$ be a binary predicate. Consider the following \nameref{formulasFOL}:
+    \[ \forall x . \forall y (loves(x,alma) \land loves (y,x) \ar \neg loves(y,alma)) \]
+    Let \nameref{interpretation} $I$ be the following: $D = \{a,b,c\}$, $loves^I = \{(a,a),(b,a),(c,a)\}, CS = \{alma\}$, $alma^I = a$. The above formulas intends to capture the expression:
+    \begin{center}
+      None of Alma's lovers' lovers love her.
+    \end{center}
+    This is not the case!
+  \end{exmp}
+  \begin{exmp}
+    Suppose $R$ is a binary relation and $\oplus$ is a binary function.
+    \begin{itemize}
+      \item Consider the sentence $\exists y. R(x,y\oplus y)$. Suppose $D = \{1,2,3,\ldots\}$, $\oplus^I$ is the addition operation, and $R^I$ is the equality relation. Then, $I,\theta \models \exists y. R(x,y\oplus y)$ iff $\theta (x)$ is an even number.
+    \end{itemize}
+  \end{exmp}
+  The universal and existential quantifiers may be interpreted respectively as a generalization of conjunction and disjunction. If the domain $D = \{\alpha_1,\ldots,\alpha_k\}$ is finite then:
+\begin{center}
+  For all $x$ such that $f(x)$ iff $R(\alpha_1)$ and ... and $R(\alpha_k)$ \\
+  There exists $x$ such that $R(x)$ iff $R(\alpha_1)$ or ... or $R(\alpha_k)$
+\end{center}
+where $R$ is a property.
+\begin{lem}
+  Let $\varphi$ be a first order \nameref{formulasFOL}, $I$ be an \nameref{interpretation}, and $\theta_1$ and $\theta_2$ be two \nameref{valuationfol}s such that $\theta_1(x) = \theta_2(x)$ for all $x \in VS$. Then,
+  \[ I, \theta_1 \models \varphi \ \ \ \ \ \ \ \ I, \theta_2 \models \varphi \]
+  Proof by structural induction.
+\end{lem}
+\begin{defn}[satisfiable]\label{satisfiablefol}
+$\Sigma \subseteq Form(\mathcal{L})$ is \textbf{satisfiable} iff there is some \nameref{interpretation} $I$ and \nameref{valuationfol} $\theta$ such that $I, \theta \models \varphi$ for all $\varphi \in \Sigma$.
+\end{defn}
+\begin{defn}[valid]\label{valid}
+A \nameref{formulasFOL} $\varphi \in Form(\mathcal{L})$ is \textbf{valid} iff for all \nameref{interpretation}s $I$ and \nameref{valuationfol} $\theta$, we have $I, \theta \models \varphi$.
+\end{defn}
+\begin{exmp}
+  Let $\varphi = P(f(g(x),g(y)),g(z))$ be a \nameref{formulasFOL}. The \nameref{formulasFOL} is \nameref{satisfiablefol}:
+  \begin{itemize}
+    \item $f^I = $ summation
+    \item $g^I = $ squaring
+    \item $P^I = $ equality
+    \item $\theta(x) = 3, \theta(y) = 4, \theta(z) = 5$
+  \end{itemize}
+  $\varphi$ is not \nameref{valid}.
+\end{exmp}
+\begin{defn}[logical consequence]\label{logical consequence}
+Suppose $\Sigma \subseteq Form(\mathcal{L})$ and $\varphi \in Form(\mathcal{L})$. We say that $\varphi$ is a \textbf{logical consequence} of $\Sigma$ (that is, of the \nameref{formulasFOL} in $\Sigma$), written as $\Sigma \models \varphi$ iff for any \nameref{interpretation} $I$ and \nameref{valuationfol} $\theta$, we have $I, \theta \models \Sigma$ implies $I , \theta \models \varphi$. \\
+
+$\models \varphi$ means that $\varphi$ is valid.
+\end{defn}
+\begin{exmp}
+  Show that $\models \forall x. (\varphi \ar \psi) \ar ((\forall x. \varphi) \ar (\forall x . \psi))$ \\
+
+  Proof by contradiction. Suppose there exists $I$ and $\theta$ such that,
+  \begin{align*}
+    I,\theta & \not \models \forall x.(\varphi \ar \psi) \ar ((\forall x . \varphi) \ar (\forall x .\psi)) \\
+    I,\theta & \models \forall x.(\varphi \ar \psi) \\
+    I,\theta & \models \forall x.\varphi \\
+    I,\theta & \not  \models \forall x.\psi \\
+    & \\
+    I,\theta([x = v]) &\models \varphi \\
+    I, \theta ([x = v])& \not \models \psi \\
+    I, \theta ([x = v]) &\not \models \varphi \ar \psi \\
+    I,\theta &\not \models \forall x.(\varphi \ar \psi) & \mbox{(contradiction)}
+  \end{align*}
+\end{exmp}
+\begin{exmp}
+  Show that $\forall x . \neg A(x) \models \neg \exists x . A(x)$ \\
+
+  Proof by contradiction. Suppose there exists $I$ and $\theta$ such that,
+  \begin{align*}
+    I,\theta &\models \forall x . \neg A(x) \mbox{ \ \ and \ \ } I,\theta \not \models \neg \exists x . A(x) \\
+    I, \theta &\models \exists x.A(x) \\
+    & \\
+    I,\theta([x = v]) &\models \neg A(x) \mbox{ \ \ for all $v$} \\
+    I,\theta([x = v]) &\models A(x) \mbox{ \ \ for some $v$} \\
+  \end{align*}
+  Contradiction!
+\end{exmp}
+
+% \subsection{Midterm Review}
+
+% If you want to show that a set is not satisfiable, show that for all valuations there is at least one formula in the set that cannot evaluate to 1. Study soundeness and completeness. Example, let's imagine that we show that $\models p \lor \neg p$, then suppose $q \vdash_{ND} q \land (p \lor \neg p)$, since I know the first part, by completness of natural deduction, i know $\vdash p \lor \neg p$. If I want $\vdash_{ND} p \lor \neg p$ then
+\begin{align*}
+  q & \vdash_{ND} q \\
+    & \vdash{ND} p \lor \neg p \\
+    q \vdash q \land (p \lor \neg p)
+\end{align*}
+Be familiar with soundness and completeness proofs.
+
+\subsection{Proof Systems in First-order Logic}
+
+  Proof calculi for predicate logic are similar to those for propositional logic, except that we have new proof rules for dealing with the quanitifiers. Again, we explore
+  \begin{itemize}
+    \item Hilbert Systems, and
+    \item Natural Deduction
+  \end{itemize}
+
+  \subsubsection{First-Order Logic Hilbert System}
+  \begin{center}
+    \begin{tabular}{c | c}
+      $Ax_1$ & $\langle \forall^* (\varphi \ar (\psi \ar \varphi))\rangle$ \\[1ex]
+      $Ax_2$ & $\langle \forall^* ((\varphi \ar (\psi \ar \eta )) \ar ((\varphi \ar \psi) \ar (\varphi \ar \eta))) \rangle$ \\[1ex]
+      $Ax_3$ & $\langle \forall^* ((( \neg \varphi) \ar (\neg \psi)) \ar (\psi \ar \varphi))\rangle$ \\[1ex]
+      $Ax_4$ & $\langle \forall^* (\forall x.(\varphi \ar \psi)) \ar ((\forall x.\varphi) \ar (\forall x.\psi))\rangle$ \\[1ex]
+      $Ax_5$ & $\langle \forall^* (\forall x .\varphi) \ar \varphi[x/t]\rangle$ for $t \in T$ a \nameref{terms} \\[1ex]
+      $Ax_6$ & $\langle \forall^* (\varphi \ar \forall x . \varphi)\rangle$ for $x \not \in FV(\varphi)$ \\[1ex]
+      $MP$ & $\langle \varphi, (\varphi \ar \psi), \psi\rangle$
+    \end{tabular} \\[1ex]
+    where $\forall^*$ is a finite sequence of universal quantifiers (e.g., $\forall x_1.\forall y.\forall x$).
+  \end{center}
+
+  \begin{exmp}
+    Show that $\vdash \forall x. \forall y. \varphi \ar \forall y. \forall x. \varphi$.
+    \begin{flagderiv}
+      \step{}{\forall x. \forall y. \varphi}{\nameref{Deduction Theorem}}
+      \step{}{\forall x.\forall y. \varphi \ar (\forall y. \varphi)[x/t]}{$Ax_5$}
+      \step{}{(\forall y. \varphi)[x/t]}{$MP$}
+      \step{}{(\forall y. \varphi)[x/t] \ar ((\varphi)[x/t])[y/t']}{$Ax_5$}
+      \step{}{((\varphi)[x/t])[y/t']}{$MP$}
+      \step{}{((\varphi)[x/t])[y/t'] \ar \forall x. (\varphi)[x/t]}{$Ax_6$}
+      \step{}{\forall x. (\varphi)[x/t]}{$MP$}
+      \step{}{\forall x. (\varphi)[x/t] \ar \forall y. \forall x. \varphi}{$Ax_6$}
+      \step{}{\forall y. \forall x. \varphi}{$MP$}
+    \end{flagderiv}
+  \end{exmp}
+
+  \begin{exmp}
+    Show that $\vdash A(a) \ar \exists x.A(x)$.
+    \begin{flagderiv}
+      \step{}{\forall x. \neg A(x) \ar \neg A(a)}{$Ax_5$}
+      \step{}{A(a) \ar (\neg \forall x. \neg A(x))}{$Ax_3$}
+      \step{}{A(a) \ar \exists x. A(x)}{Definition of $\exists$}
+    \end{flagderiv}
+  \end{exmp}
+
+  We can prove the existential quantifier by taking $\forall x. \phi \models \neg \exists x. \neg \phi$ by assuming $\forall x. \phi $ and $\exists x. \neg \phi$ (the negation of the conclusion), and following through to find a contradiction. This is left as an exercise.
+
+  \begin{exmp}
+    Show that $\vdash \forall x. (A(x) \ar B(x)) \ar (\forall x. A(x) \ar \forall x. B(x))$.
+    \begin{flagderiv}
+      \step{}{\forall x.(A(x) \ar B(x))}{Assumption}
+      \step{}{\forall x. A(x)}{Assumption}
+      \step{}{\forall x. A(x) \ar A(a)}{$Ax_5$}
+      \step{}{A(a)}{$MP, 2, 3$}
+      \step{}{\forall x. (A(x) \ar B(x)) \ar (A(a) \ar B(a))}{$Ax_5$}
+      \step{}{A(a) \ar B(a)}{$MP, 1, 5$}
+      \step{}{B(a)}{$MP, 4, 6$}
+      \step{}{B(a) \ar \forall x. B(x)}{$Ax_6$}
+    \end{flagderiv}
+  \end{exmp}
+
+  \subsubsection{Soundness of FOL Hilbert System}
+
+  Step 1: Satisfiability (\nameref{satisfiablefol}) and validity (\nameref{valid}). \\
+
+  Suppose $\Sigma \subseteq Form(\mathcal{L}), A \in Form(\mathcal{L})$, and $D$ is a \nameref{domain}.
+  \begin{itemize}
+    \item[1.] $\Sigma$ is \nameref{satisfiablefol} in $D$ iff there is some model $I, \theta$ over $D$ such that $I, \theta \models \varphi$ for all $\varphi \in \Sigma$.
+    \item[2.] $A$ is valid in $D$ iff for all models $I,\theta$ over $D$, we have $I,\theta \models A$.
+  \end{itemize}
+
+  \begin{thrm}
+    Suppose \nameref{formulasFOL} $A$ contains no equality symbol and $|D| \leq |D_1|$.
+    \begin{itemize}
+      \item If $A$ is \nameref{satisfiablefol} in $D$, then $A$ is \nameref{satisfiablefol} in $D_1$.
+      \item If $A$ is valid in $D_1$, then $A$ is \nameref{valid} in $D$.
+    \end{itemize}
+  \end{thrm}
+
+  \begin{thrm}[soundness]
+    \begin{itemize}
+      \item If $\Sigma \vdash A$, then $\Sigma \models A$.
+      \item If $\vdash A$, then $\models A$.
+    \end{itemize}
+    That is, every formally provable \nameref{formulasFOL} is \nameref{valid}.
+  \end{thrm}
+
+  \begin{defn}[consistent]\label{consistent}
+  We say that $\Sigma \subseteq Form(\mathcal{L})$ is \textbf{consistent} iff there is no $A \in Form(\mathcal{L})$ such that $\Sigma \vdash A$ and $\Sigma \vdash \neg A$. Consistency is a syntactical notion.
+  \end{defn}
+
+  \begin{thrm}
+    If $\Sigma$ is \nameref{satisfiablefol}, then $\Sigma$ is \nameref{consistent}.
+  \end{thrm}
+
+  \begin{defn}[maximal consistent]\label{maximal consistent}
+  We say that $\Sigma \subseteq Form(\mathcal{L})$ is \textbf{maximal consistent} iff
+  \begin{itemize}
+    \item $\Sigma$ is \nameref{consistent}
+    \item for any $A \in Form(\mathcal{L})$ such that $A \not \in \Sigma$, $\Sigma \cup \{ A\}$ is inconsitent.
+  \end{itemize}
+  \begin{lem}
+    Suppose $\Sigma$ is \nameref{maximal consistent}. Then, $A \in \Sigma$ iff $\Sigma \vdash A$.
+  \end{lem}
+  \begin{lem}[Lindenbaum Lemma]\label{Lindenbaum Lemma}
+    Any \nameref{consistent} set of \nameref{formulasFOL} can be extended to some \nameref{maximal consistent} set.
+  \end{lem}
+  \begin{thrm}
+    Suppose $\Sigma \subseteq Form(\mathcal{L})$. If $\Sigma$ is \nameref{consistent}, then $\Sigma$ is \nameref{satisfiablefol}.
+  \end{thrm}
+  \begin{thrm}
+    Suppose $\Sigma \subseteq Form(\mathcal{L})$ and $A \in Form(\mathcal{L})$. Then
+    \begin{itemize}
+      \item if $\Sigma \models A$, then $\Sigma \vdash A$.
+      \item if $\models A$, then $\vdash A$.
+    \end{itemize}
+  \end{thrm}
+  \end{defn}
+
+  \subsection{Natural Deduction in First-Order Logic}
+
+  Natural deduction in \nameref{first-order-logic} is similar to propositional logic except we need to introduce rules for quantifier elimination and introduction. Other proof techniques and tricks remain the same as natural deduction for propositional logic.
+
+ \begin{center}
+    \begin{tabular}{c | c | c }
+      Name & $\vdash$ Notation & Inference Notation \\
+      \hline
+      \hline
+      \ &&\\
+      $\forall$-elimination ($\forall -$) & If $\Sigma \vdash \forall x. \varphi$ then $\Sigma \vdash \phi[x/t]$ & $\displaystyle{\f{\forall x. \phi}{\varphi[x/t]}}$ \\[3ex]
+      \hline
+      \hline
+      \ &&\\
+      $\forall$-introduction ($\forall +$) & If $\Sigma \vdash \varphi[x/u]$ then $\Sigma \vdash \forall x . \varphi$ & $\displaystyle \f{\varphi[x/u]}{\forall x. \varphi}$ \\[3ex]
+      \hline
+      \hline
+    \end{tabular}
+    \end{center}
+    In $(\forall -)$, the formula $\varphi[x/t]$ is obtained by substituting $t$ for all occurrences of $x$. In $(\forall +)$, $u$ should not occur in $\Sigma$. \\
+
+    The rule $(\forall +)$ is a bit tricky. Think of it this way: if you want me to prove that $\forall x. \varphi$, then I show the truthfulness of $\varphi$ for any 'random' $x$ you give me. In other words, if we prove $\varphi$ about any $u$ that is not special in any way, then you can prove it for any $x$ whatsoever. That is, the step from $\varphi$ to $\forall x. \varphi$ is legitimate if only we have arrived at $\varphi$ in such a way that none of its assumptions contain $x$ as a free variable. \\
+
+    Rules of elimination and introduction in \nameref{first-order-logic} natural deduction can be generalized to multiple quantifiers:
+
+    \begin{itemize}
+      \item If $\Sigma \vdash \forall x_1 \ldots x_n. \varphi$ then $\Sigma \vdash [x_1/t_1\ldots x_n/t_n]$.
+      \item If $\Sigma \vdash \varphi[x_1/u_1\ldots x_n/u_n]$ then $\Sigma \vdash \forall x_1\ldots x_n.\varphi$, where $u_1,\ldots,u_n$ do not occur in $\Sigma$.
+    \end{itemize}
+    \begin{exmp}
+      Show that $\forall x. \forall y. A(x,y) \vdash \forall y. \forall x. A(x,y)$
+      \begin{itemize}
+        \item[1.] $\forall xy.\varphi(x,y) \vdash \varphi(u,v)$
+        \item[2.] $\forall xy.\varphi(x,y) \vdash \forall yx.\varphi(x,y)$ (Generalized $\forall +$)
+      \end{itemize}
+      In Step 1, $u$ and $v$ should not occur in $\varphi(x,y)$.
+    \end{exmp}
+
+     \begin{center}
+    \begin{tabular}{c | c | c }
+      Name & $\vdash$ Notation & Inference Notation \\
+      \hline
+      \hline
+      \ &&\\
+      $\exists$-elimination ($\exists -$) & If $\Sigma ,\varphi(u) \vdash \psi$ then $\Sigma, \exists x.\varphi(x) \vdash \psi $ & $\displaystyle\f{\f{\varphi(u)}{\psi}}{\f{\exists x.\varphi(x)}{\psi}}$ \\[3ex]
+      \hline
+      \hline
+      \ &&\\
+      $\exists$-introduction ($\exists +$) & If $\Sigma \vdash \varphi[x/t]$ then $\displaystyle \Sigma \vdash \exists x . \varphi$ & $\f{\varphi[x/t]}{\exists x. \varphi}$ \\[3ex]
+      \hline
+      \hline
+    \end{tabular}
+    \end{center}
+    In $(\exists -)$, $u$ should not occur in $\Sigma$ or $\psi$. In $(\exists +)$, $\varphi(x)$ is obtained by replacing some occurences of $t$ in $\varphi$ by $x$. In the $(\exists +)$ rule notice that $\varphi[x/t]$ has more information that $\exists x.  \varphi$. For example, let $t = y$ such that $\varphi[x/t]$ is $y = y$. Then, $\varphi$ could be a number of things, such as $x = x$ or $x = y$.
+
+    \begin{exmp}
+      Show that $\exists x. \varphi(x) \vdash \exists y. \varphi(y)$
+      \begin{flagderiv}
+        \step{}{\varphi(u) \vdash \varphi(u)}{Ref}
+        \step{}{\varphi(u) \vdash \exists y. \varphi(y)}{($\exists +$)}
+        \step{}{\exists x. \varphi(x) \vdash \exists y. \phi(y)}{$(\exists -)$}
+      \end{flagderiv}
+    \end{exmp}
+
+    \begin{exmp}
+      Show that $\neg \forall x. \varphi (x) \vdash \exists x. \neg \varphi(x)$.
+      \begin{flagderiv}
+        \step{}{\neg \varphi(u) \vdash \exists x . \neg \varphi (x)}{($u$ not occuring in $\varphi(x)$)}
+        \step{}{\neg \exists x. \neg \varphi(x) \vdash \varphi(u)}{(1)}
+        \step{}{\neg exists . \neg \varphi(x) \vdash \forall x. \varphi(x)}{}
+        \step{}{\neg \forall x. \varphi(x) \vdash \exists x. \neg \varphi(x)}{}
+      \end{flagderiv}
+    \end{exmp}
+
+    \begin{exmp}
+      Show that $\forall x. \varphi(x) \ar \psi \vdash \exists x. (\phi(x) \ar \psi)$, $x$ not occuring in $\psi$.
+      % 3 is not (phi implies psi) proves phi
+      \begin{flagderiv}
+
+      \end{flagderiv}
+    \end{exmp}
+
+    % if in exam ask to do explicit hilbert proof, can't use deduction theorem
+    % there is exam of using hilbert
+
+    \begin{defn}[First-Order Axioms of Equality]\label{First-Order Axioms of Equality}
+    Let $\approx$ be a binary predicate (written in infix). We define the \textbf{First-Order Axioms of Equality} as follows:
+    \begin{itemize}
+      \item Eqld : $\langle \forall x. (x \approx x)\rangle ;$
+      \item EqCong : $\langle \forall x. \forall y. (x \approx y) \ar (\varphi_x^z \ar \varphi_y^z)\rangle;$
+    \end{itemize}
+    \end{defn}
+
+    \section{Programs}
+
+    \begin{defn}[equality relation]\label{equality relation}
+    The \textbf{equality relation} $\approx$ over a domain $\mathcal{D}$ is the binary relation $\{\langle x, x \rangle \ | \ x \in \mathcal{D}\}$.
+    \end{defn}
+
+    \begin{exmp}
+      $\mathcal{D} = \{a,b,c\}$ \\
+      Eq: $\mathcal{D} \ar \mathcal{D}$ and Eq $= \{\langle a,a\rangle \langle b,b\rangle \langle c, c\rangle \}$.
+    \end{exmp}
+
+    The \nameref{equality relation} satisfies the following axioms:
+    \begin{itemize}
+      \item[EQ1.] $\forall x. x \approx x$ "everything is equal to itself".
+      \item[EQ2.] For each $\phi \in Form(\mathcal{L})$ and every variable $z$,
+      \[ \forall x. \forall y. (x \approx y \ar (\varphi[z/x] \ar \varphi[z/y])) \]
+      "equal objects have the same properties".
+    \end{itemize}
+
+    \begin{lem}
+      The axioms for equality imply that the relation $\approx$ is symmetric and transitive.
+      \[ \vdash \forall x.\forall y. (x \approx y \ar y \approx x) \]
+      \[ \vdash \forall w. \forall x. \forall y.(x \approx y \ar (y \approx w \ar x \approx w)) \]
+    \end{lem}
+
+    We can prove symmetry using natural deduction,
+
+    \begin{flagderiv}
+      \step{}{b \approx b}{EQ1}
+      \step{}{a \approx b \ar (b \approx b \ar b \approx a)}{EQ2}
+      \assume{}{a \approx b}{Assumption}
+      \step{}{b \approx b \ar a \approx a}{($\ar -$), 2, 3}
+      \step{}{b \approx a}{$(\ar -)$, 1, 3}
+      \conclude{}{a \approx b \ar b \approx a}{}
+      \step{}{\forall x. \forall y. (x \approx y \ar y \approx x)}{}
+    \end{flagderiv}
+
+    Additionally we can show transitivity,
+
+    \begin{flagderiv}
+      \step{}{b \approx a \ar (b \approx c \ar a \approx c)}{EQ2}
+      \assume{}{a \approx b}{Assmption}
+      \step{}{a \approx b \ar b \approx a}{Symmetry}
+      \step{}{b \approx a}{$(\ar -)$}
+      \step{}{b \approx c \ar a \approx c}{$(\ar -)$}
+      \conclude{}{a \approx b \ar (b \approx c \ar a \approx c)}{}
+      \step{}{\forall x. \forall y.(x \approx y \ar (y \approx a \ar x \approx a))}{}
+    \end{flagderiv}
+
+
+    Natural numbers derive from the fundamental notion of counting or ordering objects, where '0' stands for 'no objects'. Once we have counted some objects, if we have a new objects, we have a new number of objects and this number is different from all the previous numbers. This way we can generate the set of all natural numbers. Consider $S$ the unary function $S: \N \ar \N$ where $S(x)$ is the 'next number' (successor) of $x \in \N$. Starting with '0' and using the function $S$, we have a term for every natural number. \\
+
+    A standard signature of arithmetic is $\sigma = \langle 0,S,+,\cdot,\approx,\not\approx\rangle$. The standard axiomatization of arithemetics is called \textbf{Peano arithmetic}.
+
+    \begin{itemize}
+      \item[PA1] $\forall x. S(x) \not \approx 0$
+      \item[PA2] $\forall x. \forall y.(S(x) \approx S(y) \ar x \approx y)$
+      \item[PA3] $\forall x. (x + 0 \approx x)$
+      \item[PA4] $\forall x. \forall y. (x + S(y)) \approx S(x+y)$
+      \item[PA5] $\forall x. (x \cdot 0 \approx 0)$
+      \item[PA6] $\forall x. \forall y. (x \cdot S(y) \approx s \cdot y + x)$
+      \item[PA7] For each variable $x$ and every formula $\varphi(x)$,
+      \[ \varphi[x/0] \ar ((\forall x. (\varphi \ar \varphi[x/S(x)])) \ar \forall x. \varphi) \]
+    \end{itemize}
+
+    \begin{lem}
+      Peano Arithmetic has a proof of the formulas
+      \[ \forall y. (0+y \approx y) \]
+    \end{lem}
+
+    \begin{lem}
+      For each \nameref{free variable} $x$
+      \[ \forall y. (x+y \approx y + x) \vdash_{PA} \forall y. (S(x) + y) \approx S(x+y) \]
+    \end{lem}
+
+    \begin{thrm}
+      Addition in Peano Arithmetic is commutative, that is, there exists a proof of
+      \[ \vdash \forall x. \forall y. (x + y \approx y + x) \]
+      from the axioms PA1 - PA7.
+    \end{thrm}
+
+    \begin{exmp}
+      The statement "every non-zero natural number has a predecessor" can be expressed by the formula
+      \[ \vdash_{PA} \forall x. (x \not \approx 0 \ar \exists y .S(y) \approx x) \]
+      Show that this formula has a proof from the PA axioms.
+    \end{exmp}
+
+    \textbf{Exercise.} Write the formulas that express each of the following properties.
+    \begin{itemize}
+      \item[(1)] $x$ is a composite number.
+      \item[(2)] $x$ is a prime number.
+      \item[(3)] If $x$ divides $y$ and $y$ divides $z$ then $x$ divides $z$
+    \end{itemize}
+
+    An example proof:
+
+       Let $\varphi = x \approx e \lor \exists y. \exists z. cons(y,z) \approx x$. Then
+    \begin{flagderiv}
+      \assume{}{\varphi}{Assumption}
+      \step{}{\varphi(e) \approx e \approx e}{($x = e$)}
+      \step{}{x \approx x}{}
+      \step{}{S(x) \approx S(x)}{EQ1}
+      \step{}{\exists y.S(y) \approx S(x)}{$(\exists +)$}
+      \step{}{(S(x) \approx 0) \lor \exists y.S(y) \approx S(x) }{$(\forall +)$}
+      \conclude{}{\varphi \ar \varphi (S(x))}{(1,6)}
+      \step{}{\varphi[x/0] \ar \varphi \ar \varphi(S(x))}{(2,7)}
+      \step{}{\forall x. \varphi (x/0) \ar \varphi \ar \varphi(S(x))}{$(\forall +)$}
+    \end{flagderiv}
+
+    \subsection{Basic Lists}
+
+    Our language for lists will include a constant $e$, denoting the empty list, and the binary function $cons$ that creates new lists out of previous ones. $cons(a,b)$ will mean the list with $a$ as its first element, and $b$ as the remainder of the list. We will start with basic lists.
+
+    \begin{defn}[basic list]\label{basic list}
+    A list that presumes every object in the domain is a list.
+    \end{defn}
+
+    In general, if we want a list containing $a_1, a_2, \ldots, a_k$ we use the object denoted by
+    \[ cons(a_1, cons(a_2, cons(\ldots cons(a_k,e)\ldots))) \]
+    The values $a_i$ can be anything in the domain; in the case of basic lists, they must of course be lists themselves.
+
+    Consider the standard signature for lists
+    \[ \sigma = \langle e, cons, \approx, \not \approx \rangle \]
+    We use Peano axioms for natrual numbers to form similar axioms for basic lists.
+    \begin{itemize}
+      \item[BL1] $\forall x. \forall y. cons(x,y) \not \approx e$
+      \item[BL2] $\forall x. \forall y. \forall z. \forall w.(cons(x,y) \approx cons(z,w) \ar (z \approx z \land (y \approx w)))$
+      \item[BL3] For each formula $\varphi(x)$ and each variable $y$, $y \not \in FV(\varphi)$,
+      \[ \varphi[x/e] \ar (\forall x. (\varphi \ar (\forall y. \varphi[x/cons(y,x)])) \ar \forall x. \varphi) \]
+    \end{itemize}
+
+    We adopt the following conventional notation using $\langle$ and $\rangle$ :
+    \begin{itemize}
+      \item $\langle \rangle$ denotes the empty list, $e$.
+      \item For any object $a$, $\langle a \rangle$ denotes the list whose single item is $a$, that is $cons(a, e)$ or $cons(a, \langle \rangle)$.
+      \item For an object $a$ and non-empty list $\langle l \rangle$, $\langle a, l \rangle$ dentoes the list whose first item is $a$ and whose remaining items are the items on the list $l$. That is $\langle a, l \rangle$ denotes the list $cons(a, \langle l \rangle)$.
+    \end{itemize}
+
+    \textbf{Exercise:} Prove that every non-empty object is a \tc{cons}, that is show that
+    \[ \vdash_{BList}\forall x. (x \not \approx e \ar \exists y. \exists z. cons(y,z) \approx x) \]
+
+
+
+    \subsection{FOL Formulas for Scheme functions on basic lists}
+
+    Here is the template for functions using basic lists:
+    \begin{lstlisting}[language=lisp]
+;; my-list-function: (listof any) -> any
+(define (my-list-function x)
+  (cond
+    ((equal? x empty) ...)
+    (#t ... (first x) ...
+      ... (my-list-function (rest x)) ...)))
+    \end{lstlisting}
+
+    \begin{exmp}
+      Here is append:
+\begin{lstlisting}[language=lisp]
+(define (Append x y)
+  (cond
+    ((equal? x empty) y)
+    (#t (cons (first x) (Append (rest x) y)))
+  )
+)
+\end{lstlisting}
+    \end{exmp}
+
+    The Scheme program \tc{Append} uses the following objects:
+    \begin{itemize}
+      \item variables (\tc{x}, \tc{y})
+      \item constants (\tc{empty})
+      \item relations (\tc{equal?})
+      \item functions (\tc{first, rest, cons})
+      \item control structures (\tc{define, cond})
+    \end{itemize}
+
+  That is,
+
+  \begin{itemize}
+    \item Scheme program $\iff$ FOL language
+    \item variables $\iff$ FOL variables
+    \item constants (\tc{empty}) $\iff$ FOL constants ($e$)
+    \item relations (\tc{equal?}) $\iff$ FOL binary relations ($\approx$)
+    \item functions $\iff$ FOL functions
+  \end{itemize}
+
+  Scheme functions need not to be defined for all arguments, for example \tc{first}, and \tc{Append}. By contrast, function symbols in FOL create new terms, which are assigned a value in each interpretation.
+
+  \begin{exmp}
+    In Scheme we have no value for \tc{first(empty)}. If we simply use the $first(x)$ as the appropriate unary function in FOL over the domain $\mathcal{D} = \{ x \ | \ x \mbox{ \ is a list of elements} \}$, then there exists an interpretation $M$ in which $x^M = e$. What should be the value of $(first(x))^M$?
+  \end{exmp}
+
+  We need a more general approach : represent each desired partial function by an FOL relation. \\
+
+  An $n$-ary partial function $f(x_1, x_2, \ldots, x_n)$ corresponds to a $n + 1$-ary relation $R_f = (x_1, x_2, \ldots, x_n, y)$ determined by the rule that $x_1, x_2, \ldots, x_n, y$ are in relation $R_f$ iff $y = f(x_1,x_2,\ldots,x_n,y)$.
+
+  \begin{exmp}
+    Consider $\mathcal{R}_{first}$ and $\mathcal{R}_{rest}$ two binary relation symbols, where
+    \begin{itemize}
+      \item $\mathcal{R}_{first}(a,b)$ means "the first of $a$ is $b$"
+      \item $\mathcal{R}_{rest}(a,b)$ means "the rest of $a$ is $b$"
+    \end{itemize}
+    Therefore, consider the following FOL formulas
+    \[ \forall x. \forall y. (\mathcal{R}_{first}(x,y) \leftrightarrow \exists z.(x \approx cons(y,z))) \]
+    and
+    \[ \forall x. \forall y. (\mathcal{R}_{first}(x,y) \leftrightarrow \exists z.(x \approx cons(z,y))) \]
+  \end{exmp}
+
+  \begin{exmp}
+    Using the list of axioms and the formulas for $\mathcal{R}_{first}$ prove that "every item except $e$ has a first", that is give a formal prove of the FOL formula
+    \[ \forall x. (x \not \approx e \ar \exists y. \mathcal{R}_{first}(x,y)) \]
+  \end{exmp}
+
+  We can add a relation symbol for any Scheme function.
+
+  \begin{itemize}
+    \item for a \textbf{built-in function} its deifnition in Scheme determines the appropriate FOL relation.
+    \item for an \textbf{user-defined function}, our goal is to find formulas that characterize the appropriate relation associated to the Scheme function.
+  \end{itemize}
+
+  For the previous user-defined function \tc{Append}, consider the ternary relation $\mathcal{R}_{\mbox{\tc{Append}}}(x,y,z)$ which means
+  \begin{center}
+    "the result of \tc{(Append x y)} is \tc{z}".
+  \end{center}
+
+  \subsection{General Lists}
+
+  For FOL formulas for general Scheme programs, we will find it convenient to have objects that are not lists. To have such objects, we must modify our axioms for basic lists; in particular, the induction scheme BL3 forces every object except $e$ to be a $cons$. \\
+  Let $atom(x)$ denote the formula $\forall y. \forall z. x \not \approx cons(y,z)$.
+
+  The following are the axioms for generalized lists:
+
+  \begin{itemize}
+    \item GL1. $\forall x. \forall y. cons(x,y) \not \approx e$.
+    \item GL2. $\forall x. \forall y. \forall z. \forall w. cons(x,y) \approx cons(z,w) \ar (x \approx z \land y \approx w)$.
+    \item GL3. For each formula $\varphi(x)$ and each variable $y$ not \nameref{free} in $\varphi$, $\forall x. (atom(x) \ar \varphi) \ar (\forall x. (\varphi \ar (\forall y . \varphi[x/cons(y,x)])) \ar \forall x. \varphi)$.
+  \end{itemize}
+
+  In order to construct a FOL formula that describes the evalutation of any given Scheme program, we have to accomplish two maint asks:
+  \begin{itemize}
+    \item Represent a program
+    \item Describe the execution of a program
+  \end{itemize}
+
+  In order to construct a FOL formula that represents a Scheme program, we must have an interpretation whose domain contains programs. First we will represent a Scheme program as a list, thus we can use the domain of lists.
+
+  Recall the scheme function \tc{Append}.
+  \begin{lstlisting}[language=lisp]
+  (define (Append x y)
+    (cond
+      ((equal? x empty) y)
+      (#t (cons (first x) (Append (rest x) y)))
+      )
+    )
+  \end{lstlisting}
+
+  Let's recall how we treated the parts of this program before:
+  \begin{itemize}
+    \item We introduced variables for the values used in the program (the arguments \tc{x} and \tc{y} and some intermediate values \tc{(firstx), (rest x), (Append..))}
+    \item We used FOL constants and relations for the built-in constants, functions and relations (\tc{empty, equal?, cons})
+    \item We did not directly reperesent control structures (\tc{cond}, \tc{define}), instead, we used \tc{cond} to create linking of parts of FOL formulas.
+  \end{itemize}
+
+  For an arbitrary program, we must represent everything informally. We need the concept of a "name" of a value, function, and a way to represent names so that formulas can refer to them. Moreover, we want to be able to :
+  \begin{itemize}
+    \item compare names and determine whether or not they are the same
+    \item define a "dictionary" of the meanings of names, so that we can look up a name and replace it with its meaning.
+  \end{itemize}
+
+  To do these, we introduce an FOL constant symbol $name$, and adopt the following convention.
+  \begin{center}
+    \textbf{A name is a list whose $first$ is the constant $name$}
+  \end{center}
+  \[ \exists x. (x \approx \langle name, y\rangle) \]
+  We assume a canonical way to transcribe text strings into names, and use the notations to mean the name corresponding to the strings.If $s_1$ and $s_2$ are different strings, then the corresponding names $s_1$ and $s_2$ are also different. We shall represent the keywords \tc{cond, define}, and \tc{lambda} by their own FOL constants, respectively $cond, define$, and $\lambda$. With these conventions, any Scheme expression can be translated into a term in the language of lists.
+
+  \begin{exmp}
+    The program \tc{Append} becomes the term: \\
+    $\langle define, \langle Append, x, y\rangle \rangle,$ \\
+    $ \ \ \ \ \langle cond, \langle \langle equal?, x, e \rangle, y \rangle \rangle,$ \\
+    $ \ \ \ \ \ \ \ \langle \# t, \langle \langle first, x \rangle, \langle Append, \langle rest, x \rangle, y \rangle \rangle \rangle$
+  \end{exmp}
+
+  \begin{defn}[evaluation]\label{evaluation}
+  \textbf{Evaluation} is the process of converting expressions to values. In Scheme the basis step of evaluation is a \textbf{substitution step} : a replacement of one part of the expression by something else. If no substitution is possible, and the expression is a value, then the expression is fully evaluated.
+  \end{defn}
+
+  We use a relation \textbf{Step} to describe the substitution process. It takes three arguments:
+  \begin{itemize}
+    \item a list representing the current state of execution
+    \item a list representing the dictionary of definitions of names
+    \item a list representing a potential next state
+  \end{itemize}
+  We want the term $Step(x, D, y)$ to have the value true if and only if the expression $x$ converts the expression $y$ in one step, given dictionary $D$. For this we specify axioms, where each part of the definition of Scheme becomes one or more axiom schemata. \\
+
+  First we shall assume that the program never modifies a definition:
+  \begin{itemize}
+    \item All define statements come at the start of the program, with no two defining the same variable
+    \item The program does not use \tc{set!}, nor any other form of mutation
+  \end{itemize}
+  How about a program that uses local variables? Answer: Simply re-name local variables so that they all have distinct names, and then make them global.
+
+  \begin{rem}
+    Re-naming local variables and making them global, does not affect the program.The program may still use recursion. Simply executing the program will assign a different value to the formal argument of the recursive function at each recursive invocation. \textbf{We only forbid syntactic re-definition}.
+  \end{rem}
+
+  If a name denotes a \textbf{built-in function} $b$, then we assume that the function is definable by a FOL relation. That is, there is a formula $\rho_b(\vx, y)$ that is true iff $(b \vx)$ produces value $y$.
+
+  \begin{exmp}
+    The formula $\rho_{first}$ for the built-in function \tc{first} is simply $\mathcal{R}_{first}(x,y)$.
+  \end{exmp}
+
+  This leads to our first axiom schema for $Step$:
+
+  \begin{itemize}
+    \item Ax1. $\rho_b(\vx , y) \ar Step(\langle b, \vx\rangle , D, y)$ for each built-in function $b$.
+  \end{itemize}
+
+  If a name does not have a fixed definition specified by the language, we need to look it up in the dictionary. In terms of FOL, this means that we need a relation $LookUp$ such that $LookUp(x,D,y)$  evaluates to true iff the dictionary $D$ specifies the value $y$ for the name $x$. Questions: What is a dictionary? How do we specify such a relation?
+
+  \begin{defn}[dictionary]\label{dictionary}
+  Abstractly, a dictionary is a mapping from names to values. Concretely, we shall use the standard data structure of anassociation list used in Scheme and implement it in FOL.
+  \end{defn}
+
+  \begin{defn}[association list]\label{association list}
+  Anassociation list is a list of pairs, where the first element of each pair is a name (key, index) and the second element is its corresponding value (or definition).
+  \end{defn}
+
+  Association:
+  \begin{lstlisting}[language=lisp]
+  ;; As association (as) is
+  ;; (list k v), where
+  ;; k is a number (the key),
+  ;; v is a string (the value)
+  \end{lstlisting}
+  Association list:
+  \begin{lstlisting}[language=lisp]
+  ;; An association list (al) is either
+  ;; empty or
+  ;; (cons a alst), where
+  ;; a is an association, and
+  ;; alst is an association list.
+  \end{lstlisting}
+%2.6.4 2.6.5 2.6.6
+
+Everything else:
+
+\includepdf[pages=-]{functional-programs.pdf}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \end{document}
