@@ -9,7 +9,6 @@
 \newcommand{\website}{LIHORNE.COM}
 
 % Headers
-\chead{\thiscoursename}
 \lhead{\thisterm}
 
 %%%%% TITLE %%%%%
@@ -30,6 +29,18 @@
 
   \end{center}
   }
+
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\braket}[2]{\langle #1 | #2 \rangle}
+\newcommand{\ba}{\bra{\alpha}}
+\newcommand{\bb}{\bra{\beta}}
+\newcommand{\bg}{\bra{\gamma}}
+\newcommand{\ka}{| \alpha \rangle}
+\newcommand{\kb}{| \beta \rangle}
+\newcommand{\kg}{| \gamma \rangle}
+\newcommand{\mtx}[1]{\left(\begin{matrix}#1\end{matrix}\right)}
+\newcommand{\ebasis}{\ket{e_1}, \ket{e_2}, \ldots, \ket{e_n}}
 
 %   ooooo      ooo   .oooooo.   ooooooooooooo oooooooooooo  .oooooo..o
 %   `888b.     `8'  d8P'  `Y8b  8'   888   `8 `888'     `8 d8P'    `Y8
@@ -129,7 +140,90 @@
        \end{defn}
 
      \subsection{The Davisson-Germer Experiment}
-       We must first understand the Bragg Grating; it is an optical filter that re- flects particular wavelengths and transmits all others. Note that reflection, however, is common to both waves and particles.
+       We must first understand the Bragg Grating; it is an optical filter that reflects particular wavelengths and transmits all others. Note that reflection, however, is common to both waves and particles.
+
+     \subsection{Final Words}
+       The observation of both phenomena in one and the same experiment leads us also to the concept of delocalization, which goes beyond the simple concept of "being extended", because single quantum objects seem to be able to simultaneously explore regions in space-time that cannot be explored by a single object in any classical way.
+
+   \section{Linear Algebra Review}
+
+     We're going to begin by reviewing some mathematics that will be needed in the course. This is a physics course so we're going to be a little loosey-goosey.
+
+     \subsection{Vector Spaces}
+        \begin{defn}[Vector Space]\label{vector_space}
+          A {\bf vector space} consists of a set of vectors : ($|\alpha\rangle, |\beta\rangle, |\gamma\rangle, \ldots$) which is closed under vector addition and scalar multiplication.
+        \end{defn}
+        {\bf Vector Addition} produces another vector, that is
+        \[ \ket{\alpha} + \ket{\beta} = \ket{\gamma}  \]
+        it is also commutative
+        \[ \ket{\alpha} + \ket{\beta} =  \ket{\beta}  + \ket{\alpha} \]
+        and associative
+        \[ \ket{\alpha} + (\ket{\beta} + \ket{\gamma}) =  (\ket{\alpha}+\ket{\beta} ) + \ket{\gamma} \]
+        The null vector exists such that $\ket{\alpha} + \ket{0} = \ket{\alpha}$, and of course there is the inverse vector such that $\ket{\alpha} + \ket{-\alpha} = \ket{0}$.
+        \newline
+
+        {\bf Scalar Multiplication}: The product of a scalar with a vector is another vector ($a\ket{\alpha} = \ket{\gamma}$). Note that scalar multiplication is distributive with respect to vector addition
+        \[ a(\ket{\alpha} + \ket{\beta}) = a\ket{\alpha} + a\ket{\beta} \]
+        Scalar multiplication is distributive with respect to scalar addition too
+        \[ (a + b)\ket{\alpha} = a\ket{\alpha} + b\ket{\alpha} \]
+        and it is associative with respect to the product of scalars.
+        \[ a(b \ket{\alpha}) = (ab)\ket{\alpha} \]
+        then multiplication by zero and by $\pm 1$ has
+        \[ 0\ket{\alpha} = \ket{0}, \ \ \ \ 1\ket{\alpha} = \ket{\alpha}, \ \ \ \ -1\ket{\alpha} = -\ket{\alpha} = \ket{-\alpha} \]
+        \newline
+
+        {\bf Linear Combinations of Vectors}: To generate a linear combination of vectors
+        \[ \ket{\lambda} = a\ka + b\kb + c\kg \]
+        \begin{itemize}
+          \item[(I)] Any vector is linearly independent of a set of vectors if it cannot be written as a linear combination of them.
+          \item[(II)] A set of vectors is linearly independent if each is linearly independent of the rest.
+          \item[(III)] A colelction of vectors is said to {\bf span} the space if every vector can be written as a linear combination of them.
+          \item[(IV)] A set of linearly independent vectors that span a space is called a {\bf basis}.
+          \item[(V)] The number of vectors in the basis is called the {\bf dimension} of the space.\newline
+        \end{itemize}
+
+        {\bf Co-ordinate Representation}: With respect to a given basis, $\ket{e_1}, \ket{e_2}, \ket{e_3}, \hdots, \ket{e_n}$, any given vector $\ka = a_1 \ket{e_1} + a_2\ket{e_2} + \hdots + a_n \ket{e_n}$ is uniquely defined by the ordered $n$-tuple of its components.
+        \[ \ka \iff \left(\begin{matrix}a_1 \\ a_2 \\ \vdots \\ a_n\end{matrix}\right) \]
+        (the co-ordinate representation of $\ka$ with respect to the basis given by each $\ket{e_1}$.)
+
+        Coordinates depend on the chosen basis. In basis 1 $\ka = a_x\ket{x} + a_y\ket{y} \iff \left(\begin{matrix}a_x \\ a_y \end{matrix}\right)$ and then in basis 2 we see $\ka = a_{x'}\ket{x'} + a_{y'}\ket{y'} \iff \mtx{a_{x'} \\ a_{y'}}$. \newline
+
+        Addition of vectors by adding corresponding components (when in the same basis) works as you might expect, too:
+        \[ \ket{\alpha} + \ket{\beta} \iff (a_1 + b_1, a_2 + b_2, \hdots, a_n + b_n \]
+
+        Also, scalar multiplication works by multiplying the scalar in each component
+        \[ c\ka \iff (ca_1, ca_2, ca_3, \ldots, ca_n) \]
+        so of course,
+        \[ \ket{0} = (0, 0, 0, \ldots, 0),  \ \ \ \ \ \ \  \ket{-\alpha} = (-a_1, -a_2, \ldots, -a_n) \]
+
+        {\bf Inner Product}: For every vector, $\ka$, in a vector space there exists a dual vector $\bra{\alpha}$ in a corresponding dual vector space. Importantly, the dual vector to $c\ka$ is $C^*\bra{\alpha}$ where $*$ denotes complex conjugation. So the inner product of $\ka$ and $\kb$ is $\braket{\alpha}{\beta}$ which is a scalar (complex number), hence $\braket{\alpha}{\beta}$ is sometimes called {\bf scalar product}.
+
+        \begin{itemize}
+          \item[(I)] $\braket{\beta}{\alpha} = \braket{\alpha}{\beta}^*$
+          \item[(II)] $\braket{\alpha}{\alpha} \geq 0$ (real and positive), so $\braket{\alpha}{\alpha} = 0$ if $\ka = \ket{0}$.
+          \item[(III)] The norm of a vector $||\alpha|| = \sqrt{\braket{\alpha}{\alpha}}$ generalized "length" of a vector.
+          \item[(IV)] Normalized $||\alpha|| = 1$.
+          \item[(V)] Orthogonal if $\braket{\alpha}{\beta} = 0$, then $\ka$ is orthogonal to $\kb$.
+          \item[(VI)] Orthogonal set $\braket{a_i}{a_j} = \delta_{ij} = \piecewise{1}{if $i = j$}{0}{if $i \not = j$}$
+        \end{itemize}
+
+        Consider the orthonormal basis $\ebasis$, and
+        \[ \ka = a_1 \ket{e_1} + a_2 \ket{e_2} + \ldots + a_n \ket{e_n} \]
+        \[ \kb = b_1 \ket{e_1} + b_2 \ket{e_2} + \ldots + b_n \ket{e_n} \]
+        where we have the column vectors
+        \[ \ka = \mtx{a_1 \\ a_2 \\ \vdots \\ a_n} \ \ \ \ \ \ \ \ \kb = \mtx{b_1 \\ b_2 \\ \vdots \\ b_n} \]
+        then with dual vectors
+        \[ \ka  = a_1^*\ket{e_1} + a_2^*\ket{e_2} + \ldots + a_n^*\ket{e_n} \]
+        \[ \kb  = b_1^*\ket{e_1} + b_2^*\ket{e_2} + \ldots + b_n^*\ket{e_n} \]
+        so that we have row vectors
+        \[ \ka = (a_1^*, a_2^*, \ldots, a_n^*)  \ \ \ \ \ \ \ \ \kb = (b_1^*, b_2^*, \ldots,b_n^*) \]
+        Now we can see that these results interact in a kind of cool way, check this out:
+        \[ \braket{\alpha}{\beta} = (a_1^*, a_2^*, \ldots, a_n^*) \mtx{b_1 \\ b_2 \\ \vdots \\ b_n} = a_1^*b_1 + a_2^*b_2 + \ldots + a_n^* b_n \]
+        which is a complex number. The components of the linear expansion are inner products too:
+        \[ \ka = a_1\ket{e_1} + a_2\ket{e_2} + \ldots + a_n\ket{e_n} \]
+        Consider also that
+        \[ \braket{e_1}{\alpha} = \braket{e_1}{\left(a_1\ket{e_1} + a_2\ket{e_2} + \ldots + a_n\ket{e_n}\right)} = a_1\braket{e_1}{e_1} + a_2\braket{e_1}{e_2} + \ldots + a_n\braket{e_1}{e_n} = a_1\]
+
 
 
   \end{document}
