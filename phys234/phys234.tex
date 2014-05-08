@@ -225,5 +225,55 @@
         \[ \braket{e_1}{\alpha} = \braket{e_1}{\left(a_1\ket{e_1} + a_2\ket{e_2} + \ldots + a_n\ket{e_n}\right)} = a_1\braket{e_1}{e_1} + a_2\braket{e_1}{e_2} + \ldots + a_n\braket{e_1}{e_n} = a_1\]
 
 
+   \section{Tutorials}
+
+     \subsection{Tutorial 1}
+
+     \begin{itemize}
+       \item[1.] Given two vectors
+       \[ \va = \mtx{1 \\ 2 \\ 4}, \ \ \ \  \vb = \mtx{6 \\ 4 \\ 1} \]
+       \begin{itemize}
+         \item[(a)] Compute the inner product $\va^T\vb$ \\
+           \[ 1\cdot6 + 2\cdot4 + 4\cdot 1 = 12 \]
+         \item[(b)] Compute the outer product $\va\vb^T$
+           \[ 6 \cdot 1 + 4\cdot2 + 1\cdot4 = 12 \]
+       \end{itemize}
+       \item[2.] Given two matrices
+       \[ A = \mtx{1 & 9 \\ 4 & 3}, \ \ \ \ B = \mtx{0 & 2 \\ 5 & 6} \]
+       \begin{itemize}
+         \item[(a)] Compute the product $AB$
+           \[ \mtx{1\cdot0 + 9\cdot5 & 1 \cdot2 + 9\cdot 6 \\ 4 \cdot 0 + 3 \cdot 5 & 4 \cdot 2 + 3 \cdot 6} = \mtx{45 & 56 \\ 15 & 20}\]
+         \item[(b)] Do these matrices commute? \\
+           Let's check
+           \[ \mtx{ 0 \cdot 1 + 2 \cdot 4 & 0 \cdot 9 + 2 \cdot 3 \\ 5\cdot1 + 6 \cdot 4 &  5 \cdot 9 + 6\cdot 3 } = \mtx{8 & 6 \\ 29 & 63} \]
+           No.
+       \end{itemize}
+       \item[3.] Given the matrix
+       \[ C = \mtx{7 & 2 \\ 2 & 4} \]
+       \begin{itemize}
+         \item[(a)] Compute the eigenvalues of $C$
+           The characteristic polynomial is
+           \[ C(\lambda) = \det{(C - \lambda I)} = \det \mtx{7 - \lambda & 2 \\ 2 & 4 - \lambda} = (7-\lambda)(4-\lambda) - 4  = 24 -11\lambda + \lambda^2 \implies \lambda = 8, 3 \]
+         \item[(b)] Compute the eigenvectors of $C$
+           \[ C - 8I = \mtx{-1 & 2 \\ 2 & -4 } \equiv \mtx{-1 & 2 \\ 0 & 0} \implies \vv = t\mtx{2 \\ 1} \ \ \ \ s, t \in \R\]
+           \[ C - 3I = \mtx{4 & 2 \\ 2 & 1 } \equiv \mtx{0 & 0 \\ 2 & 1} \implies \vv = t\mtx{-1 \\ 2} \ \ \ \ s, t \in \R\]
+         \item[(c)] Are the eigenvectors orthogonal?
+         \[ \mbox{Yes.} \]
+         \item[(d)] Normalize the eigenvectors.
+         \[ \mtx{\f{2}{\sqrt{5}} \\ \f{1}{\sqrt{5}}}, \mtx{\f{-1}{\sqrt{5}} \\ \f{2}{\sqrt{5}}} \]
+       \end{itemize}
+       \item[4.] Given the complex number
+       \[ z = 3 + 3i \]
+       \begin{itemize}
+         \item[(a)] Compute the complex conjugate of $z$ (denoted $\bar{z}$)
+            \[ \bar{z} = 3 - 3i \]
+         \item[(b)] Compute the norm of $z$ (denoted $|z|$)
+            \[ |z| = \sqrt{z\cdot \bar{z}} = \sqrt{18} \]
+         \item[(c)] Express $z$ as $z = re^{i\theta}$.
+            \[ z = (\sqrt{18})e^{i\arctan\left( \f{3}{3} \right)} = \sqrt{18}e^{\f{\pi i}{2}} \]
+         \item[(d)] Express $z$ as $z = r(cos\theta + i\sin\theta)$
+             \[ z = \sqrt{18}\left(\cos \f{\pi}{2} + i\sin \f{\pi}{2}\right) \]
+       \end{itemize}
+     \end{itemize}
 
   \end{document}
