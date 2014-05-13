@@ -212,6 +212,89 @@
         Consider also that
         \[ \braket{e_1}{\alpha} = \braket{e_1}{\left(a_1\ket{e_1} + a_2\ket{e_2} + \ldots + a_n\ket{e_n}\right)} = a_1\braket{e_1}{e_1} + a_2\braket{e_1}{e_2} + \ldots + a_n\braket{e_1}{e_n} = a_1\]
 
+   \section{Introduction to the formalism and structure of Quantum Mechanics}
+
+     We're going to cover a few topics including Angular Momentum and Spin, the Stern-Gerlach Experiment, Quantum State Vectors, Computing Probabilities, and Operators and Measure.
+
+     \subsection{Angular Momentum and Spin}
+
+       Angular momentum and magnetic dipole moment (orbital). Consider an electron in a circular orbit, it has radius $r$, tangential velocity $\vv$, and current going in the opposite direction of travel $I$, as well as dipole moment $\vec{\mu_L}$ and angular momentum $\vec{L}$. Now, to calculate the magnitude of the dipole moment,
+       \begin{align*}
+         |\vec{\mu_L}| & = IA \mbox{\ \ (product of current and area)} \\
+                       & = \f{e}{T} \pi r^2 \mbox{ \ \ ($T =$ period of electron)} \\
+                       & = \f{e}{\left( \f{2 \pi r}{v} \right)} \pi r^2 \\
+                       & = \f{e}{2} vr \\
+                       & = \f{e}{2m_e} m_evr \\
+                       & = \f{e}{2m_e} |\vec{L}|
+       \end{align*}
+
+       The direction of $\vec{\mu_L}$ (follow the usual right hand rule)
+       \[ \vec{\mu_L} = -\f{e}{2m_e} \vec{L} \]
+
+       Next, we want to talk a little bit about \textbf{spin}. Spin is the intrinsic angular momentum $\vec{S}$ which leads to an intrinsic dipole moment $\vec{\mu_S}$. This intrinsic property is a fundamental nature of particle and cannot be taken away (c.f., mass or charge). In analogy with orbital angular momentum,
+       \[ \vec{\mu_S} = g\f{q}{2m} \vec{S} \]
+       where $g$ is the \textbf{gyromagnetic ratio}, $q$ is the \textbf{charge}, and $m$ is the \textbf{mass} of the particle.
+       \newline
+
+       For an electron, $g \approx 2$, $q = -e$, $m = m_e$, which means
+       \[ \vec{\mu_S} = -\f{e}{m_e} \vec{S} \]
+
+     \subsection{Stern Gerlach Experiment}
+
+       \begin{figure}[t!]
+          \centering
+          \includegraphics[width=0.8\textwidth]{stern_gerlach.png}
+          \caption{Stern-Gerlach experiment to measure the spin component of neutral particles along the $z$-axis. The magnet cross section at right shows the inhomogeneous field used in the experiment.}
+       \end{figure}
+
+       This experiment was designed to measure the magnetic dipole moment of a particle (atom). A beam of atoms is passed through a magnetic field gradient and observations are made as to what happens to the trajectory.
+       \newline
+
+       So what are the physics in this experiment?
+
+       Potential energy of the magnetic dipole moment $\vec{\mu}$, in external field $\vec{B}$
+       \[ E_{magn} = - \vec{\mu} \cdot \vec{B} \]
+       The force is negative of the gradient of the potential energy
+       \[ \vec{F} = - \vec{\nabla} ( - \vec{\mu} \cdot \vec{B}) \]
+
+       In the Stern Gerlach experiment, the field gradient is in the $z$-direction, so only $\f{dB_z}{dz} \not = 0$, so
+       \[ \vec{F} = \mu_z \f{dB_z}{dz} \hat{z} \ \ \ \ \ \mbox{($\hat{z}$ is unit vector in $z$-direction)}\]
+       Atoms experience a force in the $z$-direction proportionsl to the $z$-component of magnetic dipole moment $\mu_z$ because we designed an experiment where only $\f{dB_z}{dz} \not = 0$.
+       \newline
+
+       What is the classical expectation for silver atoms? (47$e^-$, 47 photons, 60/62 neutrons). Note that
+       \[ - \mu_L \mbox{ or } \mu_S \propto \f{1}{m}, \ \ \ \ \mbox{so only consider electrons } (m_p \approx 2000m_e) \]
+       and there is only one non-closed (tell electron that contributes to angular momentum), it is in an s-shell $(\vec{L} = 0)$, leaving only instrinsic angular momentum. For silver atoms,
+       \[ \vec{\mu} = - g \f{e}{2m_e} \vec{S} \ \ \ \ \mbox{(with $g \approx 2$)} \]
+       For a random gas of atoms, $\vec{\mu}$ is in all directions, so $\mu_z$ will have all possible values. So the force will range,
+       \[ - \mu \f{dB_z}{dz} \leq |\vec{F}| \leq + \mu \f{dB_z}{dz} \]
+       which implies a circular beam spread in the $z$-direction.
+       \newline
+
+       It turns out that experimental results reveal that the beam is split into two. This is known as \textbf{space quantization}. This indicates that $S_z$ has two possible values,
+       \[ S_z = \pm \f{\hbar}{2} \ \ \ \ \ \ \ \left( \hbar = \f{h}{2\pi} \right) \]
+       Splitting is associated with the field gradient $\f{dB_z}{dz}$ since it can change direction and splitting tracks the direction of field gradient. The weird thing here is that \textbf{there is no bias to atom deflection}. There is a 50\% deflection up rate and 50\% deflection down rate. An individual atom is deflected in a probabilistic way. So there is no way of determining precisely what happens to an individual atom.
+
+       \begin{figure}[t!]
+          \centering
+          \includegraphics[width=0.5\textwidth]{stern_gerlach_expect.png}
+          \caption{Space quantization as it appears in the experimental results of the Stern Gerlach experiment.}
+       \end{figure}
+
+       No what we'd like to do is strip down the experiment to the essentisls and introduce language for additional study. First, there are \textbf{two possible outcomes}
+       \[ S_z = + \f{\hbar}{2} \ \ \mbox{"spin up"} \ \ \ \ \ \ S_z = - \f{\hbar}{2} \ \ \mbox{"spin down"}  \]
+       \begin{defn}[observable]\label{observable}
+       The Quantum Mechanics term for the quantity being measured ($S_z$ in this case.)
+       \end{defn}
+       \begin{defn}[analyser]\label{analyser}
+       Stern Gerlach device is some form of an analyser ($x, y, z, \theta, \hat{n}$)
+       \end{defn}
+       \begin{defn}[Postulate 1]\label{postulate_1}
+       We label the input state with a left \textbf{ket}, $(\ket{\Phi}$), and label the output states with $\ket{+}$ for spin up and $\ket{-}$ for spin down.
+       \end{defn}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
    \section{Tutorials}
 
