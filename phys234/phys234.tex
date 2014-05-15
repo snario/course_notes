@@ -212,6 +212,89 @@
         Consider also that
         \[ \braket{e_1}{\alpha} = \braket{e_1}{\left(a_1\ket{e_1} + a_2\ket{e_2} + \ldots + a_n\ket{e_n}\right)} = a_1\braket{e_1}{e_1} + a_2\braket{e_1}{e_2} + \ldots + a_n\braket{e_1}{e_n} = a_1\]
 
+     \subsection{Matrices}
+
+        Matrices represent linear transformations that take a vector in a vector space and map it to another vector.
+        \[ \ket{\alpha} \longrightarrow \ket{\alpha'}= \hat{T} \ket{\alpha} \]
+        The transformation must be linear
+        \[ \hat{T}(a \ket{\alpha} + b \ket{\beta}) = a\hat{T}\ket{\alpha} + b \hat{T}\ket{\beta} \]
+        Consider $\hat{T}$ acting on $n$ basic vectors, $\ket{e_i}$
+        \[ \hat{T} \ket{e_1} = T_{11}\ket{e_1} + T_{21}\ket{e_2} + \ldots + T_{n1} \ket{e_n} \]
+        That is, $\ket{e_1}$ is mapped to a new vector written as a linear combination of basis vectors, likewise
+        \begin{align*}
+          \hat{T} \ket{e_2} & = T_{12}\ket{e_1} + T_{22}\ket{e_2} + \ldots + T_{n2} \ket{e_n} \\
+          & \vdots \\
+          \hat{T} \ket{e_n} & = T_{1n} \ket{e_1} + T_{2n} \ket{e_2} + \ldots + T_{nn} \ket{e_n}
+        \end{align*}
+        which can be compactly expressed
+        \[ \hat{T}\ket{e_j} = \sum_{i=1}^nT_{ij} \ket{e_i} \ \ \ \ \ \ (j = 1,2,\ldots,n) \]
+        If $\ket{\alpha}$ is an arbitrary vector, expressed in terms of basis $\ket{e_i}$'s
+        \[ \ket{\alpha} = a_1\ket{e_1} + a_2\ket{e_2} + \ldots + a_n\ket{e_n} = \sum_{j=1}^n a_j\ket{e_j} \]
+        (and recall $a_i = \braket{e_1}{\alpha}$). Then the effect of $\hat{T}$ on $\ka$ is
+        \[ \hat{T}\ka = \sum_{j=1}^n a_j \hat{T} \ket{e_j} = \sum_{j=1}^n \sum_{i=1}^n a_j T_{ij} \ket{e_i} = \sum_{i=1}^n \left( \sum_{j=1}^n T_{ij}a_j \right) \ket{e_i} \]
+        Hence $\hat{T}$ takes a vector $\ka$, with components $a_1, a_2, \ldots, a_n$ and maps to a new vector $\alpha'$ with components $a_i' = \sum_{j=1}^n T_{ij} a_j$. So $\hat{T}$ is characterized by $n^2$ elements, $T_{ij}$, which depend on the chosen basis. Express $\hat{T}$ as a matrix.
+        \[ \mtx{T_{11} & T_{12} & \hdots & T_{1n} \\ T_{21} & T_{22} & \hdots & T_{2n} \\ \vdots & \ddots & \ddots & \vdots \\ T_{n1} & T_{n2} & \hdots & T_{nn} } \]
+        where $T_{ij}$ is a matrix element, the row is $i$ and column $j$. Now if we want to express $\hat{T}$ with respect to a particular set of basis vectors, the $i$-th element will define the values of matrix elements $T_{ij}$
+        \[ \hat{T}\ket{e_j} = \sum_{i=1}^n \ket{e_i} \ \ \ \ \ (j = 1,2,\ldots,n) \]
+        multiply on left by basis vector $\ket{e_k}$,
+        \begin{align*}
+          \bra{e_k}\hat{T}\ket{e_j} & = \bra{e_k}\sum_{i = 1}T_{ij}\ket{e_i} \\
+          & = \bra{e_k} \left(T_{ij}\ket{e_1} + T_{2j}\ket{e_2} + \ldots + T_{nj} \ket{e_n} \right) \\
+          & = \left( T_{ij} = \braket{e_k}{e_1} + T_{2j}\braket{e_k}{e_2} + \ldots + T_{kj}\braket{e_k}{e_k} + \ldots + T_{nj}\braket{e_k}{e_n} \right)
+        \end{align*}
+        where all terms except $\braket{e_k}{e_k}$ go to 0. Now apply the orthonormal property of basis vectors $\ket{e_i}$ and thus
+        \[ \bra{e_k}\hat{T}\ket{e_j} = T_{kj} \ \ \ \ \mbox{matrix element} \]
+        Once the basis is chosen, the $i$-th element will define the vector in coordinate representation and the linear transformation  in matrix form.
+        \newline
+
+        Some matrix terminology,
+
+        \begin{defn}[transpose]\label{transpose}
+          The interchange of rows and columns of the matrix. Transpose of column is row and vice cersa. The transpose of a square matrix is to reflect elements in main diagonal.
+        \end{defn}
+        \begin{defn}[symmetric]\label{symmetric}
+        A matrix is equal to its transpose (square matrices only).
+        \end{defn}
+        \begin{defn}[conjugate]\label{conjugate}
+        The complex conjugate of every element.
+        \end{defn}
+        \begin{defn}[adjoint]\label{adjoint}
+        The conjugate transpose of a matrix. Inidicated by a dagger symbol $\hat{T}^\dagger$. A square matrix is \textbf{Hermitian} if matrix and adjoint are equal $\hat{T} = \hat{T}^{\dagger}$. Vector space and dual are related by adjoint.
+        \end{defn}
+        \[ \ket{\alpha} = \mtx{a_1 \\ a_2 \\ \vdots \\ a_n} = a \implies \mbox{DUAL} = a^\dagger = (a_1^*, a_2^*,
+        \ldots, a_n^*) \]
+        The inner product $\braket{\alpha}{\beta} = a^{\dagger}b$.
+        \begin{defn}[product]\label{product}
+        Multiplication may not be commutative : $\hat{T}\hat{S} \not = \hat{S}\hat{T}$. The difference between orders is commutator
+        \[ [\hat{S}, \hat{T}] = \hat{S}\hat{T} - \hat{T}\hat{S} \ \ \ \ \mbox{(will be zero if $\hat{T}$ and $\hat{S}$ commute)} \]
+        \end{defn}
+
+        \begin{defn}[eigenvalues, eigenvectors]\label{eigenvalues, eigenvectors}
+        Every linear transformation has special vectors that transform into scalar multiples of themselves.
+        \[ \hat{T}\ka = \lambda \ka \]
+        where $\ka$ is the eigenvector, and $\lambda$ is the eigenvalue.
+        \end{defn}
+
+        \begin{exmp}
+          Find the eigenvalues and normalized eigenvectors of $\mtx{5 & -2 \\ -2 & 2}$.
+          \newline
+          \[ \left| \begin{matrix} 5 - \lambda & -2 \\ -2 & 2-\lambda \end{matrix} \right| = 0 \ \ \ \ \ \mbox{(Characteristic Equation)} \]
+          This resolves to solving
+          \begin{align*}
+            (5-\lambda)(2-\lambda) - (-2)(-2) & = 0 \\
+            (\lambda - 1)(\lambda - 6) & = 0
+          \end{align*}
+          Therefore $\lambda = 1$ or $\lambda = 6$ are eigenvalues. Eigenvectors
+          \begin{itemize}
+            \item $\lambda_1 = 1 \implies \ket{\lambda_1} = \mtx{x_1 \\ y_1}$
+            \[ \mtx{5 & -2 \\ -2 & 2}\mtx{x_1 \\ y_1} = 1 \mtx{x_1 \\ y_1} \implies 5x_1 - 2y_1 = x_1 \mbox{ and } -2x_1 + 2y_1 = y_1 \]
+            Rearranging these equations gives us that $2x_1 - y_1 = 0$. This means that any vector on the line $2x_1 - y_1 = 0$ is an eigenvector. So one possible vector is $\ket{\lambda_1} = \mtx{1 \\ 2}$. Now we can normalize by introducing a normalization constant,
+            \[ \ket{\lambda_1} = a \mtx{1 \\ 2} \]
+            then
+            \[ \sqrt{\braket{\lambda_1}{\lambda_1}} = 1 \implies \left(a(1,2)\mtx{1 \\ 2} \right)^{\f{1}{2}} = a\sqrt{5} = 1 \implies a = \f{1}{\sqrt{5}} \implies \ket{\lambda_1} = \f{1}{\sqrt{5}} = \mtx{1 \\ 2} \]
+          \end{itemize}
+        \end{exmp}
+
    \section{Introduction to the formalism and structure of Quantum Mechanics}
 
      We're going to cover a few topics including Angular Momentum and Spin, the Stern-Gerlach Experiment, Quantum State Vectors, Computing Probabilities, and Operators and Measure.
