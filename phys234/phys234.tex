@@ -250,7 +250,7 @@
         Some matrix terminology,
 
         \begin{defn}[transpose]\label{transpose}
-          The interchange of rows and columns of the matrix. Transpose of column is row and vice cersa. The transpose of a square matrix is to reflect elements in main diagonal.
+          The interchange of rows and columns of the matrix. Transpose of column is row and vice versa. The transpose of a square matrix is to reflect elements in main diagonal.
         \end{defn}
         \begin{defn}[symmetric]\label{symmetric}
         A matrix is equal to its transpose (square matrices only).
@@ -295,7 +295,7 @@
           \end{itemize}
         \end{exmp}
 
-   \section{Introduction to the formalism and structure of Quantum Mechanics}
+   \section{Introduction to the Formalism and Structure of Quantum Mechanics}
 
      We're going to cover a few topics including Angular Momentum and Spin, the Stern-Gerlach Experiment, Quantum State Vectors, Computing Probabilities, and Operators and Measure.
 
@@ -322,7 +322,7 @@
        For an electron, $g \approx 2$, $q = -e$, $m = m_e$, which means
        \[ \vec{\mu_S} = -\f{e}{m_e} \vec{S} \]
 
-     \subsection{Stern Gerlach Experiment}
+     \subsection{Stern Gerlach Experiments}
 
        \begin{figure}[t!]
           \centering
@@ -372,9 +372,82 @@
        \begin{defn}[analyser]\label{analyser}
        Stern Gerlach device is some form of an analyser ($x, y, z, \theta, \hat{n}$)
        \end{defn}
-       \begin{defn}[Postulate 1]\label{postulate_1}
-       We label the input state with a left \textbf{ket}, $(\ket{\Phi}$), and label the output states with $\ket{+}$ for spin up and $\ket{-}$ for spin down.
-       \end{defn}
+
+       These are being called the essense of quantum mechanics, and there are a number of experiments involved, we're going to analyze each experiment, one by one.
+
+       \subsection{Stern-Gerlach Experiment 1}
+
+         \begin{figure}[t!]
+            \centering
+            \includegraphics[width=0.5\textwidth]{stern_gerlach_exp1.png}
+            \caption{Experiment 1}
+         \end{figure}
+
+         In this experiment, no atoms are deflected down at the second analyzer. Also, each analyzer plays a different role; the first analyszer \textbf{prepared} the beam in a specific quantum state ($\ket{+}$) and so it is a \textbf{state preparation device}. The second analyzer \textbf{measures} the prepared beam.
+
+       \subsection{Stern-Gerlach Experiment 2}
+
+         \begin{figure}[t!]
+            \centering
+            \includegraphics[width=0.5\textwidth]{stern_gerlach_exp2.png}
+            \caption{Experiment 2}
+         \end{figure}
+
+         The $X$ analyzer has field gradient in the $x$-direction, ($90^{\circ}$ with respect to the $z$-direction). Also, atoms leaving spin-up / spin-down part of the $X$-analyzer have
+         \[ S_x = + \f{\hbar}{2} \ \ \ / \ \ S_x = - \f{\hbar}{2} \]
+         For input beam $S_z = + \f{\hbar}{2}$ [$\ket{+}$], then 50\% are measured to have $S_x = +\f{\hbar}{2}$. There is the same result for any two different $X$, $Y$, or $Z$ analyser combinations.
+
+       \subsection{Stern-Gerlach Experiment 3}
+
+         \begin{figure}[b!]
+            \centering
+            \includegraphics[width=0.5\textwidth]{stern_gerlach_exp3.png}
+            \caption{Experiment 3}
+         \end{figure}
+
+         Classically, we expect to be able to measure $X$, $Y$, and $Z$ components and figure out the total spin direction.  Experiment 3 shows this is not possible in quantum mechanics, as information is reset or lost when new measurements are made. This is a very generic and key feature of quantum mechanics and comes down to really the statement that \textbf{measurement disturbes the system}. By making a measurement, we change the information of the system. Every time we make a measurement, the system isn't what it was before you made the measurement.
+         \newline
+
+         This is a key feature of quantum mechanics. We cannot have simultaneous knowledge of more than one spin component; this is a fundamental incompatability of knowing spin components along two or more directions. We can say that in quantum mechanics, $S_x$, $S_y$, $S_z$ are \textbf{incompatible observables}. More specifically then, the state represented by $\ket{+}_z = \ket{S_z = +\f{\hbar}{2}}$ or $\ket{+}_x = \ket{S_x = + \f{\hbar}{2}}$ but \textbf{not} $\ket{S_z = +\f{\hbar}{2}, S_x = + \f{\hbar}{2}}$.
+
+      \subsection{Stern-Gerlach Experiment 4}
+
+         \begin{figure}[t!]
+            \centering
+            \includegraphics[width=0.5\textwidth]{stern_gerlach_exp4.png}
+            \caption{Experiment 4}
+         \end{figure}
+
+         The first two demonstrate experiment 3 for both parts of the middle $X$ analyzer independently. The third one gives a surprising result, allowing both parts into the $Z$ analyzer simultaneously then it is as if the middle measurement had not occured. This is reminiscent of interference; adding two outputs results in enhancement in one sector and reduction or cancellation in the other.
+         \newline
+
+       In summary,
+
+       \begin{itemize}
+         \item Experiment 1: State preparation. If we know the input state and choose an appropriate experiment, we remeasure the state with certainty.
+         \item Experiment 2: Probabilistic nature of quantum measurement when the measurement is not matched to the input state.
+         \item Experiment 3: Measurement disturbs the system leading to incompatible observables.
+         \item Experiment 4: Quantum mechanical interference effects can be observed.
+       \end{itemize}
+
+       \subsection{Quantum State Vectors}
+
+         \begin{defn}[Postulate 1]\label{postulate_1}
+         We label the input state with a left \textbf{ket}, $(\ket{\Psi}$), and label the output states with $\ket{+}$ for spin up and $\ket{-}$ for spin down.
+         \end{defn}
+
+         Thus the ket, $\ket{\Psi}$ is part of a vector space called a \textbf{Hilbert Space}. The dimensionality of the Hilbert Space depends on the \textbf{observable}. For the $S_z$ observable ($z$-component of angular momentum), it has two possible values,
+         \[ S_z = \pm \f{\hbar}{2} \]
+         Each value is associated with a state vector $\ket{+}$, $\ket{-}$ (note that no subscript will in general mean the $z$-direction, which is just our notation here), so the Hilbert Space is 2D.
+         \begin{itemize}
+            \item Much like $\hat{x}, \hat{y}, \hat{z}$ vectors span 3D geometric space, the kets $\ket{+}$ and $\ket{-}$ span the 2D Hilbert Space associated with observable $S_z$.
+            \item They are complete (only 2 possible outcomes).
+            \item They are orthogonal; the result is either spin up or spin down.
+          \end{itemize}
+
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
