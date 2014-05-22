@@ -631,6 +631,17 @@
 
      \subsection{Tutorial 2}
 
-     Tutorial 2 concerns coin flipping, the SPINS program, and connections to Quantum Theory. We played games.
+      Tutorial 2 concerns coin flipping, the SPINS program, and connections to Quantum Theory. We played games.
+
+     \subsection{Tutorial 3}
+
+      We are given a matrix $M_2 = \mtx{1 & 0 \\ 0 & -1}$, so first we find the eigenvalues:
+      \[ (1-\lambda)(-1 - \lambda) = 0 \implies \lambda = \pm 1 \]
+      Then for $\lambda_1 = 1$ we get
+      \[ \mtx{0\\0} = \mtx{0 & 0 \\ 0 & -2}\mtx{x_1 \\ x_2} \implies \vv_1 = \mtx{1 \\ 0} \]
+      and $\lambda_2 = -1$ which corresponds to $\vv_2 = \mtx{0 \\ 1}$. Now we want to determine if this matrix is a reflection and if so on what line; well actually this is pretty straightforward because you can see that for any vector, $M_2\mtx{x_1\\x_2} = \mtx{x_1\\-x_2}$ which means it is a vertical reflection (over the $x$-axis).
+      \newline
+
+      Also a little bit on Group Theory.
 
   \end{document}
