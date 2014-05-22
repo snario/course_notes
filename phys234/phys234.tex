@@ -375,7 +375,7 @@
 
        These are being called the essense of quantum mechanics, and there are a number of experiments involved, we're going to analyze each experiment, one by one.
 
-       \subsection{Stern-Gerlach Experiment 1}
+       \subsubsection{Stern-Gerlach Experiment 1}
 
          \begin{figure}[t!]
             \centering
@@ -385,7 +385,7 @@
 
          In this experiment, no atoms are deflected down at the second analyzer. Also, each analyzer plays a different role; the first analyszer \textbf{prepared} the beam in a specific quantum state ($\ket{+}$) and so it is a \textbf{state preparation device}. The second analyzer \textbf{measures} the prepared beam.
 
-       \subsection{Stern-Gerlach Experiment 2}
+       \subsubsection{Stern-Gerlach Experiment 2}
 
          \begin{figure}[t!]
             \centering
@@ -397,7 +397,7 @@
          \[ S_x = + \f{\hbar}{2} \ \ \ / \ \ S_x = - \f{\hbar}{2} \]
          For input beam $S_z = + \f{\hbar}{2}$ [$\ket{+}$], then 50\% are measured to have $S_x = +\f{\hbar}{2}$. There is the same result for any two different $X$, $Y$, or $Z$ analyser combinations.
 
-       \subsection{Stern-Gerlach Experiment 3}
+       \subsubsection{Stern-Gerlach Experiment 3}
 
          \begin{figure}[b!]
             \centering
@@ -410,7 +410,7 @@
 
          This is a key feature of quantum mechanics. We cannot have simultaneous knowledge of more than one spin component; this is a fundamental incompatability of knowing spin components along two or more directions. We can say that in quantum mechanics, $S_x$, $S_y$, $S_z$ are \textbf{incompatible observables}. More specifically then, the state represented by $\ket{+}_z = \ket{S_z = +\f{\hbar}{2}}$ or $\ket{+}_x = \ket{S_x = + \f{\hbar}{2}}$ but \textbf{not} $\ket{S_z = +\f{\hbar}{2}, S_x = + \f{\hbar}{2}}$.
 
-      \subsection{Stern-Gerlach Experiment 4}
+      \subsubsection{Stern-Gerlach Experiment 4}
 
          \begin{figure}[t!]
             \centering
@@ -439,15 +439,141 @@
          Thus the ket, $\ket{\Psi}$ is part of a vector space called a \textbf{Hilbert Space}. The dimensionality of the Hilbert Space depends on the \textbf{observable}. For the $S_z$ observable ($z$-component of angular momentum), it has two possible values,
          \[ S_z = \pm \f{\hbar}{2} \]
          Each value is associated with a state vector $\ket{+}$, $\ket{-}$ (note that no subscript will in general mean the $z$-direction, which is just our notation here), so the Hilbert Space is 2D.
+
          \begin{itemize}
             \item Much like $\hat{x}, \hat{y}, \hat{z}$ vectors span 3D geometric space, the kets $\ket{+}$ and $\ket{-}$ span the 2D Hilbert Space associated with observable $S_z$.
-            \item They are complete (only 2 possible outcomes).
-            \item They are orthogonal; the result is either spin up or spin down.
+            \item They are \textbf{complete} (only 2 possible outcomes).
+            \item They are \textbf{orthogonal}; the result is either spin up or spin down.
+            \item They are also \textbf{normalised}; All Quantum state vectors can (or should be) normalized such that $\braket{\Psi}{\Psi} = 1$.
+         \end{itemize}
+
+         Orthonormal properties are characterised mathematically as
+         \[ \braket{+}{+} = 1 \ \ \ \ \ \ \ \ \braket{+}{-} = 0 \]
+         \[ \braket{-}{-} = 1 \ \ \ \ \ \ \ \ \braket{-}{+} = 0 \]
+
+         Completeness ensures that $\ket{+}, \ket{-}$ can be used as a basis to express any general Quantum Mechanical state as a linear combination of them
+         \[ \mbox{General State Vector \ \ \ } \ket{\Psi} = a\ket{+} + \ket{-} \mbox{ \ \ \ \ \ with $a, b$ complex scalars}  \]
+         The coefficients are inner products, for example consider multiplying on the left by $\ket{+}$,
+         \begin{align*}
+           \braket{+}{\Psi} & = \braket{+}{\left( a\ket{+}+b\ket{-} \right)} \\
+                            & = a\braket{+}{+} + b\braket{+}{-} \\
+                            & = a(1) + b(0) \\
+                            & = a
+         \end{align*}
+
+         Likewise, $\braket{-}{\Psi} = b$. Therfore,
+         \[ \ket{\Psi} = \left( \braket{+}{\Psi} \right)\ket{+} + \left( \braket{-}{\Psi} \right) \ket{-} \]
+          As an aside, the $\bra{+}$ is the bra to the $\ket{+}$, so together $\braket{+}{+}$ is a bra-ket. $\ddot\smile$.
+          \newline
+
+          The dual vector (bra) to the Quantum Mechanical ket $\ket{\Psi}$:
+          \begin{align*}
+            \bra{\Psi} & = a^*\bra{+} + b^*\bra{-} \\
+            \braket{\Psi}{+} & = a^*\braket{+}{+} + b^*\braket{-}{+} = a^*
+          \end{align*}
+          Hence,
+          \[ \braket{\Psi}{+} = a^* = (a)^* = \left( \braket{+}{\Psi} \right)^* = \braket{+}{\Psi}^* \]
+          Finally,
+          \[ \bra{\Psi} = \left( \braket{\Psi}{+} \right) \bra{+} + \left( \braket{+}{-} \right)\bra{-} \]
+          In Quantum Mechanics we require that all kets (vectors) are normalized.
+
+          \begin{exmp}
+            Given a general quantum state vector expressed as a linear combination of th ebasis kets for the 2D Hilbert Space associated with the $S_z$ observable:
+            \[ \ket{\Psi} = a \ket{+} + b\ket{-} \]
+            Derive an expression for the coefficients, $a$ and $b$, which when satisfied ensure that $\ket{\Psi}$ is normalized.
+          \end{exmp}
+
+          First we normalize $\ket{\Psi}$, so
+          \begin{align*}
+             \braket{\Psi}{\Psi} & = 1 \\
+             &= \left( a^*\bra{+} + b^*\bra{-} \right)\left( a\ket{+} + b\ket{-} \right) \\
+             & =a^*a\braket{+}{+} + a^*b\braket{+}{-} + b^*a\braket{-}{+} + b^*b\braket{-}{-} \\
+             & = a^*a + b^*b \\
+             & = 1 \mbox{ \ \ \ (requires normalization)} \\
+             & = |a|^2 + |b|^2
+          \end{align*}
+          or since
+          \[ a = \braket{+}{\Psi} \ \ \ \ \ a^* = \braket{\Psi}{+} \]
+          \[ b = \braket{-}{\Psi} \ \ \ \ \ b^* = \braket{\Psi}{-} \]
+          which implies
+          \[ \left| \braket{+}{\Psi} \right|^2 + \left| \braket{-}{\Psi} \right|^2 = 1 \]
+
+          \begin{defn}[Postulate 4]\label{postulate_4}
+            The probability of obtaining the value $\pm \f{\hbar}{2}$ in a measurement of the observable $S_z$ on a system in the state $\ket{\Psi}$ is
+            \[ P_{\pm} = \left| \braket{\pm}{\Psi} \right|^2 \]
+            where $\ket{\pm}$ is the basis ket of $S_z$ corresponding to the result $\pm \f{\hbar}{2}$.
+          \end{defn}
+
+          \begin{itemize}
+            \item[(i)] $\braket{+}{\Psi}$ is the \textbf{Probability Amplitude}, it must be "squared" (multiply by the complex conjugate) to get a probability.
+            \item[(ii)] Convention is usually to put order of the inner product as $\braket{\mbox{out}}{\mbox{in}}$ but since
+            \[ P = \left| \braket{\mbox{out}}{\mbox{in}}\right|^2  = \braket{\mbox{out}}{\mbox{in}} \braket{\mbox{in}}{\mbox{out}}\]
+            it doesn't really matter.
           \end{itemize}
+          $\ket{\mbox{in}}$ is the input state, and $\ket{\mbox{out}}$ is the output state, whose probability for measurement we are calculating.
 
+          \begin{exmp}
+            A Z-analyzer is used to prepare atoms in the state "spin-up". The spin state if these atoms is then measured using a 2nd Z-analyzer. What is the probability that these atoms are measured as "spin-up" and "spin-down"?
+          \end{exmp}
+          \[ P = \left| \braket{\mbox{out}}{\mbox{in}} \right|^2 \mbox{ \ \ \ \ \ \nameref{postulate_4}} \]
+          The first analyzer prepares the input state to the 2nd analyzer : $\ket{\mbox{in}} = \ket{+}$. The probablilty when $\ket{\mbox{out}} = \ket{+}$ implies that
+          \[ P_+ = \left| \braket{+}{+}\right|^2 = 1 \]
+          then similary for when $\ket{\mbox{out}} = \ket{-}$ we gey
+          \[ P_- = \left| \braket{-}{+}\right|^2 = 0 \]
+          This agrees perfectly with our observations for Stern Gerlach Experiment 1.
 
+          \textbf{Quantum State Tomography} is a way of determining the quantum state based on results of measurement and is the name of this method.
 
+          With regards to Stern Gerlach Experiment 2, let's apply this method:
+          \newline
 
+          The input state is $\ket{+}$ and we measure $S_x$ with output states $\ket{+}_x$ with probability $\f{1}{2}$ and $\ket{-}_x$ with probability $\f{1}{2}$ (giving a sum probability of 1). Next we formulate mathematically using \nameref{postulate_4} :
+          \[ P = \left| \braket{\mbox{out}}{\mbox{in}} \right|^2 \]
+          So,
+          \begin{align*}
+            \ket{\mbox{in}}  = \ket{+} \implies P_{+x} & = \left| {}_x\braket{+}{+} \right|^2 = \f{1}{2} & (1) \\
+            P_{-x} & = \left| {}_x\braket{-}{+} \right|^2 = \f{1}{2} & (2) \\
+          \end{align*}
+          and the result should be the same if $\ket{\mbox{in}} = \ket{-}$ (Experiment 4b)
+          \begin{align*}
+            \ket{\mbox{in}}  = \ket{-} \implies P_{+x} & = \left| {}_x\braket{+}{-} \right|^2 = \f{1}{2} & (3) \\
+            P_{-x} & = \left| {}_x\braket{-}{-} \right|^2 = \f{1}{2} & (4) \\
+          \end{align*}
+          Since $\ket{+}$ and $\ket{-}$ are basis states that SPAN the 2D Hilbert Space then kets for outputs of other Stern Gerlach measurements can be expressed as linear combinations of them. For example, $S_x$ output states
+          \begin{align*}
+            \ket{+}_x & = a \ket{+} + b\ket{-} \\
+            \ket{-}_x & = c \ket{+} + d\ket{-}
+          \end{align*}
+          for $a,b,c,d \in \C$. Now,
+          \begin{align*}
+            P_{+x} & = \left| {}_x\braket{+}{+} \right|^2 & = \left| \left( a^*\bra{+} + b^*\bra{-} \right)\ket{+} \right|^2 \\
+            & = \left|  a^*\braket{+}{+} + b^*\bra{-}{+} \right|^2 \\
+            & = |a|^2 \\
+            & = \f{1}{2} \mbox{ \ \ \ \ \ (from experiment)}
+          \end{align*}
+          Similary we can use (2), (3), and (4) to show that $|b|^2 = |c|^2 = |d|^2 = \f{1}{2}$.
+          \newline
+
+          The coefficients $a,b,c,d$ are complex numbers implying that the amplitude of the phase is
+          \[ re^{i\theta} \]
+          \begin{note}
+            The overall phase (global phase) of a quantum state vector is not physically meaningful - this means it doesn't affect the computation of probabilities (Assignment 3).
+          \end{note}
+
+          Only the relative phase between components of a ket (vector) is important, that is between $a$ and $b$ or $c$ and $d$. This means that we chose one component to be real ($\theta = 0$) and one complex ($\theta \not = 0$).
+          \newline
+
+          Say $a = r_1e^{i\theta_1}$ and $b = r_2e^{i\theta_2}$, then only $\theta_2 - \theta_1$ matters for quantum mechanics so we rotate the vectors to make one real. \newline
+
+          This means we can solve for $a$, $b$, $c$, and $d$ in the following way
+          \begin{align*}
+            \ket{+}_x & = \f{1}{\sqrt{2}}\ket{+} + \f{1}{\sqrt{2}}e^{i\alpha}\ket{-} \\
+            \ket{-}_x & = \f{1}{\sqrt{2}}\ket{+} + \f{1}{\sqrt{2}}e^{i\beta}\ket{-}
+          \end{align*}
+
+          We can check,
+
+          \[ P_{+x} = \left| \braket{\mbox{out}}{\mbox{in}} \right|^2 = \left| \left( \f{1}{\sqrt{2}}\ket{+} + \f{1}{\sqrt{2}}e^{i\alpha}\ket{-} \right) \ket{+} \right|^2 = \f{1}{2}\]
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
