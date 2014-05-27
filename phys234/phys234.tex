@@ -1,4 +1,5 @@
 \documentclass[english, 11pt]{article}
+\usepackage[makeroom]{cancel}
 \usepackage{../notes}
 
 \newcommand{\thiscoursecode}{PHYS 234}
@@ -518,7 +519,7 @@
           \[ P = \left| \braket{\mbox{out}}{\mbox{in}} \right|^2 \mbox{ \ \ \ \ \ \nameref{postulate_4}} \]
           The first analyzer prepares the input state to the 2nd analyzer : $\ket{\mbox{in}} = \ket{+}$. The probablilty when $\ket{\mbox{out}} = \ket{+}$ implies that
           \[ P_+ = \left| \braket{+}{+}\right|^2 = 1 \]
-          then similary for when $\ket{\mbox{out}} = \ket{-}$ we gey
+          then similary for when $\ket{\mbox{out}} = \ket{-}$ we get
           \[ P_- = \left| \braket{-}{+}\right|^2 = 0 \]
           This agrees perfectly with our observations for Stern Gerlach Experiment 1.
 
@@ -546,8 +547,8 @@
           \end{align*}
           for $a,b,c,d \in \C$. Now,
           \begin{align*}
-            P_{+x} & = \left| {}_x\braket{+}{+} \right|^2 & = \left| \left( a^*\bra{+} + b^*\bra{-} \right)\ket{+} \right|^2 \\
-            & = \left|  a^*\braket{+}{+} + b^*\bra{-}{+} \right|^2 \\
+            P_{+x} = \left| {}_x\braket{+}{+} \right|^2 & = \left| \left( a^*\bra{+} + b^*\bra{-} \right)\ket{+} \right|^2 \\
+            & = \left|  a^*\braket{+}{+} + b^*\braket{-}{+} \right|^2 \\
             & = |a|^2 \\
             & = \f{1}{2} \mbox{ \ \ \ \ \ (from experiment)}
           \end{align*}
@@ -571,9 +572,98 @@
             \ket{-}_x & = \f{1}{\sqrt{2}}\ket{+} + \f{1}{\sqrt{2}}e^{i\beta}\ket{-}
           \end{align*}
 
-          We can check,
+          We still need to determine the phases $\alpha$ and $\beta$. We can check,
 
           \[ P_{+x} = \left| \braket{\mbox{out}}{\mbox{in}} \right|^2 = \left| \left( \f{1}{\sqrt{2}}\ket{+} + \f{1}{\sqrt{2}}e^{i\alpha}\ket{-} \right) \ket{+} \right|^2 = \f{1}{2}\]
+
+          If we consider experiment 1 with an $X$-analyser, we would establish orthonormal properties of $\ket{+}_x$ and $\ket{-}_x$. That is,
+          \begin{align*}
+            {}_x\braket{+}{+}_x & = {}_x\braket{-}{-}_x = 1 \mbox{ \ \ (normalized)} \\
+            {}_x\braket{+}{-}_x & = {}_x\braket{-}{+}_x = 0 \mbox{ \ \ (orthogonal)}
+          \end{align*}
+          Also, orthogonality shows
+          \begin{align*}
+            {}_x\braket{+}{+}_x & = \f{1}{\sqrt{2}} \left( \ket{+} + e^{-i\beta}\ket{-} \right)\cdot\f{1}{\sqrt{2}}\left( \ket{+}+e^{i\alpha}\ket{-} \right) = 0 \\
+            & = \f{1}{2} \left( \cancelto{1}{\braket{+}{+}} + e^{-i\beta}\cancelto{0}{\braket{-}{+}} + e^{-i\alpha}\cancelto{0}{\braket{+}{-}} + e^{i(\alpha -\beta)}\cancelto{1}{\braket{-}{-}} \right) = 0\\
+            & \implies \f{1}{2}\left( 1 + e^{i(\alpha-\beta)} \right) = 0 \\
+            & \implies  e^{i\alpha}  = -e^{i\beta}
+          \end{align*}
+
+          This is all the information we have to determine $\alpha$ and $\beta$. So, we choose $\alpha = 0$, so $e^{i\alpha}$ and $e^{i\beta} =-1$. Thus,
+          \begin{align*}
+            \ket{+}_x & = \f{1}{\sqrt{2}} \left( \ket{+} + \ket{-} \right) \\
+            \ket{-}_x & = \f{1}{\sqrt{2}} \left( \ket{+} - \ket{-} \right) \\
+          \end{align*}
+
+          Similar analysis leads to,
+
+          \begin{align*}
+            \ket{+}_y & = \f{1}{\sqrt{2}} \left( \ket{+} + i\ket{-} \right) \\
+            \ket{-}_y & = \f{1}{\sqrt{2}} \left( \ket{+} - i\ket{-} \right) \\
+          \end{align*}
+
+          \subsection{Matrix Notation}
+
+          If an ordered set of vectors is chosen as a basis, then we can express a general state as a linear combination of them.
+          \[ \ket{\Psi} = a\ket{+} + b\ket{-} \]
+          or as an ordered array of coefficients $a$, $b$ in co-ordinate representation.
+          \begin{align*}
+            \ket{+} \xrightarrow[\mbox{basis}]{S_z} \mtx{a \\ b} = \mtx{\braket{+}{\Psi} \\ \braket{-}{\Psi}} \ \ \ \ \ \ \mbox{(column vector)}
+          \end{align*}
+
+          \begin{align*}
+            \ket{\Psi} = \kplx = \f{1}{\sqrt{2}} \ket{+} + \f{1}{\sqrt{2}}\ket{-} \xrightarrow[\mbox{basis}]{S_z} \f{1}{\sqrt{2}} \mtx{1 \\ 1} \\
+            \ket{\Psi} = \kmiy = \f{1}{\sqrt{2}} \ket{+} - \f{i}{\sqrt{2}}\ket{-} \xrightarrow[\mbox{basis}]{S_z} \f{1}{\sqrt{2}} \mtx{1 \\ -i}
+          \end{align*}
+
+          \begin{note}
+            Basis vectors are unit vectors when expressed in co-ordinate representation with respect to their own basis. For example,
+            \[ \kpsi = \ket{+} = 1\ket{+} + 0\ket{-} = \mtx{1\\0} \]
+          \end{note}
+
+          For the dual space,
+
+          \[ \kpsi = a^*\bp + b^*\bm \xrightarrow[\mbox{basis}]{S_z} (a^*, b^*) \ \ \ \ \mbox{row vector} \]
+          remember that the bra is the conjugate transpose of ket. So for the inner product,
+          \[ \braket{\Psi}{\Psi} = (a^* \  b^*)\mtx{a \\ b} = |a|^2 + |b|^2 \]
+          Let's revisit $\ket{\pm}_y$ in Matrix Notation, first consider experiment 2, but with $X$, replaced by $Y$ (the probabilities measured will be the same).
+
+          \begin{figure}[t!]
+            \centering
+            \includegraphics[width=0.5\textwidth]{stern_gerlach_exp2.png}
+            \caption{Experiment 2}
+          \end{figure}
+
+          Then, if $\ket{\mbox{in}} = \kp$,
+          \begin{align*}
+            Prob_{+y} & = \left| {}_y\braket{+}{+} \right|^2 = \f{1}{2} \\
+            Prob_{-y} & = \left| {}_y\braket{-}{+} \right|^2 = \f{1}{2}
+          \end{align*}
+          otherwise if $\ket{\mbox{in}} = \km$,
+          \begin{align*}
+            Prob_{+y} & = \left| {}_y\braket{+}{-} \right|^2 = \f{1}{2} \\
+            Prob_{-y} & = \left| {}_y\braket{-}{-} \right|^2 = \f{1}{2}
+          \end{align*}
+          Then if we use $\kply = r\kp + s\km$ and $\kmiy = t\kp + u\km$ and orthonormality of $\ket{\pm}_y$ to  get
+          \begin{align*}
+            \kply & = \f{1}{\sqrt{2}} \left( \kp + e^{i\theta}\km \right) \xrightarrow[\mbox{basis}]{S_z}  \f{1}{\sqrt{2}} \mtx{1 \\e^{i\theta}} \\
+            \kmiy & = \f{1}{\sqrt{2}} \left( \kp - e^{i\theta}\km \right) \xrightarrow[\mbox{basis}]{S_z}  \f{1}{\sqrt{2}} \mtx{1 \\-e^{i\theta}}
+          \end{align*}
+          To determine the phase angle $\theta$ we need to consider Experiment 2 but with state preparation $\ket{\pm}_x$ (not $\ket{\pm}$, ($z$-analyzer))
+          \[ \ket{\mbox{in}} = \kplx \ \ \ \ \ Prob_{+y} = \left| {}_y\braket{+}{+}_x \right|^2 = \f{1}{2} \]
+          compute the inner product using Matrix notation
+          \begin{align*}
+            {}_y\braket{+}{+}_x & = \f{1}{\sqrt{2}}(1 \ \ e^{-i\theta})\f{1}{\sqrt{2}}\mtx{1\\1} = \f{1}{2} (1 + e^{-i\theta}) \\
+            \left| {}_y\braket{+}{+}_x \right|^2 & = \f{1}{2}(1 + e^{-i\theta})\f{1}{2}(1 +  e^{i\theta}) = \f{1}{4}(1 + e^{-i\theta} + e^{i\theta} + 1)
+          \end{align*}
+          then using Euler,
+          \begin{align*}
+            \left| {}_y\braket{+}{+}_x \right|^2 & = \f{1}{2}( 1 + \cos\theta) = \f{1}{2} \ \ \ \ \longleftarrow \mbox{from experiment}
+          \end{align*}
+          which implies $\cos\theta = 0$ and so $\theta = \pm \f{\pi}{2}$. So the two possible oputcomes correspond to RH or LH orientation of $Y$ with respect to $X$ and $Z$. Let's choose the RH slution $\theta = \f{\pi}{2}$ then
+          \begin{align*}
+            \kply \xrightarrow[\mbox{basis}]{S_z} \f{1}{\sqrt{2}} \mtx{1 \\ 1}, \ \ \ \ \kmiy \xrightarrow[\mbox{basis}]{S_z} \f{1}{\sqrt{2}} \mtx{1 \\ -i}
+          \end{align*}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
