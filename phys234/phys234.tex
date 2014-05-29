@@ -665,6 +665,171 @@
             \kply \xrightarrow[\mbox{basis}]{S_z} \f{1}{\sqrt{2}} \mtx{1 \\ 1}, \ \ \ \ \kmiy \xrightarrow[\mbox{basis}]{S_z} \f{1}{\sqrt{2}} \mtx{1 \\ -i}
           \end{align*}
 
+    \subsection{General Quantum Systems}
+
+      Consider a measurement of observable $A$, which yields results $a_1, a_2, \ldots, a_n$ (discrete and finite). The states associated with each outcome are described by kets, $\ket{a_1}, \ket{a_2}, \ldots, \ket{a_n}$. These kets are orthogonal (in the sense that any single measurement on a single particle yields only 1 outcome).
+      \newline
+
+      Mathematically, $\braket{a_i}{a_j} = \delta_{ij} = \piecewise{1}{if $i = j$}{0}{if $i \not = j$}$.
+      \newline
+
+      The set of kets is complete (they span the Hilbert Space associated with observable $A$). They can be used to express any arbitrary state as a linear combination.
+
+      \[ \ket{\Psi} = \alpha_1\ket{\alpha_1} + \alpha_2\ket{a_2} + \cdots + \alpha_n\ket{a_n} \]
+
+      with $\alpha_i = \braket{a_1}{\Psi}$. So, given $\ket{\Psi}$ as an input state to a measurement of observable $A$ with results $a_i$ and associates states $\ket{a_i}$, the probability for obtaining result $a_i$ is given by
+
+      \[ Prob_{(a_i)} = |\braket{a_i}{\Psi}|^2 \ \ \ \ \ \ \ \ \ \ [\mbox{\nameref{postulate_4}}] \]
+
+      \begin{exmp}
+        Consider a quantum systemw ith an observable $A$ that has three possible measurement outcomes, with values $a_1, a_2$ and $a_3$. The quantum state associated with each of these outcomes is described by the three orthonormal kets:
+        \[ \ket{a_1}, \ket{a_2}, \ket{a_3}  \]
+        A system is prepared in the state that is a superposition of the three basis kets:
+        \[ \ket{\Psi} = 2\ket{a_1} - 3\ket{a_2} + 4i\ket{a_3} \]
+        Calculate the probability for each of the possible outcomes if a measurement of $A$ is made on the state.
+      \end{exmp}
+
+      So,
+
+      \[ \ket{\mbox{in}} = \ket{\Psi} = 2\ket{a_1} - 3\ket{a_2} + 4i\ket{a_3} \ \ \ \ \ \mbox{with} \ \ \ket{a_1}, \ket{a_2}, \ket{a_3} \ \ \mbox{orthogonal, normalised basis set} \]
+
+      First we normalize the state vector. Let $\ket{\Psi} = C \left( 2\ket{a_1} - 3\ket{a_2} + 4i\ket{a_3} \right)$, then
+
+      \begin{align*}
+        1 & = \braket{\Psi}{\Psi} \\
+          & = C^* \left( 2\bra{a_1} - 3\bra{a_2} - 4i\bra{a_3} \right) C \left( 2\ket{a_1} - 3\ket{a_2} + 4i\ket{a_3} \right) \\
+          & = |C|^2 \left( 4\braket{a_1}{a_1} + 9\braket{a_2}{a_2} + 16\braket{a_3}{a_3}) \right) \\
+          |C|^2 & = \f{1}{29}
+      \end{align*}
+
+      So, $C = \f{1}{29}$. Note that I skipped the full expansion, but remember that mismatched bra and ket pairs have inner product 0, and same pairs have inner product 1. Okay then, let's get the probabilities.
+
+      \begin{align*}
+         Prob_{a_1} = \left| \braket{\mbox{out}}{\mbox{in}} \right|^2 & = Prob_{a_1} = \left| \braket{a_1}{\Psi} \right|^2 \\
+         & = \left| \braket{a_1}{\f{1}{\sqrt{29}}\left( 2\ket{a_1} - 3\ket{a_2} + 4i\ket{a_3} \right)} \right|^2 \\
+         & = \left| \f{1}{\sqrt{29}} \braket{a_1}{\left( 2\braket{a_1}{a_1} - 3\braket{a_1}{a_2} + 4i\braket{a_1}{a_3} \right)} \right|^2 \\
+         & = \left| \f{2}{\sqrt{29}} \right|^2 \\
+         & = \f{4}{29}
+      \end{align*}
+
+      Likewise, $Prob_{a_2} = \f{9}{29}$, $Prob_{a_3} = \f{16}{29}$ (check $Prob_{a_1} + Prob_{a_2} + Prob_{a_3} = 1$)
+
+    \subsection{Quantum Mechanical Operators and Measurement}
+
+      The goal is to be able to make prediction about measurements that haven't been done yet.
+
+      \subsubsection{Operators, Eigenvalues, \& Eigenvectors}
+
+        \begin{defn}[Postulate 2]\label{postulate_2}
+          A physical observable is represented mathematically by an operator $A$ that acts on kets.
+
+          \[ A\ket{\Psi} = \phi \]
+        \end{defn}
+
+        where $A$ is an operator that represents a physical observable.
+        \newline
+
+        For each operator there are "special" (eigen) kets that are not transformed by the operator except for being multiplied by a scalar constant, which has no measureable effect on the state (we will normalize anyway). So,
+
+        \[ \mbox{Eigenvector} = \mbox{unchanged ket (eigenstate, eigenket)} \]
+        \[ \mbox{Eigenvalue} = \mbox{multiplicative constant} \]
+
+        So, the Eigen-equation is
+
+        \[ A\ket{\Psi} = a\ket{\Psi} \]
+
+        where $A$ is an \textbf{operator}, $a$ is an \textbf{eigenvalue}, and $\ket{\Psi}$ is an \textbf{eigenstate}.
+
+        \begin{defn}[Postulate 3]\label{postulate_3}
+          The only possible result of a measurement of an observable is one of the eigenvalues $a_n$ of the corresponding operator $A$. Eigenvalues are the outputs of measurements.
+        \end{defn}
+
+        \begin{exmp}
+          Define operator $S_z$ associated with measurement of the observable that in the $z$-component of intrinsic angular momentum.
+
+          \[ S_z \ket{+} = +\f{\hbar}{2}\ket{+} \]
+          \[ S_z \ket{-} = -\f{\hbar}{2}\ket{-} \]
+
+          We are using Abstract notation here. Note that the eigenvalues are $\pm \f{\hbar}{2}$ and the eigenvectors of $S_z$ are $\ket{\pm}$.
+        \end{exmp}
+
+      \subsubsection{Hermitian Operators}
+
+        Operators used in Quantum Mechanics are Hermitian operators. This means that the operator is equal to its adjoint (conjugate transpose), that is
+
+        \[ A = A^\dagger \]
+
+        Why Hermitian?
+        \begin{itemize}
+          \item[(i)] Eigenvalues of Hermitian operators are real. (Quantum Mechanics interpretation is that they are results of measurements, to they must be real numbers (Energy, position, component of span))
+          \item[(ii)] Eigenvectors of Hermitian operators form a complete set of basis vectors.
+          \item[(iii)] Same operator for the dual space vectors. So,
+          \[ A\ket{\alpha} = \ket{\beta} \ \ \ \ \ \mbox{operator $A$ acts to right on ket $\ket{\alpha}$} \]
+          \[ \bra{\alpha}B = \bra{\gamma} \ \ \ \ \ \mbox{operator $B$ acts to left on bra $\ket{\alpha}$} \]
+          For $\bra{\gamma} = \ket{\beta}$, then $B = A^\dagger$. So if $A = A^\dagger$ then the operator can act to the left or the right to give appropriate dual space relationship. Note that the dual space is transformed in the same way as original space.
+          \[ A\ket{\alpha} = \kb \]
+          \[ \bra{\alpha}A = \bra{\beta} \]
+        \end{itemize}
+
+      \subsubsection{Completeness Relationship}
+
+        We have already seen operators, but didn't realize it.
+
+        \[ \ket{\Psi} = a\kp + b\km \mbox{ \ \ \ with \ } a = \braket{+}{\Psi}, b = \braket{-}{\Psi} \]
+        \begin{align*}
+          \ket{\Psi} & = \braket{+}{\Psi}\ket{+} + \braket{-}{\Psi}\km \\
+          & = \kp\braket{+}{\Psi} + \ket{-}\braket{-}{\Psi} \\
+          & = \left( \ket{+}\bra{+} \right) \ket{\Psi} + \left( \ket{-}\bra{-} \right) \ket{\Psi} \\
+          & = \left( \ket{+}\bra{+} + \ket{-}\bra{-} \right)\ket{\Psi}
+        \end{align*}
+
+        Hence $\ket{+}\bra{+} + \ket{-}\bra{-} = I$, the identity operator. This is known as the completeness relation. Note that $\ket{+}\bra{+}$ and $\ket{-}\bra{-}$ are projection operators, and are an example of an outer product.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
