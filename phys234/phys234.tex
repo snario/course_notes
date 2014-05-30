@@ -260,7 +260,7 @@
         The complex conjugate of every element.
         \end{defn}
         \begin{defn}[adjoint]\label{adjoint}
-        The conjugate transpose of a matrix. Inidicated by a dagger symbol $\hat{T}^\dagger$. A square matrix is \textbf{Hermitian} if matrix and adjoint are equal $\hat{T} = \hat{T}^{\dagger}$. Vector space and dual are related by adjoint.
+        The conjugate transpose of a matrix. Indicated by a dagger symbol $\hat{T}^\dagger$. A square matrix is \textbf{Hermitian} if matrix and adjoint are equal $\hat{T} = \hat{T}^{\dagger}$. Vector space and dual are related by adjoint.
         \end{defn}
         \[ \ket{\alpha} = \mtx{a_1 \\ a_2 \\ \vdots \\ a_n} = a \implies \mbox{DUAL} = a^\dagger = (a_1^*, a_2^*,
         \ldots, a_n^*) \]
@@ -783,7 +783,7 @@
           & = \left( \ket{+}\bra{+} + \ket{-}\bra{-} \right)\ket{\Psi}
         \end{align*}
 
-        Hence $\ket{+}\bra{+} + \ket{-}\bra{-} = I$, the identity operator. This is known as the completeness relation. Note that $\ket{+}\bra{+}$ and $\ket{-}\bra{-}$ are projection operators, and are an example of an outer product.
+        Hence $\ket{+}\bra{+} + \ket{-}\bra{-} = \mathbb{1}$, the identity operator. This is known as the completeness relation. Note that $\ket{+}\bra{+}$ and $\ket{-}\bra{-}$ are projection operators, and are an example of an outer product.
 
 
 
@@ -898,5 +898,56 @@
       \newline
 
       Also a little bit on Group Theory.
+
+     \subsection{Tutorial 4}
+
+      On the theory of ideal finite-dimensional Quantum Mechanics and for an application, a Numerical QST Exercise.
+
+      \begin{figure}[b!]
+            \centering
+            \includegraphics[width=0.8\textwidth]{any_physics.png}
+            \caption{"Any physical experiment, classical, quantum, or other, can be viewed as the type of experiment described here." - L. Hardy (2001)}
+      \end{figure}
+
+      Axioms for Finite-Dimensional Quantum Mechanics
+
+      \begin{itemize}
+        \item Axiom 0. Systems Exist
+        \item Axiom 1. For each preparation device $\mathcal{P}$, there is an associated $\ket{\Psi} \in \C^d : \braket{\Psi}{\Psi} = 1$.
+        \item Axiom 2. For each transformation channel $\mathcal{T}$, there is an associated $u \in U(\C^d), \ket{\Psi} \rightarrow u\ket{\Psi}$
+        \item Axiom 3. For each measurement device $\mathcal{M}$, there is an associated Hermitian $A$ with eigenvalues $\lambda_r$ and eigenkets $\ket{\xi_r}$ such that for input $\ket{\phi}$,
+        \[ pr(\lambda_r) = \left| \braket{\phi}{\xi_r}\right|^2 \]
+        This is The Born Rule.
+      \end{itemize}
+
+      \begin{note}
+        $uu^\intercal = \mathbb{1}$ implies unitary, and $A = A^\intercal$ implies hermitian.
+      \end{note}
+
+      \begin{exmp}
+        Suppose that we have some preparation device with four possible states $\Psi_1, \Psi_2, \Psi_3, \Psi_4$, then we can describe $\Psi_1$ as
+        \[ \ket{\Psi_1} = a\ket{+_z} + be^{i\theta}\ket{-_z} \]
+        for $a, b \in \R_+$, and $\theta \in [0, 2\pi]$. Then,
+        \[ pr(+_z) = \left|\braket{\Psi}{+_z}\right|^2 = a^2\]
+        and remember that $a^2 + b^2 = 1$. Also,
+        \begin{align*}
+          pr(+_x) & = \left| \braket{\Psi}{+_x} \right|^2 \\
+                  & = \left| \left( a \bra{+_z}+be^{-i\theta}\bra{-_z} \right) \left( \f{\ket{+_z} + \ket{-_z}}{\sqrt{2}} \right) \right|^2 \\
+                  & = \f{1}{2} \left| a + be^{-i\theta} \right|^2 \\
+                  & = \f{1}{2} \left( a^2 + b^2 + ab \left( e^{-i\theta + e^{i\theta}} \right) \right) \\
+          pr(+_x) & = \f{1}{2} (1 + 2ab\cos\theta)
+        \end{align*}
+
+        Using this framework we can find $a_r$, $b_r$, and $\theta_r$ from experimental results (finding $pr(+_x)$, $pr(+_y)$, $pr(+_z)$ for each $\Psi_r$)
+      \end{exmp}
+
+      \begin{exmp}
+        Prove that $\left|\braket{\Psi}{\phi}\right|^2 = \left|\braket{\tau}{\phi}\right|^2$ where $\ket{\tau} = e^{i\theta} \ket{\Psi}$, for $\ket{\Psi}, \ket{\phi} \in \C^d$.
+        \newline
+        \begin{align*}
+          \left|\braket{\tau}{\phi}\right|^2 & = |e^{-i\theta}|^2\left|\braket{\Psi}{\phi}\right|^2 \\
+          & = \left|\braket{\Psi}{\phi}\right|^2 \\ \braket{\tau}{\phi} & = \braket{\Psi}{\phi}
+        \end{align*}
+      \end{exmp}
 
   \end{document}
