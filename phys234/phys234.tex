@@ -785,11 +785,73 @@
 
         Hence $\ket{+}\bra{+} + \ket{-}\bra{-} = \mathbb{1}$, the identity operator. This is known as the completeness relation. Note that $\ket{+}\bra{+}$ and $\ket{-}\bra{-}$ are projection operators, and are an example of an outer product.
 
+        More generally for any orthonormal basis, $\ket{e_1}, \ket{e_2}, \ldots, \ket{e_n}$,
+        \[ \sum_{i=1}^n \ket{e_i}\bra{e_i} = \mathbb{1} \ \ \mbox{identity} \]
 
+      \subsubsection{Spectral Decomposition}
 
+        Clearly there exists a very close relationship between an operator, its eigenvalues, and its eigenvectors. In general, any operator is related to its eigenvectors and eigenvalues by
+        \[ \mbox{Operator } A = \sum_i a_i \ket{a_i}\bra{a_i} \]
+        where $a_i$ is an eigenvalue and $\bra{a_i}$ and $\ket{a_i}$ are eigenvectors (eigenkets).
 
+        \begin{exmp}
+          Use the eigen-equations for the $S_z$ operator to verify the spectral decomposition relationship.
 
+          \[ S_z\ket{+} = +\f{\hbar}{2}\kp, \ \ \ \ \ S_z\km = -\f{\hbar}{2}\km \ \ \ \mbox{are eigen-equations} \]
 
+          So we multiply by the appropriate bra,
+          \[ S_z\ket{+}\bra{+} = +\f{\hbar}{2}\kp\bra{+}, \ \ \ \ \ S_z\km\bra{-} = -\f{\hbar}{2}\km\bra{-} \]
+          Add the two equations together and factorize
+          \begin{align*}
+            S_z\kp\bra{+} + S_z\km\bra{-} & = +\f{\hbar}{2}\kp\bra{+} + -\f{\hbar}{2}\ket{-}\bra{-} \\
+            S_z(\kp\bra{+} + \km\bra{-}) & = +\f{\hbar}{2}\kp\bra{+} + -\f{\hbar}{2}\ket{-}\bra{-} \\
+            S_z & = +\f{\hbar}{2}\ket{+}\bra{+} + -\f{\hbar}{2}\ket{-}\bra{-}
+          \end{align*}
+        \end{exmp}
+
+    \subsection{More on Matrix Notation}
+
+      Kets are 2D vectors (defined by Hilbert Space for Stern Gerlach experiments), and operators must be a $2\times 2$ matrix. Matrix elements are defined (according to ruels of linear algebra) as follows:
+
+      \[ S_z \xrightarrow[\mbox{basis}]{S_z}  \mtx{\bra{+}S_z\ket{+} & \bra{+}S_z\ket{-} \\ \bra{-}S_z\kp & \bra{-}S_z\km} = \mtx{\bra{+}\f{+\hbar}{2}\ket{+} & \bra{+}\f{-\hbar}{2}\ket{-} \\ \bra{-}\f{+\hbar}{2}\kp & \bra{-}\f{-\hbar}{2}\km} = \f{\hbar}{2} \mtx{1 & 0 \\ 0 & - 1} \]
+
+      We can check the math for our eigen-equations
+
+      \[ S_z \xrightarrow[\mbox{basis}]{S_z} \f{\hbar}{2}\mtx{1 & 0 \\ 0 & -1} \ \ \ \ \kp \xrightarrow[\mbox{basis}]{S_z} \mtx{1 \\ 0} \ \ \ \ \km \xrightarrow[\mbox{basis}]{S_z} \mtx{0 \\ 1} \]
+
+      We want to see $S_z\kp$,
+
+      \[ S_z\kp = +\f{\hbar}{2} \kp\xrightarrow[\mbox{basis}]{S_z} +\f{\hbar}{2}\mtx{1 & 0 \\ 0 & -1}\mtx{1 \\ 0} = +\f{\hbar}{2}\mtx{1\\0} \]
+
+      \begin{note}
+        Operators are always diagonal in their own basis and eigenvectors are always unit vectors in their own basis.
+      \end{note}
+
+    \subsection{Expectation Values}
+
+      Quantum Mechanics allows us to compute probabilities for outcomes of measurements. Another useful quantity is the mean average value of many repeated measurements on the same initial system. This is known as the expectation value in Quantum Mechanics. Consider observable $X$ with $i$ eigenvalues $x_i$ (measured elements).
+
+      \[ \mbox{Expectation Value } \E{x} = \sum_i x_i prob(x_i) \]
+
+      For $z$-component of angular momentum, characterised by $S_z$ operator with eigenvalues $+\f{\hbar}{2}$,
+
+      \[ \E{S_z} = +\f{\hbar}{2}prob_+ + -\f{\hbar}{2}prob_- \ \ \ \ \ (1) \]
+
+      Given an input state $\kpsi$,
+      \begin{align*}
+        \E{S_z} & = +\f{\hbar}{2} \left| \braket{+}{\Psi} \right|^2 + -\f{\hbar}{2} |\braket{-}{\Psi}|^2 \\
+        & = +\f{\hbar}{2} \left( \braket{\Psi}{+}\braket{+}{\Psi} \right) + -\f{\hbar}{2} \left( \braket{\Psi}{-}\braket{-}{\Psi} \right) \\
+        & = \bra{\Psi} \left( \underbrace{+\f{\hbar}{2} \ket{+}\bra{+} + -\f{\hbar}{2}\ket{-}\bra{-}}_{\mbox{spectral decomposition for $S_z$}} \right) \ket{\Psi}
+      \end{align*}
+
+      Then,
+
+      \[ \E{S_z} = \bra{\Psi}S_z\ket{\Psi} \ \ \ \ \ \ \ (2) \]
+
+      The expression (2) is completely general: given an operator $\Lambda$ representing a Quantum Mechanical observable with eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$, and eigenkets $\ket{\lambda_1}, \ket{\lambda_2}, \ldots, \ket{\lambda_n}$ then $\Lambda$ can be expressed as
+      \[ \Lambda = \sum_{i=1}^n \lambda_i \ket{\lambda_i}\bra{\lambda_i} \ \ \ \ \mbox{spectral decomposition} \]
+      If a measurement of $\Lambda$ is made on an arbitrary input state $\ket{+}$, the expectation value of many repeated identical measurements will be
+      \[ \E{\Lambda} = \bra{\Psi}\Lambda\ket{\Psi} \ \ \ \ \mbox{Expectation value} \]
 
 
 
