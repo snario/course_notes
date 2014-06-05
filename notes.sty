@@ -20,6 +20,7 @@
 \usepackage{enumerate}
 \usepackage{tikz}
 \usepackage{listings}
+\usepackage{bbold}
 \usepackage{thmtools}
 \usepackage{
 nameref,%\nameref
@@ -107,9 +108,11 @@ Last Revision: \today
      \end{array}
    \right.}
 
-\newcommand{\bra}[1]{\left. \langle #1 \right|}
-\newcommand{\ket}[1]{\left| #1 \rangle \right.}
-\newcommand{\braket}[2]{\langle #1 | #2 \rangle}
+\newcommand{\trace}[1]{\mbox{Tr}\ensuremath{\left\{ #1 \right\}}}
+\newcommand{\tr}[1]{\trace{#1}}
+\newcommand{\bra}[1]{\ensuremath{\left\langle#1\right|}}
+\newcommand{\ket}[1]{\ensuremath{\left|#1\right\rangle}}
+\newcommand{\braket}[2]{\ensuremath{\left\langle#1 \vphantom{#2}\middle|  #2 \vphantom{#1}\right\rangle}}
 \newcommand{\ba}{\bra{\alpha}}
 \newcommand{\bb}{\bra{\beta}}
 \newcommand{\bg}{\bra{\gamma}}
@@ -125,6 +128,7 @@ Last Revision: \today
 \newcommand{\kmix}{\ket{-}_x}
 \newcommand{\kply}{\ket{+}_y}
 \newcommand{\kmiy}{\ket{-}_y}
+\newcommand{\E}[1]{\langle #1 \rangle}
 \newcommand{\mtx}[1]{\left(\begin{matrix}#1\end{matrix}\right)}
 \newcommand{\ebasis}{\ket{e_1}, \ket{e_2}, \ldots, \ket{e_n}}
 \newcommand{\angstrom}{\mbox{\normalfont\AA}}

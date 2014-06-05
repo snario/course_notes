@@ -748,7 +748,7 @@
           Define operator $S_z$ associated with measurement of the observable that in the $z$-component of intrinsic angular momentum.
 
           \[ S_z \ket{+} = +\f{\hbar}{2}\ket{+} \]
-          \[ S_z \ket{-} = -\f{\hbar}{2}\ket{-} \]
+          \[ S_z \ket{-} = \f{-\hbar}{2}\ket{-} \]
 
           We are using Abstract notation here. Note that the eigenvalues are $\pm \f{\hbar}{2}$ and the eigenvectors of $S_z$ are $\ket{\pm}$.
         \end{exmp}
@@ -797,15 +797,15 @@
         \begin{exmp}
           Use the eigen-equations for the $S_z$ operator to verify the spectral decomposition relationship.
 
-          \[ S_z\ket{+} = +\f{\hbar}{2}\kp, \ \ \ \ \ S_z\km = -\f{\hbar}{2}\km \ \ \ \mbox{are eigen-equations} \]
+          \[ S_z\ket{+} = +\f{\hbar}{2}\kp, \ \ \ \ \ S_z\km = \f{-\hbar}{2}\km \ \ \ \mbox{are eigen-equations} \]
 
           So we multiply by the appropriate bra,
-          \[ S_z\ket{+}\bra{+} = +\f{\hbar}{2}\kp\bra{+}, \ \ \ \ \ S_z\km\bra{-} = -\f{\hbar}{2}\km\bra{-} \]
+          \[ S_z\ket{+}\bra{+} = +\f{\hbar}{2}\kp\bra{+}, \ \ \ \ \ S_z\km\bra{-} = \f{-\hbar}{2}\km\bra{-} \]
           Add the two equations together and factorize
           \begin{align*}
-            S_z\kp\bra{+} + S_z\km\bra{-} & = +\f{\hbar}{2}\kp\bra{+} + -\f{\hbar}{2}\ket{-}\bra{-} \\
-            S_z(\kp\bra{+} + \km\bra{-}) & = +\f{\hbar}{2}\kp\bra{+} + -\f{\hbar}{2}\ket{-}\bra{-} \\
-            S_z & = +\f{\hbar}{2}\ket{+}\bra{+} + -\f{\hbar}{2}\ket{-}\bra{-}
+            S_z\kp\bra{+} + S_z\km\bra{-} & = +\f{\hbar}{2}\kp\bra{+} + \f{-\hbar}{2}\ket{-}\bra{-} \\
+            S_z(\kp\bra{+} + \km\bra{-}) & = +\f{\hbar}{2}\kp\bra{+} + \f{-\hbar}{2}\ket{-}\bra{-} \\
+            S_z & = +\f{\hbar}{2}\ket{+}\bra{+} + \f{-\hbar}{2}\ket{-}\bra{-}
           \end{align*}
         \end{exmp}
 
@@ -835,13 +835,13 @@
 
       For $z$-component of angular momentum, characterised by $S_z$ operator with eigenvalues $+\f{\hbar}{2}$,
 
-      \[ \E{S_z} = +\f{\hbar}{2}prob_+ + -\f{\hbar}{2}prob_- \ \ \ \ \ (1) \]
+      \[ \E{S_z} = +\f{\hbar}{2}prob_+ + \f{-\hbar}{2}prob_- \ \ \ \ \ (1) \]
 
       Given an input state $\kpsi$,
       \begin{align*}
-        \E{S_z} & = +\f{\hbar}{2} \left| \braket{+}{\Psi} \right|^2 + -\f{\hbar}{2} |\braket{-}{\Psi}|^2 \\
-        & = +\f{\hbar}{2} \left( \braket{\Psi}{+}\braket{+}{\Psi} \right) + -\f{\hbar}{2} \left( \braket{\Psi}{-}\braket{-}{\Psi} \right) \\
-        & = \bra{\Psi} \left( \underbrace{+\f{\hbar}{2} \ket{+}\bra{+} + -\f{\hbar}{2}\ket{-}\bra{-}}_{\mbox{spectral decomposition for $S_z$}} \right) \ket{\Psi}
+        \E{S_z} & = +\f{\hbar}{2} \left| \braket{+}{\Psi} \right|^2 + \f{-\hbar}{2} |\braket{-}{\Psi}|^2 \\
+        & = +\f{\hbar}{2} \left( \braket{\Psi}{+}\braket{+}{\Psi} \right) + \f{-\hbar}{2} \left( \braket{\Psi}{-}\braket{-}{\Psi} \right) \\
+        & = \bra{\Psi} \left( \underbrace{+\f{\hbar}{2} \ket{+}\bra{+} + \f{-\hbar}{2}\ket{-}\bra{-}}_{\mbox{spectral decomposition for $S_z$}} \right) \ket{\Psi}
       \end{align*}
 
       Then,
@@ -853,14 +853,121 @@
       If a measurement of $\Lambda$ is made on an arbitrary input state $\ket{+}$, the expectation value of many repeated identical measurements will be
       \[ \E{\Lambda} = \bra{\Psi}\Lambda\ket{\Psi} \ \ \ \ \mbox{Expectation value} \]
 
+      \begin{defn}[trace]\label{trace}
+        We are going to introduce a linear operation that assigns a number to each matrix.
+        \[ \trace{\ket{1}\bra{2}} = \braket{2}{1} \]
+      \end{defn}
 
+      \begin{exmp}
+          \[ \ket{1} = \mtx{a_1 \\ a_2} \ \ \ \ \ket{2} = \mtx{b_1 \\ b_2} \ \ \ \ \braket{2}{1} = \mtx{b_1^* & b_2^*}\mtx{a_1 \\ a_2} = a_1b_1^* + a_2b_2^* \]
+          Also
+          \[ \ket{1}\bra{2} = \mtx{a_1 \\ a_2}\mtx{b_1^* & b_2^*} = \mtx{a_1b_1^* & a_1b_2^* \\ a_2b_1^* & a_2b_2^*} \]
+          so
+          \[ \trace{\ket{1}\bra{2}} = a_1b_2^* + a_2b_2^* \]
+      \end{exmp}
 
+      Consider an arbitrary operator $X$ and completeness relation for a set of basis kets
+      \[ \ket{+}\bra{+} + \ket{-}\bra{-} = \mathbb{1} \]
+      then
+      \begin{align*}
+        \trace{X} = \tr{\mathbb{1}X} & = \tr{\ket{+}\bra{+} + \ket{-}\bra{-}X} \\
+                                     & = \tr{\ket{+}\left( \bra{+}X \right) + \ket{-}\left( \bra{-}X \right)} \\
+                                     & = \tr{\ket{+}\left( \bra{+}X \right)} + \tr{\ket{-}\left( \bra{-}X \right)} \\
+                                     & = \bra{+}X\ket{+} + \bra{-}X\ket{-}
+      \end{align*}
+      which is the sum of the diagonal elements of $X$ when written in co-ordinate representation with respect to basis $\ket{+}$ and $\km$.
+      \[ X = \mtx{\bp X\kp & \bp X\km \\ \bm X\kp & \bm X\km} \]
 
+      \textbf{Properties of Trace}
 
+      \begin{itemize}
+        \item[(i)] $\tr{X+Y} = \tr{X} + \tr{Y}$
+        \item[(ii)] $\tr{\lambda X} = \lambda\tr{X}$
+        \item[(iii)] $\tr{XY} = \tr{YX}$
+        \item[(iv)] $\tr{XYZ} = \tr{YZX} = \tr{ZXY}$
+      \end{itemize}
 
+      In regard to the expectation value for a Quantum Mechanical measurement for operator $X$ and input state $\Psi$,
+      \[ \E{X} = \bra{\Psi}X\ket{\Psi} = \bra{\Psi}\left( X\ket{\Psi} \right) = \tr{ \left( X\ket{\Psi} \right)\bra{\Psi}} = \tr{X\ket{\Psi}\bra{\Psi}}\]
 
+      Separate the properties of measured system (atoms) from Observable $X$.
 
+    \subsection{Stastical Operator / Density Matrix}
 
+      Mixed state or Pure State (superposition state)?
+      \newline
+
+      So far we have discussed sources (input states) that are composed of a single type of atom - this may be a superposition state (pure state) like
+
+      \[ \ket{\Psi} = a\kp + b\km \ \ \ \ \ \ \ \mbox{e.g., \ \ \ } \kp_x = \f{1}{\sqrt{2}}\kp + \f{1}{\sqrt{2}}\km \]
+
+      How do we describe a source that is, say, a 50\% mixture of atoms in $\kp$ state and 50\% in $\km$ state - at first glance this may appear similar to $\kp_x$, but think about $S_x$. \newline
+
+      Consider a mixture of $P_1 \kp_x$ atoms and $P_2 \kp_z$ atoms, $(P_1 +P_2 = 1)$ and an arbitrary Stern Gerlach measurement $S_n$. The overall expectation value $\E{S_n}$ is the weighted sum of individual expectation values.
+
+      \[ \E{S_n} = P_1 \E{S_n}_x + P_2\E{S_n}_z \]
+
+      with
+
+      \[ \E{S_n}_x = {}_x\bp S_n\kp_x = \tr{S_n\kp_x {}_x\bp} \]
+
+      and
+
+      \[ \E{S_n}_z = {}_z\bp S_n\kp_z = \tr{S_n\kp_z {}_z\bp} \]
+
+      Thus
+
+      \begin{align*}
+        \E{S_n} & = P_1\tr{S_n\kp_x {}_x\bp} + p_2\tr{S_n\kp_z {}_z\bp} \\
+                & = \tr{S_n \underbrace{\left( P_1\kp_x{}_x\bp + P_2\kp_z{}_z\bp \right)}_{\mbox{Statistical Operator}}}
+      \end{align*}
+
+      \begin{defn}[Statistical Operator (Density Matrix)]\label{statistical_operator}
+        \[ \rho = P_1\kp_x {}_x\bp + P_2\kp_z {}_z\bp \]
+        the weighted sum of outer products of source atoms.
+        \[ \E{S_n} = \tr{S_n\rho} \]
+        In general,
+        \[ \rho = \sum_i P_i \ket{x_i}\bra{x_i} \ \ \ \ \ \ \mbox{with } \sum_i P_i = 1 \]
+        If there is only one type of atom, it is a pure state (e.g., $\ket{\Psi}$) and the statistical operator is $\rho = \ket{\Psi}\bra{\Psi}$.
+      \end{defn}
+
+      % \begin{exmp}
+      %   The operator associated with the observable that is the $y$-component of instrinsic angular expressed in co-ordinate representation with respect to the $S_z$ basis is
+      %   \[ S_y \rightarrow \f{\hbar}{2} \mtx{0 & -i \\ i & 0} \]
+      % \end{exmp}
+
+      \begin{exmp}
+        \begin{itemize}
+          \item[(i)] Use spectral decomposition and the expressions for $\kp_x$, $\km_x$ in co-ordinate representation with respect to the $S_z$ basis to find $S_x$ as a matrix, also in the $S_z$ basis.\newline
+
+          The spectral decomposition for $S_x$ is
+          \[ S_x = +\f{\hbar}{2}\ket{+}_x{}_x\bra{+} + \f{-\hbar}{2}\ket{-}_x{}_x\bra{-} \]
+          and
+          \[ \kp_x \xrightarrow[\mbox{basis}]{S_z} \f{1}{\sqrt{2}}\mtx{1 \\ 1} \ \ \ \ \ \ \ \ \km_x \xrightarrow[\mbox{basis}]{S_z} \f{1}{\sqrt{2}}\mtx{1 \\ -1} \]
+          then
+          \begin{align*}
+            S_z & \xrightarrow[\mbox{basis}]{S_z} \f{+\hbar}{2}\f{1}{\sqrt{2}}\mtx{1 \\ 1}\f{1}{\sqrt{2}}\mtx{1 & 1} + \f{-\hbar}{2}\f{1}{\sqrt{2}}\mtx{1 \\ -1}\f{1}{\sqrt{2}}\mtx{1 & -1}\\
+            & = \f{+\hbar}{2}\f{1}{2}\mtx{1 & 1 \\ 1 & 1} + \f{-\hbar}{2}\f{1}{2}\mtx{1 & -1 \\ -1 & 1} \\
+            & = \f{\hbar}{2} \mtx{0 & 1 \\ 1 & 0}
+          \end{align*}
+          \item[(ii)] A source of atoms is prepared as 20\% $\kp$ and 80\% $\km_y$ and a measurement of the $x$-component of angular momentum is performed. What is the expectation value for this experiment?\newline
+
+          \[ \E{S_z} = \tr{S_x\rho} \]
+          and
+          \begin{align*}
+            \rho & = \sum_i P_i \ket{\lambda_i}\bra{\lambda_i} = \f{20}{100}\kp\bm + \f{80}{100}\km_y{}_y\bm
+          \end{align*}
+          which in the $z$-basis is
+          \begin{align*}
+            \rho & \xrightarrow[\mbox{basis}]{S_z} \f{20}{100}\mtx{1 \\ 0}\mtx{1 & 0} + \f{80}{100}\f{1}{\sqrt{2}}\mtx{1 \\ -i} \f{1}{\sqrt{2}}\mtx{1 & i} \\
+            & = \f{1}{5}\mtx{3 & 2i \\ -2i & 2}
+          \end{align*}
+          So,
+          \begin{align*}
+            \E{S_x} & = \tr{\f{\hbar}{2}\mtx{0 & 1 \\ 1 & 0}\f{1}{5}\mtx{3 & 2i \\ -2i & 2}} = \f{\hbar}{10}\tr{\mtx{2i & 3 \\ 2 & -2i}} = 0
+          \end{align*}
+        \end{itemize}
+      \end{exmp}
 
 
 
