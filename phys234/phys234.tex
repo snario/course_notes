@@ -1119,4 +1119,52 @@
         \end{align*}
       \end{exmp}
 
+     \subsection{Tutorial 5}
+
+       Rememeber the axioms.
+
+        \begin{itemize}
+        \item Axiom 0. Systems Exist
+        \item Axiom 1. For each preparation device $\mathcal{P}$, there is an associated $\ket{\Psi} \in \C^d : \braket{\Psi}{\Psi} = 1$.
+        \item Axiom 2. For each transformation channel $\mathcal{T}$, there is an associated $u \in U(\C^d), \ket{\Psi} \rightarrow u\ket{\Psi}$
+        \item Axiom 3. For each measurement device $\mathcal{M}$, there is an associated Hermitian $A = A^\dagger$
+      \end{itemize}
+
+      \begin{thrm}
+        Let $A \in \mathcal{M}_d(\C): AA^\dagger = A^\dagger A$, then $\exists \lambda_1, \ldots, \lambda_m \in \C, m \leq d$. Then,
+        \[ \pi_1,\ldots,\pi_m \in \mathcal{M}_d(\C) : \forall r \in \{1,\ldots,m\}, \pi_r^2 = \pi_r \land \forall r \pm s \pi_r\pi_s = 0. \]
+        So,
+        \[ A = \sum_{r=1}^m \lambda_r\pi_r \]
+        where $\lambda_r$ is a unique eigenvalue of $A$ and $\pi_r$ is an eigenprojector where
+        \[ \pi_r = \sum_{s=1}^{\mbox{mult}(\lambda_r)} \ket{\xi_{r_s}{\bra{\xi_{r_s}}}} \]
+        for eigenvectors associated with $\lambda_r$.
+      \end{thrm}
+
+      So a slight generalization to Axiom 3 is \newline
+
+      \textbf{Axiom 3.} For each $\mathcal{M}$, there is an associated $A = A^\dagger$ such that
+      \[ pr(\lambda_r) = \sum_{s=1}^{\mbox{mult}(\lambda_r)} \left| \braket{\Psi}{\xi_{r_s}} \right|^2 \]
+      For input $\ket{\Psi}, \ket{\Psi} \longrightarrow \f{\pi_r\ket{\Psi}}{\bra{\Psi}\pi_r\ket{\Psi}}$
+      when outcome $\lambda_r$ is registered.
+
+      There we go. My question is, is this just a special case of the unitary axiom?
+
+      \[ \braket{u\Psi}{u\phi} = \bra{\Psi}u^\dagger u\ket{\phi} = \braket{\Psi}{\phi} \]
+
+      Let $\ket{\Psi_1} = \ket{+_z}$ and $\ket{\Psi_2} = \ket{-_z}$ and $\braket{\Psi_1}{\Psi_2} = 0$ and then
+      \[ A = \mtx{0 & 1 \\ 1 & 0} \mbox{ \ \ \ \ \ \ $x$ measurement} \]
+      Suppose a $+_x$ outcome, then
+
+      \[ \ket{\Psi_1} \rightarrow \ket{+_x}, \ \ \ \ \ket{\Psi_2} \rightarrow \ket{+_x} \ \ \ \braket{+_x}{+_x} = 1 \]
+
+      Let's do an example. Consider the situation in the figure at the bottom:
+
+      Find the values mentioned on the board at the different parts of the experiment. I'm not going to do it but essentially all you need to do is apply the function in the transformation to the input state to get the first one, then given the $+$ outcome occurs the new state just tacks off the $-$ component and is then normalized. Next, do the transformation again and normalize and getting the probability after that is just the same old way of getting probabilities from states. For more of a challenge instead of just measuring twice, say we are measuring $n$ times. This leads to the Quantum Zeno effect becuase we'll notice that as we keep observing the state of system over the course the experiment, we nullify the experiment.
+
+      \begin{figure}[b!]
+            \centering
+            \includegraphics[width=0.8\textwidth]{axiom3_exmp.jpg}
+            \caption{Example}
+      \end{figure}
+
   \end{document}
