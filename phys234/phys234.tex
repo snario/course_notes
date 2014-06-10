@@ -969,15 +969,101 @@
         \end{itemize}
       \end{exmp}
 
+    \subsection{Projection Operators and Measurements}
 
+      \begin{defn}[Postulate 5]\label{postulate_5}
+        After a measurement of $A$ that yields the result $a_n$, the quantum system is in a new state that is the normalized projection of the original system ket onto the ket (or kets) corresponding to the result of the measurement:
 
+        \[ \ket{\Psi'} = \f{P_n\ket{\Psi}}{\sqrt{\bra{\Psi}P_n\ket{\Psi}}} \]
+      \end{defn}
 
+      We have seen proejction operators before, for example
+      \[ \ket{\Psi} = \braket{+}{\Psi}\kp + \braket{-}{\Psi}\ket{-} = \left( \underbrace{\kp\bp}_{\mbox{projection}} \right)\ket{\Psi} + \left( \underbrace{\km\bm}_{\mbox{projection}}  \right)\ket{\Psi}\]
 
+      In this case, these are projection operators for $\kp$ and $\km$ states respectively. Applying the projection operator is analogous to taking components of geometric vectors. It produces a new state that is aligned along the eigenstate, with magnitude equal to the probability amplitude for the state to be in that eigenstate.
 
+      \[ P_+ = \kp\bp \xrightarrow[\mbox{basis}]{S_z} \mtx{1 \\0}\mtx{1 & 0} = \mtx{1 & 0 \\ 0 & 0} \]
+      \[ P_- = \km\bm \xrightarrow[\mbox{basis}]{S_z} \mtx{0 \\1}\mtx{0 & 1} = \mtx{0 & 0 \\ 0 & 1} \]
 
+      \[ P_+\ket{\Psi} = \kp\braket{+}{\Psi} = \braket{+}{\Psi} \kp \]
+      \[ P_-\ket{\Psi} = \km\braket{-}{\Psi} = \braket{-}{\Psi} \km \]
 
+      where $\kp$ and $\km$ are eigenstates, and $\left( \braket{+}{\Psi} \right)$ and $\left( \braket{-}{\Psi} \right)$ are probability amplitudes.\
+      \newline
 
+      Now Postulate 5 lets us determine the output state using the projection operator.
+      \[ \ket{\Psi'} = \f{P_\Psi\ket{\Psi}}{\sqrt{\bra{\Psi}P_\Psi\ket{\Psi}}} \]
 
+      where
+
+      \begin{align*}
+        P_\Psi & = \ket{\Psi'}\bra{\Psi'} \\
+        \sqrt{\bra{\Psi}P_{\Psi'}\ket{\Psi}} & = \sqrt{\braket{\Psi}{\Psi'}\braket{\Psi'}{\Psi}} \\
+        & = \sqrt{|\braket{\Psi}{\Psi'}|^2} = \mbox{probablity amplitude}
+      \end{align*}
+
+      Now, the expectation value for the projection operator is
+
+      \begin{align*}
+        \E{P_+} & = \bra{\Psi}P_+\ket{\Psi} \\
+                & = \braket{\Psi}{+}\braket{+}{\Psi} \\
+                & = |\braket{+}{\Psi}|^2 \\
+                & = prob_+
+      \end{align*}
+
+    \subsection{Spin Components in Arbitrary Directions}
+
+      For spin components in arbitrary directions, we are going to use as our operator a linear combination of the operators $S_z, S_x, S_y$. First we express an arbitrary vector $\hat{n}$ (for field gradient direction) in terms of polar co-ordinates. We'll use $\theta$ as the polar angle (angle between $\hat{n}$ and the $z$ axis), $\phi$ as the agimuthal angle (angle between $\hat{n}$ and the $x$ axis), and then
+      \[ \hat{n} = \hat{i}\sin\theta\cos\phi + \hat{j}\sin\theta\sin\phi + \hat{k}\cos\theta  \]
+      where $\hat{i}, \hat{j}, \hat{k}$ are unit vectors in direction $x, y,z$ respectively.
+      \newline
+
+      Then the operator for spin component along direction $\hat{n}$ is obtained by projecting spin vector operator $S = (S_x,S_y,S_z)$ on $\hat{n}$ unit vector. Then,
+
+      \[ \mbox{operator } S_n = S\cdot\hat{n} = S_x\sin\theta\cos\phi + S_y\sin\theta\sin\phi + S_z\cos\theta \]
+      in matrix form with respect to the $S_z$ basis
+      \begin{align*}
+        S_n & \xrightarrow[\mbox{basis}]{S_z} \f{\hbar}{2} \left[ \mtx{0 & 1 \\ 1 & 0}\sin\theta\cos\phi + \mtx{0 & -i \\ i & 0}\sin\theta\sin\phi + \mtx{1 & 0 \\ 0 & -1}\cos\theta \right] \\
+        & = \f{\hbar}{2}\mtx{\cos\theta & \sin\theta\cos\phi - i\sin\theta\sin\phi \\ \sin\theta\cos\phi+i\sin\theta\sin\phi & - \cos\theta} \\
+        & = \f{\hbar}{2}\mtx{\cos\theta & \sin\theta e^{-i\theta}\\ \sin\theta e^{i\theta} & -\cos\theta}
+      \end{align*}
+
+      This can be diagonalised to find eigenvalues and eigenvectors,
+
+      \[ \mbox{Eigenvalues } = \pm\f{\hbar}{2} \]
+     \begin{align*}
+       \mbox{Eigenvectors } & = \ket{+}_n = \cos\f{\theta}{2}\kp + \sin\f{\theta}{2}e^{i\phi}\km \xrightarrow[\mbox{basis}]{S_z} \mtx{\cos\f{\theta}{2} \\ \sin\f{\theta}{2}e^{i\phi}} \\
+        & = \ket{-}_n =  \sin\f{\theta}{2}\kp - \cos\f{\theta}{2}e^{i\phi}\km  \xrightarrow[\mbox{basis}]{S_z} \mtx{\sin\f{\theta}{2} \\ -\cos\f{\theta}{2}e^{i\phi}}
+     \end{align*}
+
+     We can check that this is consitent using spectral decomposition:
+
+     \[ S_n = \f{+\hbar}{2}\kp_n{}_n\bp + \f{-\hbar}{2}\km_n{}_n\bm \]
+
+     \begin{exmp}
+       Consider an input state with $\theta = \f{2\pi}{3}$ and $\phi = \f{\pi}{4}$, and we want to take an $X$ measurement. Then, in general we have
+       \[ Prob = |\braket{\mbox{out}}{\mbox{in}}|^2 \]
+       and in this case
+       \begin{align*}
+           \ket{\mbox{in}} & = \kp_n = \cos\f{\theta}{2}\kp + \sin\f{\theta}{2}e^{i\phi}\km = \cos\f{\pi}{3}\kp + \sin\f{\pi}{3}e^{i\f{\pi}{4}}\km \\
+                           & = \f{1}{2}\kp + \f{\sqrt{3}}{2}e^{i\f{\pi}{4}}\km
+       \end{align*}
+       For $Prob_{+x}$, $\ket{\mbox{out}} = \kp_x = \f{1}{\sqrt{2}} \kp + \f{1}{\sqrt{2}}\km$,
+       \begin{align*}
+         Prob_{+x} & = |{}_x\braket{+}{+}_n|^2 = \left| \left( \f{1}{\sqrt{2}}\bp + \f{1}{\sqrt{2}}\bm \right)\left( \f{1}{2}\kp + \f{\sqrt{3}}{2}e^{i\f{\pi}{4}}\km \right) \right|^2 \\
+         & = \left| \f{1}{\sqrt{2}} \left( \f{1}{2}\braket{+}{+} + \f{\sqrt{3}}{2}e^{i\f{\pi}{4}}\braket{+}{-} + \f{1}{2}\braket{-}{+} + \f{\sqrt{3}}{2}e^{i\f{\pi}{4}}\braket{-}{-} \right) \right|^2 \\
+         & = \left| \f{1}{2\sqrt{2}} \left( 1 + \sqrt{3}e^{i\f{\pi}{4}} \right) \right|^2 \\
+         & = \f{1}{8} \left( 1 + \sqrt{3}e^{i\f{\pi}{4}} \right) \left( 1 + \sqrt{3}e^{-i\f{\pi}{4}} \right) \\
+         & = 0.806
+       \end{align*}
+       Then of course $prob_{-x} = 1 - 0.806 = 0.194$. Next for the expectation value we could do it any of these ways
+       \begin{itemize}
+         \item[(i)] use weighted sum of products of eigenvalues $\f{\pm\hbar}{2}$ and probabilities
+         \item[(ii)] $\E{S_x} = {}_n\bp S_x \kp_n$
+         \item[(iii)] $\E{S_x} = \tr{S_x \kp_n{}_n\bp}$
+         \item[(iv)] use projection operator (expectation value) to compute probabilities and perform weighted sum as in (i)
+       \end{itemize}
+     \end{exmp}
 
 
 
