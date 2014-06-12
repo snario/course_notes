@@ -1065,13 +1065,74 @@
        \end{itemize}
      \end{exmp}
 
+    \subsection{Commuting Observables}
 
+      Looking at the Stern Gerlach Experiment number 3, we see that simultaneous knowledge of a spin-component in more than one direction is not possible. How do we mathematically characterize the incompatible nature of certain observables? We use the \textbf{commutator}.
 
+      \begin{defn}[commutator]\label{commutator}
+        \[ [A, B] = AB - BA \]
+        The difference in the products of the two operators taken in alternate orders. For $[A,B] = 0$, we know that $AB = BA$ so the operators (or observables) commute and the order of operation does not matter.
+      \end{defn}
 
+      Consider the effect of commutation on eigen-equations. For operator $A$, with eigenvalues $a$ and eigenkets $\ket{a}$,
+      \[ A\ket{a} = a\ket{a} \]
+      then for a second operator $B$,
+      \[ BA\ket{a} = Ba\ket{a} = aB\ket{a} \]
+      If $[A,B] = 0$ then $AB = BA$ which implies
+      \[ BA\ket{a} = A(B\ket{A}) = a(B\ket{a}) \]
+      Hence $BA$ is an eigenket of $A$ with eigenvalue $a$, so $B\ket{a}$ is a scalar multiple of $\ket{a}$, say $b\ket{a}$ and therefore
+      \[ B\ket{a} = b\ket{a} \]
 
+      So, $A$ and $B$ share common eigenkets $\ket{a}$. Therefore the general statement is that
 
+      \begin{thrm}
+      Commuting operators (observables) share common eigenkets, eigenstates, and eigenvectors.
+      \end{thrm}
 
+       The consequence for measurement is shown in page 29 of the textbook. So, Commuting observables preserve the state information, and eigenvalues $(a_1,b_1)$ of the operators can be known simultaneously. So with non-commuting operators it means we have incompatible observables which cannot be shown simultaneously.\newline
 
+       From experiment 3,
+
+       \[ [S_z,S_x] \xrightarrow[\mbox{basis}]{S_z} \f{\hbar}{2}\mtx{1 & 0 \\ 0 & -1}\f{\hbar}{2}\mtx{0 & 1 \\ 1 & 0} - \f{\hbar}{2}\mtx{0 & 1 \\ 1 & 0}\f{\hbar}{2}\mtx{1 & 0 \\ 0 & -1} = -i\hbar\cdot\f{\hbar}{2}\mtx{0 & i \\ -i & 0} = +i\hbar S_y \]
+
+    \subsection{Uncertainty in Measurement of Observables}
+
+      \begin{itemize}
+        \item The outcome of measurements is probabilistic.
+        \item Compute "ideal" probabilities to which experimental results converge.
+      \end{itemize}
+
+      Expectation value is the average of repeated identical measurements but sees nothing about the distribution of results. Information on distribution requires variance or standard deviation. In Quantum Mechanics we call this the uncertainty,
+
+      \begin{defn}[uncertainty]\label{uncertainty}
+      \[ \Delta A = \sqrt{\E{A^2} - \E{A}^2} \]
+      where $\E{A}^2$ is the square of the expectation value for observable $A$ and $\E{A^2}$ is the expectation value of $A^2 = AA$.
+      \end{defn}
+
+      \begin{defn}[Uncertainty Principle]\label{Uncertainty Principle}
+        Connects the possibility or not of having simultaneous knowledge of two Quantum Mechanical observables to the product of their respective uncertainties in their measurement through the commutation relation.
+        \[ \Delta A \Delta B \geq \f{1}{2} \left| \E{[A,B]} \right| \]
+      \end{defn}
+
+      \begin{exmp}
+        For observables $S_x$ and $S_y$, where $[S_x,S_y] = i\hbar S_z$,
+        \begin{align*}
+          \Delta S_x \Delta S_y & \geq \f{1}{2} \left| \E{[S_x,S_y]} \right| \\
+                                & = \f{1}{2} \left| \E{i\hbar S_z} \right| \\
+                                & = \f{\hbar}{2} \left| \E{S_z} \right| \\
+        \end{align*}
+        If $\kp$ is used as the input state for a $Z$-SG measurement, then
+        \[ \underbrace{\E{S_z} = \f{+\hbar}{2}}_{\mbox{always deflected up}}, \ \ \ \ \ \underbrace{\Delta S_z = 0}_{\mbox{always get same result}} \]
+        The uncertainty principle then continues to say
+        \[  \Delta S_x \Delta S_y \geq \f{\hbar}{2} \left| \E{S_z} \right| \geq \left( \f{\hbar}{2} \right)^2 \not = 0 \]
+
+        This implies that
+        \[ \Delta S_x \not = 0 \ \ \ \ \ \ \ \ \ \mbox{and} \ \ \ \ \ \ \ \ \ \Delta S_y \not = 0 \]
+        That is, if we know $S_z$ with certainty ($\Delta S_z = 0$), then we have non-zero uncertainty in $S_x$ and $S_y$. This is entirely consistent with the concept of incompatible observables. \newline
+
+        For observables that do commute, then $[A,B] = 0$ and $\Delta A \Delta B \geq 0$, so uncertainties can be simultaneously zero and we can have simultaneous knowledge of observables $A$ and $B$.
+
+      \end{exmp}
 
 
 
