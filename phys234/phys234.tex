@@ -98,7 +98,7 @@
        In the photoelectric effect, we treated light as being composed of individual light particles, called photons, that carry some energy. It then makes sense to think that the photons also have momentum.
        \newline
 
-       Electromagnetic radiation is scattered by a target object. In classical theory, the charges in the target object will respond to the incoming wave and start to oscillate. All oscillating charges emit radiation at the frequency of oscillation, and this newly generated set of waves can also be detected at an angle θ with respect to the incoming wave. This classical model explains why the sky is blue and all that jazz. The scattering process itself, though, does not change the frequency of incoming and outgoing radiation.
+       Electromagnetic radiation is scattered by a target object. In classical theory, the charges in the target object will respond to the incoming wave and start to oscillate. All oscillating charges emit radiation at the frequency of oscillation, and this newly generated set of waves can also be detected at an angle $\theta$ with respect to the incoming wave. This classical model explains why the sky is blue and all that jazz. The scattering process itself, though, does not change the frequency of incoming and outgoing radiation.
        \newline
 
        However, an experimental problem occurred. In experiments with X-ray radiation on a graphene target, one observes that two separate frequencies at an angle $\theta$ result in different intensities. This effect is independent of the material, though intensities may vary.
@@ -1134,8 +1134,75 @@
 
       \end{exmp}
 
+  \section{Quantum Dynamics}
 
+    We'll study how quantum systems evolve in time including details on the Shroedinger Equation, the Hamiltonian operator and energy eigenstates, the Time independent Hamiltonian, and some Examples.
 
+    \subsection{Time Dependence in Quantum Mechanics}
+
+    \begin{defn}[Postulate 5]\label{postulate_5}
+      The time evolution of a quantum system is determined by the Hamiltonian or total energy operator $H(t)$ through the Schrödinger equation
+      \[ i\hbar\f{d}{dt} \ket{\Psi(t)} = H(t)\ket{\Psi(t)} \]
+    \end{defn}
+
+    How does a quantum state (ket) evolve with time? Time dependence is governed by the Schrödinger Equation (see postulate 6). $H(t)$ is a new operator called the Hamiltonian Operator.
+    It is an observable corresponding to the \textbf{total} energy of the system. It is also a Hermitian operator, which means some important things for us:
+    \begin{itemize}
+      \item It's eigenvalues are real
+      \item Eigenvectors form a complete basis set
+    \end{itemize}
+    Eigenvalues are allowed energies of the system, and \textbf{may be discrete or continuous}. Eigenstates are the energy eigenstates of the system. If the allowed energy states are $\ket{E_n}$ corresponding to allowed energy eigenvalues $E_n$, Then
+    \[ H\ket{E_n} = E_n\ket{E_n} \]
+
+    Where $H$ is a Hamiltonian operator, $\ket{E_n}$ is the energy eigenket, and $E_n$ the energy eigenvalue. Given a Hamiltonian, it can be diagonalised to find the eigenvalues and eigenvectors.
+    \newline
+
+    Energy eigenstates form a complete basis, and any arbitrary state can be constructed as a linear combination of them
+    \[ \ket{\Psi} = \sum_n c_n\ket{E_n} \mbox{ \ \ \ \ \ with } c_n = \braket{E_n}{\Psi} \]
+    and
+    \[ \braket{E_k}{E_n} = \delta_{kn} = \piecewise{0}{if $k \not = n$}{1}{if $k = n$} \]
+    The Time Independent Hamiltonian is then
+    \[ H(t) = H(0) = H \]
+    Since $H$ is time independent, then eigenvaluesand eigenkets must be time independent too (think spectral decomposition).
+    \newline
+
+    Time evolution of the quantum state $\ket{\Psi(t)}$ is governed by time independent coefficients of an expansion in the energy basis
+    \[ \ket{\Psi(t)} = \sum_n c_n(t)\ket{E_n} \]
+    The goal is to find an expression for the $c_n(t)$'s. We're going to substitue the expansion in the energy basis into the Schrödinger Equation
+    \begin{align*}
+      i\hbar\f{d}{dt} \ket{\Psi(t)} & = H(t)\ket{\Psi(t)} \\
+      i\hbar\f{d}{dt} \left( \sum_n c_n(t) \ket{E_n} \right) & = H\sum_n c_n(t)\ket{E_n} \\
+      i\hbar \sum_n \f{dc_n(t)}{dt} \ket{E_n} & = \sum_n c_n(t) E_n \ket{E_n} \\
+    \end{align*}
+    now we'll multiply on the left by the bra of the particular eigenstate $\ket{E_k}$
+    \begin{align*}
+      \bra{E_k} i\hbar \sum_n \f{dc_n(t)}{dt} \ket{E_n} & = \bra{E_k} \sum_n c_n(t) E_n \ket{E_n} \\
+      i\hbar \sum_n \f{dc_n(t)}{dt}\braket{E_k}{E_n} & = \sum_n c_n(t)E_n\braket{E_k}{E_n} \\
+      i\hbar \f{dc_k(t)}{dt} & = c_k(t)E_k
+    \end{align*}
+    This picks out the single eigenstate when $k=n$, and $\braket{E_k}{E_n} =1$
+    \begin{align*}
+      i\hbar \f{dc_k(t)}{dt} & = c_k(t)E_k \\
+      \f{dc_k(t)}{dt} & = \f{-iE_k}{\hbar} c_k(t)
+    \end{align*}
+    So a general solution is that
+    \[ C_k(t) = C_k(0) \exp \left\{ \f{-iE_k}{\hbar} t \right\} \]
+    Each coefficient in the linear expansion for $\ket{\Psi(t)}$ has the same form of complex exponential, with exponent proportional to the eigenvalue asociated with energy eigenket
+    \[ \ket{\Psi(t)} = \sum_n c_n(0)\exp\left\{\f{-iE_n}{\hbar} t\right\} \]
+    We can deduce the consequences for computing probabilities depending on what form the arbitrary state $\ket{\Psi(t)}$ takes.
+    \begin{itemize}
+      \item[(1)] $\ket{\Psi(0)}$ is an energy eigenstate $\implies \ket{\Psi(0)} = \ket{E_1}$. At time $t \ (t > 0)$, the quantum state is described by the ket:
+      \[ \ket{\Psi(t)} = \expo{\f{-iE_1}{\hbar} t}\ket{E_1} \]
+      Consider measuring observable $A$, the probability of measuring eigenvalue $a_i$, corresponding to eigenstate $\ket{a_i}$ is given then by
+      \begin{align*}
+         prob_{a_i} & = \left| \braket{\mbox{out}}{\mbox{in}} \right|^2 \\
+                    & = \left| \braket{a_i}{\Psi(t)} \right|^2 \\
+                    & = \left| \bra{a_i}{\expo{\f{-iE_1}{\hbar} t}\ket{E_1}} \right|^2 \\
+                    & = \left| \braket{a_i}{E_1} \right|^2
+      \end{align*}
+      So the probability is time independent, and the energy eigenstates are termed \textbf{stationary states}. If a system starts in that state it will continue to be in that state.
+      \item[(2)] $\ket{\Psi(0)}$ is a superposition.
+    \end{itemize}
 
 
 
