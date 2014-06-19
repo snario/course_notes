@@ -1140,7 +1140,7 @@
 
     \subsection{Time Dependence in Quantum Mechanics}
 
-    \begin{defn}[Postulate 5]\label{postulate_5}
+    \begin{defn}[Postulate 6]\label{postulate_6}
       The time evolution of a quantum system is determined by the Hamiltonian or total energy operator $H(t)$ through the Schrödinger equation
       \[ i\hbar\f{d}{dt} \ket{\Psi(t)} = H(t)\ket{\Psi(t)} \]
     \end{defn}
@@ -1148,7 +1148,7 @@
     How does a quantum state (ket) evolve with time? Time dependence is governed by the Schrödinger Equation (see postulate 6). $H(t)$ is a new operator called the Hamiltonian Operator.
     It is an observable corresponding to the \textbf{total} energy of the system. It is also a Hermitian operator, which means some important things for us:
     \begin{itemize}
-      \item It's eigenvalues are real
+      \item Its eigenvalues are real
       \item Eigenvectors form a complete basis set
     \end{itemize}
     Eigenvalues are allowed energies of the system, and \textbf{may be discrete or continuous}. Eigenstates are the energy eigenstates of the system. If the allowed energy states are $\ket{E_n}$ corresponding to allowed energy eigenvalues $E_n$, Then
@@ -1186,7 +1186,7 @@
       \f{dc_k(t)}{dt} & = \f{-iE_k}{\hbar} c_k(t)
     \end{align*}
     So a general solution is that
-    \[ C_k(t) = C_k(0) \exp \left\{ \f{-iE_k}{\hbar} t \right\} \]
+    \[ c_k(t) = c_k(0) \exp \left\{ \f{-iE_k}{\hbar} t \right\} \]
     Each coefficient in the linear expansion for $\ket{\Psi(t)}$ has the same form of complex exponential, with exponent proportional to the eigenvalue asociated with energy eigenket
     \[ \ket{\Psi(t)} = \sum_n c_n(0)\exp\left\{\f{-iE_n}{\hbar} t\right\} \]
     We can deduce the consequences for computing probabilities depending on what form the arbitrary state $\ket{\Psi(t)}$ takes.
@@ -1201,7 +1201,38 @@
                     & = \left| \braket{a_i}{E_1} \right|^2
       \end{align*}
       So the probability is time independent, and the energy eigenstates are termed \textbf{stationary states}. If a system starts in that state it will continue to be in that state.
-      \item[(2)] $\ket{\Psi(0)}$ is a superposition.
+
+      \item[(2)] Suppose that our input state is a linear combination of energy eigenstates,
+      \[ \ket{\mbox{in}} = \ket{\Psi(0)} = c_1\ket{E_1} + c_2\ket{E_2} \]
+      At some time $t > 0$, the quantum state is described by
+      \begin{align*}
+        \ket{\Psi(t)} & = c_1\exp{\f{-iE_1}{\hbar} t}\ket{E_1} + c_2\exp{\f{-iE_2}{\hbar} t}\ket{E_2}
+      \end{align*}
+      \begin{itemize}
+        \item[(i)] Consider measuring the energy of the system at some time $t$. The only possible outcomes are $E_1$ or $E_2$ (others may exists but $pr = 0$). This input state would yield $E_1$ with probability:
+        \begin{align*}
+          prob_{E_1} & = \left| \braket{\mbox{out}}{\mbox{in}} \right|^2 \\
+                      & = \pr{\braket{E_1}{\Psi(t)}} \\
+                      & = \pr{\bra{E_1}\left( c_1 \exp{\f{-iE_1}{\hbar} t}\ket{E_1} + c_2\exp{\f{-iE_2}{\hbar} t}\ket{E_2} \right)} \\
+                      & = |c_1|^2
+        \end{align*}
+        \item[(ii)] Consider measuring a different observable $A$, using $\ket{\Psi(t)}$ as $\ket{\mbox{in}}$
+        \begin{itemize}
+          \item If $A$ commutes with the Hamiltonian $([A,H] =0)$, then $A$ and $H$ share common eigenstates. The probabilities for outcomes of $A$ will proceed as in $(2)(i)$ and will be time independent.
+          \item If $A$ does \textbf{not} commute with $H$ $([A,H] \not = 0)$ then eigenstates of $A$ can be written as a linear combination of energy eigenstates of $H$. For example, an eigenstate of $A$
+          \[ \ket{a_1} = \alpha_1\ket{E_1} + \alpha_2\ket{E_2} \]
+        \end{itemize}
+        The probability for measuring $a_1$,
+        \begin{align*}
+          prob_{a_1} = \left| \braket{\mbox{out}}{\mbox{in}} \right|^2 & = \pr{\braket{a_1}{\Psi(t)}} \\
+          & = \pr{\left( \alpha_1^*\bra{E_1} + \alpha_2^*\bra{E_2} \right)\left( c_1 \exp{\f{-iE_1}{\hbar} t}\ket{E_1} + c_2\exp{\f{-iE_2}{\hbar} t}\ket{E_2} \right)} \\
+          & = \pr{\alpha_1^*c_1\exp{\f{-iE_1}{\hbar}t}+\alpha_2^*c_2\exp{\f{-iE_2}{\hbar}t}} \\
+          & = \pr{\exp{\f{-iE_1}{\hbar}t}}\pr{\alpha_1^*c_1 + \alpha_2^*c_2\exp{\f{-i(E_2-E_1)}{\hbar}t}} \\
+          & = \pr{\alpha_1}\pr{c_1} + \pr{\alpha_2}\pr{c_2} + 2\Re \left( \alpha_1c_1^*\alpha_2^*c_2\exp{\f{-i(E_1 - E_2)}{\hbar}t} \right)
+        \end{align*}
+        Time dependence is determined by the difference in energy of two energy eigenstates in the superposition for $\ket{\Psi(t)}$. The probability oscillates with a frequency
+        \[ \omega_{21} = \f{E_2-E_1}{\hbar} \ \ \ \ \ \ \ \mbox{Bohr Frequency} \ \ \ \ \ \ E =\hbar \omega \]
+      \end{itemize}
     \end{itemize}
 
 
@@ -1214,6 +1245,34 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    % TODO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
    \section{Tutorials}
