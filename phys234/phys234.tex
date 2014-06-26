@@ -175,7 +175,7 @@
         \[ \ka \iff \left(\begin{matrix}a_1 \\ a_2 \\ \vdots \\ a_n\end{matrix}\right) \]
         (the co-ordinate representation of $\ka$ with respect to the basis given by each $\ket{e_1}$.)
 
-        Coordinates depend on the chosen basis. In basis 1 $\ka = a_x\ket{x} + a_y\ket{y} \iff \left(\begin{matrix}a_x \\ a_y \end{matrix}\right)$ and then in basis 2 we see $\ka = a_{x'}\ket{x'} + a_{y'}\ket{y'} \iff \mtx{a_{x'} \\ a_{y'}}$. \newline
+        Coordinates depend on the chosen basis. In basis 1 $\ka = a_x\kx + a_y\ket{y} \iff \left(\begin{matrix}a_x \\ a_y \end{matrix}\right)$ and then in basis 2 we see $\ka = a_{x'}\ket{x'} + a_{y'}\ket{y'} \iff \mtx{a_{x'} \\ a_{y'}}$. \newline
 
         Addition of vectors by adding corresponding components (when in the same basis) works as you might expect, too:
         \[ \ket{\alpha} + \ket{\beta} \iff (a_1 + b_1, a_2 + b_2, \hdots, a_n + b_n \]
@@ -434,10 +434,10 @@
        \subsection{Quantum State Vectors}
 
          \begin{defn}[Postulate 1]\label{postulate_1}
-         We label the input state with a left \textbf{ket}, $(\ket{\Psi}$), and label the output states with $\ket{+}$ for spin up and $\ket{-}$ for spin down.
+         We label the input state with a left \textbf{ket}, $(\kpsi$), and label the output states with $\ket{+}$ for spin up and $\ket{-}$ for spin down.
          \end{defn}
 
-         Thus the ket, $\ket{\Psi}$ is part of a vector space called a \textbf{Hilbert Space}. The dimensionality of the Hilbert Space depends on the \textbf{observable}. For the $S_z$ observable ($z$-component of angular momentum), it has two possible values,
+         Thus the ket, $\kpsi$ is part of a vector space called a \textbf{Hilbert Space}. The dimensionality of the Hilbert Space depends on the \textbf{observable}. For the $S_z$ observable ($z$-component of angular momentum), it has two possible values,
          \[ S_z = \pm \f{\hbar}{2} \]
          Each value is associated with a state vector $\ket{+}$, $\ket{-}$ (note that no subscript will in general mean the $z$-direction, which is just our notation here), so the Hilbert Space is 2D.
 
@@ -453,7 +453,7 @@
          \[ \braket{-}{-} = 1 \ \ \ \ \ \ \ \ \braket{-}{+} = 0 \]
 
          Completeness ensures that $\ket{+}, \ket{-}$ can be used as a basis to express any general Quantum Mechanical state as a linear combination of them
-         \[ \mbox{General State Vector \ \ \ } \ket{\Psi} = a\ket{+} + b\ket{-} \mbox{ \ \ \ \ \ with $a, b$ complex scalars}  \]
+         \[ \mbox{General State Vector \ \ \ } \kpsi = a\ket{+} + b\ket{-} \mbox{ \ \ \ \ \ with $a, b$ complex scalars}  \]
          The coefficients are inner products, for example consider multiplying on the left by $\ket{+}$,
          \begin{align*}
            \braket{+}{\Psi} & = \braket{+}{\left( a\ket{+}+b\ket{-} \right)} \\
@@ -463,11 +463,11 @@
          \end{align*}
 
          Likewise, $\braket{-}{\Psi} = b$. Therfore,
-         \[ \ket{\Psi} = \left( \braket{+}{\Psi} \right)\ket{+} + \left( \braket{-}{\Psi} \right) \ket{-} \]
+         \[ \kpsi = \left( \braket{+}{\Psi} \right)\ket{+} + \left( \braket{-}{\Psi} \right) \ket{-} \]
           As an aside, the $\bra{+}$ is the bra to the $\ket{+}$, so together $\braket{+}{+}$ is a bra-ket. $\ddot\smile$.
           \newline
 
-          The dual vector (bra) to the Quantum Mechanical ket $\ket{\Psi}$:
+          The dual vector (bra) to the Quantum Mechanical ket $\kpsi$:
           \begin{align*}
             \bra{\Psi} & = a^*\bra{+} + b^*\bra{-} \\
             \braket{\Psi}{+} & = a^*\braket{+}{+} + b^*\braket{-}{+} = a^*
@@ -480,11 +480,11 @@
 
           \begin{exmp}
             Given a general quantum state vector expressed as a linear combination of the basis kets for the 2D Hilbert Space associated with the $S_z$ observable:
-            \[ \ket{\Psi} = a \ket{+} + b\ket{-} \]
-            Derive an expression for the coefficients, $a$ and $b$, which when satisfied ensure that $\ket{\Psi}$ is normalized.
+            \[ \kpsi = a \ket{+} + b\ket{-} \]
+            Derive an expression for the coefficients, $a$ and $b$, which when satisfied ensure that $\kpsi$ is normalized.
           \end{exmp}
 
-          First we normalize $\ket{\Psi}$, so
+          First we normalize $\kpsi$, so
           \begin{align*}
              \braket{\Psi}{\Psi} & = 1 \\
              &= \left( a^*\bra{+} + b^*\bra{-} \right)\left( a\ket{+} + b\ket{-} \right) \\
@@ -500,7 +500,7 @@
           \[ \left| \braket{+}{\Psi} \right|^2 + \left| \braket{-}{\Psi} \right|^2 = 1 \]
 
           \begin{defn}[Postulate 4]\label{postulate_4}
-            The probability of obtaining the value $\pm \f{\hbar}{2}$ in a measurement of the observable $S_z$ on a system in the state $\ket{\Psi}$ is
+            The probability of obtaining the value $\pm \f{\hbar}{2}$ in a measurement of the observable $S_z$ on a system in the state $\kpsi$ is
             \[ P_{\pm} = \left| \braket{\pm}{\Psi} \right|^2 \]
             where $\ket{\pm}$ is the basis ket of $S_z$ corresponding to the result $\pm \f{\hbar}{2}$.
           \end{defn}
@@ -605,15 +605,15 @@
           \subsection{Matrix Notation}
 
           If an ordered set of vectors is chosen as a basis, then we can express a general state as a linear combination of them.
-          \[ \ket{\Psi} = a\ket{+} + b\ket{-} \]
+          \[ \kpsi = a\ket{+} + b\ket{-} \]
           or as an ordered array of coefficients $a$, $b$ in co-ordinate representation.
           \begin{align*}
             \ket{+} \xrightarrow[\mbox{basis}]{S_z} \mtx{a \\ b} = \mtx{\braket{+}{\Psi} \\ \braket{-}{\Psi}} \ \ \ \ \ \ \mbox{(column vector)}
           \end{align*}
 
           \begin{align*}
-            \ket{\Psi} = \kplx = \f{1}{\sqrt{2}} \ket{+} + \f{1}{\sqrt{2}}\ket{-} \xrightarrow[\mbox{basis}]{S_z} \f{1}{\sqrt{2}} \mtx{1 \\ 1} \\
-            \ket{\Psi} = \kmiy = \f{1}{\sqrt{2}} \ket{+} - \f{i}{\sqrt{2}}\ket{-} \xrightarrow[\mbox{basis}]{S_z} \f{1}{\sqrt{2}} \mtx{1 \\ -i}
+            \kpsi = \kplx = \f{1}{\sqrt{2}} \ket{+} + \f{1}{\sqrt{2}}\ket{-} \xrightarrow[\mbox{basis}]{S_z} \f{1}{\sqrt{2}} \mtx{1 \\ 1} \\
+            \kpsi = \kmiy = \f{1}{\sqrt{2}} \ket{+} - \f{i}{\sqrt{2}}\ket{-} \xrightarrow[\mbox{basis}]{S_z} \f{1}{\sqrt{2}} \mtx{1 \\ -i}
           \end{align*}
 
           \begin{note}
@@ -675,9 +675,9 @@
 
       The set of kets is complete (they span the Hilbert Space associated with observable $A$). They can be used to express any arbitrary state as a linear combination.
 
-      \[ \ket{\Psi} = \alpha_1\ket{\alpha_1} + \alpha_2\ket{a_2} + \cdots + \alpha_n\ket{a_n} \]
+      \[ \kpsi = \alpha_1\ket{\alpha_1} + \alpha_2\ket{a_2} + \cdots + \alpha_n\ket{a_n} \]
 
-      with $\alpha_i = \braket{a_1}{\Psi}$. So, given $\ket{\Psi}$ as an input state to a measurement of observable $A$ with results $a_i$ and associates states $\ket{a_i}$, the probability for obtaining result $a_i$ is given by
+      with $\alpha_i = \braket{a_1}{\Psi}$. So, given $\kpsi$ as an input state to a measurement of observable $A$ with results $a_i$ and associates states $\ket{a_i}$, the probability for obtaining result $a_i$ is given by
 
       \[ Prob_{(a_i)} = |\braket{a_i}{\Psi}|^2 \ \ \ \ \ \ \ \ \ \ [\mbox{\nameref{postulate_4}}] \]
 
@@ -685,15 +685,15 @@
         Consider a quantum systemw ith an observable $A$ that has three possible measurement outcomes, with values $a_1, a_2$ and $a_3$. The quantum state associated with each of these outcomes is described by the three orthonormal kets:
         \[ \ket{a_1}, \ket{a_2}, \ket{a_3}  \]
         A system is prepared in the state that is a superposition of the three basis kets:
-        \[ \ket{\Psi} = 2\ket{a_1} - 3\ket{a_2} + 4i\ket{a_3} \]
+        \[ \kpsi = 2\ket{a_1} - 3\ket{a_2} + 4i\ket{a_3} \]
         Calculate the probability for each of the possible outcomes if a measurement of $A$ is made on the state.
       \end{exmp}
 
       So,
 
-      \[ \ket{\mbox{in}} = \ket{\Psi} = 2\ket{a_1} - 3\ket{a_2} + 4i\ket{a_3} \ \ \ \ \ \mbox{with} \ \ \ket{a_1}, \ket{a_2}, \ket{a_3} \ \ \mbox{orthogonal, normalised basis set} \]
+      \[ \ket{\mbox{in}} = \kpsi = 2\ket{a_1} - 3\ket{a_2} + 4i\ket{a_3} \ \ \ \ \ \mbox{with} \ \ \ket{a_1}, \ket{a_2}, \ket{a_3} \ \ \mbox{orthogonal, normalised basis set} \]
 
-      First we normalize the state vector. Let $\ket{\Psi} = C \left( 2\ket{a_1} - 3\ket{a_2} + 4i\ket{a_3} \right)$, then
+      First we normalize the state vector. Let $\kpsi = C \left( 2\ket{a_1} - 3\ket{a_2} + 4i\ket{a_3} \right)$, then
 
       \begin{align*}
         1 & = \braket{\Psi}{\Psi} \\
@@ -723,7 +723,7 @@
         \begin{defn}[Postulate 2]\label{postulate_2}
           A physical observable is represented mathematically by an operator $A$ that acts on kets.
 
-          \[ A\ket{\Psi} = \phi \]
+          \[ A\kpsi = \phi \]
         \end{defn}
 
         where $A$ is an operator that represents a physical observable.
@@ -736,9 +736,9 @@
 
         So, the Eigen-equation is
 
-        \[ A\ket{\Psi} = a\ket{\Psi} \]
+        \[ A\kpsi = a\kpsi \]
 
-        where $A$ is an \textbf{operator}, $a$ is an \textbf{eigenvalue}, and $\ket{\Psi}$ is an \textbf{eigenstate}.
+        where $A$ is an \textbf{operator}, $a$ is an \textbf{eigenvalue}, and $\kpsi$ is an \textbf{eigenstate}.
 
         \begin{defn}[Postulate 3]\label{postulate_3}
           The only possible result of a measurement of an observable is one of the eigenvalues $a_n$ of the corresponding operator $A$. Eigenvalues are the outputs of measurements.
@@ -775,12 +775,12 @@
 
         We have already seen operators, but didn't realize it.
 
-        \[ \ket{\Psi} = a\kp + b\km \mbox{ \ \ \ with \ } a = \braket{+}{\Psi}, b = \braket{-}{\Psi} \]
+        \[ \kpsi = a\kp + b\km \mbox{ \ \ \ with \ } a = \braket{+}{\Psi}, b = \braket{-}{\Psi} \]
         \begin{align*}
-          \ket{\Psi} & = \braket{+}{\Psi}\ket{+} + \braket{-}{\Psi}\km \\
+          \kpsi & = \braket{+}{\Psi}\ket{+} + \braket{-}{\Psi}\km \\
           & = \kp\braket{+}{\Psi} + \ket{-}\braket{-}{\Psi} \\
-          & = \left( \ket{+}\bra{+} \right) \ket{\Psi} + \left( \ket{-}\bra{-} \right) \ket{\Psi} \\
-          & = \left( \ket{+}\bra{+} + \ket{-}\bra{-} \right)\ket{\Psi}
+          & = \left( \ket{+}\bra{+} \right) \kpsi + \left( \ket{-}\bra{-} \right) \kpsi \\
+          & = \left( \ket{+}\bra{+} + \ket{-}\bra{-} \right)\kpsi
         \end{align*}
 
         Hence $\ket{+}\bra{+} + \ket{-}\bra{-} = \mathbb{1}$, the identity operator. This is known as the completeness relation. Note that $\ket{+}\bra{+}$ and $\ket{-}\bra{-}$ are projection operators, and are an example of an outer product.
@@ -841,17 +841,17 @@
       \begin{align*}
         \E{S_z} & = +\f{\hbar}{2} \left| \braket{+}{\Psi} \right|^2 + \f{-\hbar}{2} |\braket{-}{\Psi}|^2 \\
         & = +\f{\hbar}{2} \left( \braket{\Psi}{+}\braket{+}{\Psi} \right) + \f{-\hbar}{2} \left( \braket{\Psi}{-}\braket{-}{\Psi} \right) \\
-        & = \bra{\Psi} \left( \underbrace{+\f{\hbar}{2} \ket{+}\bra{+} + \f{-\hbar}{2}\ket{-}\bra{-}}_{\mbox{spectral decomposition for $S_z$}} \right) \ket{\Psi}
+        & = \bra{\Psi} \left( \underbrace{+\f{\hbar}{2} \ket{+}\bra{+} + \f{-\hbar}{2}\ket{-}\bra{-}}_{\mbox{spectral decomposition for $S_z$}} \right) \kpsi
       \end{align*}
 
       Then,
 
-      \[ \E{S_z} = \bra{\Psi}S_z\ket{\Psi} \ \ \ \ \ \ \ (2) \]
+      \[ \E{S_z} = \bra{\Psi}S_z\kpsi \ \ \ \ \ \ \ (2) \]
 
       The expression (2) is completely general: given an operator $\Lambda$ representing a Quantum Mechanical observable with eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$, and eigenkets $\ket{\lambda_1}, \ket{\lambda_2}, \ldots, \ket{\lambda_n}$ then $\Lambda$ can be expressed as
       \[ \Lambda = \sum_{i=1}^n \lambda_i \ket{\lambda_i}\bra{\lambda_i} \ \ \ \ \mbox{spectral decomposition} \]
       If a measurement of $\Lambda$ is made on an arbitrary input state $\ket{+}$, the expectation value of many repeated identical measurements will be
-      \[ \E{\Lambda} = \bra{\Psi}\Lambda\ket{\Psi} \ \ \ \ \mbox{Expectation value} \]
+      \[ \E{\Lambda} = \bra{\Psi}\Lambda\kpsi \ \ \ \ \mbox{Expectation value} \]
 
       \begin{defn}[trace]\label{trace}
         We are going to introduce a linear operation that assigns a number to each matrix.
@@ -888,7 +888,7 @@
       \end{itemize}
 
       In regard to the expectation value for a Quantum Mechanical measurement for operator $X$ and input state $\Psi$,
-      \[ \E{X} = \bra{\Psi}X\ket{\Psi} = \bra{\Psi}\left( X\ket{\Psi} \right) = \tr{ \left( X\ket{\Psi} \right)\bra{\Psi}} = \tr{X\ket{\Psi}\bra{\Psi}}\]
+      \[ \E{X} = \bra{\Psi}X\kpsi = \bra{\Psi}\left( X\kpsi \right) = \tr{ \left( X\kpsi \right)\bra{\Psi}} = \tr{X\kpsi\bra{\Psi}}\]
 
       Separate the properties of measured system (atoms) from Observable $X$.
 
@@ -899,7 +899,7 @@
 
       So far we have discussed sources (input states) that are composed of a single type of atom - this may be a superposition state (pure state) like
 
-      \[ \ket{\Psi} = a\kp + b\km \ \ \ \ \ \ \ \mbox{e.g., \ \ \ } \kp_x = \f{1}{\sqrt{2}}\kp + \f{1}{\sqrt{2}}\km \]
+      \[ \kpsi = a\kp + b\km \ \ \ \ \ \ \ \mbox{e.g., \ \ \ } \kp_x = \f{1}{\sqrt{2}}\kp + \f{1}{\sqrt{2}}\km \]
 
       How do we describe a source that is, say, a 50\% mixture of atoms in $\kp$ state and 50\% in $\km$ state - at first glance this may appear similar to $\kp_x$, but think about $S_x$. \newline
 
@@ -928,7 +928,7 @@
         \[ \E{S_n} = \tr{S_n\rho} \]
         In general,
         \[ \rho = \sum_i P_i \ket{x_i}\bra{x_i} \ \ \ \ \ \ \mbox{with } \sum_i P_i = 1 \]
-        If there is only one type of atom, it is a pure state (e.g., $\ket{\Psi}$) and the statistical operator is $\rho = \ket{\Psi}\bra{\Psi}$.
+        If there is only one type of atom, it is a pure state (e.g., $\kpsi$) and the statistical operator is $\rho = \kpsi\bra{\Psi}$.
       \end{defn}
 
       % \begin{exmp}
@@ -974,38 +974,38 @@
       \begin{defn}[Postulate 5]\label{postulate_5}
         After a measurement of $A$ that yields the result $a_n$, the quantum system is in a new state that is the normalized projection of the original system ket onto the ket (or kets) corresponding to the result of the measurement:
 
-        \[ \ket{\Psi'} = \f{P_n\ket{\Psi}}{\sqrt{\bra{\Psi}P_n\ket{\Psi}}} \]
+        \[ \ket{\Psi'} = \f{P_n\kpsi}{\sqrt{\bra{\Psi}P_n\kpsi}} \]
       \end{defn}
 
       We have seen proejction operators before, for example
-      \[ \ket{\Psi} = \braket{+}{\Psi}\kp + \braket{-}{\Psi}\ket{-} = \left( \underbrace{\kp\bp}_{\mbox{projection}} \right)\ket{\Psi} + \left( \underbrace{\km\bm}_{\mbox{projection}}  \right)\ket{\Psi}\]
+      \[ \kpsi = \braket{+}{\Psi}\kp + \braket{-}{\Psi}\ket{-} = \left( \underbrace{\kp\bp}_{\mbox{projection}} \right)\kpsi + \left( \underbrace{\km\bm}_{\mbox{projection}}  \right)\kpsi\]
 
       In this case, these are projection operators for $\kp$ and $\km$ states respectively. Applying the projection operator is analogous to taking components of geometric vectors. It produces a new state that is aligned along the eigenstate, with magnitude equal to the probability amplitude for the state to be in that eigenstate.
 
       \[ P_+ = \kp\bp \xrightarrow[\mbox{basis}]{S_z} \mtx{1 \\0}\mtx{1 & 0} = \mtx{1 & 0 \\ 0 & 0} \]
       \[ P_- = \km\bm \xrightarrow[\mbox{basis}]{S_z} \mtx{0 \\1}\mtx{0 & 1} = \mtx{0 & 0 \\ 0 & 1} \]
 
-      \[ P_+\ket{\Psi} = \kp\braket{+}{\Psi} = \braket{+}{\Psi} \kp \]
-      \[ P_-\ket{\Psi} = \km\braket{-}{\Psi} = \braket{-}{\Psi} \km \]
+      \[ P_+\kpsi = \kp\braket{+}{\Psi} = \braket{+}{\Psi} \kp \]
+      \[ P_-\kpsi = \km\braket{-}{\Psi} = \braket{-}{\Psi} \km \]
 
       where $\kp$ and $\km$ are eigenstates, and $\left( \braket{+}{\Psi} \right)$ and $\left( \braket{-}{\Psi} \right)$ are probability amplitudes.\
       \newline
 
       Now Postulate 5 lets us determine the output state using the projection operator.
-      \[ \ket{\Psi'} = \f{P_\Psi\ket{\Psi}}{\sqrt{\bra{\Psi}P_\Psi\ket{\Psi}}} \]
+      \[ \ket{\Psi'} = \f{P_\Psi\kpsi}{\sqrt{\bra{\Psi}P_\Psi\kpsi}} \]
 
       where
 
       \begin{align*}
         P_\Psi & = \ket{\Psi'}\bra{\Psi'} \\
-        \sqrt{\bra{\Psi}P_{\Psi'}\ket{\Psi}} & = \sqrt{\braket{\Psi}{\Psi'}\braket{\Psi'}{\Psi}} \\
+        \sqrt{\bra{\Psi}P_{\Psi'}\kpsi} & = \sqrt{\braket{\Psi}{\Psi'}\braket{\Psi'}{\Psi}} \\
         & = \sqrt{|\braket{\Psi}{\Psi'}|^2} = \mbox{probablity amplitude}
       \end{align*}
 
       Now, the expectation value for the projection operator is
 
       \begin{align*}
-        \E{P_+} & = \bra{\Psi}P_+\ket{\Psi} \\
+        \E{P_+} & = \bra{\Psi}P_+\kpsi \\
                 & = \braket{\Psi}{+}\braket{+}{\Psi} \\
                 & = |\braket{+}{\Psi}|^2 \\
                 & = prob_+
@@ -1158,7 +1158,7 @@
     \newline
 
     Energy eigenstates form a complete basis, and any arbitrary state can be constructed as a linear combination of them
-    \[ \ket{\Psi} = \sum_n c_n\ket{E_n} \mbox{ \ \ \ \ \ with } c_n = \braket{E_n}{\Psi} \]
+    \[ \kpsi = \sum_n c_n\ket{E_n} \mbox{ \ \ \ \ \ with } c_n = \braket{E_n}{\Psi} \]
     and
     \[ \braket{E_k}{E_n} = \delta_{kn} = \piecewise{0}{if $k \not = n$}{1}{if $k = n$} \]
     The Time Independent Hamiltonian is then
@@ -1334,7 +1334,7 @@
     \end{align*}
     Then for $S_y$,
     \begin{align*}
-      \E{S_y} & = \bra{\Psi(t)}S_z\ket{\Psi(t)} \ \ \ \ \mbox{(use co-ordinate representation)} \\
+      \E{S_y} & = \bra{\Psi(t)}S_y\ket{\Psi(t)} \ \ \ \ \mbox{(use co-ordinate representation)} \\
               & = \f{\hbar}{2}\cos(\omega_0t)
     \end{align*}
     likewise for $S_z$, $\E{S_z} = \f{\hbar}{2}\sin(\omega_0t)$. Checking consistency at $t = 0$, we see $\ket{\Psi(0)} = \kp_y$, and
@@ -1344,6 +1344,69 @@
 
     Time dependence is consistent with $\E{S}$ precessing about $\vec{B} = B_0\hat{x}$ in the $yz$-plane. This is consistent with our classical expectation for a spin dipole moment precessing about the field direction.
 
+  \section{Continuous Observables in Quantum Mechanics}
+
+    An example of an observable that has a continuum of possible outcomes would be the poisition of an atom (1 dimension for mathematical simplicity). We're going to characterize the quantum state associated with the position observable by a position ket and an associated bra
+
+    \[ \kx \equiv \mbox{"atom is at position $x$"} \]
+
+    \[ \bra{x} \equiv \kx^\dagger \]
+
+    These are known as \textbf{position eigenstates}. They require an infinite number of such kets (and bras) to allow for atoms existing anywhere on the $x$-axis. The theoretical idealization that a particle is at position $x$ (singularity on the $x$-axis) is not realistic, this is because there is a question of precision and spatial extent of a real particle. However, the realistic situation is that a physical position (i.e., one that occurs in reality) is a superposition of theoretically ideal position eigenstates.
+    \newline
+
+    Now we wish to build up an analogous formalism for continuous eigenstates to that which we have for discrete systems (e.g., Stern-Gerlach)
+
+    \begin{itemize}
+      \item[(1)] Expressing arbitrary state as a linear combination of basis states. In Finite Dimensions with basis $\ket{a_k}$, then
+      \[ \kpsi = \sum_x \ket{a}_k{}_k\braket{a}{\Psi} = \sum_k \Psi_k \ket{a_k} \]
+      where $\ket{a}_k$ is a basis state and ${}_k\braket{a}{\Psi} = \Psi_k$ are the probability amplitude. Similarly if we express $\kpsi$ as a vector in co-ordinate representation with respect to the ordered basis $\ket{a_k}$
+      \[ \kpsi  \xrightarrow[\mbox{basis}]{\ket{a_k}} \mtx{\Psi_1\\\Psi_2\\\vdots\\\Psi_n} \ \ \ \mbox{with } \Psi_k = \braket{a_k}{\Psi} \]
+      In \textbf{infinite dimensions} (position basis) then we write
+      \[ \kpsi = \int dx \kx \braket{x}{\Psi} = \int dx \kx\Psi(x) \]
+      with \textbf{position wave function} $\Psi(x) = \braket{x}{\Psi}$. Note that $\braket{x}{\Psi}$ is not a number as it was in the finite case, it is now a function over all possible values of $x$; a continuous function of probability amplitude for finding a particle in state $\kpsi$ at position $x$. The integrals are taken over the entire space unless otherwise noted.
+
+      \item[(2)] \textbf{Probabilities.} In order to use coefficients of linear expansions to compute probabilities the position kets must be normalized. Consider the special case of $\kpsi = \ket{x'}$ (position eigenstate), then
+      \[ \kpsi = \ket{x'} = \int dx \kx\braket{x}{x'} \]
+      This only makes sense if $\braket{x}{x'} = \delta(x-x')$ (Dirac-delta function).
+      \begin{defn}[Dirac-delta function]\label{Dirac-delta function}
+        This is the continuous analogue of the kronicker delta function $(\delta_{mn}$) from considering orthonormal properties of discrete kets. Its operation definition is
+        \[ \int dx' \delta{x-x'}f(x') = f(x) \]
+        with properties
+        \[ \int dx' \delta(x-x') = 1 \ \ \ \ \mbox{(special case that $f(x') = 1$)} \]
+        \[ \delta(x-x') = 0 \ \ \ \ \mbox{for all $x \not = x'$} \]
+        \[ \delta(x-x') = \infty \ \ \ \ \mbox{for $x = x'$} \]
+        (but really only makes sense in the context of integration)
+      \end{defn}
+      However, now it appears that when $x = x'$, then $\braket{x}{x'} = \delta(x-x')$ is infinite, and so our probability amplitude would apparently be infinite too. However, as already stated, the idea or concept of an exact position is not realistic. So, $\braket{x}{x'}$ is not related to any physical observable quantity.
+      \newline
+
+      The correct stance to take is to consider our position over some region of space (a linear superposition of position eigenstates), so the Dirac-delta function is integrated and results will be finite.
+      \newline
+
+      For normalisation we require that $\braket{\Psi}{\Psi} = 1$
+
+      \begin{align*}
+        \braket{\Psi}{\Psi} & = \int \int dx dx' \braket{\Psi}{x}\braket{x}{x'}\braket{x'}{\Psi} \\
+                            & = \int \int dx' dx \braket{\Psi}{x}\delta(x-x')\braket{x'}{\Psi} \\
+                            & = \int dx \braket{\Psi}{x}\braket{x}{\Psi} \\
+                            & = \int dx \pr{\braket{x}{\Psi}}
+      \end{align*}
+
+      If the state $\kpsi$ is normalised, then
+
+      \[ \braket{\Psi}{\Psi} = \int dx \pr{\braket{x}{\Psi}} = 1 \]
+
+      Also, since $\Psi(x) = \braket{x}{\Psi}$ is the position wave function (a continuous function of probability ampltitudes for all $x$)
+
+      \begin{align*}
+        \braket{\Psi}{\Psi} & = \int dx \Psi^*(x)\Psi(x) = \int dx \pr{\Psi(x)} = 1
+      \end{align*}
+
+      It's then natural to identify $dx \pr{\Psi(x)} = dx \pr{\braket{x}{\Psi}}$ with probability that the particle will be bound between $x$ and $x + dx$. Now, the normalisation condition ensured that the probability to find the particle somewhere on the $x$-axis ($-\infty \leftrightarrow \infty$) is 1.
+
+
+    \end{itemize}
 
 
 
@@ -1453,8 +1516,8 @@
 
       \begin{itemize}
         \item Axiom 0. Systems Exist
-        \item Axiom 1. For each preparation device $\mathcal{P}$, there is an associated $\ket{\Psi} \in \C^d : \braket{\Psi}{\Psi} = 1$.
-        \item Axiom 2. For each transformation channel $\mathcal{T}$, there is an associated $u \in U(\C^d), \ket{\Psi} \rightarrow u\ket{\Psi}$
+        \item Axiom 1. For each preparation device $\mathcal{P}$, there is an associated $\kpsi \in \C^d : \braket{\Psi}{\Psi} = 1$.
+        \item Axiom 2. For each transformation channel $\mathcal{T}$, there is an associated $u \in U(\C^d), \kpsi \rightarrow u\kpsi$
         \item Axiom 3. For each measurement device $\mathcal{M}$, there is an associated Hermitian $A$ with eigenvalues $\lambda_r$ and eigenkets $\ket{\xi_r}$ such that for input $\ket{\phi}$,
         \[ pr(\lambda_r) = \left| \braket{\phi}{\xi_r}\right|^2 \]
         This is The Born Rule.
@@ -1482,7 +1545,7 @@
       \end{exmp}
 
       \begin{exmp}
-        Prove that $\left|\braket{\Psi}{\phi}\right|^2 = \left|\braket{\tau}{\phi}\right|^2$ where $\ket{\tau} = e^{i\theta} \ket{\Psi}$, for $\ket{\Psi}, \ket{\phi} \in \C^d$.
+        Prove that $\left|\braket{\Psi}{\phi}\right|^2 = \left|\braket{\tau}{\phi}\right|^2$ where $\ket{\tau} = e^{i\theta} \kpsi$, for $\kpsi, \ket{\phi} \in \C^d$.
         \newline
         \begin{align*}
           \left|\braket{\tau}{\phi}\right|^2 & = |e^{-i\theta}|^2\left|\braket{\Psi}{\phi}\right|^2 \\
@@ -1496,8 +1559,8 @@
 
         \begin{itemize}
         \item Axiom 0. Systems Exist
-        \item Axiom 1. For each preparation device $\mathcal{P}$, there is an associated $\ket{\Psi} \in \C^d : \braket{\Psi}{\Psi} = 1$.
-        \item Axiom 2. For each transformation channel $\mathcal{T}$, there is an associated $u \in U(\C^d), \ket{\Psi} \rightarrow u\ket{\Psi}$
+        \item Axiom 1. For each preparation device $\mathcal{P}$, there is an associated $\kpsi \in \C^d : \braket{\Psi}{\Psi} = 1$.
+        \item Axiom 2. For each transformation channel $\mathcal{T}$, there is an associated $u \in U(\C^d), \kpsi \rightarrow u\kpsi$
         \item Axiom 3. For each measurement device $\mathcal{M}$, there is an associated Hermitian $A = A^\dagger$
       \end{itemize}
 
@@ -1515,7 +1578,7 @@
 
       \textbf{Axiom 3.} For each $\mathcal{M}$, there is an associated $A = A^\dagger$ such that
       \[ pr(\lambda_r) = \sum_{s=1}^{\mbox{mult}(\lambda_r)} \left| \braket{\Psi}{\xi_{r_s}} \right|^2 \]
-      For input $\ket{\Psi}, \ket{\Psi} \longrightarrow \f{\pi_r\ket{\Psi}}{\bra{\Psi}\pi_r\ket{\Psi}}$
+      For input $\kpsi, \kpsi \longrightarrow \f{\pi_r\kpsi}{\bra{\Psi}\pi_r\kpsi}$
       when outcome $\lambda_r$ is registered.
 
       There we go. My question is, is this just a special case of the unitary axiom?
