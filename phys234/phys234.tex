@@ -51,7 +51,7 @@
   Robert Hill is a low temperature experimentalist, but this course will be mostly theoretical.
   \newline
 
-   Albert Einstein once said, "Quantum mechanics is certainly imposing. But an inner voice tells me that it is not yet the realthing. The theory says a lot, but does not really bring us any closer to the secret of the 'old one'. I, at any rate, am convinced that He does not throw dice."
+   Albert Einstein once said, "Quantum mechanics is certainly imposing. But an inner voice tells me that it is not yet the real thing. The theory says a lot, but does not really bring us any closer to the secret of the 'old one'. I, at any rate, am convinced that He does not throw dice."
    \newline
 
    Richard Feynman said "I think I can safely say that nobody understand quantum mechanics."
@@ -1405,9 +1405,98 @@
 
       It's then natural to identify $dx \pr{\Psi(x)} = dx \pr{\braket{x}{\Psi}}$ with probability that the particle will be bound between $x$ and $x + dx$. Now, the normalisation condition ensured that the probability to find the particle somewhere on the $x$-axis ($-\infty \leftrightarrow \infty$) is 1.
 
+      Then, the probability of finding the particle between $x=a$ and $x=b$ is
+
+      \[ prob(a<x<b) = \int_a^b \pr{\braket{x}{\Psi}} dx = \int_a^b \Psi^*(x)\Psi(x) dx \]
+
+      \item[(3)] The completeness relation in finite dimensions is
+      \[ \sum_k \ket{a_k}\bra{a_k} = \mathbb{1} \]
+      and in infinite dimensions (continuous) it is
+      \[ \int dx \ket{x}\bra{x} \]
+
+      \item[(4)] The inner product is defined in finite dimensions as
+      \[ \braket{\phi}{\Psi} \longrightarrow \sum_x \braket{\phi}{a_k}\braket{a_k}{\Psi} = \sum_k \phi_k^*\Psi_k \]
+      where $\phi_k = \braket{a_k}{\phi}$ and $\Psi_k = \braket{a_k}{\Psi}$. Then, in infinite dimensions the inner product is defined like
+      \[ \braket{\phi}{\Psi} \longrightarrow \int dx \braket{\phi}{x}\braket{x}{\Psi} = \int dx (\phi(x))^*\Psi(x)  \]
+      with $\phi(x) = \braket{x}{\phi}$ and $\Psi(x) = \braket{x}{\Psi}$.
+
+      \item[(5)] The \textbf{expectation value} is the mean value of many repeated experiments on identical states. For observable $\hat{A}$ and input state $\ket{\Psi}$,
+
+      \[ \E{\hat{A}} = \bra{\Psi}\hat{A}\ket{\Psi} \]
+
+      In the position basis, it yields a continuous spectrum of results.
+
+      Now to summarize the transition from finite dimensional expectation values to infinite dimensions,
+
+      \begin{align*}
+        \kpsi & \longrightarrow \Psi(x) \\
+        \bra{\Psi} & \longrightarrow \Psi^*(x) \\
+        \hat{A} & \longrightarrow A(X) \\
+        \E{\hat{A}} & \longrightarrow \int dx \Psi^*(x)A(x)\Psi(x)
+      \end{align*}
+
+      \item[(6)] The position operator, $\hat{x}$
+
+      \[ \mbox{position basis } \ \ \hat{x} \longrightarrow x \ \ \ \mbox{multiply by scalar $x$} \]
+
+      The Eigenvalue equation is
+
+      \[ \hat{x}\kx = x\kx \]
+
+      Therefore the expectation value can be written like
+
+      \[ \E{\hat{x}} = \bra{\Psi}\hat{x}\ket{\Psi} \longrightarrow \int dx \Psi^*(x)x\Psi(x) \]
+
+      We can explore this value more formally:
+
+      \[ \E{\hat{x}} = \bra{\Psi}\hat{x}\ket{\Psi} \]
+
+      Now we need to express $\kx$ in the position basis, so
+
+      \begin{align*}
+        \kpsi & \longrightarrow \int dx \kx \braket{x}{\Psi} \\
+        \implies \E{\hat{x}} & = \int dx \bra{\Psi}\hat{x}\kx \braket{x}{\Psi}
+      \end{align*}
+
+      Now we use the eigenvalue equation for $\hat{x}$ and we get
+
+      \begin{align*}
+         \E{\hat{x}} & = \int dx \bra{\Psi}x\kx \braket{x}{\Psi} \\
+                     & = \int dx \braket{\Psi}{x}x\braket{x}{\Psi} \\
+                     & = \int dx \Psi^*(x)x\Psi(x)
+      \end{align*}
+
+      Also by the same arguments, we see that
+
+      \[ \E{\hat{x^2}} = \int dx \Psi^*(x) x^2 \Psi(x) \ \ \ \mbox{useful for computing uncertainties} \]
+
+      Even more generally,
+
+      \[ \E{f(\hat{x})} = \int dx \Psi^*(x) f(x) \Psi(x) \ \ \ \mbox{for $f$ a function} \]
+
+      Another operator of interest is the \textbf{momentum operator}, $\hat{p}$. In the position basis we note that
+
+      \[ \hat{p} \longrightarrow -i\hbar \f{d}{dx} \ \ \ \ \mbox{(advanced derivation through consideration of spatial translations)} \]
+
+      The expectation value for this operator is then $\E{\hat{p}} = \bra{\Psi}\hat{p}\ket{\Psi}$ for an input state $\ket{\Psi}$ and then written in the position basis it is
+
+      \[ \E{\hat{p}} = \int dx \Psi^*(x) \left( -i\hbar \f{d}{dx} \right) \Psi(x) \]
+
+      where we have a spatial derivative of the wavefunction and so order is important. So we require an explicit form of the wavefunction.\newline
+
+      Now we can consider \textbf{the Hamiltonian Operator}, $\hat{H}$. It is a total energy observable where total energy is equal to the sum of the potential energy and the kinetic energy, and the potential energy depends on position $V(\hat{x})$, a function of the position operator. The kinetic energy then depends on speed : $\f{\hat{p}^2}{2m}$, a function of the momentum operator. The total energy given by the hamiltonian operator is then
+
+      \[ \hat{H} = V(\hat{x}) + \f{\hat{p}^2}{2m} \]
+
+      in the position basis then it looks like
+
+      \[ H = V(\hat{x}) + \f{\hat{p}^2}{2m} \longrightarrow V(X) + \f{1}{2m} \left( -i\hbar \f{d}{dx} \right)^2 \]
+
+      The energy eigenvalue equation is
+
+      \[ \hat{H}\ket{E_1} = E_1\ket{E_1} \]
 
     \end{itemize}
-
 
 
 
