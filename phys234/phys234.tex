@@ -1494,7 +1494,74 @@
 
       The energy eigenvalue equation is
 
-      \[ \hat{H}\ket{E_1} = E_1\ket{E_1} \]
+      \[ \hat{H}\ket{E_i} = E_i\ket{E_i} \]
+
+      Now if we express it in the position basis: $\ket{E_i} \longrightarrow \phi_{E_i}(x)$ we have the energy eigenfunction as a wavefunction in the position basis. The energy eigen equation in the position basis is then
+
+      \[ \left[ V(x) + \f{1}{2m} \left( -i\hbar \f{d}{d x} \right)^2 \right] \phi_{E_i}(x) = E_1 \phi_{E_i}(x) \]
+
+      Second order differential equation, often called "time independent Schrödinger equation" (TISE)
+
+      \[ -\f{\hbar^2}{2m}\f{d^2}{dx^2}\phi_{E_i}(x) + V(x) \phi_{E_i}(x) = E_i\phi_{E_i}(x) \]
+
+      Now we consider the eigenstate ($\phi_{E_i}(x)$) and eigenvalues $(E_i)$ of the Hamiltonian operator for different potential energy functions $V(x)$.
+
+      \begin{figure}[t!]
+            \centering
+            \includegraphics[width=0.5\textwidth]{energy_quantum.png}
+            \caption{A generic potential energy well.}
+      \end{figure}
+
+      \subsection{Infinite Square Well Potential}
+
+        This is an approximation as the limiting case for a charged particle between two charged plates. So,
+
+        \[ V(x) = \piecewise{0}{$0 \leq x \leq L$}{\infty}{otherwise} \]
+
+        \begin{figure}[t!]
+              \centering
+              \includegraphics[width=0.4\textwidth]{well.png}
+              \caption{Infinite square potential energy well.}
+        \end{figure}
+
+        \textbf{Outside the well} (classically forbidden for all possible energies), we have that
+
+        \[ V(x) = \infty \]
+
+        We express the wavefunction (energy eigenstate) as $\Psi(x) = \phi_{E_i}(x)$ and so
+
+        \[ \Psi(x) = 0 \]
+
+        is the probability of finding the particle outside of the box ($x < 0$ or $x > L$), because the potential is infinite.
+
+        \textbf{Inside the well} now we have $V(x) = 0$ so looking again at the time independent Schrödinger equation,
+
+        \[ -\f{\hbar^2}{2m}\f{d^2\Psi(x)}{dx^2} = E\Psi(x) \]
+
+        which we can rewrite as
+
+        \[ \f{d^2\Psi(x)}{dx^2} = -k^2\Psi(x) \ \ \ \ \ \mbox{with } k = \f{\sqrt{2mE}}{\hbar} \]
+
+        Since $E>0$, so $k$ is real and so $k^2$ is positive. Here, we have a general solution
+
+        \[ \Psi(x) = c_1 \expo{ikx} + c_2\expo{-ikx} \]
+
+        Since complex exponentials can be rewritten as oscillatory functions. Now, constants $c_1$ and $c_2$ are fixed by boundary conditions. Ordinarily these are $\Psi(x)$ is continuous and $\f{d\Psi(x)}{dx}$ is continuous. Ensure that energy remains finite and the Schrödinger Equation can be solved.
+        \newline
+
+        In this case, because $V(x) = \infty$ and $\Psi(x) = 0$, the latter condition may be relaxed (i.e., derivative need not be continuous). Thus continuity for $\Psi(x)$ requires that $\Psi(0) = \Psi(L) = 0$, so we have matching solutions inside and outside the potential well. So,
+
+        \begin{align*}
+          \Psi(0) & \implies c_1 + c_2 = 0 \implies c_1 = - c_2 \\
+          & \implies \Psi(x) = c_1 \left( \expo{+ikx} - \exp{-ikx} \right) \\
+          & \implies \Psi(x) = A\sin(kx) & \left[ \mbox{Euler } e^{i\alpha} = \left( \cos\alpha + i\sin\alpha \right)\right]
+        \end{align*}
+
+        The other side of the well, given
+        \[ \Psi(L) = 0 \implies A\sin(kL) = 0 \implies kL=n\pi \]
+        Hence the values of $k$ are restricted to a set of discrete values.
+
+        \[ k_n = \f{n\pi}{L} \ \ \ \ \ \ \ n = 1, 2, 3, 4, \ldots \]
 
     \end{itemize}
 
