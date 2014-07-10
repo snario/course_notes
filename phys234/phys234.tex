@@ -1346,6 +1346,8 @@
 
   \section{Continuous Observables in Quantum Mechanics}
 
+    \subsection{Transition to Infinite Dimensions}
+
     An example of an observable that has a continuum of possible outcomes would be the poisition of an atom (1 dimension for mathematical simplicity). We're going to characterize the quantum state associated with the position observable by a position ket and an associated bra
 
     \[ \kx \equiv \mbox{"atom is at position $x$"} \]
@@ -1563,26 +1565,71 @@
 
         \[ k_n = \f{n\pi}{L} \ \ \ \ \ \ \ n = 1, 2, 3, 4, \ldots \]
 
+        The solution to the time independent Schrödinger equation for $0 \leq x \leq L$ is then
+
+        \[ \Psi_n(x) = A_n\sin \left( \f{n\pi x}{2} \right) \ \ \ \ \ \mbox{energy eigenfunctions (wavefunctions) in position basis} \]
+
+        Furthermore, since $k^2 = \f{2mE}{\hbar^2}$ and $k_n = \f{n\pi}{L}$ for $n = 1, 2, 3, \ldots$. Then,
+
+        \[ E_n = \f{\hbar^2k_n^2}{2m} = \f{n^2h^2}{8mL^2} \ \ \ \ \mbox{energy eigenvalues.} \]
+
     \end{itemize}
 
+    \subsubsection{Probability Density}
+
+      Integrate over a finite region of the $x$-axis to get the probability that it is to be in thay region. The wavefunction (energy eigenfunction) must be normalised. Find $A_n$ such that
+
+      \[ \int_{-\infty}^{\infty} dx \Psi_n^*(x)\Psi_n(x) = 1 \ \ \ \ \ \ \left( A_n = \sqrt{\f{2}{L}} \right) \]
+
+      If we compare this with the classical expectation, then we would have a classical particle bouncing around in a box that has equal probability to be found anywhere. Not so far in Quantum Mechanics when $n$ is small, but as $n$ gets very large, changes in the probability become extremely small on the spatial scale and the classical result is approximated (\textbf{correspondance principle}).
+
+    \subsubsection{Zero Point Energy}
+
+      Energy is quantised in $n$ (quantum number), but $n = 0$ is not a "physical" solution, so the lowest eigenstate is $n=1$ (ground state). The first energy eigenvalue $E_1 = \f{\pi^2\hbar^2}{2mL^2}$ is zero point energy. There are some purely Quantum Mechanical effect:
+
+      \begin{itemize}
+        \item Stops Helium from solidifying
+        \item Can be large enough to disrupt crystalline or magnetic order (quantum phase transition)
+      \end{itemize}
+
+      \subsubsection{Completeness and Orthonormality}
+
+        The set of solutions of the time independent Schrödinger equation form a complete set in the sense that any arbitrary wavefunction may be written as a linear combination of the $\Psi_n(x)$ (Fourier Series). \newline
+
+        The $\Psi_n(x)$ are orthonormal
+
+        \[ \int_{-\infty}^{\infty} \Psi_{n}^*(x)\Psi_{m} dx = \delta_{mn} = \piecewise{0}{if $m \not = n$}{1}{if $m = n$} \]
+
+      \subsubsection{Symmetry}
+
+        The potential energy function is symmetryic about its center line, $x = \f{L}{2}$. The eigenfunctions $\Psi_n(x)$ are alternatively odd and even functions as $n$ is increased.\newline
+
+      These are very general properties of any solutions to a symmetric potential energy function (see finite potential well, harmonic oscillator).
+
+      \begin{exmp}
+        Consider a particle in the ground state of an infinite square well potential. Find the expectation value for a measurement of position, and the probability that a measurement of position would find the particle in the first third of the well.
+      \end{exmp}
+
+      We want to work in the position basis, so
+
+      \[ \ket{E_1} \xrightarrow[\mbox{basis}]{\mbox{position}} \Psi_1(x) = \sqrt{\f{2}{L}}\sin \left( \f{\pi x}{L} \right) \ \ \ \ \ \ \ (0 < x < L) \]
+
+      then,
+
+      \[ \E{\hat{x}} = \bra{E_1}\hat{x}\ket{E_1} = \int_{-\infty}^{\infty} dx \Psi_1^*(x)x\Psi_1(x) = \f{2}{L} \int_0^L x\sin^2 \left( \f{\pi x}{L} \right) \]
+
+      and finally the probability,
+
+      \[ prob\left(0<x<\f{L}{3}\right) = \int_0^{\f{L}{3}}\Psi_1^*(x)\Psi_1(x) = \f{2}{L} \int_0^{\f{L}{3}} \sin^2 \left( \f{\pi x}{L} dx = 0.195 \right) \]
 
 
+    \subsection{Harmonic Oscillator Potential}
 
+      The harmonic oscillator potential $V(x) = \f{1}{2}kx^2$ for spring constant $k = m\omega^2$ and $\omega = \sqrt{\f{k}{m}}$. This is distinct from the earlier piecewise functions because it is continuous. Since $V(x)$ is a quadratic function, we can split up the regions for which it has meaning into three; region II being the rectangular region bounded by the line $y = E$ and $y = 0$ and bounded on the left and right by the $x$ for which $y = E$. Region I is to the left of this, and region III to the right. So, for region II (classically allowed),
 
+      \[ \f{d^2\psi}{dx^2} = -k^2\psi \ \ \ \ \ \ \ \ \ \ k = \f{\sqrt{2m(E-V(x))}}{\hbar} \]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+      Since $E > V(x)$, then $k$ is real and so we expect
 
 
 
