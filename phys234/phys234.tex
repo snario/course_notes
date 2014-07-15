@@ -1,7 +1,7 @@
 \documentclass[english, 11pt]{article}
 \usepackage[makeroom]{cancel}
 \usepackage{../notes}
-
+%\usepackage{cmbright}
 \newcommand{\thiscoursecode}{PHYS 234}
 \newcommand{\thiscoursename}{Quantum Physics I}
 \newcommand{\thisprof}{Dr. Robert Hill}
@@ -40,7 +40,6 @@
 %   o8o        `8   `Y8bood8P'      o888o     o888ooooood8 8""88888P'
 
 \begin{document}
-
   % Notes fron,
   \notefront
   % Table of Contents and List of Figures
@@ -1616,11 +1615,11 @@
 
       then,
 
-      \[ \E{\hat{x}} = \bra{E_1}\hat{x}\ket{E_1} = \int_{-\infty}^{\infty} dx \Psi_1^*(x)x\Psi_1(x) = \f{2}{L} \int_0^L x\sin^2 \left( \f{\pi x}{L} \right) \]
+      \[ \E{\hat{x}} = \bra{E_1}\hat{x}\ket{E_1} = \int_{-\infty}^{\infty} dx \Psi_1^*(x)x\Psi_1(x) = \f{2}{L} dx \int_0^L x\sin^2 \left( \f{\pi x}{L} \right) \]
 
       and finally the probability,
 
-      \[ prob\left(0<x<\f{L}{3}\right) = \int_0^{\f{L}{3}}\Psi_1^*(x)\Psi_1(x) = \f{2}{L} \int_0^{\f{L}{3}} \sin^2 \left( \f{\pi x}{L} dx = 0.195 \right) \]
+      \[ prob\left(0<x<\f{L}{3}\right) = \int_0^{\f{L}{3}}\Psi_1^*(x)\Psi_1(x)dx = \f{2}{L} \int_0^{\f{L}{3}} \sin^2 \left( \f{\pi x}{L}\right) dx = 0.195  \]
 
 
     \subsection{Harmonic Oscillator Potential}
@@ -1629,7 +1628,134 @@
 
       \[ \f{d^2\psi}{dx^2} = -k^2\psi \ \ \ \ \ \ \ \ \ \ k = \f{\sqrt{2m(E-V(x))}}{\hbar} \]
 
-      Since $E > V(x)$, then $k$ is real and so we expect
+      Let $V(x) = V_0$,\newline
+
+      Classically we have that $E > V_0$, so $k$ is real, and so $k^2$ is positive. This means that a general solution in this case is a complex exponential (oscillatory functions, wavelength determined by $k$).
+      \newline
+
+      Classically forbidden, $E<V_0$, which means $k$ is imaginary, $k^2$ is negative, and so our general solution is a real exponential (diverging or decreasing with $x$).\newline
+
+      We can use physical arguments based on required properties of $\Psi(x)$ as probability amplitude to discard "unphysical" terms in the general solution.
+
+    \subsection{Harmonic Oscillator - Algebraic Method}
+
+      The potential energy $V(x) = \f{1}{2}m \omega^2 x^2$, and we know that the time independent Schrödinger equation (energy eiegenvalue equation) states,
+      \[ \hat{H}\ket{\psi} = E\ket{\psi} \]
+
+      The Hamiltonian is also,
+
+      \[ \hat{H} = \f{\hat{p}^2}{2} + V(\hat{x}) = \f{1}{2m} \left[ \hat{p}^2 + (m \omega \hat{x})^2 \right] \]
+
+      This is the sum of the two squared operators, which can be factorized. For numbers, it is straightforward
+
+      \[ v^2 + u^2 = (v+iu)(v-iu) \]
+
+      For operators, order is important becuse they may not commute.\newline
+
+      However, consider
+
+      \[ \hat{a}_{\pm} = \f{1}{\sqrt{2\hbar m \omega}} \left( \mp i \hat{p} + m\omega \hat{x} \right) \]
+
+      The product of the two can be computed,
+
+      \begin{align*}
+        \hat{a}_-\hat{a}_+ & = \f{1}{2\hbar m \omega} \left( i\hat{p} + m\omega \hat{x} \right)\left( -i\hat{p} + m\omega\hat{x} \right) \\
+        & = \f{1}{2\hbar m \omega} \left( \hat{p}^2 + (m\omega \hat{x})^2 - im\omega(\hat{x}\hat{p} - \hat{p}\hat{x}) \right)
+      \end{align*}
+
+      Where the latter term in the commutator $[\hat{x}, \hat{p}] = \hat{x}\hat{p}-\hat{p}\hat{x}$. \newline
+
+      To find the commutator, move to the position basis and apply it to the wavefunction.
+
+      \begin{align*}
+         [\hat{x}, \hat{p}]\ket{\psi} & \longrightarrow \left[x, (-i\hbar)\f{d}{dx} \right]\psi(x)  \\
+         & = x(-i\hbar)\f{d}{dx} \psi(x) - (-i\hbar)\f{d}{dx} (x\psi(x)) \\
+         & = -i\hbar \left( x \f{d\psi(x)}{dx} - x\f{d\psi(x)}{dx} - \psi(x) \right) \\
+         &  = i\hbar\psi(x)
+       \end{align*}
+       Thus the commutator relationship for $\hat{x}$ and $\hat{p}$ is
+       \[ [\hat{x},\hat{p}] = i\hbar \]
+       Substitute this into the product of factoring operators,
+
+       \begin{align*}
+         \hat{a}_-\hat{a}_+ & = \f{1}{2\hbar m \omega} \left( \hat{p}^2 + (m\omega \hat{x})^2 \right) - \f{i}{2\hbar}[\hat{x},\hat{p}] \\
+         & = \f{1}{2\hbar m \omega} \left( \hat{p}^2 + (m\omega\hat{x})^2 \right) - \f{i}{2\hbar}(i\hbar) \\
+         & = \f{1}{\hbar \omega}\hat{H} + \f{1}{2} & (1)
+       \end{align*}
+
+       Similarly,
+
+       \begin{align*}
+         \hat{a}_+\hat{a}_- = \f{1}{\hbar\omega}\hat{H} - \f{1}{2} & (2)
+       \end{align*}
+
+       Using (1) and (2),
+
+       \[ \hat{H} = \hbar \omega \left(\hat{a}_+\hat{a}_- + \f{1}{2}\right) = \hbar \omega \left(\hat{a}_-\hat{a}_+ - \f{1}{2}\right) \]
+
+       Substitute with the time independent Schrödinger equations,
+
+       \[ \hbar\omega \left( \hat{a}_\pm\hat{a}_\mp  \pm \f{1}{2} \right)\ket{\psi} = E\ket{\psi} \]
+
+       Also,
+
+       \[ [\hat{a}_-,\hat{a}_+] = \hat{a}_-\hat{a}_+ - \hat{a}_+\hat{a}_- = 1 \]
+
+       Now we can use operator manipulation to show that if $\ket{\psi}$ is an eigenstate of the Hamiltonian for the Harmonic Oscillator with energy eigenvalue $E$, then $\hat{a}_+\ket{\psi}$ is also an eigenstate with energy eigenvalue $E + \hbar \omega$.
+
+       \begin{align*}
+         \hat{H} (\hat{a}_+\ket{\psi}) & = \hbar \omega \left( \hat{a}_+\hat{a}_- + \f{1}{2} \right)\left( \hat{a}_+\ket{\psi} \right) \\
+         & = \hbar \omega \left( \hat{a}_+\hat{a}_-\hat{a}_+ + \f{1}{2}\hat{a}_+\right)\ket{\psi} \\
+         & = \hbar \omega \hat{a}_+ \left( \hat{a}_-\hat{a}_+ + \f{1}{2} \right)\ket{\psi} & \mbox{use commutator} \\
+         & = \hat{a}_+\hbar \omega \left( \hat{a}_+\hat{a}_- + 1 + \f{1}{2} \right)\ket{\psi} & \mbox{use Hamiltonian} \\
+         & = \hat{a}_+\left( \hat{H} + \hbar \omega + \hbar \omega \right)\ket{\psi} \\
+         & = \hat{a}_+ \left( E + \hbar \omega \right)\ket{\psi} \\
+         & = (E + \hbar \omega) \hat{a}_+\ket{\psi}
+       \end{align*}
+
+       The same method can be used to show that $(\hat{a}_-\ket{\psi})$ is the eigenstate with energy $E - \hbar \omega$.\newline
+
+       We call these $\hat{a}_{\pm}$ \textbf{ladder operators}, once we have one solution we can obtain all others by applying $\hat{a}_+$ and or $\hat{a}_-$.
+
+       \begin{defn}[Lowest Energy Eigenstate]\label{Lowest Energy Eigenstate}
+        We require that repeated application of the lowering operator $\hat{a}_-$, will eventually result in zero, this is the \textbf{ladder termination condition}.
+       \end{defn}
+
+       That is, at the lowest rung,
+
+       \[ \hat{a}_-\ket{\psi_0} = 0 \]
+
+       is the lowest energy eigenstate.
+
+       Expressing this equation in the position basis,
+
+       \[ \f{1}{2\hbar m \omega} \left( -\hbar \f{d}{dx} + m\omega x \right) \psi_0(x) = 0 \implies \f{d\psi_0(x)}{dx} = -\f{m\omega}{\hbar} x\psi_0(x) \]
+
+       We can solve this equation by integrating,
+
+       \begin{align*}
+         \int \f{1}{\psi_0(x)} d\psi_0(x) & = -\f{m\omega}{\hbar} \int x dx \implies \ln(\psi_0(x)) = -\f{-m\omega}{2\hbar}x^2 + A' \\
+         & \implies \psi_0(x) = A\expo{-\f{m\omega}{2\hbar}x^2}
+       \end{align*}
+
+       We find $A$ by normalizing,
+
+       \begin{align*}
+         A^2 \int_{-\infty}^{\infty} \expo{-\f{m\omega}{\hbar}x^2} dx \implies A = \left( \f{m\omega}{\pi \hbar} \right)^{\f{1}{4}}
+       \end{align*}
+
+       So,
+
+       \[ \psi_0(x) = \left( \f{m\omega}{\pi\hbar} \right)^{\f{1}{4}}\expo{-\f{m\omega}{2\hbar}c^2} \ \ \ \ \ \ \ \ \ \ (\ket{\psi_0} \mbox{ in position basis})\]
+
+       What about the energy eigenvalues?
+
+
+
+
+
+
+
 
 
 
