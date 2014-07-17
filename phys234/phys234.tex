@@ -1748,9 +1748,112 @@
 
        \[ \psi_0(x) = \left( \f{m\omega}{\pi\hbar} \right)^{\f{1}{4}}\expo{-\f{m\omega}{2\hbar}c^2} \ \ \ \ \ \ \ \ \ \ (\ket{\psi_0} \mbox{ in position basis})\]
 
-       What about the energy eigenvalues?
+       What about the corresponding energy eigenvalues? The time independent Schrödinger equation is,
 
+       \[ \hbar \omega \left(\hat{a}_+\hat{a}_- + \f{1}{2}\right) \ket{\psi_0} = E_0 \ket{\psi_0} \]
 
+       Then expanding the operator,
+
+       \begin{align*}
+         \hbar \omega \hat{a}_+\hat{a}_-\ket{\psi_0} + \f{\hbar \omega}{2} \ket{\psi_0} & = E_0\ket{\psi_0} \\
+        & = \f{\hbar \omega}{2} \ket{\psi_0} \\
+        & = E_0\ket{\psi_0}
+       \end{align*}
+
+       So,
+
+       \[ \f{\hbar\omega}{2} = E_0 \ \ \ \ \mbox{ground state energy} \]
+
+       Since we know the lowest energy eigenvalue and eigenstate, all others are computed using the raising operator $\hat{a}_+$
+
+       \begin{align*}
+         \psi_n(x) & = A_n (\hat{a}_+)^n\psi_0(x) \ \ \ \ \mbox{with $E_n = \left( n + \f{1}{2} \right) \hbar \omega$} \\
+         \mbox{and } \psi_0(x) & = \left( \f{m\omega}{\pi\hbar} \right)^{\f{1}{4}}\expo{\f{-m\omega}{2\hbar}x^2}, \ \ E_0 = \f{1}{2}\hbar\omega
+       \end{align*}
+
+       \[ \hat{a}_+ \longrightarrow \f{1}{\sqrt{2\hbar m \omega}} \left( -i \left( -i\hbar \right) \f{d}{dx} + m\omega x \right) \]
+
+       Now, let's explore the Time Dependent Wavefunction
+
+       \[ \Psi_n(x,t) = \expo{\f{-iE_n}{\hbar}t}\psi_n(x) \ \ \ \ \ \ \mbox{consequence of $\psi_n(x)$ being an Energy eigenstate} \]
+
+       Here are some properties of Eigenstates of H.O. Potential,
+
+       \begin{itemize}
+         \item[1.] Penetration into classically forbidden region
+         \begin{itemize}
+           \item Non-zero probability that if a measurement of position is made, it maybe found in  a classically forbidden region ($V(x) > E_n$)
+           \item Ultimately leads to quantum mechanical tunnelling
+         \end{itemize}
+        \item[2.] Note energy of ground state is $n = 0$ (c.f., $n = 1$ for infinite potential well). Seperation in energy between adjacent states is equal (c.f., $\delta E ~ n^2$ for infinite potential well)
+        \item[3.] Low quantum numbers implies high probability for finding the particle in the centre of the well. Classically, we expect the highest probability when moving most slowly, so the edges of the well Classical expectation is recorded for $n \longrightarrow$ large (see e.g., $n = 100$)
+        \item[4.] As for solutions to the infinite potential well, eigenstates of the H.O. potential have the following generic properties:
+        \begin{itemize}
+          \item[(i)] Symmetry $\longrightarrow$ they are alternately odd and even
+          \item[(ii)] Orthonormality $\longrightarrow$ Eigenstates are orthonormal and normalized
+          \item[(iii)] Completeness - any arbitrary state may be expressed as a linear combination of them.
+        \end{itemize}
+       \end{itemize}
+
+    \subsection{Time Dependance for Continuous Observables}
+
+      Eigenstates for time independent Hamiltonians are a simple generation of time dependant states.
+
+      \[ \ket{E_n(0)} \longrightarrow \psi_n(x) \ \ \ \ \ \mbox{wavefunction in position basis} \]
+
+      \[ \ket{E_n(t)} \longrightarrow \Psi(x, t) = \expo{\f{-iE_n}{\hbar} t}\psi_n(x) \]
+
+      Eigenstates of such Hamiltonians are stationary states, so the probabilities and expectation values are time independent. Consider making a measurement of observable $A$ with eigenstates $\ket{a_i}$ on energy eigenstate $\ket{E_n(t)}$,
+
+      \[ prob(a_i) = \pr{\braket{\mbox{out}}{\mbox{in}}} = \pr{\braket{a_i}{E_n(t)}} \]
+
+      In the position basis,
+
+      \[ \ket{a_i} \longrightarrow a_i(x) \]
+
+      \[ \ket{E_n(t)} \longrightarrow \psi_n(x) \expo{\f{-iE_n}{\hbar}t} \]
+
+      So,
+
+      \begin{align*}
+        prob(a_i) & = \pr{\int dx a_i^*(x) \psi_n(x)\expo{\f{-iE_n}{\hbar}t}} \\
+        & = \pr{\expo{\f{-iE_n}{\hbar}t}}\expo{\int dx a_i^*(x)\psi_n(x)} \\
+        & = \pr{\int dx a_i^* \psi_n(x)} \ \ \ \mbox{time independent}
+      \end{align*}
+
+      For arbitrary states that are linear combinations of energy eigenstates
+
+      \[ \ket{\alpha} = \sum_n c_n \ket{E_n} \longrightarrow \sum_n c_n \psi_n(x) \ \ \ \mbox{linear combination of position energy eigenfunctions} \]
+
+      \[ c_n = \braket{E_n}{\alpha} \longrightarrow \int dx \psi_n^*(x) \alpha(x) \]
+
+      If $\ket{\alpha} = \ket{\alpha(0)}$ (initial state), the state at time $t$ is given by
+
+      \[ \alpha(t) = \sum_n c_n \expo{\f{-iE_n}{\hbar}t} \ket{E_n} \longrightarrow \sum_n c_n \expo{\f{-iE_n}{\hbar}t}\psi_n(x) \]
+
+      \[ c_n = \braket{E_n}{\alpha(0)} \longrightarrow \int dx \psi_n^*(x) \alpha(x,0) \]
+
+      Time dependence for probabilities and expectation values, for example
+
+      \[ \ket{\alpha(0)} = c_1\ket{E_1} + c_2\ket{E_2} \ \ \ \ c_1 = \braket{E_1}{\alpha(0)}, c_2 = \braket{E_2}{\alpha(0)} \]
+
+      So,
+
+      \[ \ket{\alpha(t)} = c_1\expo{\f{-iE_1}{\hbar}t}\ket{E_1} + c_2\expo{\f{-iE_2}{\hbar}t}\ket{E_2} \]
+
+      In the position basis, $\ket{\alpha(t)} = \alpha(x,t)$  \ \ \ \ (time independent wavefunction in a position basis), so
+
+      \[ c_1 \expo{\f{-iE_1}{\hbar}t} \psi_1(x) + c_2\expo{\f{-iE_2}{\hbar}t}\psi_2(x)\]
+
+      with
+
+      \[ c_1 = \int dx \psi_1^*(x)\alpha(x,0) \ \ \ \ \ \  \ \ \ \ \ c_2 = \int dx \psi_2^*(x)\alpha(x,0) \]
+
+      \begin{itemize}
+        \item[(i)] If observable is Hamiltonian, then the probabilitiesand expectations will be time independent. (use eigenvalue equations to compute where possible)
+        \item[(ii)] If observable commutes with the Hamiltonian, then the probabilities and expectation values will be time independent.
+        \item[(iii)] If observable does not commute, then the probabilities and expectation values will be time independent.
+      \end{itemize}
 
 
 
