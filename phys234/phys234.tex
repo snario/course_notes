@@ -1413,7 +1413,7 @@
       \item[(3)] The completeness relation in finite dimensions is
       \[ \sum_k \ket{a_k}\bra{a_k} = \mathbb{1} \]
       and in infinite dimensions (continuous) it is
-      \[ \int dx \ket{x}\bra{x} \]
+      \[ \int dx \ket{x}\bra{x} = 1 \]
 
       \item[(4)] The inner product is defined in finite dimensions as
       \[ \braket{\phi}{\Psi} \longrightarrow \sum_x \braket{\phi}{a_k}\braket{a_k}{\Psi} = \sum_k \phi_k^*\Psi_k \]
@@ -1491,7 +1491,7 @@
 
       in the position basis then it looks like
 
-      \[ H = V(\hat{x}) + \f{\hat{p}^2}{2m} \longrightarrow V(X) + \f{1}{2m} \left( -i\hbar \f{d}{dx} \right)^2 \]
+      \[ H = V(\hat{x}) + \f{\hat{p}^2}{2m} \longrightarrow V(x) + \f{1}{2m} \left( -i\hbar \f{d}{dx} \right)^2 \]
 
       The energy eigenvalue equation is
 
@@ -1554,7 +1554,7 @@
 
         \begin{align*}
           \Psi(0) & \implies c_1 + c_2 = 0 \implies c_1 = - c_2 \\
-          & \implies \Psi(x) = c_1 \left( \expo{+ikx} - \exp{-ikx} \right) \\
+          & \implies \Psi(x) = c_1 \left( \expo{+ikx} - \expo{-ikx} \right) \\
           & \implies \Psi(x) = A\sin(kx) & \left[ \mbox{Euler } e^{i\alpha} = \left( \cos\alpha + i\sin\alpha \right)\right]
         \end{align*}
 
@@ -1601,7 +1601,7 @@
 
       \subsubsection{Symmetry}
 
-        The potential energy function is symmetryic about its center line, $x = \f{L}{2}$. The eigenfunctions $\Psi_n(x)$ are alternatively odd and even functions as $n$ is increased.\newline
+        The potential energy function is symmetric about its center line, $x = \f{L}{2}$. The eigenfunctions $\Psi_n(x)$ are alternatively odd and even functions as $n$ is increased.\newline
 
       These are very general properties of any solutions to a symmetric potential energy function (see finite potential well, harmonic oscillator).
 
@@ -1644,7 +1644,7 @@
 
       The Hamiltonian is also,
 
-      \[ \hat{H} = \f{\hat{p}^2}{2} + V(\hat{x}) = \f{1}{2m} \left[ \hat{p}^2 + (m \omega \hat{x})^2 \right] \]
+      \[ \hat{H} = \f{\hat{p}^2}{2m} + V(\hat{x}) = \f{1}{2m} \left[ \hat{p}^2 + (m \omega \hat{x})^2 \right] \]
 
       This is the sum of the two squared operators, which can be factorized. For numbers, it is straightforward
 
@@ -1663,7 +1663,7 @@
         & = \f{1}{2\hbar m \omega} \left( \hat{p}^2 + (m\omega \hat{x})^2 - im\omega(\hat{x}\hat{p} - \hat{p}\hat{x}) \right)
       \end{align*}
 
-      Where the latter term in the commutator $[\hat{x}, \hat{p}] = \hat{x}\hat{p}-\hat{p}\hat{x}$. \newline
+      Where the latter term is the commutator $[\hat{x}, \hat{p}] = \hat{x}\hat{p}-\hat{p}\hat{x}$. \newline
 
       To find the commutator, move to the position basis and apply it to the wavefunction.
 
@@ -1686,7 +1686,7 @@
        Similarly,
 
        \begin{align*}
-         \hat{a}_+\hat{a}_- = \f{1}{\hbar\omega}\hat{H} - \f{1}{2} & (2)
+         \hat{a}_+\hat{a}_- &  = \f{1}{\hbar\omega}\hat{H} - \f{1}{2} & (2)
        \end{align*}
 
        Using (1) and (2),
@@ -1850,15 +1850,108 @@
       \[ c_1 = \int dx \psi_1^*(x)\alpha(x,0) \ \ \ \ \ \  \ \ \ \ \ c_2 = \int dx \psi_2^*(x)\alpha(x,0) \]
 
       \begin{itemize}
-        \item[(i)] If observable is Hamiltonian, then the probabilitiesand expectations will be time independent. (use eigenvalue equations to compute where possible)
+        \item[(i)] If observable is Hamiltonian, then the probabilities and expectations will be time independent. (use eigenvalue equations to compute where possible)
         \item[(ii)] If observable commutes with the Hamiltonian, then the probabilities and expectation values will be time independent.
         \item[(iii)] If observable does not commute, then the probabilities and expectation values will be time independent.
       \end{itemize}
 
+      \begin{exmp}
+        Consider a particle in an infinite potential well with an initial wavefunction that is:
+        \[ \ket{\alpha(0)} = 3\ket{E_1} + 2\ket{E_3} \]
+        where $\ket{E_n}$ is an eigenstate of the Hamiltonian
+        \begin{itemize}
+          \item[i.] Normalize the initial state
+          \begin{align*}
+            \braket{\alpha(0)}{\alpha(0)} = 1 = A^2[3\bra{E_1} + 2\bra{E_3}][3\ket{E_1} + 2\ket{E_2}]
+          \end{align*}
+          provided $\ket{E_1}$ and $\ket{E_3}$ are orthonormal, which they are as they're eigenstates of an infinite potential well, then
+          \[ 1 = |A|^2(9+4) \implies A = \f{1}{\sqrt{13}} \ \ \ \ \ \ \mbox{choose to be real and positive} \]
+
+          \item[ii.] Find the expectation values for position and energy
+          \begin{align*}
+            \E{\hat{x}} & = \bra{\alpha(0)}\hat{x}\ket{\alpha(0)} \\
+                        & = \left[ \f{3}{\sqrt{13}} \bra{E_1} + \f{2}{\sqrt{13}}\bra{E_3} \right]\hat{x}\left[ \f{3}{\sqrt{13}}\ket{E_1} + \f{2}{\sqrt{13}}\ket{E_3} \right]
+          \end{align*}
+          We don't know how $\hat{x}$ acts on $\ket{E_n}$ (it is not an eigenstate of $\hat{x}$), therefore we move to the position basis.
+
+          \[ \bra{\alpha(0)}\hat{x}\ket{\alpha(0)} = \int_{-\infty}^{\infty} dx \left[ \f{3}{\sqrt{13}}\psi_1^*(x) + \f{2}{\sqrt{13}}\psi_3^*(x) \right]x \left[ \f{3}{\sqrt{13}}\psi_1(x) + \f{2}{\sqrt{13}}\psi_3(x) \right] \]
+
+          Energy eigenstates in the position basis:
+
+          \[ \psi_n(x) = \sqrt{\f{2}{L}} \sin \left( \f{n\pi x}{L} \right)  \ \ \ \ \ n = 1,2,3,\ldots \ \ \ \ \ \ 0 \leq x \leq L\]
+
+          See page 144 of the textbook for full math details. There are two types of integral.
+          \[ \f{2}{L} \int_0^L dx \sin^2 \left( \f{n\pi x}{L} \right) x = \f{L}{2} \ \ \ \ \ \ \mbox{[diagonal terms, $n$ is same]}  \]
+          \[ \f{2}{L} \int_0^L dx \sin^2 \left( \f{n\pi x}{L} \right) x \sin \left( \f{m\pi x}{L} \right) = \piecewise{0}{if $m + n$ is even}{\f{-16L}{9\pi^3}}{if $m + n$ is odd} \]
+          So,
+          \begin{align*}
+            \E{\hat{x}} & = \f{9}{13} \int_0^L dx \psi_1^*(x)x\psi_1(x) + \f{6}{13} \int_0^L dx \psi_1^*(x)x\psi_3(x) +  \f{6}{13} \int_0^L dx \psi_3^*(x)x\psi_1(x) +  \f{4}{13} \int_0^L dx \psi_3^*(x)x\psi_3(x) \\
+            & = \f{L}{2}
+          \end{align*}
+          Next, the expectation value for energy is
+          \begin{align*}
+            \E{\hat{H}} & = \bra{\alpha(0)}\hat{H}\ket{\alpha(0)} \\
+            & = \left( \f{3}{\sqrt{13}}\bra{E_1} + \f{2}{\sqrt{13}} \right) \hat{H} \left( \f{3}{\sqrt{13}}\ket{E_1} + \f{2}{\sqrt{13}}\ket{E_3} \right) \\
+            & = \f{9}{\sqrt{13}} \bra{E_1}\hat{H}\ket{E_1} + \f{6}{\sqrt{13}} \bra{E_1}\hat{H}\ket{E_3} + \f{6}{\sqrt{13}} \bra{E_3}\hat{H}\ket{E_1} + \f{4}{\sqrt{13}} \bra{E_3}\hat{H}\ket{E_3} & \mbox{(use energy eigen equation)} \\
+            & = \f{9}{\sqrt{13}} E_1 \braket{E_1}{E_1} + \f{6}{\sqrt{13}} E_3 \braket{E_1}{E_3} + \f{6}{\sqrt{13}} E_1 \braket{E_3}{E_1} + \f{4}{\sqrt{13}} E_3 \braket{E_3}{E_3} \\
+            & = \f{1}{13} \left( 9E_1 + 4E_3 \right)
+          \end{align*}
+          Now,
+          \[ E_n = \f{n^2\pi^2\hbar^2}{2mL^2} \implies \E{\hat{H}} = \left( \f{9\times 1}{13} + \f{4 \times 9}{13} \right) \f{\pi^2\hbar^2}{2mL^2} = \f{45}{13} \f{\pi^2\hbar^2}{2mL^2} \]
+          The solution could have also been obtained by
+          \[ \E{\hat{E}} = \sum_n E_n \times prob(E_n) \]
+
+          \item[iii.] Find the wavefunction at a later time $t$. \newline
+
+          Since $\ket{\alpha(0)}$ is written as a linear combination of energy eigenstates then,
+          \[ \ket{\alpha(t)} = \f{3}{\sqrt{13}}\expo{\f{-iE_1}{\hbar}t}\ket{E_1} + \f{2}{\sqrt{13}}\expo{\f{-iE_2}{\hbar}t}\ket{E_2}\]
 
 
+          \item[iv.] Find the time dependence of the expectation value for position and energy.\newline
+
+          \begin{align*}
+            \E{\hat{x}} & = \bra{\alpha(t)}\hat{x|\ket{\alpha(t)}} \\
+            & = \left( \f{3}{\sqrt{13}} \expo{\f{+iE_1}{\hbar}t}\bra{E_1} + \f{2}{\sqrt{13}} \expo{\f{+iE_3}{\hbar}t}\bra{E_3} \right) \hat{x} \left( \f{3}{\sqrt{13}} \expo{\f{-iE_1}{\hbar}t}\ket{E_1} + \f{2}{\sqrt{13}} \expo{\f{-iE_3}{\hbar}t}\ket{E_3} \right) \\
+            & = \f{9}{13} \bra{E_1}\hat{x}\ket{E_1} + \f{4}{13} \bra{E_3}\hat{x}\ket{E_3} + \f{6}{13} \expo{\f{-i(E_1-E_3)}{\hbar}t} \bra{E_3}\hat{x}\ket{E_1} + \f{6}{13} \expo{\f{-i(E_3-E_1)}{\hbar}t} \bra{E_1}\hat{x}\ket{E_3}
+          \end{align*}
+
+          We need to switch to the position basis to evaluate the inner products. Same integrals as earlier.
+
+          \[ \E{\hat{x}} = \f{9}{13} \f{L}{2} + \f{4}{13} \f{L}{2} = \f{L}{2} \ \ \ \ \mbox{as before} \]
+
+          time dependence has disappeared because of the nature of integrals for $\bra{E_n}\hat{x}\ket{E_m}$ with $m+n$ being even, \textbf{not} because of orthogonality. In general, we expect to see time dependence because $[\hat{x}, \hat{H}] \not = 0$.
+
+        \end{itemize}
+      \end{exmp}
 
 
+  \section{Free Particle}
+
+    To consider a free particle in Quantum Mechanics, we solve the time independent Schrödinger equation for $V(x) = 0$
+
+    \[ \f{d^2\psi_E(x)}{dx^2} = \f{-2mE}{\hbar^2}\psi_E(x) = -k^2 \psi_E(x) \ \ \ \ \ \ \ k = \f{\sqrt{2mE}}{\hbar} \]
+
+    again since $E > 0$, $k$ is REAL and so $k^2$ is positive. The general solution is then
+
+    \[ \psi_E(x) = A\expo{+ikx} + B\expo{-ikx} \]
+
+    No boundary conditions to apply means that solutions exist for all $k$ (and $E$), this means that $\psi_E(x)$ and $E$ for a continuous spectrum of eigenfunctions and eigenvalues respectively. \newline
+
+    Mathematically, the system is underconstrained with only normalisation (if possible) to get $A, B$ and $E$. How one proceeds depends on what problem is being solved.
+
+    \begin{itemize}
+      \item[1.] Physical interpretation \newline
+
+      Consider the full time dependent eigenfunction
+      \[ \Psi_E(x,t) = \psi_E(x)\expo{\f{-iE}{\hbar}t} \]
+      then using $E = \hbar \omega$,
+      \[ \Psi_E(x,t) = A\expo{i(kx - \omega t)} + B \expo{-i(kx + \omega t)} \]
+      and expand $\psi_E(x)$. If we compare this to a classical expression for a travelling wave, we see that $\Psi_E(x,t)$ is a linear superposition of a plane wave travelling in the positive $x$ direction and plane wave travelling in the negative $x$ direction.
+    \end{itemize}
+
+    \subsection{Scattering Problems}
+
+      For these interactions between two particles, we typically only require relative amplitudes before and after interactions (e.g, $\f{|A|^2}{|B|^2}$) and travelling wave interpretation in sufficient
 
 
 
