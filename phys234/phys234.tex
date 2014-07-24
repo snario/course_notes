@@ -1947,11 +1947,75 @@
       then using $E = \hbar \omega$,
       \[ \Psi_E(x,t) = A\expo{i(kx - \omega t)} + B \expo{-i(kx + \omega t)} \]
       and expand $\psi_E(x)$. If we compare this to a classical expression for a travelling wave, we see that $\Psi_E(x,t)$ is a linear superposition of a plane wave travelling in the positive $x$ direction and plane wave travelling in the negative $x$ direction.
+
+      For a more reliable description of moving particles use the continuous superposition of energy eigenstates $\Psi_E(x,t) \implies$ wavepacket. \newline
     \end{itemize}
+      \subsubsection{Position, Momentum, and Heisenberg's Uncertainty Principle.}
 
-    \subsection{Scattering Problems}
+      Consider the energy eigenstate for a free particle ($V(x) = 0$) that is a travelling wave in the $x$ direction
 
-      For these interactions between two particles, we typically only require relative amplitudes before and after interactions (e.g, $\f{|A|^2}{|B|^2}$) and travelling wave interpretation in sufficient
+      \[ \psi_E(x) = A\expo{+ikx} \]
+
+      The probability density is
+
+      \[ \pr{\psi_E(x)} = \psi_E^*(x)\psi_E(x) = A^2 \ \ \ \ \ \mbox{constant} \]
+
+      The particle has the same probability to be found anywhere (delocalised). [ignore normalization issue for now, already identified state as physically unreliable but theoretically ideal] \newline
+      Apply the momentum operator to $\psi_E(x)$
+
+      \[ \hat{p} \longrightarrow (-i\hbar)\f{d}{dx} \]
+
+      \[ \hat{p}\ket{\psi_E} \longrightarrow -i\hbar\f{d}{dx}\psi_E(x) = \hbar kA\expo{+ikx} = \hbar k \psi_E(x) \]
+
+      This is an eiegen equation for the momentum operator. In this case, $\hat{p}\ket{\psi_E} = p\ket{\psi_E}$ with momentum eigenvalue $p = \hbar k$. If we compare this with the de Broglie relationship, $p=\f{h}{\lambda}$.
+
+      \[ p = \hbar k = \f{h}{\lambda} \implies k = \f{2\pi}{\lambda} \ \ \ \ \ \ k \mbox{is wave vector, units of inverse length} \]
+
+      \subsubsection{Uncertainties}
+
+      \[ \psi_E(x) = A\expo{+ikx} \]
+      is an energy eigenstate that has equal probability to be found anywhere on the $x$-axis in the momentum eigenstate with eigenvalue $p = \hbar k$. Thus,
+
+      \[ \E{\hat{p}} = \hbar k, \ \ \ \ \ \ \E{\hat{p}^2} = (\hbar k)^2,  \ \ \ \ \ \ \Delta \hat{p} = \sqrt{\E{\hat{p}^2} - \E{\hat{p}}^2} = 0 \]
+
+      $\Delta \hat{x}$ uncertainty in positions is as large as it can be (infinite?). \newline
+
+      If we try to reduce our uncertainty in position ($\Delta \hat{x}$) we will increase out uncertainty in momentum ($\Delta \hat{p}$) because this is simply a general property of waves. That is, the more a wave is localised, the less well-defined its wavelength and vice versa.
+
+      \subsubsection{Quantitively in QM}
+
+      \[ \Delta \hat{A} \Delta \hat{B} \geq \f{1}{2} \left|\langle\left|\left[A,B\right]\right|\rangle\right| \]
+
+      For $\hat{x}$ and $\hat{p}$, the Heisenberg Commutator is
+
+      \[ [\hat{x},\hat{p}] = i\hbar \]
+
+      \begin{align*}
+        \Delta \hat{x} \Delta \hat{p} & \geq \f{1}{2} \left|\langle\left|\left[\hat{x},\hat{p}\right]\right|\rangle\right| \\
+        & \geq \f{1}{2} \hbar \implies \mbox{Heisenberg Uncertainty Principle}
+      \end{align*}
+
+    \subsection{Scattering and Unbound Particles}
+
+      Classically bound ($E$ inside well) implies quantised states (boundary conditions on eiether side).\newline
+      Classically unbound ($E$ above well) implies a continuous spectrum of energy eigenstates (no quantisation). \newline
+
+      Consider the simolest example of a finite potential well
+
+      \begin{itemize}
+        \item define well symmetry about $x = 0$
+        \item potential is zero at $x = \pm \infty$ and $V(x) = V_0$ inside the well
+        \item consequently $E<0 \implies$ bound states (quantisation) and $E>0 \implies$ unbound states (comntinuous)
+      \end{itemize}
+
+      Sondier just $E > 0$ (unbound, scattering states). Solve the Time Independent Schrödinger Equation in each of the three regions, and match solutions together at boundaries
+
+      \[ \mbox{Region I and III: } \ \ \ \ \ \f{d^2\psi_E(x)}{dx^2} = -k_1^2\psi_E(x) \ \ \ \ \ \ \ k_1 = \f{\sqrt{2mE}}{\hbar} \]
+      \[ \mbox{Region II: } \ \ \ \ \ \f{d^2\psi_E(x)}{dx^2} = -k_2^2\psi_E(x) \ \ \ \ \ \ \ k_2 = \f{\sqrt{2m(E+V_0)}}{\hbar} \]
+
+      In both cases $k_1$ and $k_2$ are REAL, then $k_1^2$ and $k_2^2$ are positive. General solutions are complex exponents sinusoids. Qualitatively we have already seen that the effect of the change in potential is a change in wavevector, $k$ (see above, on Harmonic Oscillator eigenstates). $\implies$ a change in wavelength of the wavefunction.
+
+      % For these interactions between two particles, we typically only require relative amplitudes before and after interactions (e.g, $\f{|A|^2}{|B|^2}$) and travelling wave interpretation in sufficient
 
 
 
