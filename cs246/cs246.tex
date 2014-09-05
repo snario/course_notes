@@ -193,7 +193,7 @@ echo $0
 
   What if I want to see just the text files? (\tc{.txt} extension). The \tc{*} character symbolizes a "globbing" pattern, matching any string at all to it. Thus,
   \[ \mbox { \tc {ls *.txt }} \]
-  will match all \tc{.txt} files and list them. The act of globbing by the command line is that the shell will substitude every file matching the expression and replaces the single term with multiple terms of matching files. If there is no match, the original glob considers the \tc{*} to be a literal character. For example,
+  will match all \tc{.txt} files and list them. The act of globbing by the command line is that the shell will substitute every file matching the expression and replaces the single term with multiple terms of matching files. If there is no match, the original glob considers the \tc{*} to be a literal character. For example,
 
   \[ \mbox{\tc{ls *.txt}} \iff \mbox{\tc{ls abc.txt def.txt ghi.txt}} \]
 
@@ -212,7 +212,7 @@ echo $0
 
   Note that the \tc{$\sim$} is expanded before the variable is assigned. \\
 
-  In bash there are several "global" variabels that are already set up for you. To list these variables, use the \tc{env} command. For example,
+  In bash there are several "global" variables that are already set up for you. To list these variables, use the \tc{env} command. For example,
   \begin{lstlisting}[language=bash,numbers=none]
 $ env
 SHELL=/bin/bash
