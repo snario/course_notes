@@ -48,13 +48,17 @@ Speciailization of Priority Queue sort. Insert all the elements using `heapify`
 To begin, think about something called Quick Select. Finding the k-largest element.
 
 **Worst-Case** each recursive call has size `n - 1` leading to `O(n^2)` time.
+
 **Best-Case** 0 recursive calls, `O(n)`.
+
 **Average-Case** `O(n)`
 
 Now for Quick Sort, it is basically just the same as Quick Select but you take both paths.
 
 **Worst-Case** each recursive call has size `n - 1` leading to `O(n^2)` time.
+
 **Best-Case** 0 recursive calls, `O(nlogn)`.
+
 **Average-Case** `O(nlogn)`
 
 ### Lower Bounds for Sorting
@@ -354,8 +358,8 @@ C = result from 3
 
 ### Summary
 
--**RLE** Variable-width, multiple-character encoding
--**Huffman** Variable-width, single-character (optimal in this case)
--**MTF** Adaptive, transforms to smaller integers, must be followed by variable-width integer encoding
--**LZW** Adaptive, fixed-width, multiple-character encoding Augments dictionary with repeated substrings
--**BWT** Block compression method, must be followed by MTF
+- **RLE** Variable-width, multiple-character encoding
+- **Huffman** Variable-width, single-character (optimal in this case)
+- **MTF** Adaptive, transforms to smaller integers, must be followed by variable-width integer encoding
+- **LZW** Adaptive, fixed-width, multiple-character encoding Augments dictionary with repeated substrings
+- **BWT** Block compression method, must be followed by MTF
