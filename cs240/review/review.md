@@ -37,7 +37,7 @@ A list of items that runs LIFO.
 
 ### Priority Queue Sort
 
-Put everything into a priority queue and then deleteMax. O(n lg n)
+Put everything into a priority queue and then deleteMax. `O(n lg n)`
 
 ### Heap Sort
 
@@ -47,19 +47,19 @@ Speciailization of Priority Queue sort. Insert all the elements using `heapify`
 
 To begin, think about something called Quick Select. Finding the k-largest element.
 
-**Worst-Case** each recursive call has size `n - 1` leading to `O(n^2)` time.
+**Worst-Case** each recursive call has size `n - 1` leading to ``O(n^2)`` time.
 
-**Best-Case** 0 recursive calls, `O(n)`.
+**Best-Case** 0 recursive calls, ``O(n)``.
 
-**Average-Case** `O(n)`
+**Average-Case** ``O(n)``
 
 Now for Quick Sort, it is basically just the same as Quick Select but you take both paths.
 
-**Worst-Case** each recursive call has size `n - 1` leading to `O(n^2)` time.
+**Worst-Case** each recursive call has size `n - 1` leading to ``O(n^2)`` time.
 
-**Best-Case** 0 recursive calls, `O(nlogn)`.
+**Best-Case** 0 recursive calls, ``O(nlogn)``.
 
-**Average-Case** `O(nlogn)`
+**Average-Case** ``O(nlogn)``
 
 ### Lower Bounds for Sorting
 
@@ -69,9 +69,9 @@ If we use The Comparison Model, we can prove there is an Ω(n log n) lower bound
 
 Does not use comparison. Essentially just loads a new array C of length max(A) where C[i] = count(A, i). E.g., [1 5 2 4 5] --> [0 1 1 0 1 2] then reduces this like [0 1 2 2 3 5], then A[--C[B[i]]] = B[i].
 
-Time: O(n)
+Time: `O(n)`
 
-Space: O(n + k)
+Space: `O(n + k)`
 
 Stable!
 
@@ -79,19 +79,19 @@ Stable!
 
 Counting sort on single digits of numbers from the end to the front for each digit. Works best on lists of equal length numbers.
 
-Time: Θ(d(n + k))
-Space: Θ(n + k)
+Time: `Θ(d(n + k)`)
+Space: `Θ(n + k)`
 
 ### Summary
 
 - Randomized algorithms can eliminate “bad cases”
 - Best-case, worst-case, average-case, expected-case can all differ
 - Sorting is an important and very well-studied algorithm
-- Can be done in Θ(n log n) time; faster is not possible for general input
-- HeapSort is the only fast algorithm we have seen with O(1) auxiliary space.
+- Can be done in `Θ(n log n)` time; faster is not possible for general input
+- HeapSort is the only fast algorithm we have seen with `O(1)` auxiliary space.
 - QuickSort is often the fastest in practice
-- MergeSort is also Θ(nlogn), selection & insertion sorts are Θ(n^2)
-- CountingSort, RadixSort can achieve o(n log n) if the input is special
+- MergeSort is also `Θ(nlogn)`, selection & insertion sorts are `Θ(n^2)`
+- CountingSort, RadixSort can achieve `o(n log n)` if the input is special
 
 ## Dictionaries
 
@@ -101,7 +101,7 @@ Collection of items with a key and some data. Search, insert, delete.
 
 Everything is less on left, more on right.
 
-Everything is Θ(h), but depending on structure can be at worst Θ(n) and best Θ(log n).
+Everything is `Θ(h)`, but depending on structure can be at worst `Θ(n)` and best `Θ(log n)`.
 
 ### AVL Trees
 
@@ -133,7 +133,7 @@ There are a few strategies. Don't forget *load balance* is alpha = n/M. n is num
 
 ### Chaining
 
-Each entry is a bucket. We have Θ(1 + alpha) average case search, Θ(n) worst case. Insert is O(1). Delete is same as search.
+Each entry is a bucket. We have `Θ(1 + alpha)` average case search, `Θ(n)` worst case. Insert is `O(1)`. Delete is same as search.
 
 ### Open Addressing
 
@@ -147,7 +147,7 @@ Define h(k, i) = h1(k) + i*h2(k) mod M and use linear probing with this thing.
 
 ### Cuckoo Hashing
 
-The whole point of this is to get O(1) inserting.
+The whole point of this is to get `O(1)` inserting.
 
 We use h1(k) to try to insert, if it is empty then great. Otherwise we put it in anyway and re-insert the item that was there with the other hash function.
 
@@ -164,14 +164,14 @@ You just need to work through some examples to understand this.
 ### Summary
 
 *Advantages of Balanced Search Trees*
-- O(log n) worst-case operation cost
+- `O(log n)` worst-case operation cost
 - Does not require any assumptions, special functions, or known properties of input distribution No wasted space
 - Never need to rebuild the entire structure
 
 *Advantages of Hash Tables*
-- O(1) cost, but only on average
+- `O(1)` cost, but only on average
 - Flexible load factor parameters
-- Cuckoo hashing achieves O(1) worst-case for search & delete
+- Cuckoo hashing achieves `O(1)` worst-case for search & delete
 
 *External memory*
 -Both approaches can be adopted to minimize page faults.
@@ -180,13 +180,13 @@ You just need to work through some examples to understand this.
 
 ### Interpolation Search
 
-This is just binary search with some flair. If the keys are uniformly distributed then we get O(log log n) on average. Worst case is O(n) though.
+This is just binary search with some flair. If the keys are uniformly distributed then we get `O(log log n)` on average. Worst case is `O(n)` though.
 
 Instead of `l + floor((r - l)/2)` we do `l + floor([(k - A[l]) / (A[r] - A[l])]*(r - l))`
 
 ### Gallop Search
 
-Good for if we don't know where the end of the array is. O(log m) comparisons (m is the location of k in A).
+Good for if we don't know where the end of the array is. `O(log m)` comparisons (m is the location of k in A).
 
 ### Self-Organizing Search
 
@@ -202,7 +202,7 @@ Every insert you roll a dice for k heads until the first tail and k determines t
 When traversing in a search you start at the topleft and go as far as you can, then drop down, and repeat.
 Insert is just search until you find the largest item less than the new one and place it before it.
 
-Space is O(n). Height is O(log n). O(log n) expected everything else.
+Space is `O(n)`. Height is `O(log n)`. `O(log n)` expected everything else.
 
 ## Multi-Dimensional Data
 
@@ -212,7 +212,7 @@ All the data is in euclidean n-space. We usually talk about 2-space.
 
 Using an AVL tree as the base, we make a tree on one dimension.
 There is a notion of boundary, inside, or outside when searching a range.
-Not every boundary node is returned. For 1-D we get O(log n + k) where n is all nodes, k is the inside nodes.
+Not every boundary node is returned. For 1-D we get `O(log n + k)` where n is all nodes, k is the inside nodes.
 
 ### 2-D Range Search
 
@@ -224,15 +224,15 @@ All about subdiving a square plane R into quadrants recursively.
 
 Using Quadtrees for range searches is wasteful on space, easy to compute, not complicated, can easily have large height for nonuniform data. Easily generalizable.
 
-Height is Θ(log dmax / dmin). Worst-case initial build is Θ(nh). Range search is also Θ(nh) worst case.
+Height is `Θ(log dmax / dmin)`. Worst-case initial build is `Θ(nh)`. Range search is also `Θ(nh)` worst case.
 
 ### kd-trees
 
 Split into two at the median and alternate the axis each time you split.
 
-Complexity is Θ(n log n), height is Θ(log n).
+Complexity is `Θ(n log n)`, height is `Θ(log n)`.
 
-Range query time is O(n^(1-1/d) + k)
+Range query time is `O(n^(1-1/d)` + k)
 
 ### Range trees
 
@@ -245,7 +245,7 @@ Rebalancing is a problem.
 1. Do a BST range search
 2. For every outside node, skip. For every _top inside_ node, do a range search on the y interval. For every boundary node, test if inside R.
 
-Running time is O(k +log^2(n)). Construction is O(n logn). Space is O(n logn).
+Running time is `O(k +log^2(n)`). Construction is `O(n logn)`. Space is `O(n logn)`.
 
 ## Tries and String Matching
 
@@ -278,7 +278,7 @@ Basically with KMP we find the largest prefix of P[0..j] that is a suffix of P[1
 
 To compute the suffix array, start with the last character. What you do is find the index of the last character that is NOT the character you're on now, followed by the characters that follow it.
 
-It's usually better than KMP on English text. At worst runs in O(n + |Alphabet|)
+It's usually better than KMP on English text. At worst runs in `O(n + |Alphabet|)`
 
 ### Suffies Trees (Suffix Tries)
 
@@ -293,11 +293,11 @@ Useful for searching for many patterns not just one. We preprocess T not P. P is
 
 Brute Force vs KMP vs Boyer-Moore vs Suffix Trees
 
-Preprocessing = ---, O(m), O(m + |Σ|), O(n^2)
+Preprocessing = ---, `O(m)`, `O(m + |Σ|)`, `O(n^2)`
 
-Search Time = O(nm), O(n), O(n), O(m)
+Search Time = `O(nm)`, `O(n)`, `O(n)`, `O(m)`
 
-Extra Space = ---, O(m), O(m + |Σ|), O(n)
+Extra Space = ---, `O(m)`, `O(m + |Σ|)`, `O(n)`
 
 ## Compressions
 
@@ -325,7 +325,7 @@ Best to use a min-heap to store each trie.
 
 **Summary**
 
-Encoder does lots of work (O(|S| + |Σ|log|Σ|) building decoding trie)
+Encoder does lots of work (`O(|S| + |Σ|log|Σ|)` building decoding trie)
 
 The constructed trie is not necessarily unique.
 
@@ -345,7 +345,7 @@ Basically as we add, we take the last subtring and first char in the next substr
 
 ### Burrows-Wheeler Transform
 
-**Encoding** O(n^2) using radix sort (needs to be stable!)
+**Encoding** `O(n^2)` using radix sort (needs to be stable!)
 
 1. Place all cyclic shifts of S in a list L
 2. Sort them lexicographically
@@ -353,7 +353,7 @@ Basically as we add, we take the last subtring and first char in the next substr
 
 C = result from 3
 
-**Decoding** O(n)
+**Decoding** `O(n)`
 
 1. Make array of A of tuples (C[i], i)
 2. Sort A by the characters, record integers in array N
