@@ -41,7 +41,7 @@ Put everything into a priority queue and then deleteMax. O(n lg n)
 
 ### Heap Sort
 
-Speciailization of Priority Queue sort. Insert all the elements using `heapify` 
+Speciailization of Priority Queue sort. Insert all the elements using `heapify`
 
 ### Quick Sort
 
@@ -261,8 +261,7 @@ P of length m is the pattern.
 
 A guess is a start position i so P _might_ start at T[i].
 A check of a guess is a position j < m where we compare T[i+j] to P[j].
-
-*KMP* is an algorithm which does some preprocessing on P and eliminates bad guesses.
+**KMP** is an algorithm which does some preprocessing on P and eliminates bad guesses.
 
 Basically with KMP we find the largest prefix of P[0..j] that is a suffix of P[1..j]. F[j] is the length of that.
 
@@ -317,8 +316,7 @@ The hard part is building the trie, we need to:
 - merge the two worst together and repeat
 
 Best to use a min-heap to store each trie.
-
-*Summary*
+**Summary**
 
 Encoder does lots of work (O(|S| + |Σ|log|Σ|) building decoding trie)
 
@@ -339,16 +337,14 @@ Each character in the coded text C either refers to a single character in ΣS , 
 Basically as we add, we take the last subtring and first char in the next substring and add it to dict after looking up the current substring.
 
 ### Burrows-Wheeler Transform
-
-*Encoding* O(n^2) using radix sort (needs to be stable!)
+**Encoding** O(n^2) using radix sort (needs to be stable!)
 
 1. Place all cyclic shifts of S in a list L
 2. Sort them lexicographically
 3. Extract the last characters from the sorted shifts
 
 C = result from 3
-
-*Decoding* O(n)
+**Decoding** O(n)
 
 1. Make array of A of tuples (C[i], i)
 2. Sort A by the characters, record integers in array N
@@ -358,8 +354,8 @@ C = result from 3
 
 ### Summary
 
-- *RLE* Variable-width, multiple-character encoding
-- *Huffman* Variable-width, single-character (optimal in this case)
-- *MTF* Adaptive, transforms to smaller integers, must be followed by variable-width integer encoding
-- *LZW* Adaptive, fixed-width, multiple-character encoding Augments dictionary with repeated substrings
-- *BWT* Block compression method, must be followed by MTF
+-**RLE** Variable-width, multiple-character encoding
+-**Huffman** Variable-width, single-character (optimal in this case)
+-**MTF** Adaptive, transforms to smaller integers, must be followed by variable-width integer encoding
+-**LZW** Adaptive, fixed-width, multiple-character encoding Augments dictionary with repeated substrings
+-**BWT** Block compression method, must be followed by MTF
