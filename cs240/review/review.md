@@ -263,15 +263,19 @@ Compression is the same, just add nodes for indicies.
 T of length n is the text.
 P of length m is the pattern.
 
-### Algorithms
+### KMP
 
 A guess is a start position i so P _might_ start at T[i].
 A check of a guess is a position j < m where we compare T[i+j] to P[j].
+
 **KMP** is an algorithm which does some preprocessing on P and eliminates bad guesses.
 
 Basically with KMP we find the largest prefix of P[0..j] that is a suffix of P[1..j]. F[j] is the length of that.
 
-*Boyer-Moore* is an algorithm that
+### Boyer-Moore
+
+Boyer-Moore is an algorithm that
+
 1. compares backwards
 2. jumps bad characters
 3. finds good suffix jumps
