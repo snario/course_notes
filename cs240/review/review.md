@@ -70,7 +70,9 @@ If we use The Comparison Model, we can prove there is an Ω(n log n) lower bound
 Does not use comparison. Essentially just loads a new array C of length max(A) where C[i] = count(A, i). E.g., [1 5 2 4 5] --> [0 1 1 0 1 2] then reduces this like [0 1 2 2 3 5], then A[--C[B[i]]] = B[i].
 
 Time: O(n)
+
 Space: O(n + k)
+
 Stable!
 
 ### Radix Sort
@@ -320,6 +322,7 @@ The hard part is building the trie, we need to:
 - merge the two worst together and repeat
 
 Best to use a min-heap to store each trie.
+
 **Summary**
 
 Encoder does lots of work (O(|S| + |Σ|log|Σ|) building decoding trie)
@@ -341,6 +344,7 @@ Each character in the coded text C either refers to a single character in ΣS , 
 Basically as we add, we take the last subtring and first char in the next substring and add it to dict after looking up the current substring.
 
 ### Burrows-Wheeler Transform
+
 **Encoding** O(n^2) using radix sort (needs to be stable!)
 
 1. Place all cyclic shifts of S in a list L
@@ -348,6 +352,7 @@ Basically as we add, we take the last subtring and first char in the next substr
 3. Extract the last characters from the sorted shifts
 
 C = result from 3
+
 **Decoding** O(n)
 
 1. Make array of A of tuples (C[i], i)
