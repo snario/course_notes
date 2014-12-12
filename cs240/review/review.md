@@ -228,7 +228,7 @@ Height is `Θ(log dmax / dmin)`. Worst-case initial build is `Θ(nh)`. Range sea
 
 ### kd-trees
 
-Split into two at the median and alternate the axis each time you split.
+Split into two at the median and alternate the axis each time you split. Insert the median as a node in the tree. Splitting order is left=left and right=right and bottom=left and up=right when building the tree.
 
 Complexity is `Θ(n log n)`, height is `Θ(log n)`.
 
